@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -129,13 +129,16 @@
     <ClCompile Include="Pikmin1Decompiled\sysBootup\sysBootup.cpp" />
     <ClCompile Include="Pikmin1Decompiled\sysCore\String.cpp" />
     <ClCompile Include="Pikmin1Decompiled\sysCore\sysCore.cpp" />
+    <ClCompile Include="Pikmin1Decompiled\sysCore\UIMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Pikmin1Decompiled\Externals.h" />
     <ClInclude Include="Pikmin1Decompiled\plugAtxServer\plugAtxServer.h" />
     <ClInclude Include="Pikmin1Decompiled\plugTexConv\plugTexConv.h" />
     <ClInclude Include="Pikmin1Decompiled\sysBootup\sysBootup.h" />
     <ClInclude Include="Pikmin1Decompiled\sysCore\String.h" />
     <ClInclude Include="Pikmin1Decompiled\sysCore\sysCore.h" />
+    <ClInclude Include="Pikmin1Decompiled\sysCore\UIMgr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

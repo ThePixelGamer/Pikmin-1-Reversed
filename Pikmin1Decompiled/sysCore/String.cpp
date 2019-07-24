@@ -4,6 +4,7 @@
 
 String::String()
 {
+	this->init(64);
 }
 
 String::String(int stringLength)
@@ -19,6 +20,7 @@ String::String(char* string, int stringLength)
 
 String::~String()
 {
+	delete[] this->string;
 }
 
 void String::init(int stringLength)
@@ -60,4 +62,64 @@ unsigned int String::calcHash(char* str)
 {
 	String tempString(str, 0);
 	return this->calcHash();
+}
+
+bool String::contains(char*arg)
+{
+	return this->contains(arg);
+}
+
+bool String::contains(char* a1, char* a2)
+{
+	char* tempChar; // [esp+4Ch] [ebp-4h]
+
+	tempChar = a2;
+	while (*a1 && *a2)
+	{
+		char a1Iter = *a1++;
+		char a2Iter = *a2++;
+		if (a1Iter == a2Iter)
+		{
+			if (!*a2)
+				return 1;
+		}
+		else
+		{
+			a2 = tempChar;
+		}
+	}
+	return 0;
+}
+
+bool String::contains(char* a1, char a2)
+{
+	return this->contains(a1, &a2);
+}
+
+char* String::copy(char* arg1, char* arg2)
+{
+	int loop = 0;
+	while (loop)
+	{
+		*arg1 = *arg2;
+		loop = *arg1++;
+		++arg2;
+	}
+	return arg1;
+}
+
+void String::concat(char* arg1, char* arg2)
+{
+	char arg1Iter = *arg1;
+	while (arg1Iter)
+		arg1Iter = *arg1++;
+
+	char* tempChar = arg1 - 1;
+	char v3;
+	do
+	{
+		*tempChar = *arg2;
+		v3 = *arg1++;
+		++arg2;
+	} while (v3);
 }

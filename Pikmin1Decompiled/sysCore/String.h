@@ -15,5 +15,12 @@ public:
 
 	int calcHash();
 	unsigned int calcHash(char* str);
+
+	bool contains(char*);
+	bool contains(char*, char*);
+	bool contains(char*, char);
+
+	static char* copy(char* arg1, char* arg2);
+	static void concat(char* arg1, char* arg2);
 };
 
