@@ -66,7 +66,7 @@ unsigned int String::calcHash(char* str)
 
 bool String::contains(char*arg)
 {
-	return this->contains(arg);
+	return this->contains(arg, this->string);
 }
 
 bool String::contains(char* a1, char* a2)
@@ -94,6 +94,18 @@ bool String::contains(char* a1, char* a2)
 bool String::contains(char* a1, char a2)
 {
 	return this->contains(a1, &a2);
+}
+
+int String::getLength()
+{
+	int i = 0;
+	char* tempString = this->string;
+	for (i = 0; ; ++i)
+	{
+		if (!(*tempString++))
+			break;
+	}
+	return i;
 }
 
 char* String::copy(char* arg1, char* arg2)

@@ -3,6 +3,6 @@
 #include <Windows.h>
 #pragma once
 
-extern HINSTANCE sysHInst;
+static HINSTANCE sysHInst;
 
 #endif

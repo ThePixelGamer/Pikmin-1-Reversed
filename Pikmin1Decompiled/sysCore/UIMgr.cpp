@@ -19,7 +19,5 @@ void UIMgr::RegisterGenWindowClass(LPCSTR szClass, void* unkBuf, bool unk)
 		wcx.cbSize = 48;
 		wcx.lpszClassName = szClass;
 		wcx.hInstance = sysHInst;
-		if (unkBuf)
-			funcCallBack = unkBuf;
 	}
 }

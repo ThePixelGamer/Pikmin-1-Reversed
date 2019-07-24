@@ -1,10 +1,10 @@
 #pragma once
 class String
 {
-private:
+public:
 	char * string = nullptr;
 	int stringLen = 0;
-public:
+
 	String();
 	String(int stringLength);
 	String(char* string, int stringLength);
@@ -19,6 +19,8 @@ public:
 	bool contains(char*);
 	bool contains(char*, char*);
 	bool contains(char*, char);
+
+	int getLength();
 
 	static char* copy(char* arg1, char* arg2);
 	static void concat(char* arg1, char* arg2);
