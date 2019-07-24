@@ -1,4 +1,4 @@
-Vs Project/Debug/
-v16/
+.vs/
 *.log
 *.tlog
+*.ilk
