@@ -124,6 +124,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Pikmin1Decompiled\Pikmin1Decompiled.cpp" />
+    <ClCompile Include="Pikmin1Decompiled\plugAtxServer\plugAtxServer.cpp" />
+    <ClCompile Include="Pikmin1Decompiled\plugTexConv\plugTexConv.cpp" />
+    <ClCompile Include="Pikmin1Decompiled\sysBootup\sysBootup.cpp" />
+    <ClCompile Include="Pikmin1Decompiled\sysCore\String.cpp" />
+    <ClCompile Include="Pikmin1Decompiled\sysCore\sysCore.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Pikmin1Decompiled\plugAtxServer\plugAtxServer.h" />
+    <ClInclude Include="Pikmin1Decompiled\plugTexConv\plugTexConv.h" />
+    <ClInclude Include="Pikmin1Decompiled\sysBootup\sysBootup.h" />
+    <ClInclude Include="Pikmin1Decompiled\sysCore\String.h" />
+    <ClInclude Include="Pikmin1Decompiled\sysCore\sysCore.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
