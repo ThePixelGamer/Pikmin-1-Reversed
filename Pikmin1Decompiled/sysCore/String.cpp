@@ -65,7 +65,7 @@ unsigned __int32 String::calcHash(char* str)
 
 bool String::contains(char*arg)
 {
-	return this->contains(arg, this->string);
+	return this->contains(this->string, arg);
 }
 
 bool String::contains(char* a1, char* a2)
@@ -75,8 +75,9 @@ bool String::contains(char* a1, char* a2)
 	tempChar = a2;
 	while (*a1 && *a2)
 	{
-		char a1Iter = *a1++;
-		char a2Iter = *a2++;
+		int a1Iter = *a1;
+		int a2Iter = *a2++;
+		++a1;
 		if (a1Iter == a2Iter)
 		{
 			if (!*a2)
@@ -92,7 +93,8 @@ bool String::contains(char* a1, char* a2)
 
 bool String::contains(char* a1, char a2)
 {
-	return this->contains(a1, &a2);
+	char temp = a2;
+	return this->contains(a1, &temp);
 }
 
 int String::getLength()
@@ -121,16 +123,23 @@ char* String::copy(char* arg1, char* arg2)
 
 void String::concat(char* arg1, char* arg2)
 {
-	char arg1Iter = *arg1;
-	while (arg1Iter)
+	int arg1Iter;
+	do
 		arg1Iter = *arg1++;
+	while (arg1Iter);
 
 	char* tempChar = arg1 - 1;
-	char v3;
+	int temp;
 	do
 	{
 		*tempChar = *arg2;
-		v3 = *arg1++;
+		temp = *arg1++;
 		++arg2;
-	} while (v3);
+	} while (temp);
+}
+
+bool String::isWhiteSpace(char toCheck)
+{
+	return toCheck == ' ' || toCheck == '\t' || toCheck == '\r'
+		|| toCheck == '\n' || toCheck < ' ';
 }

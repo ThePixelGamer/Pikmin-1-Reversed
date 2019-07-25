@@ -8,11 +8,14 @@
 #define SYSCORE_H
 
 	#pragma once	
-
+	
+	#include "Stream.h"
 	#include <winsock2.h>
 	#include <Windows.h>
 	#pragma comment(lib,"ws2_32.lib") //Winsock Library
 
 	SYSCORE_API HINSTANCE hInstance;
+	SYSCORE_API Stream * sysCon;
+	SYSCORE_API class Stream * errCon;
 
 #endif

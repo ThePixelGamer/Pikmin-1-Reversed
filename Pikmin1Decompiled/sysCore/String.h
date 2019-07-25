@@ -24,12 +24,13 @@ public:
 	unsigned __int32 calcHash(char* str);
 
 	bool contains(char*);
-	bool contains(char*, char*);
+	static bool contains(char*, char*);
 	bool contains(char*, char);
 
 	int getLength();
 
 	static char* copy(char* arg1, char* arg2);
 	static void concat(char* arg1, char* arg2);
+	static bool isWhiteSpace(char toCheck);
 };
 
