@@ -28,7 +28,7 @@ void createUIWindow(const char* str) {
 	gsys->createDebugStream();
 	window->refreshWindow();
 	ShowWindow((window + 100), SW_SHOWNORMAL);
-	sub_401910("Basedir = %s\n", (gsys + 20));
+	print("Basedir = %s\n", (gsys + 20));
 }
 
 void loadDLLsInDir(const char* dir) {
@@ -60,7 +60,7 @@ size_t passCmdParams(const char* str) {
 	size_t result = strlen(str); //seems to be unused, maybe for debugging purposes
 
 	if(strlen(str)) {
-		sub_401910("got cmdParams [%d] : %s\n", strlen(str), str);
+		print("got cmdParams [%d] : %s\n", strlen(str), str);
 		CmdStream* cmd = new CmdStream(new RamStream(str, strlen(str)));
 
 		while(!cmd->endOfCmds() && !cmd->endOfSection()) {
@@ -72,9 +72,9 @@ size_t passCmdParams(const char* str) {
 				loadDLLsInDir(cmd->getToken(true));
 			} 
 			else if(cmd->isToken("+direct")) {
-				sub_401910("Creating atxDirectRouter\n");
+				print("Creating atxDirectRouter\n");
 				(gsys + 270) = new AtxDirectRouter(cmd->getToken(true)); //big hmmm
-				sub_401910("done\n");
+				print("done\n");
 			}
 			else if (cmd->isToken("+client")) {
 				modMgr->Alloc(cmd->getToken(true));
@@ -85,7 +85,7 @@ size_t passCmdParams(const char* str) {
 		if(!result) 
 			result = cmd->getToken(true);
 
-	} //if(result)
+	} 
 
 	return result;
 }
@@ -104,5 +104,4 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		MessageBoxA(NULL, "A top level window does not exist,\nthe application will now close.", "Warning!", MB_OK | MB_ICONWARNING);
 
     return gsys->run();
-	return 0;
 }
