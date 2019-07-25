@@ -43,12 +43,11 @@ void String::init(char* string, int stringLength)
 
 int String::calcHash()
 {
-	char* tempString = this->string;
 	int returnValue = 0;
-
+	char* tempString = this->string;
 	while (*tempString)
 	{
-		int unkPurpose = *tempString++ + (16 * returnValue);
+		int unkPurpose = 16 * returnValue + *tempString++;
 		unsigned int unkPurpose2 = unkPurpose & 0xF0000000;
 		if (unkPurpose2)
 			unkPurpose ^= unkPurpose2 >> 24;
@@ -58,7 +57,7 @@ int String::calcHash()
 	return returnValue;
 }
 
-unsigned int String::calcHash(char* str)
+unsigned __int32 String::calcHash(char* str)
 {
 	String tempString(str, 0);
 	return this->calcHash();

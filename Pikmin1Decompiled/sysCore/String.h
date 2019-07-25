@@ -9,8 +9,8 @@
 class SYSCORE_API String
 {
 public:
-	char * string;
 	int stringLen;
+	char * string;
 
 	String();
 	String(int stringLength);
@@ -21,7 +21,7 @@ public:
 	void init(char* string, int stringLength);
 
 	int calcHash();
-	unsigned int calcHash(char* str);
+	unsigned __int32 calcHash(char* str);
 
 	bool contains(char*);
 	bool contains(char*, char*);
