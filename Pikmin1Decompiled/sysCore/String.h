@@ -1,14 +1,21 @@
 #pragma once
-class String
+
+#ifdef SYSCORE_EXPORTS
+#define SYSCORE_API __declspec(dllexport)
+#else
+#define SYSCORE_API __declspec(dllimport)
+#endif
+
+class SYSCORE_API String
 {
 public:
-	char * string = nullptr;
-	int stringLen = 0;
+	char * string;
+	int stringLen;
 
 	String();
 	String(int stringLength);
 	String(char* string, int stringLength);
-	~String();
+	//~String();
 
 	void init(int stringLength);
 	void init(char* string, int stringLength);

@@ -4,36 +4,31 @@ Stream::Stream()
 {
 }
 
-
-Stream::~Stream()
-{
-}
-
 void Stream::print(char* Format, ...)
 {
 	va_list vaList;
-	char* resultantString = nullptr;
+	char resultantString;
 
 	va_start(vaList, Format);
-	vsprintf(resultantString, Format, vaList);
+	vsprintf(&resultantString, Format, vaList);
 
-	int resultStringLength = strlen(resultantString);
-	if (resultStringLength)
+	if (strlen(&resultantString))
 	{
-		this->write(resultantString, resultStringLength);
+		this->write(&resultantString, strlen(&resultantString));
 	}
 }
 
 void Stream::vPrintf(char* Format, char* Args)
 {
-	char* resultantString = nullptr;
+	char resultantString;
 
-	vsprintf(resultantString, Format, Args);
+	vsprintf(&resultantString, Format, Args);
 
-	int resultStringLength = strlen(resultantString);
-	if (resultStringLength)
+	
+	if (strlen(&resultantString))
 	{
-		this->write(resultantString, resultStringLength);
+		int resultStringLength = strlen(&resultantString);
+		this->write(&resultantString, resultStringLength);
 	}
 }
 
@@ -91,8 +86,7 @@ void Stream::readString(String& str)
 
 void Stream::readString(char* string, int stringLength)
 {
-	String tempVar(string, stringLength);
-	this->readString(tempVar);
+	this->readString(String(string, stringLength));
 }
 
 void Stream::writeInt(int toW)
@@ -106,35 +100,46 @@ void Stream::writeByte(unsigned __int8 toW)
 	this->write(&toW, sizeof(toW));
 }
 
-void Stream::writeShort(__int16 toW)
+void Stream::writeShort(short toW)
 {
-	__int16 wr = ((toW & 0xFF00) >> 8) | (toW << 8);
+	short wr = ((toW & 0xFF00) >> 8) | (toW << 8);
 	this->write(&wr, sizeof(wr));
 }
 
 void Stream::writeFloat(float toW)
 {
-	short* bigEndian = reinterpret_cast<short*>(&toW);
-	std::reverse(bigEndian, bigEndian + sizeof(toW));
+	float bigEndian = (((unsigned int)toW & 0xFF000000) >> 24) | (((unsigned int)toW & 0xFF0000) >> 8) | (((unsigned int)toW & 0xFF00) << 8) | ((unsigned __int16)toW << 24);
 	this->write(&bigEndian, sizeof(toW));
 }
 
 void Stream::writeString(String& str)
 {
-	int stringLength = str.stringLen;
-	this->writeInt(stringLength + 3);
-	this->write(str.string, stringLength);
-	stringLength += 3; // used instead of the v7 var
-	for (int i = 0; ; ++i)
-	{
-		if (i >= stringLength - str.stringLen)
-			break;
-		this->writeByte(0);
-	}
+  int v2; // eax
+  int v3; // eax
+  int v4; // eax
+  int i; // [esp+4Ch] [ebp-10h]
+  int v7; // [esp+54h] [ebp-8h]
+
+  v2 = (str.getLength() + 3);
+  v2 = v2 & 0xFC;
+  v7 = v2;
+
+  this->writeInt(v2);
+  v3 = str.getLength();
+  this->write(str.string, v3);
+  
+  char v6 = 0; // [esp+50h] [ebp-Ch]
+  for ( i = 0; ; ++i )
+  {
+    v4 = str.getLength();
+    if ( i >= v7 - v4 )
+      break;
+    this->write(&v6, 1);
+  }
 }
 
 void Stream::writeString(char* toW)
 {
-	String tempVar(toW, 0);
-	this->writeString(tempVar);
+	String tempStr(toW, 0);
+	this->writeString(tempStr);
 }

@@ -18,10 +18,10 @@ String::String(char* string, int stringLength)
 }
 
 
-String::~String()
+/*String::~String()
 {
 	delete[] this->string;
-}
+}*/
 
 void String::init(int stringLength)
 {
