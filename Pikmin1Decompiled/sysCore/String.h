@@ -17,6 +17,7 @@ public:
 	String(char* string, int stringLength);
 
 	double toFloat() { return 0.0; }
+	int toInt();
 
 	void init(int stringLength);
 	void init(char* string, int stringLength);

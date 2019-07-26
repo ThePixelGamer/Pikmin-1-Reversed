@@ -94,6 +94,14 @@ SOURCE=.\CmdStream.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\GfxobjInfo.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\RandomAccessStream.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Stream.cpp
 # End Source File
 # Begin Source File
@@ -111,6 +119,14 @@ SOURCE=.\sysCore.cpp
 # Begin Source File
 
 SOURCE=.\CmdStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\GfxobjInfo.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RandomAccessStream.h
 # End Source File
 # Begin Source File
 

@@ -195,3 +195,54 @@ bool String::copyUntil(char *a1, char *a2, char a3, char **a4)
 		*a4 = a2;
 	return *a2 == a3;
 }
+
+int String::toInt() {
+    int ret = 0;
+    char nextChar; // [esp+60h] [ebp-8h]
+    char* string = this->string;
+
+    if(*string != '0' || string[1] != 'x') {
+        bool unk2 = false;
+        ret = (nextChar - '0');
+        while(true) {
+          while(true) {
+            nextChar = *(string++);
+            if((nextChar < '0' || nextChar > '9') && nextChar != '-')
+              return 0;
+            if(nextChar != '-')
+              break;
+            unk2 = true;
+          }
+          if(!*string || *string == '.' || *string < '0' || *string > '9')
+            break;
+        }
+        if(unk2)
+          ret = -ret;
+    }
+    else {
+        char* stringa = string + 2;
+        while(true) {
+            int v2;
+            nextChar = *(stringa++);
+            if(!nextChar)
+                break;
+            if(nextChar < '0' || nextChar > '9') {
+              if(nextChar < 'a' || nextChar > 'f') {
+                if(nextChar < 'A' || nextChar > 'F')
+                  return 0;
+                v2 = nextChar - '7';
+              }
+              else {
+                v2 = nextChar - 'W';
+              }
+            }
+            else {
+              v2 = nextChar - '0';
+            }
+            ret += v2;
+            if(*stringa)
+              ret *= 16;
+        }
+    }
+    return ret;
+}
