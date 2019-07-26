@@ -15,22 +15,31 @@ public:
 	String();
 	String(int stringLength);
 	String(char* string, int stringLength);
-	//~String();
+
+	double toFloat() { return 0.0; }
 
 	void init(int stringLength);
 	void init(char* string, int stringLength);
 
 	int calcHash();
-	unsigned __int32 calcHash(char* str);
+	unsigned __int32 calcHash(char*);
 
-	bool contains(char*);
-	static bool contains(char*, char*);
-	bool contains(char*, char);
-
+	static int getLength(char *);
 	int getLength();
 
-	static char* copy(char* arg1, char* arg2);
-	static void concat(char* arg1, char* arg2);
-	static bool isWhiteSpace(char toCheck);
+	static char * dup(char *);
+	char * dup();
+
+	static void concat(char*, char*);	
+	static char* copy(char*, char*);
+	static bool isSame(char *, char *);
+	bool isSame(char *);
+	bool isSame(String *);
+	static bool isWhiteSpace(char);
+	static bool copyUntil(char *, char *, char, char **);
+	static bool equals(char *, char*);	
+	static bool contains(char*, char*);
+	static bool contains(char*, char);
+	bool contains(char*);
 };
 

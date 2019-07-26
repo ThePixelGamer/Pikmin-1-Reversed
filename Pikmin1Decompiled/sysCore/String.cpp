@@ -17,12 +17,6 @@ String::String(char* string, int stringLength)
 	this->init(string, stringLength);
 }
 
-
-/*String::~String()
-{
-	delete[] this->string;
-}*/
-
 void String::init(int stringLength)
 {
 	char *tempString;
@@ -94,7 +88,55 @@ bool String::contains(char* a1, char* a2)
 bool String::contains(char* a1, char a2)
 {
 	char temp = a2;
-	return this->contains(a1, &temp);
+
+	return String::contains(a1, &temp);
+}
+
+bool String::isSame(String * a1)
+{
+	return this->isSame(a1->string);
+}
+
+bool String::isSame(char * a1)
+{
+	char * str = this->string;
+	while (*str && *a1)
+	{
+		if (*str++ != *a1++)
+			return 0;
+	}
+
+	int retVal = *str || *a1;
+	return retVal == 0;
+}
+
+bool String::isSame(char * s1, char * s2)
+{
+	String tempStr(s1, 0);
+	return tempStr.isSame(s2);
+}
+
+bool String::equals(char * str1, char* str2)
+{
+	return String::isSame(str1, str2);
+}
+
+char * String::dup()
+{
+	return String::dup(this->string);
+}
+
+char * String::dup(char * a1)
+{
+	char * newStr = new char[String::getLength(a1) + 1];
+	String::copy(newStr, a1);
+	return newStr;
+}
+
+int String::getLength(char * string)
+{
+	String tempStr(string, 0);
+	return tempStr.getLength();
 }
 
 int String::getLength()
@@ -142,4 +184,14 @@ bool String::isWhiteSpace(char toCheck)
 {
 	return toCheck == ' ' || toCheck == '\t' || toCheck == '\r'
 		|| toCheck == '\n' || toCheck < ' ';
+}
+bool String::copyUntil(char *a1, char *a2, char a3, char **a4)
+{
+	while ( *a2 != a3 && *a2 )
+		*a1++ = *a2++;
+
+	*a1 = 0;
+	if ( a4 )
+		*a4 = a2;
+	return *a2 == a3;
 }
