@@ -67,7 +67,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "Debug"
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "SYSCORE_EXPORTS" /YX /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "SYSCORE_EXPORTS" /YX /FD /GZ /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "SYSCORE_EXPORTS" /FR /YX /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "_DEBUG"
@@ -94,11 +94,23 @@ SOURCE=.\CmdStream.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ControllerManager.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\GfxobjInfo.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Nodes.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\RandomAccessStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StdSystem.cpp
 # End Source File
 # Begin Source File
 
@@ -112,6 +124,10 @@ SOURCE=.\String.cpp
 
 SOURCE=.\sysCore.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\System.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -122,11 +138,23 @@ SOURCE=.\CmdStream.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\ControllerManager.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\GfxobjInfo.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\Nodes.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\RandomAccessStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\StdSystem.h
 # End Source File
 # Begin Source File
 
@@ -139,6 +167,10 @@ SOURCE=.\String.h
 # Begin Source File
 
 SOURCE=.\sysCore.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\System.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

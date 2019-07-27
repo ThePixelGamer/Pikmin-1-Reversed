@@ -19,8 +19,8 @@ void StdSystem::initSoftReset() {
 
 }
 
-void StdSystem::openFile(char*, bool, bool) {
-
+FileRandomAccessStream * StdSystem::openFile(char*, bool, bool) {
+	return new FileRandomAccessStream(0, 0);
 }
 
 void StdSystem::copyRamToCache(unsigned int, unsigned int, unsigned int) {
@@ -53,6 +53,10 @@ void StdSystem::startLoading(LoadIdler*, bool, unsigned int) {
 
 void StdSystem::endLoading() {
 
+}
+
+bool StdSystem::isShutdown() {
+	return (this->unkShutdownCode) == 0x80000000;
 }
 /*
 void StdSystem::Shutdown() {}
