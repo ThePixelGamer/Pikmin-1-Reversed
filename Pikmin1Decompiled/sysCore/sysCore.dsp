@@ -128,6 +128,10 @@ SOURCE=.\sysCore.cpp
 
 SOURCE=.\System.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\UI.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -171,6 +175,10 @@ SOURCE=.\sysCore.h
 # Begin Source File
 
 SOURCE=.\System.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

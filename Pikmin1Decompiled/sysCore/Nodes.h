@@ -15,7 +15,6 @@
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
-
 class SYSCORE_API ANode  
 {
 public:
@@ -38,7 +37,7 @@ public:
 	CoreNode * next;	 // this + 12 (C)
 	CoreNode * child; // this + 16 (10)
 
-	CoreNode(char * name)
+	CoreNode(char * name = "CoreNode")
 	{
 		this->initCore(name);
 	}
@@ -68,6 +67,38 @@ public:
 	void genRead (struct AgeServer *);			 // TODO
 	virtual void genAgeNode(struct AgeServer *){}// TODO
 	virtual void genAge(struct AgeServer *){}	 // TODO
+};
+
+class SYSCORE_API Node
+	: public CoreNode
+{
+public:
+	//Var
+	int type;
+	int flags;
+	int dword1c;
+
+	//Functions
+	Node(char * name = "<Node>") : CoreNode(name) { /*this->init(name)*/ }
+
+};
+
+static unsigned char foundNode;
+static CoreNode * unkNode;
+
+class SYSCORE_API NodeMgr
+{
+	//Var
+	int unk;
+	CoreNode firstnode;
+
+	// Functions
+	NodeMgr() { unk = 0; }
+	~NodeMgr() {}
+
+	CoreNode * findNode(char *, CoreNode *);
+	CoreNode * firstNode() { return &this->firstnode; }
+	void recFindNode(CoreNode *, char *);
 };
 
 #endif // !defined(AFX_NODES_H__2042AE37_864B_4DDD_B546_D1118B98AC5D__INCLUDED_)

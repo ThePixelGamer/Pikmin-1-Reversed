@@ -11,8 +11,9 @@ void ANode::genAge(struct AgeServer *) {}
 void ANode::genAgeNode(struct AgeServer *) {}
 int ANode::getAgeNodeType() { return 0; }
 
-
-
+//////////////////////////////////////////////////////////////////////
+// CoreNode class functions
+//////////////////////////////////////////////////////////////////////
 void CoreNode::initCore(char * name)
 {
 	this->parent = 0;
@@ -74,4 +75,36 @@ int CoreNode::getChildCount()
 	for (CoreNode *temp = this->child; temp; temp = temp->next)
 		count++;
 	return count;
+}
+
+//////////////////////////////////////////////////////////////////////
+// NodeMgr class functions
+//////////////////////////////////////////////////////////////////////
+
+CoreNode * NodeMgr::findNode(char * a1, CoreNode * a2)
+{
+	unkNode = 0;
+	foundNode = 0;
+	if (!a2)
+		a2 = this->firstNode();
+	this->recFindNode(a2, a1);
+	return unkNode;
+}
+
+void NodeMgr::recFindNode(CoreNode * toFind, char * name)
+{ 
+	if ( !foundNode )
+	{
+		for ( CoreNode * i = toFind; i; i = i->Next() )
+		{
+			if ( !strcmp(name, i->name) )
+			{
+				foundNode = 1;
+				unkNode = i;
+				return;
+			}
+		  if ( i->child )
+			  this->recFindNode(i->child, name);
+		}
+	}
 }
