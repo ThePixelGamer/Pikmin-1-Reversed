@@ -6,7 +6,6 @@
 class UIWindow { public: UIWindow() {} };
 class BaseApp { public: BaseApp() {} };
 class AgeServer { public: AgeServer() {} };
-class AtxRouter { public: AtxRouter() {} };
 class IDelegate2 { public: IDelegate2() {} };
 
 #ifdef SYSCORE_EXPORTS
@@ -20,6 +19,7 @@ public:
 	char * currentWorkingDirectory; // this + 80
 	char * fileName; // ??? this + 84
 	int streamType;	  // this + 688
+	struct AtxRouter *mainRouter; // this + 1080
 	double frameTime; // this + 1112
 	double frameRate; // this + 1116
 	int frameCount;   // this + 1128
@@ -39,7 +39,7 @@ public:
 	void					doneRender();
 	BaseApp*				firstApp();
 	void					genAge(AgeServer*);
-	AtxRouter*				getAtxRouter();
+	struct AtxRouter*		getAtxRouter();
 	int						getFrameCount();
 	float					getFrameRate();
 	float					getFrameTime();

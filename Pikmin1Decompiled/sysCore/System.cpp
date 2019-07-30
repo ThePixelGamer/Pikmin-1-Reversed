@@ -78,8 +78,8 @@ void System::genAge(AgeServer*) {
 
 }
 
-AtxRouter* System::getAtxRouter() {
-	return new AtxRouter;
+struct AtxRouter* System::getAtxRouter() {
+	return this->mainRouter;
 }
 
 int	System::getFrameCount() {

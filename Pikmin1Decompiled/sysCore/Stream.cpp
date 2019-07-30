@@ -6,29 +6,27 @@ Stream::Stream()
 
 void Stream::print(char* Format, ...)
 {
-	va_list vaList;
-	char resultantString;
+	char Dest[256]; // [esp+50h] [ebp-400h]
+	va_list va; // [esp+460h] [ebp+10h]
 
-	va_start(vaList, Format);
-	vsprintf(&resultantString, Format, vaList);
-
-	if (strlen(&resultantString))
+	va_start(va, Format);
+	vsprintf(Dest, Format, va);
+	if ( strlen(Dest) )
 	{
-		this->write(&resultantString, strlen(&resultantString));
+        this->write(Dest, strlen(Dest));
 	}
 }
 
 void Stream::vPrintf(char* Format, char* Args)
 {
-	char resultantString;
+	char resultantString[256];
 
-	vsprintf(&resultantString, Format, Args);
+	vsprintf(resultantString, Format, Args);
 
 	
-	if (strlen(&resultantString))
+	if (strlen(resultantString))
 	{
-		int resultStringLength = strlen(&resultantString);
-		this->write(&resultantString, resultStringLength);
+		this->write(resultantString, strlen(resultantString));
 	}
 }
 
@@ -55,10 +53,10 @@ short Stream::readShort()
 
 double Stream::readFloat()
 {
-	int c;
-	this->read(&c, sizeof(float));
-	c = ((c & 0xFF000000) >> 24) | ((c & 0xFF0000) >> 8) | ((c & 0xFF00) << 8) | (c << 24);
-	return *reinterpret_cast<double*> (&c);
+    int c;
+    this->read(&c, sizeof(float));    
+    c = ((c & 0xFF000000) >> 24) | ((c & 0xFF0000) >> 8) | ((c & 0xFF00) << 8) | (c << 24);
+    return *(float*)(&c);
 }
 
 char * Stream::readString()
@@ -86,7 +84,8 @@ void Stream::readString(String& str)
 
 void Stream::readString(char* string, int stringLength)
 {
-	this->readString(String(string, stringLength));
+	String tempVar(string, stringLength);
+	this->readString(tempVar);
 }
 
 void Stream::writeInt(int toW)
@@ -108,34 +107,24 @@ void Stream::writeShort(short toW)
 
 void Stream::writeFloat(float toW)
 {
-	float bigEndian = (((unsigned int)toW & 0xFF000000) >> 24) | (((unsigned int)toW & 0xFF0000) >> 8) | (((unsigned int)toW & 0xFF00) << 8) | ((unsigned __int16)toW << 24);
-	this->write(&bigEndian, sizeof(toW));
+	unsigned int temp = *reinterpret_cast<unsigned int*>(&toW);
+	temp = (temp << 24) | ((temp & 0xFF00) << 8) | ((temp & 0xFF0000) >> 8) | ((temp & 0xFF000000) >> 24);
+	this->write(&temp, sizeof(float));
 }
 
 void Stream::writeString(String& str)
 {
-  int v2; // eax
-  int v3; // eax
-  int v4; // eax
-  int i; // [esp+4Ch] [ebp-10h]
-  int v7; // [esp+54h] [ebp-8h]
+	int strleng = (str.getLength() + 3) & ~3;
+	this->writeInt(strleng);
+	this->write(str.string, str.getLength());
 
-  v2 = (str.getLength() + 3);
-  v2 = v2 & 0xFC;
-  v7 = v2;
-
-  this->writeInt(v2);
-  v3 = str.getLength();
-  this->write(str.string, v3);
-  
-  char v6 = 0; // [esp+50h] [ebp-Ch]
-  for ( i = 0; ; ++i )
-  {
-    v4 = str.getLength();
-    if ( i >= v7 - v4 )
-      break;
-    this->write(&v6, 1);
-  }
+	char tempBuf = 0;
+	for ( int i = 0; ; ++i )
+	{
+		if ( i >= strleng - str.getLength() )
+			break;
+		this->write(&tempBuf, 1);
+	}
 }
 
 void Stream::writeString(char* toW)

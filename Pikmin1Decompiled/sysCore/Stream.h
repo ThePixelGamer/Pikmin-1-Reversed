@@ -8,6 +8,8 @@
 class SYSCORE_API Stream
 {
 public:
+	int whatTheFuck;
+
 	Stream();
 
 	virtual int readInt();
@@ -31,9 +33,9 @@ public:
 	virtual int getPending  () { return 0; }
 	virtual int getAvailable() { return 0; }
 
-	virtual void close() {} // although I would've wanted it to be a pure virtual function, there are 
-	virtual bool getClosing  () { return 0; } // instances of this class on its own (errCon & sysCon), meaning that there
-	virtual void flush() {} // can't be any pure virtual functions because it wouldn't have compiled otherwise.
+	virtual void close() {}
+	virtual bool getClosing  () { return 0; }
+	virtual void flush() {}
 
 	void print(char*, ...);
 	void vPrintf(char*, char*);
