@@ -1,1 +1,0 @@
-	sysHInst = GetModuleHandle(NULL);
