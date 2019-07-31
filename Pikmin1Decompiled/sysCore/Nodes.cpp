@@ -1,7 +1,3 @@
-// Nodes.cpp: implementation of the various node classes.
-//
-//////////////////////////////////////////////////////////////////////
-
 #include "Nodes.h"
 
 //////////////////////////////////////////////////////////////////////
@@ -14,31 +10,23 @@ int ANode::getAgeNodeType() { return 0; }
 //////////////////////////////////////////////////////////////////////
 // CoreNode class functions
 //////////////////////////////////////////////////////////////////////
-void CoreNode::initCore(char * name)
-{
+void CoreNode::initCore(char* nme) {
 	this->parent = 0;
 	this->next = 0;
 	this->child = 0;
-	this->setName(name);
+	this->setName(nme);
 }
 
-void CoreNode::setName(char * nme)
-{
+void CoreNode::setName(char* nme){
 	this->name = nme;
 }
 
-void CoreNode::add(CoreNode * toAdd)
-{
-	CoreNode * temp = this->child;
-
-	if (temp)
-	{
-		while (temp->next)
-			temp = temp->next;
-		temp->next = toAdd;
-	}
-	else
-	{
+void CoreNode::add(CoreNode* toAdd) {
+	if(this->child) {
+		while (this->child->next)
+			this->child = this->child->next;
+		this->child->next = toAdd;
+	} else {
 		this->child = toAdd;
 	}
 

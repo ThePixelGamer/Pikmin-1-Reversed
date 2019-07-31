@@ -13,3 +13,4 @@ Debug/
 Pikmin1Decompiled/sysBootup/Original/log.txt
 Pikmin1Decompiled/sysBootup/Original/MSVCRTD.DLL
 Pikmin1Decompiled/sysBootup/Original/sysCore.dll
+*.plg

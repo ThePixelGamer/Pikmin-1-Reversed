@@ -49,15 +49,35 @@ class SYSCORE_API UIFrame : public Node {
 	//vtable 0h
 	//(CoreNode: 4h-10h)
 	//(Node: 14h-1Ch)
-	RectArea frame; //20h
-	RectArea unk2; //30h
-	RectArea client; //40h
+	RectArea m_frame; //20h
+	RectArea m_unk2; //30h
+	RectArea m_client; //40h
 
-	UIFrame() : Node("UIFrame") { //string could be auto generated
-		frame();
-		unk2();
-		client();
+	UIFrame() : Node("UIFrame") { }
+
+	void calcClientFromFrame(RectArea& client) {
+		client.x1 = 0;
+		client.y1 = 0;
+		client.x2 = this->m_frame.width() - (-this->m_unk2.x1 + this->m_unk2.x2);
+		client.y2 = this->m_frame.height() - (-this->m_unk2.y1 + this->m_unk2.y2);
+	}
+
+	void calcFrameFromClient(RectArea& frame) {
+		frame.x1 += this->m_unk2.x1;
+		frame.y1 += this->m_unk2.y1;
+		frame.x2 = (frame.x1 + this->m_client.x2) + (-this->m_unk2.x1 + this->m_unk2.x2);
+		frame.y2 = (frame.y1 + this->m_client.y2) + (-this->m_unk2.y1 + this->m_unk2.y2);
+	}
+
+	void setClient(RectArea& client) {
+		this->m_client = client;
+		calcFrameFromClient(this->m_frame);
+	}
+
+	void setFrame(RectArea& frame) {
+		this->m_frame = frame;
+		calcClientFromFrame(this->m_client);
 	}
 };
 
-#endif // !defined(AFX_UI_H__D0971E89_2F25_4AAD_8CC9_0BF76D8E23A7__INCLUDED_)
+#endif

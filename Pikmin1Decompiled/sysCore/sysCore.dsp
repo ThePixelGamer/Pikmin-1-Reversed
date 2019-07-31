@@ -94,7 +94,7 @@ SOURCE=.\AgeAtx.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\CmdStream.cpp
+SOURCE=.\Stream\CmdStream.cpp
 # End Source File
 # Begin Source File
 
@@ -110,15 +110,15 @@ SOURCE=.\Nodes.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\RandomAccessStream.cpp
+SOURCE=.\Stream\RandomAccessStream.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\StdSystem.cpp
+SOURCE=.\System\StdSystem.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream.cpp
+SOURCE=.\Stream\Stream.cpp
 # End Source File
 # Begin Source File
 
@@ -130,11 +130,11 @@ SOURCE=.\sysCore.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\System.cpp
+SOURCE=.\System\System.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\UI.cpp
+SOURCE=.\UI\UI.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -146,7 +146,7 @@ SOURCE=.\AgeAtx.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\CmdStream.h
+SOURCE=.\Stream\CmdStream.h
 # End Source File
 # Begin Source File
 
@@ -162,15 +162,15 @@ SOURCE=.\Nodes.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\RandomAccessStream.h
+SOURCE=.\Stream\RandomAccessStream.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\StdSystem.h
+SOURCE=.\System\StdSystem.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream.h
+SOURCE=.\Stream\Stream.h
 # End Source File
 # Begin Source File
 
@@ -182,11 +182,11 @@ SOURCE=.\sysCore.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\System.h
+SOURCE=.\System\System.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\UI.h
+SOURCE=.\UI\UI.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

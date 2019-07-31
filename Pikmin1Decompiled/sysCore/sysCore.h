@@ -9,7 +9,7 @@
 
 	#pragma once	
 	
-	#include "Stream.h"
+	#include "Stream/Stream.h"
 	#include <winsock2.h>
 	#include <Windows.h>
 	#pragma comment(lib,"ws2_32.lib") //Winsock Library

@@ -7,7 +7,7 @@
 #ifndef STREAM_H
 #define STREAM_H
 
-#include "String.h"
+#include "../String.h"
 #include <cstdarg>
 #include <algorithm>
 
