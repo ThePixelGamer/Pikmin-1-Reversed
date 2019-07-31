@@ -1,17 +1,15 @@
-#pragma once
-#ifndef RAS_H
-#define RAS_H
-
 #ifdef SYSCORE_EXPORTS
 #define SYSCORE_API __declspec(dllexport)
 #else
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
+#ifndef RAS_H
+#define RAS_H
+
 #include "Stream.h"
 
-class SYSCORE_API RandomAccessStream : public Stream
-{
+class SYSCORE_API RandomAccessStream : public Stream {
 public:
 	void skipPadding(unsigned __int32 paddingAmount);
 	RandomAccessStream();
@@ -27,4 +25,3 @@ public:
 };
 
 #endif
-

@@ -1,13 +1,11 @@
-// ControllerManager.h: interface for the ControllerManager class.
-//
-//////////////////////////////////////////////////////////////////////
+#ifdef SYSCORE_EXPORTS
+#define SYSCORE_API __declspec(dllexport)
+#else
+#define SYSCORE_API __declspec(dllimport)
+#endif
 
-#if !defined(AFX_CONTROLLERMANAGER_H__85C88C02_280C_4D7D_A1A1_F75C084B1F7C__INCLUDED_)
-#define AFX_CONTROLLERMANAGER_H__85C88C02_280C_4D7D_A1A1_F75C084B1F7C__INCLUDED_
-
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
+#ifndef CONTROLLERMANAGER_H
+#define CONTROLLERMANAGER_H
 
 class ControllerManager  
 {
@@ -17,4 +15,4 @@ public:
 
 };
 
-#endif // !defined(AFX_CONTROLLERMANAGER_H__85C88C02_280C_4D7D_A1A1_F75C084B1F7C__INCLUDED_)
+#endif 

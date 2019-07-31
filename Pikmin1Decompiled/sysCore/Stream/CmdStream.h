@@ -1,10 +1,15 @@
+#ifdef SYSCORE_EXPORTS
+#define SYSCORE_API __declspec(dllexport)
+#else
+#define SYSCORE_API __declspec(dllimport)
+#endif
+
 #ifndef CMDSTREAM_H
 #define CMDSTREAM_H
 
 #include "Stream.h"
 
-class SYSCORE_API CmdStream
-{
+class SYSCORE_API CmdStream {
 private:
 	Stream *strm;
 	void *buffer; //this + 4

@@ -1,27 +1,20 @@
-// UI.h: interface for the UI class. //
-///////////////////////////////////////
-
-#if !defined(AFX_UI_H__D0971E89_2F25_4AAD_8CC9_0BF76D8E23A7__INCLUDED_)
-#define AFX_UI_H__D0971E89_2F25_4AAD_8CC9_0BF76D8E23A7__INCLUDED_
-
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
-
 #ifdef SYSCORE_EXPORTS
 #define SYSCORE_API __declspec(dllexport)
 #else
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
-#include "Nodes.h"
+#ifndef UI_H
+#define UI_H
+
+#include "../Nodes.h"
 
 class SYSCORE_API RectArea {
 public:
-	int x1;
-	int y1;
-	int x2;
-	int y2;
+	int x1; //0h
+	int y1; //4h
+	int x2; //8h
+	int y2; //Ch
 
 	RectArea() {
 		this->x1 = 0;
@@ -52,9 +45,19 @@ public:
 	}
 };
 
-class SYSCORE_API UIFrame
-	: public Node
-{
-	UIFrame() : Node("UIFrame") {};
+class SYSCORE_API UIFrame : public Node {
+	//vtable 0h
+	//(CoreNode: 4h-10h)
+	//(Node: 14h-1Ch)
+	RectArea frame; //20h
+	RectArea unk2; //30h
+	RectArea client; //40h
+
+	UIFrame() : Node("UIFrame") { //string could be auto generated
+		frame();
+		unk2();
+		client();
+	}
 };
+
 #endif // !defined(AFX_UI_H__D0971E89_2F25_4AAD_8CC9_0BF76D8E23A7__INCLUDED_)

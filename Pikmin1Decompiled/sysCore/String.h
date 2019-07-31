@@ -1,13 +1,13 @@
-#pragma once
-
 #ifdef SYSCORE_EXPORTS
 #define SYSCORE_API __declspec(dllexport)
 #else
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
-class SYSCORE_API String
-{
+#ifndef STRING_H
+#define STRING_H
+
+class SYSCORE_API String {
 public:
 	int stringLen;
 	char * string;
@@ -44,3 +44,4 @@ public:
 	bool contains(char*);
 };
 
+#endif

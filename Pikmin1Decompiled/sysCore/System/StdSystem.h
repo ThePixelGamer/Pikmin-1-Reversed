@@ -1,9 +1,15 @@
+#ifdef SYSCORE_EXPORTS
+#define SYSCORE_API __declspec(dllexport)
+#else
+#define SYSCORE_API __declspec(dllimport)
+#endif
+
 #ifndef STDSYSTEM_H
 #define STDSYSTEM_H
 
 #include <cstdarg>
 #include <algorithm>
-#include "RandomAccessStream.h"
+#include "../Stream/RandomAccessStream.h"
 #include <Windows.h>
 
 class CacheTexture;
@@ -18,14 +24,7 @@ class LFInfo;
 class Shape;
 class LFlareGroup;
 
-#ifdef SYSCORE_EXPORTS
-#define SYSCORE_API __declspec(dllexport)
-#else
-#define SYSCORE_API __declspec(dllimport)
-#endif
-
-class FileRandomAccessStream : public RandomAccessStream
-{
+class FileRandomAccessStream : public RandomAccessStream {
 public:
 	// 0 | 4 bytes for vtbl ptr
 	char* currentWorkingDir; // 4
@@ -123,4 +122,3 @@ public:
 };
 
 #endif
-

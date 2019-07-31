@@ -1,6 +1,12 @@
-#pragma once
+#ifdef SYSCORE_EXPORTS
+#define SYSCORE_API __declspec(dllexport)
+#else
+#define SYSCORE_API __declspec(dllimport)
+#endif
+
 #ifndef STREAM_H
 #define STREAM_H
+
 #include "String.h"
 #include <cstdarg>
 #include <algorithm>
@@ -42,4 +48,3 @@ public:
 };
 
 #endif
-

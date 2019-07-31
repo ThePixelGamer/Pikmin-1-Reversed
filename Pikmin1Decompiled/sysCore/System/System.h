@@ -1,3 +1,9 @@
+#ifdef SYSCORE_EXPORTS
+#define SYSCORE_API __declspec(dllexport)
+#else
+#define SYSCORE_API __declspec(dllimport)
+#endif
+
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
@@ -7,12 +13,6 @@ class UIWindow { public: UIWindow() {} };
 class BaseApp { public: BaseApp() {} };
 class AgeServer { public: AgeServer() {} };
 class IDelegate2 { public: IDelegate2() {} };
-
-#ifdef SYSCORE_EXPORTS
-#define SYSCORE_API __declspec(dllexport)
-#else
-#define SYSCORE_API __declspec(dllimport)
-#endif
 
 class SYSCORE_API System : public StdSystem {
 public:
