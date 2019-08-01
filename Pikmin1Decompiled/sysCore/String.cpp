@@ -19,7 +19,7 @@ String::String(char* string, int stringLength)
 
 void String::init(int stringLength)
 {
-	char *tempString;
+	char* tempString;
 
 	if (stringLength)
 		tempString = new char[stringLength + 1]; // v2 = sub_10001AC3(a2 + 1);
@@ -57,7 +57,7 @@ unsigned __int32 String::calcHash(char* str)
 	return this->calcHash();
 }
 
-bool String::contains(char*arg)
+bool String::contains(char* arg)
 {
 	return this->contains(this->string, arg);
 }
@@ -92,14 +92,14 @@ bool String::contains(char* a1, char a2)
 	return String::contains(a1, &temp);
 }
 
-bool String::isSame(String * a1)
+bool String::isSame(String* a1)
 {
 	return this->isSame(a1->string);
 }
 
-bool String::isSame(char * a1)
+bool String::isSame(char* a1)
 {
-	char * str = this->string;
+	char* str = this->string;
 	while (*str && *a1)
 	{
 		if (*str++ != *a1++)
@@ -110,30 +110,30 @@ bool String::isSame(char * a1)
 	return retVal == 0;
 }
 
-bool String::isSame(char * s1, char * s2)
+bool String::isSame(char* s1, char* s2)
 {
 	String tempStr(s1, 0);
 	return tempStr.isSame(s2);
 }
 
-bool String::equals(char * str1, char* str2)
+bool String::equals(char* str1, char* str2)
 {
 	return String::isSame(str1, str2);
 }
 
-char * String::dup()
+char* String::dup()
 {
 	return String::dup(this->string);
 }
 
-char * String::dup(char * a1)
+char* String::dup(char* a1)
 {
-	char * newStr = new char[String::getLength(a1) + 1];
+	char* newStr = new char[String::getLength(a1) + 1];
 	String::copy(newStr, a1);
 	return newStr;
 }
 
-int String::getLength(char * string)
+int String::getLength(char* string)
 {
 	String tempStr(string, 0);
 	return tempStr.getLength();
@@ -185,64 +185,64 @@ bool String::isWhiteSpace(char toCheck)
 	return toCheck == ' ' || toCheck == '\t' || toCheck == '\r'
 		|| toCheck == '\n' || toCheck < ' ';
 }
-bool String::copyUntil(char *a1, char *a2, char a3, char **a4)
+bool String::copyUntil(char* a1, char* a2, char a3, char** a4)
 {
-	while ( *a2 != a3 && *a2 )
-		*a1++ = *a2++;
+	while (*a2 != a3 && *a2)
+		* a1++ = *a2++;
 
 	*a1 = 0;
-	if ( a4 )
-		*a4 = a2;
+	if (a4)
+		* a4 = a2;
 	return *a2 == a3;
 }
 
 int String::toInt() {
-    int ret = 0;
-    char nextChar; // [esp+60h] [ebp-8h]
-    char* string = this->string;
+	int ret = 0;
+	char nextChar; // [esp+60h] [ebp-8h]
+	char* string = this->string;
 
-    if(*string != '0' || string[1] != 'x') {
-        bool unk2 = false;
-        ret = (nextChar - '0');
-        while(true) {
-          while(true) {
-            nextChar = *(string++);
-            if((nextChar < '0' || nextChar > '9') && nextChar != '-')
-              return 0;
-            if(nextChar != '-')
-              break;
-            unk2 = true;
-          }
-          if(!*string || *string == '.' || *string < '0' || *string > '9')
-            break;
-        }
-        if(unk2)
-          ret = -ret;
-    }
-    else {
-        char* stringa = string + 2;
-        while(true) {
-            int v2;
-            nextChar = *(stringa++);
-            if(!nextChar)
-                break;
-            if(nextChar < '0' || nextChar > '9') {
-              if(nextChar < 'a' || nextChar > 'f') {
-                if(nextChar < 'A' || nextChar > 'F')
-                  return 0;
-                v2 = nextChar - '7';
-              }
-              else {
-                v2 = nextChar - 'W';
-              }
-            }
-            else {
-              v2 = nextChar - '0';
-            }
-            ret += v2;
-            if(*stringa)
-              ret *= 16;
-        }
-    }
-    return ret;
+	if (*string != '0' || string[1] != 'x') {
+		bool unk2 = false;
+		ret = (nextChar - '0');
+		while (true) {
+			while (true) {
+				nextChar = *(string++);
+				if ((nextChar < '0' || nextChar > '9') && nextChar != '-')
+					return 0;
+				if (nextChar != '-')
+					break;
+				unk2 = true;
+			}
+			if (!*string || *string == '.' || *string < '0' || *string > '9')
+				break;
+		}
+		if (unk2)
+			ret = -ret;
+	}
+	else {
+		char* stringa = string + 2;
+		while (true) {
+			int v2;
+			nextChar = *(stringa++);
+			if (!nextChar)
+				break;
+			if (nextChar < '0' || nextChar > '9') {
+				if (nextChar < 'a' || nextChar > 'f') {
+					if (nextChar < 'A' || nextChar > 'F')
+						return 0;
+					v2 = nextChar - '7';
+				}
+				else {
+					v2 = nextChar - 'W';
+				}
+			}
+			else {
+				v2 = nextChar - '0';
+			}
+			ret += v2;
+			if (*stringa)
+				ret *= 16;
+		}
+	}
+	return ret;
 }

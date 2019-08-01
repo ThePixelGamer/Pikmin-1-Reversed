@@ -16,31 +16,31 @@ CoreNode::CoreNode(char* name) {
 	this->initCore(name);
 }
 
-int CoreNode::getAgeNodeType() { 
-	return 2; 
+int CoreNode::getAgeNodeType() {
+	return 2;
 }
 
-CoreNode* CoreNode::Next() { 
-	return this->next;  
+CoreNode* CoreNode::Next() {
+	return this->next;
 }
 
-void CoreNode::Next(CoreNode* set) { 
-	this->next = set;   
+void CoreNode::Next(CoreNode* set) {
+	this->next = set;
 }
 
 CoreNode* CoreNode::Child() {
-	return this->child; 
+	return this->child;
 }
 
-void CoreNode::Child(CoreNode* set) { 
-	this->child = set;  
+void CoreNode::Child(CoreNode* set) {
+	this->child = set;
 }
 
-char* CoreNode::Name() { 
-	return this->name;  
+char* CoreNode::Name() {
+	return this->name;
 }
 
-CoreNode* CoreNode::Parent() { 
+CoreNode* CoreNode::Parent() {
 	return this->parent;
 }
 
@@ -51,19 +51,20 @@ void CoreNode::initCore(char* nme) {
 	this->setName(nme);
 }
 
-void CoreNode::setName(char* nme){
+void CoreNode::setName(char* nme) {
 	this->name = nme;
 }
 
 void CoreNode::add(CoreNode* toAdd) {
-	CoreNode * temp = this->child;
+	CoreNode* temp = this->child;
 
 	if (temp)
 	{
 		while (temp->next)
 			temp = temp->next;
 		temp->next = toAdd;
-	} else {
+	}
+	else {
 		this->child = toAdd;
 	}
 
@@ -72,32 +73,32 @@ void CoreNode::add(CoreNode* toAdd) {
 
 void CoreNode::del()
 {
-  if ( this->parent )
-  {
-    CoreNode * parChild = this->parent->child;
-    CoreNode * oldChild = 0;
-    while ( parChild )
-    {
-      if ( parChild == this )
-      {
-        if ( oldChild )
-          oldChild->next = parChild->next;
-        else
-          this->parent->child = parChild->next;
-        this->next = 0;
-        this->parent = 0;
-        return;
-      }
-      oldChild = parChild;
-      parChild = parChild->next;
-    }
-  }
+	if (this->parent)
+	{
+		CoreNode* parChild = this->parent->child;
+		CoreNode* oldChild = 0;
+		while (parChild)
+		{
+			if (parChild == this)
+			{
+				if (oldChild)
+					oldChild->next = parChild->next;
+				else
+					this->parent->child = parChild->next;
+				this->next = 0;
+				this->parent = 0;
+				return;
+			}
+			oldChild = parChild;
+			parChild = parChild->next;
+		}
+	}
 }
 
 int CoreNode::getChildCount()
 {
 	int count;
-	for (CoreNode *temp = this->child; temp; temp = temp->next)
+	for (CoreNode* temp = this->child; temp; temp = temp->next)
 		count++;
 	return count;
 }
@@ -106,14 +107,14 @@ int CoreNode::getChildCount()
 // Node class functions
 //////////////////////////////////////////////////////////////////////
 
-Node::Node(char* name) : CoreNode(name) { 
-	/*this->init(name)*/ 
+Node::Node(char* name) : CoreNode(name) {
+	/*this->init(name)*/
 }
 
 void Node::update() {
 	Node* i = static_cast<Node*>(this->child);
 	while (i) {
-		if(i->getFlag(1)) {
+		if (i->getFlag(1)) {
 			i->concat();
 			i->update();
 		}
@@ -158,10 +159,10 @@ bool Node::getFlag(int f) {
 //////////////////////////////////////////////////////////////////////
 
 NodeMgr::NodeMgr() {
-	unk = 0; 
+	unk = 0;
 }
 
-CoreNode* NodeMgr::findNode(char* a1, CoreNode* a2) {
+CoreNode* NodeMgr::findNode(char* a1, CoreNode * a2) {
 	unkNode = 0;
 	foundNode = 0;
 	if (!a2)
@@ -170,19 +171,19 @@ CoreNode* NodeMgr::findNode(char* a1, CoreNode* a2) {
 	return unkNode;
 }
 
-CoreNode* NodeMgr::firstNode() { 
-	return &this->firstnode; 
+CoreNode* NodeMgr::firstNode() {
+	return &this->firstnode;
 }
 
-void NodeMgr::recFindNode(CoreNode* toFind, char* name) { 
-	if ( !foundNode ) {
-		for ( CoreNode * i = toFind; i; i = i->Next() ) {
-			if ( !strcmp(name, i->name) ) {
+void NodeMgr::recFindNode(CoreNode * toFind, char* name) {
+	if (!foundNode) {
+		for (CoreNode* i = toFind; i; i = i->Next()) {
+			if (!strcmp(name, i->name)) {
 				foundNode = 1;
 				unkNode = i;
 				return;
 			}
-		  if ( i->child )
+			if (i->child)
 				this->recFindNode(i->child, name);
 		}
 	}

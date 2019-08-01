@@ -7,7 +7,7 @@
 #ifndef CONTROLLERMANAGER_H
 #define CONTROLLERMANAGER_H
 
-class ControllerManager  
+class ControllerManager
 {
 public:
 	ControllerManager();

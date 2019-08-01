@@ -10,7 +10,7 @@
 class SYSCORE_API String {
 public:
 	int stringLen;
-	char * string;
+	char* string;
 
 	String();
 	String(int stringLength);
@@ -25,20 +25,20 @@ public:
 	int calcHash();
 	unsigned __int32 calcHash(char*);
 
-	static int getLength(char *);
+	static int getLength(char*);
 	int getLength();
 
-	static char * dup(char *);
-	char * dup();
+	static char* dup(char*);
+	char* dup();
 
-	static void concat(char*, char*);	
+	static void concat(char*, char*);
 	static char* copy(char*, char*);
-	static bool isSame(char *, char *);
-	bool isSame(char *);
-	bool isSame(String *);
+	static bool isSame(char*, char*);
+	bool isSame(char*);
+	bool isSame(String*);
 	static bool isWhiteSpace(char);
-	static bool copyUntil(char *, char *, char, char **);
-	static bool equals(char *, char*);	
+	static bool copyUntil(char*, char*, char, char**);
+	static bool equals(char*, char*);
 	static bool contains(char*, char*);
 	static bool contains(char*, char);
 	bool contains(char*);

@@ -11,8 +11,8 @@
 
 class SYSCORE_API AtxRouter {
 public:
-	virtual bool openRoute (class AtxStream *, int) = 0;
-	virtual void closeRoute(class AtxStream *) = 0;
+	virtual bool openRoute(class AtxStream*, int) = 0;
+	virtual void closeRoute(class AtxStream*) = 0;
 	virtual void lock() {}
 	virtual void unlock() {}
 	virtual void closeAll() {}
@@ -26,7 +26,7 @@ public:
 	int dword8;
 	int dwordC;
 
-	AtxStream() { this->init(); } 
+	AtxStream() { this->init(); }
 
 	void init() {}
 };
@@ -37,17 +37,16 @@ public:
 	int dword8;
 	char byteC;
 	bool isconnected;
-	struct TcpStream * networkStream;
+	struct TcpStream* networkStream;
 
-
-	virtual bool openRoute (AtxStream *, int) {return false;} // to do
-	virtual void closeRoute(AtxStream *) {}
+	virtual bool openRoute(AtxStream*, int) { return false; } // to do
+	virtual void closeRoute(AtxStream*) {}
 	virtual void lock() {}
 	virtual void unlock() {}
 	virtual void closeAll() {}
 	virtual void reset() {}
 	virtual bool isConnected() { return this->isconnected; }
-	virtual void setWindow(unsigned __int32) {}	
+	virtual void setWindow(unsigned __int32) {}
 };
 
 #endif

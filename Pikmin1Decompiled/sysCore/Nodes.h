@@ -20,7 +20,7 @@ public:
 
 
 class SYSCORE_API CoreNode : public ANode {
-public: 
+public:
 	//vtable 0h
 	char* name; // 4h
 	CoreNode* parent; // 8h
@@ -52,8 +52,8 @@ public:
 
 	void genWrite(AgeServer*);			 // TODO
 	void genRead(AgeServer*);			 // TODO
-	virtual void genAgeNode(AgeServer*){}// TODO
-	virtual void genAge(AgeServer*){}	 // TODO
+	virtual void genAgeNode(AgeServer*) {}// TODO
+	virtual void genAge(AgeServer*) {}	 // TODO
 };
 
 class Graphics;
@@ -84,7 +84,7 @@ public:
 };
 
 static unsigned char foundNode;
-static CoreNode * unkNode;
+static CoreNode* unkNode;
 
 class SYSCORE_API NodeMgr {
 	//Var
