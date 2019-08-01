@@ -68,8 +68,8 @@ public:
 	virtual void refreshWindow(); // 34h
 	virtual void updateSizes(int, int); // 38h
 	virtual void activate(); // 3Ch
-	virtual void processMessages(HWND, unsigned int, unsigned int, long); // 40h
-	virtual void returnMessages(HWND, unsigned int, unsigned int, long); // 44h
+	virtual int processMessage(HWND, unsigned int, unsigned int, long); // 40h
+	virtual LRESULT returnMessage(HWND, unsigned int, unsigned int, long); // 44h
 	virtual HDWP resizeChildren(HDWP, RectArea&); // 48h
 	virtual HDWP resizeFrame(HDWP, RectArea&); // 4Ch
 	virtual void createWindow(LPCSTR, LPCSTR, HMENU); // 50h

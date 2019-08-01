@@ -56,10 +56,13 @@ void CoreNode::setName(char* nme){
 }
 
 void CoreNode::add(CoreNode* toAdd) {
-	if(this->child) {
-		while (this->child->next)
-			this->child = this->child->next;
-		this->child->next = toAdd;
+	CoreNode * temp = this->child;
+
+	if (temp)
+	{
+		while (temp->next)
+			temp = temp->next;
+		temp->next = toAdd;
 	} else {
 		this->child = toAdd;
 	}

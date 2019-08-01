@@ -96,8 +96,7 @@ void UIWindow::updateSizes(int w, int h) {
 	calcClientFromFrame(this->m_client);
     HDWP hWinPosInfo = BeginDeferWindowPos(40);
     if(Child()) {
-        RectArea temp(0, 0, w, h);
-        hWinPosInfo = resizeChildren(hWinPosInfo, temp);
+        hWinPosInfo = resizeChildren(hWinPosInfo, RectArea(0, 0, w, h));
     }
     EndDeferWindowPos(hWinPosInfo);
 }
@@ -106,12 +105,52 @@ void UIWindow::activate() {
 
 }
 
-void UIWindow::processMessages(HWND, unsigned int, unsigned int, long) {
+int UIWindow::processMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
+/*
+    unsigned int v6; // [esp+4Ch] [ebp-18h]
+  unsigned int unusedInt; // [esp+50h] [ebp-14h]
+  LONG v9; // [esp+58h] [ebp-Ch]
+  struct Node *v10; // [esp+5Ch] [ebp-8h]
 
+  unusedInt = Msg - 3;
+  switch ( Msg )
+  {
+    case WM_MOVE:
+      UIWindow *uiWind = (UIWindow *)GetWindowLongA(hWnd, 0);
+      if ( v8 )
+        uiWind->updateMove(lParam, lParam >> 16);
+      return 0;
+    case WM_SIZE:
+      v9 = GetWindowLongA(hWnd, 0);
+      if ( v9 )
+        (*(*v9 + 56))(v9, lParam, lParam >> 16);
+      return 0;
+    case WM_CLOSE:
+      v10 = GetWindowLongA(hWnd, 0);
+      if ( v10 )
+      {
+        UIWindow::closeChildren(this);
+        NodeMgr::Del(nodeMgr, v10);
+        SetWindowLongA(hWnd, 0, 0);
+      }
+      return (*(*this + 68))(this, hWnd, Msg, wParam, lParam);
+    case WM_NCLBUTTONDOWN:
+      if ( wParam == 2 && GetFocus() != hWnd )
+        SetFocus(hWnd);
+      break;
+    case WM_KEYDOWN:
+      v6 = wParam;
+      if ( wParam == 27 )
+        SendMessageA(hWnd, WM_CLOSE, 0, 0);
+      break;
+    default:
+      return this->returnMessage(hWnd, Msg, wParam, lParam);
+  }*/
+  return this->returnMessage(hWnd, Msg, wParam, lParam);
 }
 
-void UIWindow::returnMessages(HWND, unsigned int, unsigned int, long) {
-
+LRESULT UIWindow::returnMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
+	return DefWindowProc(hWnd, (UINT)Msg, (WPARAM)wParam, lParam);
 }
 
 HDWP UIWindow::resizeChildren(HDWP hWinPosInfo, RectArea& rect) {
