@@ -9,17 +9,18 @@
 
 #include "StdSystem.h"
 
-class UIWindow { public: UIWindow() {} };
+#include "../UI/UI.h"
+
 class BaseApp { public: BaseApp() {} };
 class AgeServer { public: AgeServer() {} };
 class IDelegate2 { public: IDelegate2() {} };
 
 class SYSCORE_API System : public StdSystem {
 public:
-	char * currentWorkingDirectory; // this + 80
-	char * fileName; // ??? this + 84
+	char* currentWorkingDirectory; // this + 80
+	char* fileName; // ??? this + 84
 	int streamType;	  // this + 688
-	struct AtxRouter *mainRouter; // this + 1080
+	struct AtxRouter* mainRouter; // this + 1080
 	double frameTime; // this + 1112
 	double frameRate; // this + 1116
 	int frameCount;   // this + 1128

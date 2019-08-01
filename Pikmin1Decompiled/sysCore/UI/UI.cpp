@@ -1,1 +1,150 @@
 #include "UI.h"
+
+//////////////////////////////////////////////////////////////////////
+// RectArea class functions
+//////////////////////////////////////////////////////////////////////
+
+RectArea::RectArea() {
+    this->x1 = 0;
+    this->y1 = 0;
+    this->x2 = 0;
+    this->y2 = 0;
+}
+
+RectArea::RectArea(int x_1, int y_1, int x_2, int y_2) {
+    this->x1 = x_1;
+    this->y1 = y_1;
+    this->x2 = x_2;
+    this->y2 = y_2;	
+}
+
+int RectArea::height() { return this->y2 - this->y1; }
+int RectArea::width()  { return this->x2 - this->x1; }
+bool RectArea::pointInside (int x, int y) {
+    return x > this->x1 && x < this->x2
+        && y > this->y1 && y < this->y2;
+}
+
+void RectArea::set(int x_1, int y_1, int x_2, int y_2) {
+    this->x1 = x_1;
+    this->y1 = y_1;
+    this->x2 = x_2;
+    this->y2 = y_2;	
+}
+
+//////////////////////////////////////////////////////////////////////
+// UIFrame class functions
+//////////////////////////////////////////////////////////////////////
+
+UIFrame::UIFrame() : Node("UIFrame") { }
+
+void UIFrame::calcClientFromFrame(RectArea& client) {
+    client.x1 = 0;
+    client.y1 = 0;
+    client.x2 = this->m_frame.width() - (-this->m_zero.x1 + this->m_zero.x2);
+    client.y2 = this->m_frame.height() - (-this->m_zero.y1 + this->m_zero.y2);
+}
+
+void UIFrame::calcFrameFromClient(RectArea& frame) {
+    frame.x1 += this->m_zero.x1;
+    frame.y1 += this->m_zero.y1;
+    frame.x2 = (frame.x1 + this->m_client.x2) + (-this->m_zero.x1 + this->m_zero.x2);
+    frame.y2 = (frame.y1 + this->m_client.y2) + (-this->m_zero.y1 + this->m_zero.y2);
+}
+
+void UIFrame::setClient(RectArea& client) {
+    this->m_client = client;
+    calcFrameFromClient(this->m_frame);
+}
+
+void UIFrame::setFrame(RectArea& frame) {
+    this->m_frame = frame;
+    calcClientFromFrame(this->m_client);
+}
+
+//////////////////////////////////////////////////////////////////////
+// UIWindow class functions
+//////////////////////////////////////////////////////////////////////
+
+UIWindow::UIWindow() : UIFrame() { 
+    this->m_unk2 = 0;
+    this->m_dwExStyle = 0;
+    this->m_dwStyle = 0;
+    this->m_unk10 = 0;
+    this->m_hUnk1 = 0;
+    this->m_unk7 = 0;
+    this->m_unk1.set(0, 0, 0, 0);
+}
+
+UIWindow::UIWindow(UIWindow* unk1, int unk2, int unk3, int unk4, bool unk5) : UIFrame() {
+    this->m_unk7 = 0;
+    this->m_unk10 = 0;
+    this->m_hUnk1 = 0; //HMENU
+    initFrame(unk1, unk2, unk3, unk4, unk5);
+}
+
+void UIWindow::refreshWindow() {
+    updateSizes(this->m_client.width(), this->m_client.height());
+}
+
+void UIWindow::updateSizes(int w, int h) {
+    int v12 = this->m_frame.x1;
+    int v11 = this->m_frame.y1;
+    int v10 = w + (-this->m_zero.x1 + this->m_zero.x2);
+    int v9 = h + (-this->m_zero.y1 + this->m_zero.y2);
+    this->m_frame = RectArea(v12, v11, v12 + v10, v11 + v9);
+	calcClientFromFrame(this->m_client);
+    HDWP hWinPosInfo = BeginDeferWindowPos(40);
+    if(Child()) {
+        RectArea temp(0, 0, w, h);
+        hWinPosInfo = resizeChildren(hWinPosInfo, temp);
+    }
+    EndDeferWindowPos(hWinPosInfo);
+}
+
+void UIWindow::activate() {
+
+}
+
+void UIWindow::processMessages(HWND, unsigned int, unsigned int, long) {
+
+}
+
+void UIWindow::returnMessages(HWND, unsigned int, unsigned int, long) {
+
+}
+
+HDWP UIWindow::resizeChildren(HDWP hWinPosInfo, RectArea& rect) {
+    for(CoreNode* i = Child(); i; i = i->Next()) {
+        hWinPosInfo = resizeFrame(hWinPosInfo, rect);
+    }
+    return hWinPosInfo;
+}
+
+HDWP UIWindow::resizeFrame(HDWP hWinPosInfo, RectArea& rect) {
+    return hWinPosInfo;
+}
+
+void UIWindow::createWindow(const char*, const char*, HMENU) {
+
+}
+
+void UIWindow::dockTop(int, RectArea&, RectArea&) {
+
+}
+
+void UIWindow::closeChildren() {
+
+}
+
+void UIWindow::initFrame(UIWindow*, int, int, int, bool) {
+
+}
+
+void UIWindow::sizeWindow(int, int, int) {
+
+}
+
+void UIWindow::updateMove(int, int) {
+
+}

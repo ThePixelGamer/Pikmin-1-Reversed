@@ -8,6 +8,7 @@
 #define UI_H
 
 #include "../Nodes.h"
+#include <Windows.h>
 
 class SYSCORE_API RectArea {
 public:
@@ -16,68 +17,68 @@ public:
 	int x2; //8h
 	int y2; //Ch
 
-	RectArea() {
-		this->x1 = 0;
-		this->y1 = 0;
-		this->x2 = 0;
-		this->y2 = 0;
-	}
+	RectArea();
+	RectArea(int, int, int, int);
 
-	RectArea(int x_1, int y_1, int x_2, int y_2) {
-		this->x1 = x_1;
-		this->y1 = y_1;
-		this->x2 = x_2;
-		this->y2 = y_2;	
-	}
-
-	int height() { return this->y2 - this->y1; }
-	int width()  { return this->x2 - this->x1; }
-	bool pointInside (int x, int y) {
-		return x > this->x1 && x < this->x2
-		    && y > this->y1 && y < this->y2;
-	}
-
-	void set(int x_1, int y_1, int x_2, int y_2) {
-		this->x1 = x_1;
-		this->y1 = y_1;
-		this->x2 = x_2;
-		this->y2 = y_2;	
-	}
+	int height();
+	int width();
+	bool pointInside (int, int);
+	void set(int, int, int, int);
 };
 
 class SYSCORE_API UIFrame : public Node {
+public:
 	//vtable 0h
 	//(CoreNode: 4h-10h)
 	//(Node: 14h-1Ch)
 	RectArea m_frame; //20h
-	RectArea m_unk2; //30h
+	RectArea m_zero; //30h
 	RectArea m_client; //40h
 
-	UIFrame() : Node("UIFrame") { }
+	UIFrame();
 
-	void calcClientFromFrame(RectArea& client) {
-		client.x1 = 0;
-		client.y1 = 0;
-		client.x2 = this->m_frame.width() - (-this->m_unk2.x1 + this->m_unk2.x2);
-		client.y2 = this->m_frame.height() - (-this->m_unk2.y1 + this->m_unk2.y2);
-	}
+	void calcClientFromFrame(RectArea&);
+	void calcFrameFromClient(RectArea&);
+	void setClient(RectArea&);
+	void setFrame(RectArea&);
+};
 
-	void calcFrameFromClient(RectArea& frame) {
-		frame.x1 += this->m_unk2.x1;
-		frame.y1 += this->m_unk2.y1;
-		frame.x2 = (frame.x1 + this->m_client.x2) + (-this->m_unk2.x1 + this->m_unk2.x2);
-		frame.y2 = (frame.y1 + this->m_client.y2) + (-this->m_unk2.y1 + this->m_unk2.y2);
-	}
+class SYSCORE_API UIWindow : public UIFrame {
+public:
+	//vtable 0h
+	//(CoreNode: 4h-10h)
+	//(Node: 14h-1Ch)
+	//(UIFrame: 20h-40h)
+	RectArea m_unk1; // 50h 
+	int m_unk2; // 60h
+	int m_unk3; // 64h
+	int m_dwStyle; // 68h
+	int m_dwExStyle; // 6Ch
+	int m_unk6; // 70h
+	int m_unk7; // 74h
+	int m_unk8; // 78h
+	int m_unk9; // 7Ch
+	int m_unk10; // 80h
+	int m_hUnk1; // 84h
 
-	void setClient(RectArea& client) {
-		this->m_client = client;
-		calcFrameFromClient(this->m_frame);
-	}
+	UIWindow();
+	UIWindow(UIWindow*, int, int, int, bool);
+	~UIWindow();
+	
+	virtual void refreshWindow(); // 34h
+	virtual void updateSizes(int, int); // 38h
+	virtual void activate(); // 3Ch
+	virtual void processMessages(HWND, unsigned int, unsigned int, long); // 40h
+	virtual void returnMessages(HWND, unsigned int, unsigned int, long); // 44h
+	virtual HDWP resizeChildren(HDWP, RectArea&); // 48h
+	virtual HDWP resizeFrame(HDWP, RectArea&); // 4Ch
+	virtual void createWindow(LPCSTR, LPCSTR, HMENU); // 50h
+	virtual void dockTop(int, RectArea&, RectArea&); // 54h
 
-	void setFrame(RectArea& frame) {
-		this->m_frame = frame;
-		calcClientFromFrame(this->m_client);
-	}
+	void closeChildren();
+	void initFrame(UIWindow*, int, int, int, bool);
+	void sizeWindow(int, int, int);
+	void updateMove(int, int);
 };
 
 #endif

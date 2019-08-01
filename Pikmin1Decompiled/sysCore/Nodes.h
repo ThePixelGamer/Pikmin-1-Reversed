@@ -7,57 +7,59 @@
 #ifndef NODES_H
 #define NODES_H
 
+#include "Stream/RandomAccessStream.h"
+
+class AgeServer;
+
 class SYSCORE_API ANode {
 public:
-	ANode() { }
-
-	virtual void genAge(struct AgeServer *);
-	virtual void genAgeNode(struct AgeServer *);
+	virtual void genAge(AgeServer*);
+	virtual void genAgeNode(AgeServer*);
 	virtual int getAgeNodeType();
 };
 
-#include "Stream/RandomAccessStream.h"
 
 class SYSCORE_API CoreNode : public ANode {
-public:
-	//CoreNode Size: 14h 
+public: 
 	//vtable 0h
 	char* name; // 4h
 	CoreNode* parent; // 8h
 	CoreNode* next;	// Ch
 	CoreNode* child; // 10h
 
-	CoreNode(char * name = "CoreNode")
-	{
-		this->initCore(name);
-	}
+	CoreNode(char* = "CoreNode");
 
-	virtual void write (RandomAccessStream *) {}
-	virtual void read  (RandomAccessStream *) {}
-	virtual int getAgeNodeType() { return 2; }
+	virtual void write(RandomAccessStream*) {}
+	virtual void read(RandomAccessStream*) {}
+	virtual int getAgeNodeType();
 
-	CoreNode * Next   ()				{ return this->next;  }
-	void	   Next   (CoreNode * set)  { this->next = set;   }
-	CoreNode * Child  ()				{ return this->child; }
-	void	   Child  (CoreNode * set)	{ this->child = set;  }
-	char	 * Name   ()				{ return this->name;  }
-	CoreNode * Parent ()				{ return this->parent;}
+	CoreNode* Next();
+	void Next(CoreNode*);
+	CoreNode* Child();
+	void Child(CoreNode*);
+	char* Name();
+	CoreNode* Parent();
 
 	int getChildCount();
 
-	void initCore(char * name);
-	void setName(char * name);
+	void initCore(char*);
+	void setName(char*);
 
-	void add(CoreNode *);
+	void add(CoreNode*);
 	void del();
 
-	void load(char *, char *, unsigned __int32); // TODO
+	void load(char*, char*, unsigned __int32); // TODO
 
-	void genWrite(struct AgeServer *);			 // TODO
-	void genRead (struct AgeServer *);			 // TODO
-	virtual void genAgeNode(struct AgeServer *){}// TODO
-	virtual void genAge(struct AgeServer *){}	 // TODO
+	void genWrite(AgeServer*);			 // TODO
+	void genRead(AgeServer*);			 // TODO
+	virtual void genAgeNode(AgeServer*){}// TODO
+	virtual void genAge(AgeServer*){}	 // TODO
 };
+
+class Graphics;
+class Matrix4f;
+class SRT;
+class VQS;
 
 class SYSCORE_API Node : public CoreNode {
 public:
@@ -67,9 +69,18 @@ public:
 	int flags; //18h
 	int dword1c; //1Ch
 
-	//Functions
-	Node(char * name = "<Node>") : CoreNode(name) { /*this->init(name)*/ }
+	Node(char* = "<Node>");
 
+	virtual void update();
+	virtual void draw(Graphics&);
+	virtual void render(Graphics&);
+	virtual void concat();
+	virtual void concat(VQS&);
+	virtual void concat(SRT&);
+	virtual void concat(Matrix4f&);
+	virtual void getModelMatrix();
+
+	bool getFlag(int);
 };
 
 static unsigned char foundNode;
@@ -81,12 +92,12 @@ class SYSCORE_API NodeMgr {
 	CoreNode firstnode;
 
 	// Functions
-	NodeMgr() { unk = 0; }
-	~NodeMgr() {}
+	NodeMgr();
+	~NodeMgr();
 
-	CoreNode * findNode(char *, CoreNode *);
-	CoreNode * firstNode() { return &this->firstnode; }
-	void recFindNode(CoreNode *, char *);
+	CoreNode* findNode(char*, CoreNode*);
+	CoreNode* firstNode();
+	void recFindNode(CoreNode*, char*);
 };
 
 #endif 
