@@ -9,8 +9,20 @@
 
 #include <cstdarg>
 #include <algorithm>
-#include "../Stream/RandomAccessStream.h"
 #include <Windows.h>
+#include "../Stream/RandomAccessStream.h"
+
+	class FileRandomAccessStream : public RandomAccessStream {
+	public:
+		// 0 | 4 bytes for vtbl ptr
+		char* currentWorkingDir; // 4h
+		FILE* fStream; // 8h
+		int dwordC; // Ch
+		int fileSize; // 10h 
+
+		FileRandomAccessStream(FILE* fpointer, char* cwd);
+		virtual int getPosition();
+	};
 
 class CacheTexture;
 class LoadIdler;
@@ -24,29 +36,6 @@ class LFInfo;
 class Shape;
 class LFlareGroup;
 
-class FileRandomAccessStream : public RandomAccessStream {
-public:
-	// 0 | 4 bytes for vtbl ptr
-	char* currentWorkingDir; // 4
-	FILE* fStream; // C
-	int dwordC; // 10
-	int fileSize;
-
-	FileRandomAccessStream(FILE* fpointer, char* cwd)
-	{
-		this->fStream = fpointer;
-		this->currentWorkingDir = cwd;
-		this->dwordC = 0;
-
-		int offset = this->getPosition();
-		fseek(this->fStream, 0, SEEK_END);
-		this->fileSize = ftell(this->fStream);
-		fseek(this->fStream, offset, SEEK_SET);
-	}
-
-	virtual int getPosition() { return ftell(this->fStream); }
-};
-
 class SYSCORE_API StdSystem {
 public:
 
@@ -58,7 +47,7 @@ public:
 	~StdSystem();
 
 	virtual void					initSoftReset();
-	virtual FileRandomAccessStream* openFile(char*, bool, bool);
+	virtual RandomAccessStream	  * openFile(char*, bool, bool);
 	virtual void					copyRamToCache(unsigned int, unsigned int, unsigned int);
 	virtual void					copyCacheToRam(unsigned int, unsigned int, unsigned int);
 	virtual void					copyWaitUntilDone();

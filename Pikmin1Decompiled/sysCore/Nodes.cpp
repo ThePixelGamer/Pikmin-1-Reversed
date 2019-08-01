@@ -190,3 +190,28 @@ void NodeMgr::recFindNode(CoreNode * toFind, char* name) {
 		}
 	}
 }
+
+void NodeMgr::Del(Node * toDelete)
+{
+	this->unk = 1;
+	if (toDelete && toDelete->parent)
+	{
+		CoreNode * toDeleteChild = toDelete->parent->child;
+		
+		CoreNode * tempNext = 0;
+		while (toDeleteChild)
+		{
+			if (toDeleteChild == toDelete)
+			{
+				if (tempNext)
+				{
+					tempNext->Next(toDeleteChild->Next());
+					return;
+				}
+				toDelete->parent->child = toDeleteChild->Next();
+			}
+			tempNext = toDeleteChild;
+			toDeleteChild = toDeleteChild->Next();
+		}
+	}
+}

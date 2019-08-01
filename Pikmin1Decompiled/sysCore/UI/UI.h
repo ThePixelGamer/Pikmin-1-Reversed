@@ -89,6 +89,8 @@ public:
 
 	UIMgr();
 	~UIMgr();
+
+	void RegisterGenWindowClass(LPCSTR lpszClass, void *, bool);
 };
 
 extern SYSCORE_API UIMgr *uiMgr;

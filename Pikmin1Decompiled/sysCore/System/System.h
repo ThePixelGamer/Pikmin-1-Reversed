@@ -29,7 +29,7 @@ public:
 	System(const System&);
 	~System();
 
-	virtual FileRandomAccessStream* openFile(char*, bool, bool);
+	virtual RandomAccessStream* openFile(char*, bool, bool);
 	//virtual void 			parseArchiveDirectory(char * );
 	virtual void 			sndPlaySe(unsigned int);
 

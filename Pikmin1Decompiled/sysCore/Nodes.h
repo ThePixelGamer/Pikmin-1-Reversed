@@ -98,6 +98,7 @@ class SYSCORE_API NodeMgr {
 	CoreNode* findNode(char*, CoreNode*);
 	CoreNode* firstNode();
 	void recFindNode(CoreNode*, char*);
+	void Del(Node *);
 };
 
 extern SYSCORE_API NodeMgr * nodeMgr;

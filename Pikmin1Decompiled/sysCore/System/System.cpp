@@ -20,7 +20,7 @@ System::~System() {
 
 }
 
-FileRandomAccessStream* System::openFile(char*, bool, bool)
+RandomAccessStream* System::openFile(char*, bool, bool)
 {
 
 	return new FileRandomAccessStream(0, 0);
