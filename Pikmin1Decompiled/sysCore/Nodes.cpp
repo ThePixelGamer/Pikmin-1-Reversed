@@ -158,6 +158,8 @@ bool Node::getFlag(int f) {
 // NodeMgr class functions
 //////////////////////////////////////////////////////////////////////
 
+SYSCORE_API NodeMgr * nodeMgr;
+
 NodeMgr::NodeMgr() {
 	unk = 0;
 }

@@ -83,6 +83,10 @@ UIWindow::UIWindow(UIWindow * unk1, int unk2, int unk3, int unk4, bool unk5) : U
 	initFrame(unk1, unk2, unk3, unk4, unk5);
 }
 
+UIWindow::~UIWindow() {
+	// print("now closing window %s", this->name);
+}
+
 void UIWindow::refreshWindow() {
 	updateSizes(this->m_client.width(), this->m_client.height());
 }
@@ -199,8 +203,42 @@ void UIWindow::closeChildren() {
 
 }
 
-void UIWindow::initFrame(UIWindow*, int, int, int, bool) {
+void UIWindow::initFrame(UIWindow* a1, int a2, int a3, int a4, bool a5) {
+	this->m_parent = a1;
+	this->m_dwStyle = a3;
+	this->m_dwExStyle = a4;
+	this->m_unk6 = a2;
+	this->m_unk10 = a5;
 
+	int x1 = 32;
+	int y1 = 32;
+	int unk1 = 128;
+	int unk2 = 128;
+
+	tagRECT rect;
+	rect.left = 32;
+	rect.top = 32;
+	rect.right = 128;
+	rect.bottom = 128;
+
+	AdjustWindowRectEx(&rect, this->m_dwStyle, false, this->m_dwExStyle);
+
+	this->m_zero.x1 = rect.left - x1;
+	this->m_zero.y1 = rect.top  - y1;
+	this->m_zero.x2 = rect.right - unk1;
+	this->m_zero.y2 = rect.bottom - unk2;
+
+	if ( this->m_unk10)
+		this->m_zero.y1 -= GetSystemMetrics(SM_CYMENU);//     The height of a single-line menu bar, in pixels.
+	  if ( this->m_dwStyle & WS_VSCROLL )
+		this->m_zero.x2 += GetSystemMetrics(SM_CXVSCROLL);// The width of a vertical scroll bar, in pixels.
+	  if ( this->m_dwStyle & WS_HSCROLL )
+		this->m_zero.y2 += GetSystemMetrics(SM_CYHSCROLL);// The height of a horizontal scroll bar, in pixels.
+
+	  if ( a3 & WS_CHILDWINDOW )
+		this->m_parent->add(this);
+	  else
+		uiMgr->add(this);
 }
 
 void UIWindow::sizeWindow(int, int, int) {
@@ -208,5 +246,19 @@ void UIWindow::sizeWindow(int, int, int) {
 }
 
 void UIWindow::updateMove(int, int) {
+
+}
+
+//////////////////////////////////////////////////////////////////////
+// UIMgr class functions
+//////////////////////////////////////////////////////////////////////
+
+SYSCORE_API UIMgr *uiMgr;
+
+UIMgr::UIMgr() {
+
+}
+
+UIMgr::~UIMgr() {
 
 }

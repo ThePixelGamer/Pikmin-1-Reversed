@@ -80,4 +80,17 @@ public:
 	void updateMove(int, int);
 };
 
+class SYSCORE_API UIMgr : public Node {
+public:
+	//vtable 0h
+	//(CoreNode: 4h-10h)
+	//(Node: 14h-1Ch)
+	Node m_unk1; // 20h
+
+	UIMgr();
+	~UIMgr();
+};
+
+extern SYSCORE_API UIMgr *uiMgr;
+
 #endif

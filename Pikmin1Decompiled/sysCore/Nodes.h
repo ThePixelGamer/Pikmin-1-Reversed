@@ -100,4 +100,6 @@ class SYSCORE_API NodeMgr {
 	void recFindNode(CoreNode*, char*);
 };
 
+extern SYSCORE_API NodeMgr * nodeMgr;
+
 #endif 
