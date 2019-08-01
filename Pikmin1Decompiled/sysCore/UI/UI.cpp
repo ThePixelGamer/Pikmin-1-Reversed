@@ -67,7 +67,7 @@ void UIFrame::setFrame(RectArea & frame) {
 //////////////////////////////////////////////////////////////////////
 
 UIWindow::UIWindow() : UIFrame() {
-	this->m_unk2 = 0;
+	this->m_parent = 0;
 	this->m_dwExStyle = 0;
 	this->m_dwStyle = 0;
 	this->m_unk10 = 0;
@@ -166,36 +166,27 @@ HDWP UIWindow::resizeFrame(HDWP hWinPosInfo, RectArea & rect) {
 	return hWinPosInfo;
 }
 
-void UIWindow::createWindow(const char* className, const char* windowName, HMENU hMenu) {
+void UIWindow::createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu) {
 	this->m_hMenu = hMenu;
 	
 	HWND hWndParent;
-	if (this->m_unk2)
-		hWndParent = 0;
+	if (this->m_parent)
+		hWndParent = this->m_parent->m_hWnd;
 	else
 		hWndParent = 0;
 	
-	this->m_hWnd = CreateWindowExA(
-                      this->m_dwExStyle,
-                      className,
-                      windowName,
-                      this->m_dwStyle,
-                      this->m_frame.x1,
-                      this->m_frame.y1,
-                      m_frame.width(),
-                      m_frame.height(),
-                      hWndParent,
-                      this->m_hMenu,
-                      sysHInst,
-                      0);
+	this->m_hWnd = CreateWindowExA(this->m_dwExStyle, className, windowName, this->m_dwStyle, this->m_frame.x1, this->m_frame.y1, this->m_frame.width(), this->m_frame.height(), hWndParent, this->m_hMenu, sysHInst, 0);
 
-	if (windowName)
-		this->setName((char *)windowName);
+    LPCSTR lpTemp;
+	if(windowName)
+		lpTemp = windowName;
 	else
-		this->setName((char *)className);
+		lpTemp = className;
+	
+    this->setName((char*)lpTemp);
 
 	if (!strcmp(className, "DUIGenWin") || !strcmp(className, "DUIClearWin"))	
-		SetWindowLong(this->m_hWnd, 0, (LONG)this);
+		SetWindowLong(this->m_hWnd, 0, (long)this);
 }
 
 void UIWindow::dockTop(int, RectArea&, RectArea&) {
@@ -208,6 +199,10 @@ void UIWindow::closeChildren() {
 
 void UIWindow::initFrame(UIWindow*, int, int, int, bool) {
 
+}
+
+void UIWindow::setName(char* nme) {
+    this->name = nme;
 }
 
 void UIWindow::sizeWindow(int, int, int) {

@@ -49,7 +49,7 @@ public:
 	//(Node: 14h-1Ch)
 	//(UIFrame: 20h-40h)
 	RectArea m_unk1; // 50h 
-	CoreNode * m_unk2; // 60h
+	UIWindow* m_parent; // 60h
 	HWND m_hWnd; // 64h (sizeof(HANDLE) = void * = sizeof(int) = 4)
 	int m_dwStyle; // 68h
 	int m_dwExStyle; // 6Ch
@@ -76,6 +76,7 @@ public:
 
 	void closeChildren();
 	void initFrame(UIWindow*, int, int, int, bool);
+	void setName(char*);
 	void sizeWindow(int, int, int);
 	void updateMove(int, int);
 };
