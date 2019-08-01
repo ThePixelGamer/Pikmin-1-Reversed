@@ -57,7 +57,7 @@ public:
 	void 					waitRetrace();
 };
 
-SYSCORE_API System* gsys;
+extern SYSCORE_API System* gsys;
 
 #endif
 

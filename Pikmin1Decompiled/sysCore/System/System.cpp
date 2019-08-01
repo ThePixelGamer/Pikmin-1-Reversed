@@ -1,6 +1,8 @@
 #include "System.h"
 #include <direct.h>
 
+SYSCORE_API System* gsys;
+
 System::System() : StdSystem() {
 	gsys = this;
 

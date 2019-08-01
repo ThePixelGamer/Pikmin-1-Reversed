@@ -5,10 +5,10 @@
 //////////////////////////////////////////////////////////////////////
 
 RectArea::RectArea() {
-    this->x1 = 0;
-    this->y1 = 0;
-    this->x2 = 0;
-    this->y2 = 0;
+	this->x1 = 0;
+	this->y1 = 0;
+	this->x2 = 0;
+	this->y2 = 0;
 }
 
 RectArea::RectArea(int x_1, int y_1, int x_2, int y_2) {
@@ -71,7 +71,7 @@ UIWindow::UIWindow() : UIFrame() {
 	this->m_dwExStyle = 0;
 	this->m_dwStyle = 0;
 	this->m_unk10 = 0;
-	this->m_hUnk1 = 0;
+	this->m_hMenu = 0;
 	this->m_unk7 = 0;
 	this->m_unk1.set(0, 0, 0, 0);
 }
@@ -79,7 +79,7 @@ UIWindow::UIWindow() : UIFrame() {
 UIWindow::UIWindow(UIWindow * unk1, int unk2, int unk3, int unk4, bool unk5) : UIFrame() {
 	this->m_unk7 = 0;
 	this->m_unk10 = 0;
-	this->m_hUnk1 = 0; //HMENU
+	this->m_hMenu = 0; //HMENU
 	initFrame(unk1, unk2, unk3, unk4, unk5);
 }
 
@@ -106,7 +106,7 @@ void UIWindow::activate() {
 }
 
 int UIWindow::processMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
-	unsigned int v6; // [esp+4Ch] [ebp-18h]
+	/*unsigned int v6; // [esp+4Ch] [ebp-18h]
 	unsigned int unusedInt; // [esp+50h] [ebp-14h]
 	struct Node* v10; // [esp+5Ch] [ebp-8h]
 
@@ -146,9 +146,9 @@ int UIWindow::processMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, l
 			SendMessageA(hWnd, WM_CLOSE, 0, 0);
 		break;
 
-	default:
+	default:*/
 		return this->returnMessage(hWnd, Msg, wParam, lParam);
-	}
+	//}
 }
 
 LRESULT UIWindow::returnMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
@@ -166,8 +166,36 @@ HDWP UIWindow::resizeFrame(HDWP hWinPosInfo, RectArea & rect) {
 	return hWinPosInfo;
 }
 
-void UIWindow::createWindow(const char*, const char*, HMENU) {
+void UIWindow::createWindow(const char* className, const char* windowName, HMENU hMenu) {
+	this->m_hMenu = hMenu;
+	
+	HWND hWndParent;
+	if (this->m_unk2)
+		hWndParent = 0;
+	else
+		hWndParent = 0;
+	
+	this->m_hWnd = CreateWindowExA(
+                      this->m_dwExStyle,
+                      className,
+                      windowName,
+                      this->m_dwStyle,
+                      this->m_frame.x1,
+                      this->m_frame.y1,
+                      m_frame.width(),
+                      m_frame.height(),
+                      hWndParent,
+                      this->m_hMenu,
+                      sysHInst,
+                      0);
 
+	if (windowName)
+		this->setName((char *)windowName);
+	else
+		this->setName((char *)className);
+
+	if (!strcmp(className, "DUIGenWin") || !strcmp(className, "DUIClearWin"))	
+		SetWindowLong(this->m_hWnd, 0, (LONG)this);
 }
 
 void UIWindow::dockTop(int, RectArea&, RectArea&) {

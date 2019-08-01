@@ -4,19 +4,23 @@
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+
+#pragma once
+	
 #ifndef SYSCORE_H
 #define SYSCORE_H
 
-#pragma once	
-
 #include "Stream/Stream.h"
-#include <winsock2.h>
+#include "Nodes.h"
 #include <Windows.h>
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
 
-SYSCORE_API HINSTANCE hInstance;
-SYSCORE_API HINSTANCE sysHInst;
-SYSCORE_API Stream* sysCon;
-SYSCORE_API class Stream* errCon;
+extern SYSCORE_API HINSTANCE hInstance;
+extern SYSCORE_API HINSTANCE sysHInst;
+extern SYSCORE_API Stream* sysCon;
+extern SYSCORE_API class Stream* errCon;
 
 #endif

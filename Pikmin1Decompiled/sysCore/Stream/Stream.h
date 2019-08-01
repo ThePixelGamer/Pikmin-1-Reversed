@@ -14,7 +14,7 @@
 class SYSCORE_API Stream
 {
 public:
-	int whatTheFuck;
+	int unknown_for_realsies; //04h
 
 	Stream();
 

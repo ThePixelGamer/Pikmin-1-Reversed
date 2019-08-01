@@ -7,8 +7,7 @@
 #ifndef UI_H
 #define UI_H
 
-#include "../Nodes.h"
-#include <Windows.h>
+#include "../sysCore.h"
 
 class SYSCORE_API RectArea {
 public:
@@ -50,16 +49,16 @@ public:
 	//(Node: 14h-1Ch)
 	//(UIFrame: 20h-40h)
 	RectArea m_unk1; // 50h 
-	int m_unk2; // 60h
-	int m_unk3; // 64h
+	CoreNode * m_unk2; // 60h
+	HWND m_hWnd; // 64h (sizeof(HANDLE) = void * = sizeof(int) = 4)
 	int m_dwStyle; // 68h
 	int m_dwExStyle; // 6Ch
 	int m_unk6; // 70h
 	int m_unk7; // 74h
 	int m_unk8; // 78h
 	int m_unk9; // 7Ch
-	int m_unk10; // 80h
-	int m_hUnk1; // 84h
+	bool m_unk10; // 80h
+	HMENU m_hMenu; // 84h (HMENU is a handle)
 
 	UIWindow();
 	UIWindow(UIWindow*, int, int, int, bool);
