@@ -5,7 +5,7 @@ System::System() : StdSystem() {
 	gsys = this;
 
 	char Dest[512];
-	sprintf(Dest, "%s\\", getcwd(0,0));
+	sprintf(Dest, "%s\\", getcwd(0, 0));
 	this->currentWorkingDirectory = strdup(Dest);
 
 }
@@ -18,7 +18,7 @@ System::~System() {
 
 }
 
-FileRandomAccessStream * System::openFile(char*, bool, bool) 
+FileRandomAccessStream* System::openFile(char*, bool, bool)
 {
 
 	return new FileRandomAccessStream(0, 0);
@@ -41,17 +41,17 @@ UIWindow* System::createDebugStream(UIWindow*) {
 	return new UIWindow;
 }
 
-FileRandomAccessStream * System::createFile(char* cwd, bool hasCwd) {
-	char * workingDir;
+FileRandomAccessStream* System::createFile(char* cwd, bool hasCwd) {
+	char* workingDir;
 	if (hasCwd)
 		workingDir = this->currentWorkingDirectory;
 	else
 		workingDir = "";
-	
+
 	char Dest[256];
 	sprintf(Dest, "%s", workingDir);
 
-	char * fname;
+	char* fname;
 	if (cwd)
 		fname = this->fileName;
 	else
@@ -59,7 +59,7 @@ FileRandomAccessStream * System::createFile(char* cwd, bool hasCwd) {
 
 	sprintf(Dest, "%s%s", fname, cwd);
 
-	FILE * fptr = fopen(Dest, "wb");
+	FILE* fptr = fopen(Dest, "wb");
 	if (!fptr)
 		return 0;
 
@@ -67,7 +67,7 @@ FileRandomAccessStream * System::createFile(char* cwd, bool hasCwd) {
 }
 
 void System::doneRender() {
-	
+
 }
 
 BaseApp* System::firstApp() {
@@ -134,7 +134,7 @@ int System::run(BaseApp*) {
 			break;
 
 		TranslateMessage(&message);
-		DispatchMessage (&message);
+		DispatchMessage(&message);
 	}
 
 	return message.wParam;

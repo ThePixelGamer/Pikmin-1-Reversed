@@ -23,7 +23,7 @@ void RandomAccessStream::padFileTo(unsigned __int32 a1, unsigned __int32 a2)
 		this->writeByte(0);
 }
 
-void RandomAccessStream::readFrom(int arg1, void *buffer, int length)
+void RandomAccessStream::readFrom(int arg1, void* buffer, int length)
 {
 	this->setPosition(arg1);
 	this->read(buffer, length);

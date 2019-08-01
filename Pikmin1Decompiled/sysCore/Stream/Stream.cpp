@@ -11,9 +11,9 @@ void Stream::print(char* Format, ...)
 
 	va_start(va, Format);
 	vsprintf(Dest, Format, va);
-	if ( strlen(Dest) )
+	if (strlen(Dest))
 	{
-        this->write(Dest, strlen(Dest));
+		this->write(Dest, strlen(Dest));
 	}
 }
 
@@ -23,7 +23,7 @@ void Stream::vPrintf(char* Format, char* Args)
 
 	vsprintf(resultantString, Format, Args);
 
-	
+
 	if (strlen(resultantString))
 	{
 		this->write(resultantString, strlen(resultantString));
@@ -53,13 +53,13 @@ short Stream::readShort()
 
 double Stream::readFloat()
 {
-    int c;
-    this->read(&c, sizeof(float));    
-    c = ((c & 0xFF000000) >> 24) | ((c & 0xFF0000) >> 8) | ((c & 0xFF00) << 8) | (c << 24);
-    return *(float*)(&c);
+	int c;
+	this->read(&c, sizeof(float));
+	c = ((c & 0xFF000000) >> 24) | ((c & 0xFF0000) >> 8) | ((c & 0xFF00) << 8) | (c << 24);
+	return *(float*)(&c);
 }
 
-char * Stream::readString()
+char* Stream::readString()
 {
 	int stringLength = this->readInt();
 	char* returnValue = new char[stringLength + 1];
@@ -70,13 +70,13 @@ char * Stream::readString()
 	return returnValue;
 }
 
-void Stream::readString(String& str)
+void Stream::readString(String & str)
 {
 	int stringLength = this->readInt();
 
 	if (str.stringLen < stringLength)
 		str.init(stringLength);
-	
+
 	this->read(str.string, stringLength);
 
 	str.string[stringLength] = 0; // null terminate string
@@ -112,16 +112,16 @@ void Stream::writeFloat(float toW)
 	this->write(&temp, sizeof(float));
 }
 
-void Stream::writeString(String& str)
+void Stream::writeString(String & str)
 {
 	int strleng = (str.getLength() + 3) & ~3;
 	this->writeInt(strleng);
 	this->write(str.string, str.getLength());
 
 	char tempBuf = 0;
-	for ( int i = 0; ; ++i )
+	for (int i = 0; ; ++i)
 	{
-		if ( i >= strleng - str.getLength() )
+		if (i >= strleng - str.getLength())
 			break;
 		this->write(&tempBuf, 1);
 	}

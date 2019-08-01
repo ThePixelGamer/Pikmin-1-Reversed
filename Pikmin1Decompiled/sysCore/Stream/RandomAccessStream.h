@@ -16,11 +16,11 @@ public:
 	virtual int getPending();
 	virtual int getLength() { return this->getAvailable(); }
 	virtual void setPosition(int) { }
-	virtual int getPosition() { return 0; } 
+	virtual int getPosition() { return 0; }
 
 	void padFile(unsigned __int32 toPad);
 	void padFileTo(unsigned __int32 a1, unsigned __int32 a2);
-	void readFrom(int arg1, void * buffer, int length);
+	void readFrom(int arg1, void* buffer, int length);
 	int readIntFrom(int position);
 };
 

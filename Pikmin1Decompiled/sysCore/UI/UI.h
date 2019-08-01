@@ -22,7 +22,7 @@ public:
 
 	int height();
 	int width();
-	bool pointInside (int, int);
+	bool pointInside(int, int);
 	void set(int, int, int, int);
 };
 
@@ -64,7 +64,7 @@ public:
 	UIWindow();
 	UIWindow(UIWindow*, int, int, int, bool);
 	~UIWindow();
-	
+
 	virtual void refreshWindow(); // 34h
 	virtual void updateSizes(int, int); // 38h
 	virtual void activate(); // 3Ch

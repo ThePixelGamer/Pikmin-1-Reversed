@@ -21,10 +21,10 @@ public:
 	virtual int readInt();
 	virtual char readByte();
 	virtual short readShort();
-	virtual double readFloat ();
-	virtual char * readString();
-	virtual void readString(String &);
-	virtual void readString(char *, int);
+	virtual double readFloat();
+	virtual char* readString();
+	virtual void readString(String&);
+	virtual void readString(char*, int);
 
 	virtual void writeInt(int);
 	virtual void writeByte(unsigned __int8);
@@ -36,11 +36,11 @@ public:
 	virtual void read(void*, int) {}
 	virtual void write(void*, int) {}
 
-	virtual int getPending  () { return 0; }
+	virtual int getPending() { return 0; }
 	virtual int getAvailable() { return 0; }
 
 	virtual void close() {}
-	virtual bool getClosing  () { return 0; }
+	virtual bool getClosing() { return 0; }
 	virtual void flush() {}
 
 	void print(char*, ...);

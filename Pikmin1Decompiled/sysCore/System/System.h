@@ -35,12 +35,12 @@ public:
 
 	void					beginRender();
 	void					buildModeList();
-	UIWindow*				createDebugStream(UIWindow*);
-	FileRandomAccessStream*	createFile(char*, bool);
+	UIWindow* createDebugStream(UIWindow*);
+	FileRandomAccessStream* createFile(char*, bool);
 	void					doneRender();
-	BaseApp*				firstApp();
+	BaseApp* firstApp();
 	void					genAge(AgeServer*);
-	struct AtxRouter*		getAtxRouter();
+	struct AtxRouter* getAtxRouter();
 	int						getFrameCount();
 	float					getFrameRate();
 	float					getFrameTime();
@@ -57,7 +57,7 @@ public:
 	void 					waitRetrace();
 };
 
-SYSCORE_API System * gsys;
+SYSCORE_API System* gsys;
 
 #endif
 

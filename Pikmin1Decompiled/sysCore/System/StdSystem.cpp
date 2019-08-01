@@ -19,7 +19,7 @@ void StdSystem::initSoftReset() {
 
 }
 
-FileRandomAccessStream * StdSystem::openFile(char*, bool, bool) {
+FileRandomAccessStream* StdSystem::openFile(char*, bool, bool) {
 	return new FileRandomAccessStream(0, 0);
 }
 
