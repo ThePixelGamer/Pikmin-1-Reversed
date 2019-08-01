@@ -1,6 +1,8 @@
-#include <Windows.h>
+#include <windows.h>
 #include <string.h>
 #include <stdio.h>
+#include "..\sysCore\System\System.h"
+#include "..\sysCore\sysCore.h"
 
 //paste this for a debug print
 //MessageBoxA(NULL, "String Displayed", "Title", MB_OK); 
@@ -73,7 +75,7 @@ size_t passCmdParams(const char* str) {
 			} 
 			else if(cmd->isToken("+direct")) {
 				print("Creating atxDirectRouter\n");
-				(gsys + 270) = new AtxDirectRouter(cmd->getToken(true)); //big hmmm
+				(gsys + 270) = new AtxDirectRouter(cmd->getToken(true));
 				print("done\n");
 			}
 			else if (cmd->isToken("+client")) {
@@ -103,5 +105,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if(!uiMgr->isActive() && !gsys->firstApp())
 		MessageBoxA(NULL, "A top level window does not exist,\nthe application will now close.", "Warning!", MB_OK | MB_ICONWARNING);
 
-    return gsys->run();
+	int returnValue = gsys->run();
+
+	delete nodeMgr;
+	delete moduleMgr;
+	delete uiMgr;
+
+    return returnValue;
 }
