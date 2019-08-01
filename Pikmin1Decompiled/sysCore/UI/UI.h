@@ -76,7 +76,6 @@ public:
 
 	void closeChildren();
 	void initFrame(UIWindow*, int, int, int, bool);
-	void setName(char*);
 	void sizeWindow(int, int, int);
 	void updateMove(int, int);
 };

@@ -175,15 +175,17 @@ void UIWindow::createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu) {
 	else
 		hWndParent = 0;
 	
-	this->m_hWnd = CreateWindowExA(this->m_dwExStyle, className, windowName, this->m_dwStyle, this->m_frame.x1, this->m_frame.y1, this->m_frame.width(), this->m_frame.height(), hWndParent, this->m_hMenu, sysHInst, 0);
+	this->m_hWnd = CreateWindowExA(this->m_dwExStyle, className, 
+									windowName, this->m_dwStyle, 
+									this->m_frame.x1, this->m_frame.y1, 
+									this->m_frame.width(), this->m_frame.height(), 
+									hWndParent, this->m_hMenu, 
+									sysHInst, 0);
 
-    LPCSTR lpTemp;
 	if(windowName)
-		lpTemp = windowName;
+		this->setName((char *)windowName);
 	else
-		lpTemp = className;
-	
-    this->setName((char*)lpTemp);
+		this->setName((char *)className);
 
 	if (!strcmp(className, "DUIGenWin") || !strcmp(className, "DUIClearWin"))	
 		SetWindowLong(this->m_hWnd, 0, (long)this);
@@ -199,10 +201,6 @@ void UIWindow::closeChildren() {
 
 void UIWindow::initFrame(UIWindow*, int, int, int, bool) {
 
-}
-
-void UIWindow::setName(char* nme) {
-    this->name = nme;
 }
 
 void UIWindow::sizeWindow(int, int, int) {
