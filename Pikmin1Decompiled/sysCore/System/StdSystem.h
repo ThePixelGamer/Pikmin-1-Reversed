@@ -40,11 +40,9 @@ class SYSCORE_API StdSystem {
 public:
 
 	char* dataRoot;	 // this + 84
-	int unkShutdownCode; // ???? this + 114
+	int unkShutdownCode; //1C8h
 
 	StdSystem();
-	StdSystem(const StdSystem&);
-	~StdSystem();
 
 	virtual void					initSoftReset();
 	virtual RandomAccessStream	  * openFile(char*, bool, bool);
@@ -59,6 +57,8 @@ public:
 	virtual void					endLoading();
 
 	bool							isShutdown();
+	bool							isActive() { return (this->unkShutdownCode & 0x200000) == 0x200000; }
+	void							setActive(bool set) { }
 	/*
 		void		 Shutdown();
 		void		 addAnimation(AnimData*, char*);

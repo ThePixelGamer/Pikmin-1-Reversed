@@ -22,16 +22,18 @@ public:
 class SYSCORE_API CoreNode : public ANode {
 public:
 	//vtable 0h
-	char* name; // 4h
-	CoreNode* parent; // 8h
-	CoreNode* next;	// Ch
-	CoreNode* child; // 10h
+	char* name; //4h
+	CoreNode* parent; //8h
+	CoreNode* next;	//Ch
+	CoreNode* child; //10h
 
 	CoreNode(char* = "CoreNode");
 
-	virtual void write(RandomAccessStream*) {}
-	virtual void read(RandomAccessStream*) {}
-	virtual int getAgeNodeType();
+	virtual void genAge(AgeServer*) {}			//this+0 TODO
+	virtual void genAgeNode(AgeServer*) {}		//this+4 TODO
+	virtual int getAgeNodeType();				//this+8
+	virtual void write(RandomAccessStream*) {}	//this+12
+	virtual void read(RandomAccessStream*) {}	//this+16
 
 	CoreNode* Next();
 	void Next(CoreNode*);
@@ -50,10 +52,8 @@ public:
 
 	void load(char*, char*, unsigned __int32); // TODO
 
-	void genWrite(AgeServer*);			 // TODO
-	void genRead(AgeServer*);			 // TODO
-	virtual void genAgeNode(AgeServer*) {}// TODO
-	virtual void genAge(AgeServer*) {}	 // TODO
+	void genWrite(AgeServer*);				   // TODO
+	void genRead(AgeServer*);				   // TODO
 };
 
 class Graphics;
@@ -71,14 +71,15 @@ public:
 
 	Node(char* = "<Node>");
 
-	virtual void update();
-	virtual void draw(Graphics&);
-	virtual void render(Graphics&);
-	virtual void concat();
-	virtual void concat(VQS&);
-	virtual void concat(SRT&);
-	virtual void concat(Matrix4f&);
-	virtual void getModelMatrix();
+	//(CoreNode: 0 - 16)
+	virtual void update();			//this+20
+	virtual void draw(Graphics&);	//this+24
+	virtual void render(Graphics&);	//this+28
+	virtual void concat(Matrix4f&);	//this+32
+	virtual void concat(SRT&);		//this+36
+	virtual void concat(VQS&);		//this+40	
+	virtual void concat();			//this+44	
+	virtual void getModelMatrix();	//this+48
 
 	bool getFlag(int);
 };
@@ -87,9 +88,10 @@ static unsigned char foundNode;
 static CoreNode* unkNode;
 
 class SYSCORE_API NodeMgr {
+public:
 	//Var
-	int unk;
-	CoreNode firstnode;
+	int unk; //4h
+	CoreNode firstnode; //32h
 
 	// Functions
 	NodeMgr();

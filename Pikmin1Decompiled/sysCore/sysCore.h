@@ -21,6 +21,6 @@
 extern SYSCORE_API HINSTANCE hInstance;
 extern SYSCORE_API HINSTANCE sysHInst;
 extern SYSCORE_API Stream* sysCon;
-extern SYSCORE_API class Stream* errCon;
+extern SYSCORE_API Stream* errCon;
 
 #endif

@@ -8,6 +8,8 @@
 #define UI_H
 
 #include "../sysCore.h"
+#include<CommCtrl.h>
+#pragma comment(lib, "comctl32.lib")
 
 class SYSCORE_API RectArea {
 public:
@@ -91,6 +93,8 @@ public:
 	~UIMgr();
 
 	void RegisterGenWindowClass(LPCSTR lpszClass, void *, bool);
+	void activateWindow(HWND, UIWindow * a3);
+	bool isActive();
 };
 
 extern SYSCORE_API UIMgr *uiMgr;

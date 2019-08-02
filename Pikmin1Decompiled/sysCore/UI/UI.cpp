@@ -256,14 +256,19 @@ void UIWindow::updateMove(int, int) {
 SYSCORE_API UIMgr *uiMgr;
 
 UIMgr::UIMgr() : Node("UIMgr"), m_unk1("<Node>") {
-
+	this->RegisterGenWindowClass("DUIGenWin", 0, true);
+	this->RegisterGenWindowClass("DUIClearWin", 0, false);
+	InitCommonControls();
+	nodeMgr->firstNode()->add(this);
 }
 
 UIMgr::~UIMgr() {
 
 }
 
-/*LRESULT __stdcall selectWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+#include "../System/System.h"
+
+LRESULT __stdcall selectWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
 	UINT msg = Msg;
 	if (Msg == 1)
@@ -273,11 +278,33 @@ UIMgr::~UIMgr() {
 	}
 	if (msg == 2)
 	{
-		nodeMgr->Del(GetWindowLongA(hWnd, 0));
+		nodeMgr->Del((Node *)GetWindowLongA(hWnd, 0));
 RETURNNOW:
+		UIWindow * wind = (UIWindow *)GetWindowLongA(hWnd, 0);
+		if (!wind || gsys->isShutdown())
+			return DefWindowProcA(hWnd, Msg, wParam, lParam);
+		else
+			return wind->processMessage(hWnd, Msg, wParam, lParam);
 	}
-	return LRESULT;
-}*/
+	if (Msg != 28)
+		goto RETURNNOW;
+	if (wParam)
+	{
+		if (!gsys->isShutdown() && !gsys->isActive())
+		{
+			gsys->setActive(1);
+			if (uiMgr)
+			{
+				uiMgr->activateWindow(hWnd, (UIWindow *)GetWindowLongA(hWnd, 0));
+			}
+		}
+	}
+	else if (gsys->isActive())
+	{
+		gsys->setActive(0);
+	}
+	return 0;
+}
 
 void UIMgr::RegisterGenWindowClass(LPCSTR lpszClass, void * wndProcAddr, bool a3)
 {
@@ -292,7 +319,7 @@ void UIMgr::RegisterGenWindowClass(LPCSTR lpszClass, void * wndProcAddr, bool a3
 		if ( a3 )
 		  wndProc = (LRESULT (__stdcall *)(HWND, UINT, WPARAM, LPARAM))wndProcAddr;
 		else
-		  wndProc = (LRESULT (__stdcall *)(HWND, UINT, WPARAM, LPARAM))wndProcAddr;
+		  wndProc = selectWndProc;
 		wcx.lpfnWndProc = wndProc;
 		wcx.hCursor = LoadCursorA(0, IDC_ARROW);
 		wcx.hIcon = LoadIconA(hInstance, IDI_APPLICATION); // originally 0x65 instead of IDI_APPLICATION
@@ -304,4 +331,23 @@ void UIMgr::RegisterGenWindowClass(LPCSTR lpszClass, void * wndProcAddr, bool a3
 		wcx.hIconSm = LoadIconA(hInstance, IDI_APPLICATION); // originally 0x65 instead of IDI_APPLICATION
 		RegisterClassExA(&wcx);
 	}
+}
+
+void UIMgr::activateWindow(HWND hWnd, UIWindow * window)
+{
+	for (UIWindow * i = (UIWindow *)this->Child(); i; i = (UIWindow *)i->Next())
+		i->activate();
+}
+
+bool UIMgr::isActive()
+{
+	bool retVal = false;
+
+	for (UIWindow * i = (UIWindow *)this->Child(); i; i = (UIWindow *)i->Next())
+	{
+		if (i->m_dwExStyle & WS_EX_APPWINDOW)
+			retVal = true;
+
+	}
+	return retVal;
 }

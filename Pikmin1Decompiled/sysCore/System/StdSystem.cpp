@@ -28,16 +28,6 @@ StdSystem::StdSystem()
 
 }
 
-StdSystem::StdSystem(const StdSystem&)
-{
-
-}
-
-StdSystem::~StdSystem()
-{
-
-}
-
 void StdSystem::initSoftReset() {
 
 }

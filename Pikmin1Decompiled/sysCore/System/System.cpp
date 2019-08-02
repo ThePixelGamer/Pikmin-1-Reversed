@@ -40,7 +40,7 @@ void System::buildModeList() {
 
 UIWindow* System::createDebugStream(UIWindow*) {
 
-	return new UIWindow;
+	return new UIWindow();
 }
 
 FileRandomAccessStream* System::createFile(char* cwd, bool hasCwd) {
