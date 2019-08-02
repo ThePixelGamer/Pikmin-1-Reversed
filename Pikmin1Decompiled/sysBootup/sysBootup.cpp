@@ -4,10 +4,25 @@
 #include "..\sysCore\System\System.h"
 #include "..\sysCore\sysCore.h"
 
-//paste this for a debug print
-//MessageBoxA(NULL, "String Displayed", "Title", MB_OK); 
+MenuPlugin menuP; //0: wParam,  4: char* name, 8: MenuPlugin* (next one or something?)
+System unused;
 
-UIWindow* window;
+void isLast() { menuP.next = 0; } //may be autogen?
+
+class UIMain : public UIWindow { //not an official name
+public:
+	UIMain(UIWindow* parent, int unk1, int dwStyle, int dwExStyle, bool unk2) : UIWindow(parent, unk1, dwStyle, dwExStyle, unk2) {}
+
+	virtual int processMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
+		if(Msg == WM_COMMAND)
+			for(MenuPlugin* i = menuP; i; i = i->next) 
+				if(i->wParam == wParam)
+					modMgr->Alloc(i->name);
+
+		return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
+	}
+}; 
+UIMain* window;
 
 void print(const char* fmt, ...) {
 	char* dest;
@@ -24,13 +39,13 @@ void print(const char* fmt, ...) {
 } 
 
 void createUIWindow(const char* str) {
-	window = new UIWindow(); //not created here, UIWindow inherits UIFrame 
+	window = new UIMain();
 	window->setFrame(new RectArea(690, 32, 1260, 300));
-	window->createWindow("DUIClearWin", "OpenGL / Dolphin System", LoadMenuA(sysHInst, 101));//load menu from resource file
+	window->createWindow("DUIClearWin", "OpenGL / Dolphin System", LoadMenuA(sysHInst, 101)); //load menu from resource file
 	gsys->createDebugStream();
 	window->refreshWindow();
-	ShowWindow((window + 100), SW_SHOWNORMAL);
-	print("Basedir = %s\n", (gsys + 20));
+	ShowWindow(window->m_hWnd, SW_SHOWNORMAL);
+	print("Basedir = %s\n", gsys->baseDir);
 }
 
 void loadDLLsInDir(const char* dir) {
@@ -40,7 +55,7 @@ void loadDLLsInDir(const char* dir) {
 	_finddata_t fd_file;
 
 	if(window) {
-		HMENU hMenu = GetMenu((window + 100));
+		HMENU hMenu = GetMenu(window->m_hWnd);
 		if(hMenu)
 			hSubMenu = GetSubMenu(hMenu, 0);
 	}
@@ -51,7 +66,7 @@ void loadDLLsInDir(const char* dir) {
 	for(bool dll_count = (dll == -1); !dll_count; dll_count = (_findnext(dll, &fd_file) != 0)) {
 		sprintf(src, "%s/%s", dir, fd_file.name);
 		if(hSubMenu)
-			modMgr->loadModule(strdup(src))->menuPlugins((MenuPlugin*)&unk_416638, hSubMenu);
+			modMgr->loadModule(strdup(src))->menuPlugins(menuP, hSubMenu);
 	}
 	
 	_findclose(fd_file);
@@ -75,7 +90,7 @@ size_t passCmdParams(const char* str) {
 			} 
 			else if(cmd->isToken("+direct")) {
 				print("Creating atxDirectRouter\n");
-				(gsys + 270) = new AtxDirectRouter(cmd->getToken(true));
+				gsys->mainRouter = new AtxDirectRouter(cmd->getToken(true));
 				print("done\n");
 			}
 			else if (cmd->isToken("+client")) {
@@ -86,7 +101,6 @@ size_t passCmdParams(const char* str) {
 		result = cmd->endOfCmds();
 		if(!result) 
 			result = cmd->getToken(true);
-
 	} 
 
 	return result;

@@ -111,7 +111,7 @@ char* CmdStream::getToken(bool hasComments)
 	int currChar = this->currentChar;
 	char tempIdentifier = 0;
 
-	if (*((char*)this->buffer + currChar) == '"' || (*((char*)this->buffer + currChar)) == '\'')
+	if (*(this->buffer + currChar) == '"' || *(this->buffer + currChar) == '\'')
 	{
 		tempIdentifier = 1;
 		++currChar;

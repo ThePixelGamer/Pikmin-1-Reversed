@@ -76,7 +76,7 @@ UIWindow::UIWindow() : UIFrame() {
 	this->m_unk1.set(0, 0, 0, 0);
 }
 
-UIWindow::UIWindow(UIWindow * unk1, int unk2, int unk3, int unk4, bool unk5) : UIFrame() {
+UIWindow::UIWindow(UIWindow* unk1, int unk2, int unk3, int unk4, bool unk5) : UIFrame() {
 	this->m_unk7 = 0;
 	this->m_unk10 = 0;
 	this->m_hMenu = 0; //HMENU
@@ -333,9 +333,9 @@ void UIMgr::RegisterGenWindowClass(LPCSTR lpszClass, void * wndProcAddr, bool a3
 	}
 }
 
-void UIMgr::activateWindow(HWND hWnd, UIWindow * window)
+void UIMgr::activateWindow(HWND hWnd, UIWindow* window)
 {
-	for (UIWindow * i = (UIWindow *)this->Child(); i; i = (UIWindow *)i->Next())
+	for (UIWindow* i = (UIWindow*)window->Child(); i; i = (UIWindow*)i->Next())
 		i->activate();
 }
 

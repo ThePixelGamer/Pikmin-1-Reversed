@@ -39,6 +39,7 @@ class LFlareGroup;
 class SYSCORE_API StdSystem {
 public:
 
+	char* baseDir; // 50h
 	char* dataRoot;	 // this + 84
 	int unkShutdownCode; //1C8h
 
