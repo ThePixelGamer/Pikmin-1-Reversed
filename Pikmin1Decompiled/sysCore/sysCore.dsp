@@ -138,6 +138,10 @@ SOURCE=.\System\System.cpp
 
 SOURCE=.\UI\UI.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\Vector3f.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -189,6 +193,10 @@ SOURCE=.\System\System.h
 # Begin Source File
 
 SOURCE=.\UI\UI.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Vector3f.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

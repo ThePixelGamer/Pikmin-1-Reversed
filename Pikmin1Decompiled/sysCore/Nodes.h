@@ -18,7 +18,6 @@ public:
 	virtual int getAgeNodeType();
 };
 
-
 class SYSCORE_API CoreNode : public ANode {
 public:
 	//vtable 0h
@@ -75,13 +74,77 @@ public:
 	virtual void update();			//this+20
 	virtual void draw(Graphics&);	//this+24
 	virtual void render(Graphics&);	//this+28
-	virtual void concat(Matrix4f&);	//this+32
-	virtual void concat(SRT&);		//this+36
-	virtual void concat(VQS&);		//this+40	
 	virtual void concat();			//this+44	
-	virtual void getModelMatrix();	//this+48
+	virtual void concat(VQS&);		//this+40	
+	virtual void concat(SRT&);		//this+36
+	virtual void concat(Matrix4f&);	//this+32
+	virtual Matrix4f* getModelMatrix();	//this+48
 
 	bool getFlag(int);
+};
+
+class DataMsg;
+
+class SYSCORE_API EditNode : public CoreNode {
+public:
+	EditNode(char*);
+
+	virtual void msgCommand(DataMsg&);
+	virtual void render2d(Graphics&, int&);
+};
+
+class SYSCORE_API FaceNode : public CoreNode {
+public: 
+	int m_facenode_0; // 14h
+	int m_facenode_1; // 18h
+	int m_facenode_2; // 1Ch
+	int m_facenode_3; // 20h
+	int m_facenode_4; // 24h
+	int m_facenode_5; // 28h
+	int m_facenode_6; // 2Ch
+	int m_facenode_7; // 30h
+	int m_facenode_8; // 34h
+	int m_facenode_9; // 38h
+	int m_facenode_10; // 3Ch
+	int m_facenode_11; // 40h
+	int m_facenode_12; // 44h
+
+	FaceNode();
+	FaceNode(int);
+};
+
+class SYSCORE_API MemInfoNode : public CoreNode {
+public:
+	MemInfoNode();
+};
+
+class Vector3f;
+
+class SYSCORE_API SRTNode : public Node {
+public:
+	//vtable 0h
+	//(CoreNode: 4h-10h)
+	//(Node: 14h-1Ch)
+	Matrix4f m_mat4f; // 20h
+	SRT m_srt; // 60 h
+
+	SRTNode(char*);
+
+	//(CoreNode: 0 - 16)
+	virtual void update();			//this+20
+	virtual void concat();			//this+44	
+	virtual void concat(Matrix4f&);	//this+32
+	virtual Matrix4f* getModelMatrix();	//this+48
+
+	void genAge(AgeServer&);
+	Vector3f* getPosition();
+	Vector3f* getRotation();
+	Vector3f* getScale();
+	Vector3f* getWorldPosition();
+	void setPosition(Vector3f&);
+	void setRotation(Vector3f&);
+	void setScale(Vector3f&);
+	void update();
 };
 
 static unsigned char foundNode;
