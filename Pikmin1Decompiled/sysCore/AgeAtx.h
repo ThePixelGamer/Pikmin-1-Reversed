@@ -23,8 +23,8 @@ public:
 
 class SYSCORE_API AtxStream : public Stream {
 public:
-	int dword8;
-	int dwordC;
+	int m_dword8;
+	int m_dwordC;
 
 	AtxStream() { this->init(); }
 
@@ -33,11 +33,11 @@ public:
 
 class SYSCORE_API AtxDirectRouter : public AtxRouter {
 public:
-	int dword4;
-	int dword8;
-	char byteC;
-	bool isconnected;
-	struct TcpStream* networkStream;
+	int m_dword4; //4h
+	int m_dword8; //8h
+	char m_byteC; //Ch
+	bool m_connected; //Dh
+	struct TcpStream* m_networkStream; //10h
 
 	virtual bool openRoute(AtxStream*, int) { return false; } // to do
 	virtual void closeRoute(AtxStream*) {}
@@ -45,7 +45,7 @@ public:
 	virtual void unlock() {}
 	virtual void closeAll() {}
 	virtual void reset() {}
-	virtual bool isConnected() { return this->isconnected; }
+	virtual bool isConnected() { return this->m_connected; }
 	virtual void setWindow(unsigned __int32) {}
 };
 
