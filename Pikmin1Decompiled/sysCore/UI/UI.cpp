@@ -76,7 +76,7 @@ UIWindow::UIWindow() : UIFrame() {
 	this->m_unk1.set(0, 0, 0, 0);
 }
 
-UIWindow::UIWindow(UIWindow* unk1, int unk2, int unk3, int unk4, bool unk5) : UIFrame() {
+UIWindow::UIWindow(UIWindow * unk1, int unk2, int unk3, int unk4, bool unk5) : UIFrame() {
 	this->m_unk7 = 0;
 	this->m_unk10 = 0;
 	this->m_hMenu = 0; //HMENU
@@ -151,7 +151,7 @@ int UIWindow::processMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, l
 		break;
 
 	default:*/
-		return this->returnMessage(hWnd, Msg, wParam, lParam);
+	return this->returnMessage(hWnd, Msg, wParam, lParam);
 	//}
 }
 
@@ -172,26 +172,26 @@ HDWP UIWindow::resizeFrame(HDWP hWinPosInfo, RectArea & rect) {
 
 void UIWindow::createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu) {
 	this->m_hMenu = hMenu;
-	
+
 	HWND hWndParent;
 	if (this->m_parent)
 		hWndParent = this->m_parent->m_hWnd;
 	else
 		hWndParent = 0;
-	
-	this->m_hWnd = CreateWindowExA(this->m_dwExStyle, className, 
-									windowName, this->m_dwStyle, 
-									this->m_frame.x1, this->m_frame.y1, 
-									this->m_frame.width(), this->m_frame.height(), 
-									hWndParent, this->m_hMenu, 
-									sysHInst, 0);
 
-	if(windowName)
-		this->setName((char *)windowName);
+	this->m_hWnd = CreateWindowExA(this->m_dwExStyle, className,
+		windowName, this->m_dwStyle,
+		this->m_frame.x1, this->m_frame.y1,
+		this->m_frame.width(), this->m_frame.height(),
+		hWndParent, this->m_hMenu,
+		sysHInst, 0);
+
+	if (windowName)
+		this->setName((char*)windowName);
 	else
-		this->setName((char *)className);
+		this->setName((char*)className);
 
-	if (!strcmp(className, "DUIGenWin") || !strcmp(className, "DUIClearWin"))	
+	if (!strcmp(className, "DUIGenWin") || !strcmp(className, "DUIClearWin"))
 		SetWindowLong(this->m_hWnd, 0, (long)this);
 }
 
@@ -203,7 +203,7 @@ void UIWindow::closeChildren() {
 
 }
 
-void UIWindow::initFrame(UIWindow* a1, int a2, int a3, int a4, bool a5) {
+void UIWindow::initFrame(UIWindow * a1, int a2, int a3, int a4, bool a5) {
 	this->m_parent = a1;
 	this->m_dwStyle = a3;
 	this->m_dwExStyle = a4;
@@ -224,20 +224,20 @@ void UIWindow::initFrame(UIWindow* a1, int a2, int a3, int a4, bool a5) {
 	AdjustWindowRectEx(&rect, this->m_dwStyle, false, this->m_dwExStyle);
 
 	this->m_zero.x1 = rect.left - x1;
-	this->m_zero.y1 = rect.top  - y1;
+	this->m_zero.y1 = rect.top - y1;
 	this->m_zero.x2 = rect.right - unk1;
 	this->m_zero.y2 = rect.bottom - unk2;
 
-	if ( this->m_unk10)
+	if (this->m_unk10)
 		this->m_zero.y1 -= GetSystemMetrics(SM_CYMENU);//     The height of a single-line menu bar, in pixels.
-	  if ( this->m_dwStyle & WS_VSCROLL )
+	if (this->m_dwStyle & WS_VSCROLL)
 		this->m_zero.x2 += GetSystemMetrics(SM_CXVSCROLL);// The width of a vertical scroll bar, in pixels.
-	  if ( this->m_dwStyle & WS_HSCROLL )
+	if (this->m_dwStyle & WS_HSCROLL)
 		this->m_zero.y2 += GetSystemMetrics(SM_CYHSCROLL);// The height of a horizontal scroll bar, in pixels.
 
-	  if ( a3 & WS_CHILDWINDOW )
+	if (a3 & WS_CHILDWINDOW)
 		this->m_parent->add(this);
-	  else
+	else
 		uiMgr->add(this);
 }
 
@@ -253,7 +253,7 @@ void UIWindow::updateMove(int, int) {
 // UIMgr class functions
 //////////////////////////////////////////////////////////////////////
 
-SYSCORE_API UIMgr *uiMgr;
+SYSCORE_API UIMgr* uiMgr;
 
 UIMgr::UIMgr() : Node("UIMgr"), m_unk1("<Node>") {
 	this->RegisterGenWindowClass("DUIGenWin", 0, true);
@@ -278,9 +278,9 @@ LRESULT __stdcall selectWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lPara
 	}
 	if (msg == 2)
 	{
-		nodeMgr->Del((Node *)GetWindowLongA(hWnd, 0));
-RETURNNOW:
-		UIWindow * wind = (UIWindow *)GetWindowLongA(hWnd, 0);
+		nodeMgr->Del((Node*)GetWindowLongA(hWnd, 0));
+	RETURNNOW:
+		UIWindow* wind = (UIWindow*)GetWindowLongA(hWnd, 0);
 		if (!wind || gsys->isShutdown())
 			return DefWindowProcA(hWnd, Msg, wParam, lParam);
 		else
@@ -295,7 +295,7 @@ RETURNNOW:
 			gsys->setActive(1);
 			if (uiMgr)
 			{
-				uiMgr->activateWindow(hWnd, (UIWindow *)GetWindowLongA(hWnd, 0));
+				uiMgr->activateWindow(hWnd, (UIWindow*)GetWindowLongA(hWnd, 0));
 			}
 		}
 	}
@@ -306,25 +306,25 @@ RETURNNOW:
 	return 0;
 }
 
-void UIMgr::RegisterGenWindowClass(LPCSTR lpszClass, void * wndProcAddr, bool a3)
+void UIMgr::RegisterGenWindowClass(LPCSTR lpszClass, void* wndProcAddr, bool a3)
 {
 	tagWNDCLASSEXA wcx;
-	LRESULT (__stdcall *wndProc)(HWND, UINT, WPARAM, LPARAM);
+	LRESULT(__stdcall * wndProc)(HWND, UINT, WPARAM, LPARAM);
 
-	if ( !GetClassInfoExA(sysHInst, lpszClass, &wcx) )
+	if (!GetClassInfoExA(sysHInst, lpszClass, &wcx))
 	{
 		wcx.cbSize = 48;
 		wcx.lpszClassName = lpszClass;
 		wcx.hInstance = sysHInst;
-		if ( a3 )
-		  wndProc = (LRESULT (__stdcall *)(HWND, UINT, WPARAM, LPARAM))wndProcAddr;
+		if (a3)
+			wndProc = (LRESULT(__stdcall*)(HWND, UINT, WPARAM, LPARAM))wndProcAddr;
 		else
-		  wndProc = selectWndProc;
+			wndProc = selectWndProc;
 		wcx.lpfnWndProc = wndProc;
 		wcx.hCursor = LoadCursorA(0, IDC_ARROW);
 		wcx.hIcon = LoadIconA(hInstance, IDI_APPLICATION); // originally 0x65 instead of IDI_APPLICATION
 		wcx.lpszMenuName = 0;
-		wcx.hbrBackground = (HBRUSH)(a3 != 0 ? COLOR_BTNSHADOW : COLOR_SCROLLBAR );
+		wcx.hbrBackground = (HBRUSH)(a3 != 0 ? COLOR_BTNSHADOW : COLOR_SCROLLBAR);
 		wcx.style = 32;
 		wcx.cbClsExtra = 0;
 		wcx.cbWndExtra = 4;
@@ -333,7 +333,7 @@ void UIMgr::RegisterGenWindowClass(LPCSTR lpszClass, void * wndProcAddr, bool a3
 	}
 }
 
-void UIMgr::activateWindow(HWND hWnd, UIWindow* window)
+void UIMgr::activateWindow(HWND hWnd, UIWindow * window)
 {
 	for (UIWindow* i = (UIWindow*)window->Child(); i; i = (UIWindow*)i->Next())
 		i->activate();
@@ -343,7 +343,7 @@ bool UIMgr::isActive()
 {
 	bool retVal = false;
 
-	for (UIWindow * i = (UIWindow *)this->Child(); i; i = (UIWindow *)i->Next())
+	for (UIWindow* i = (UIWindow*)this->Child(); i; i = (UIWindow*)i->Next())
 	{
 		if (i->m_dwExStyle & WS_EX_APPWINDOW)
 			retVal = true;

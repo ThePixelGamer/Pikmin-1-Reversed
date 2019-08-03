@@ -11,12 +11,13 @@
 
 class SYSCORE_API RandomAccessStream : public Stream {
 public:
+	// (Stream VTable 0 - 76)
 	void skipPadding(unsigned __int32 paddingAmount);
 	RandomAccessStream();
-	virtual int getPending();
-	virtual int getLength() { return this->getAvailable(); }
-	virtual void setPosition(int) { }
-	virtual int getPosition() { return 0; }
+	virtual int getPending();// 80
+	virtual int getLength() { return this->getAvailable(); } //84
+	virtual void setPosition(int) { }//88
+	virtual int getPosition() { return 0; }//92
 
 	void padFile(unsigned __int32 toPad);
 	void padFileTo(unsigned __int32 a1, unsigned __int32 a2);

@@ -6,14 +6,14 @@
 
 FileRandomAccessStream::FileRandomAccessStream(FILE* fpointer, char* cwd) : RandomAccessStream() {
 	this->fStream = fpointer;
-			this->currentWorkingDir = cwd;
-			this->dwordC = 0;
+	this->currentWorkingDir = cwd;
+	this->dwordC = 0;
 
-			int offset = this->getPosition();
-			fseek(this->fStream, 0, SEEK_END);
-			this->fileSize = ftell(this->fStream);
-			fseek(this->fStream, offset, SEEK_SET);
-		}
+	int offset = this->getPosition();
+	fseek(this->fStream, 0, SEEK_END);
+	this->fileSize = ftell(this->fStream);
+	fseek(this->fStream, offset, SEEK_SET);
+}
 
 int FileRandomAccessStream::getPosition() {
 	return ftell(this->fStream);
@@ -32,7 +32,7 @@ void StdSystem::initSoftReset() {
 
 }
 
-RandomAccessStream * StdSystem::openFile(char*, bool, bool) {
+RandomAccessStream* StdSystem::openFile(char*, bool, bool) {
 	return new FileRandomAccessStream(0, 0);
 }
 

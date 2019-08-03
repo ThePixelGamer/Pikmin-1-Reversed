@@ -12,17 +12,17 @@
 #include <Windows.h>
 #include "../Stream/RandomAccessStream.h"
 
-	class FileRandomAccessStream : public RandomAccessStream {
-	public:
-		// 0 | 4 bytes for vtbl ptr
-		char* currentWorkingDir; // 4h
-		FILE* fStream; // 8h
-		int dwordC; // Ch
-		int fileSize; // 10h 
+class FileRandomAccessStream : public RandomAccessStream {
+public:
+	// 0 | 4 bytes for vtbl ptr
+	char* currentWorkingDir; // 4h
+	FILE* fStream; // 8h
+	int dwordC; // Ch
+	int fileSize; // 10h 
 
-		FileRandomAccessStream(FILE* fpointer, char* cwd);
-		virtual int getPosition();
-	};
+	FileRandomAccessStream(FILE* fpointer, char* cwd);
+	virtual int getPosition();
+};
 
 class CacheTexture;
 class LoadIdler;
@@ -46,7 +46,7 @@ public:
 	StdSystem();
 
 	virtual void					initSoftReset();
-	virtual RandomAccessStream	  * openFile(char*, bool, bool);
+	virtual RandomAccessStream* openFile(char*, bool, bool);
 	virtual void					copyRamToCache(unsigned int, unsigned int, unsigned int);
 	virtual void					copyCacheToRam(unsigned int, unsigned int, unsigned int);
 	virtual void					copyWaitUntilDone();

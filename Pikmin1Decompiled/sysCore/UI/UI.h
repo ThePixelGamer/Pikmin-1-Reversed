@@ -92,11 +92,11 @@ public:
 	UIMgr();
 	~UIMgr();
 
-	void RegisterGenWindowClass(LPCSTR lpszClass, void *, bool);
-	void activateWindow(HWND, UIWindow * a3);
+	void RegisterGenWindowClass(LPCSTR lpszClass, void*, bool);
+	void activateWindow(HWND, UIWindow* a3);
 	bool isActive();
 };
 
-extern SYSCORE_API UIMgr *uiMgr;
+extern SYSCORE_API UIMgr* uiMgr;
 
 #endif

@@ -112,6 +112,10 @@ SOURCE=.\Nodes.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\RamStream.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Stream\RandomAccessStream.cpp
 # End Source File
 # Begin Source File
@@ -161,6 +165,10 @@ SOURCE=.\GfxobjInfo.h
 # Begin Source File
 
 SOURCE=.\Nodes.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RamStream.h
 # End Source File
 # Begin Source File
 

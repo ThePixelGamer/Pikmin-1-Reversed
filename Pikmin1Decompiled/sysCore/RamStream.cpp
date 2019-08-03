@@ -1,0 +1,57 @@
+// RamStream.cpp: implementation of the RamStream class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "RamStream.h"
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+RamStream::RamStream(void * _buffer, int _length) : RandomAccessStream() {
+	this->buffer = (char *)_buffer;
+	this->position = 0;
+	this->length = _length;
+}
+
+//////////////////////////////////////////////////////////////////////
+// Core functions of the Stream class
+//////////////////////////////////////////////////////////////////////
+
+void RamStream::read(void * buffer, int amount) {
+	memcpy(buffer, &this->buffer[this->position], amount);
+	this->position += amount;
+}
+
+void RamStream::write(void * src, int amount) {
+	memcpy(&this->buffer[this->position], src, amount);
+	this->position += amount;
+}
+
+//////////////////////////////////////////////////////////////////////
+// 'Getter' functions
+//////////////////////////////////////////////////////////////////////
+
+int RamStream::getLength() {
+	return this->length;
+}
+
+int RamStream::getPosition() {
+	return this->position;
+}
+
+int RamStream::getPending() {
+	return this->length - this->position;
+}
+
+//////////////////////////////////////////////////////////////////////
+// 'Setter' functions
+//////////////////////////////////////////////////////////////////////
+
+void RamStream::setLength(int _length) {
+	this->length = _length;
+}
+
+void RamStream::setPosition(int _position) {
+	this->position = _position;
+}
