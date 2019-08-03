@@ -6,7 +6,7 @@
 --------------------Configuration: sysCore - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1A1.tmp" with contents
+Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C5.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "SYSCORE_EXPORTS" /FR"Debug/" /Fp"Debug/sysCore.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
 "Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\AgeAtx.cpp"
@@ -22,9 +22,10 @@ Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1A1.tmp" with content
 "Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\System\System.cpp"
 "Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\UI\UI.cpp"
 "Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\Vector3f.cpp"
+"Z:\Pikmin-1-Reversed\Pikmin1Decompiled\sysCore\Module.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1A1.tmp" 
-Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1A2.tmp" with contents
+Creating command line "cl.exe @C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C5.tmp" 
+Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C6.tmp" with contents
 [
 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:yes /pdb:"Debug/sysCore.pdb" /debug /machine:I386 /out:"Debug/sysCore.dll" /implib:"Debug/sysCore.lib" /pdbtype:sept 
 ".\Debug\AgeAtx.obj"
@@ -40,8 +41,9 @@ kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32
 ".\Debug\System.obj"
 ".\Debug\UI.obj"
 ".\Debug\Vector3f.obj"
+".\Debug\Module.obj"
 ]
-Creating command line "link.exe @C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1A2.tmp"
+Creating command line "link.exe @C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C6.tmp"
 <h3>Output Window</h3>
 Compiling...
 AgeAtx.cpp
@@ -57,9 +59,11 @@ sysCore.cpp
 System.cpp
 UI.cpp
 Vector3f.cpp
-Linking...
-   Creating library Debug/sysCore.lib and object Debug/sysCore.exp
-Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1A6.tmp" with contents
+Module.cpp
+z:\pikmin-1-reversed\pikmin1decompiled\syscore\module.cpp(33) : error C2664: 'free' : cannot convert parameter 1 from 'const char *' to 'void *'
+        Conversion loses qualifiers
+Error executing cl.exe.
+Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C7.tmp" with contents
 [
 /nologo /o"Debug/sysCore.bsc" 
 ".\Debug\AgeAtx.sbr"
@@ -74,15 +78,16 @@ Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1A6.tmp" with content
 ".\Debug\sysCore.sbr"
 ".\Debug\System.sbr"
 ".\Debug\UI.sbr"
-".\Debug\Vector3f.sbr"]
-Creating command line "bscmake.exe @C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1A6.tmp"
+".\Debug\Vector3f.sbr"
+".\Debug\Module.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C7.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-sysCore.dll - 0 error(s), 0 warning(s)
+sysCore.dll - 1 error(s), 0 warning(s)
 </pre>
 </body>
 </html>

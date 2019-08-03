@@ -104,6 +104,10 @@ SOURCE=.\ControllerManager.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Module.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Nodes.cpp
 # End Source File
 # Begin Source File
@@ -157,6 +161,10 @@ SOURCE=.\Stream\CmdStream.h
 # Begin Source File
 
 SOURCE=.\ControllerManager.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Module.h
 # End Source File
 # Begin Source File
 
