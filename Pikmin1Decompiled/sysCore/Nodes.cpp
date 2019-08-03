@@ -146,7 +146,7 @@ void Node::concat(Matrix4f&) {
 
 }
 
-void Node::getModelMatrix() {
+Matrix4f* Node::getModelMatrix() {
 
 }
 
@@ -154,6 +154,69 @@ bool Node::getFlag(int f) {
 	return (f & this->flags) != 0;
 }
 
+//////////////////////////////////////////////////////////////////////
+// EditNode class functions
+//////////////////////////////////////////////////////////////////////
+
+EditNode::EditNode(char* unk) : CoreNode(unk) {}
+
+void EditNode::msgCommand(DataMsg& unk) {}
+void EditNode::render2d(Graphics& unk, int& unk1) {}
+
+//////////////////////////////////////////////////////////////////////
+// FaceNode class functions
+//////////////////////////////////////////////////////////////////////
+
+FaceNode::FaceNode() : CoreNode("face") {}
+FaceNode::FaceNode(int unk) : CoreNode("face") {
+	this->m_facenode_0  = unk; 
+	this->m_facenode_1  = 0; 
+	this->m_facenode_2  = 0; 
+	this->m_facenode_3  = 0; 
+	this->m_facenode_4  = 0; 
+	this->m_facenode_5  = 0; 
+	this->m_facenode_6  = 0; 
+	this->m_facenode_7  = 0; 
+	this->m_facenode_8  = 0; 
+	this->m_facenode_9  = 0; 
+	this->m_facenode_10 = 0;
+	this->m_facenode_11 = 0;
+	this->m_facenode_12 = 0;
+}
+
+//////////////////////////////////////////////////////////////////////
+// MemInfoNode class functions
+//////////////////////////////////////////////////////////////////////
+
+MemInfoNode::MemInfoNode() : CoreNode("meminfo") {}
+
+//////////////////////////////////////////////////////////////////////
+// SRTNode class functions
+//////////////////////////////////////////////////////////////////////
+
+SRTNode::SRTNode(char*) : Node() {
+	Vector3f pos(0.0, 0.0, 0.0);
+	setPosition(tmp);
+	Vector3f rot(1.0, 1.0, 1.0);
+	setRotation(tmp);
+	Vector3f sc(0.0, 0.0, 0.0);
+	setScale(sc);
+}
+
+void SRTNode::update();
+void SRTNode::concat();
+void SRTNode::concat(Matrix4f&);
+Matrix4f* SRTNode::getModelMatrix();
+
+void SRTNode::genAge(AgeServer&);
+Vector3f* SRTNode::getPosition();
+Vector3f* SRTNode::getRotation();
+Vector3f* SRTNode::getScale();
+Vector3f* SRTNode::getWorldPosition();
+void SRTNode::setPosition(Vector3f&);
+void SRTNode::setRotation(Vector3f&);
+void SRTNode::setScale(Vector3f&);
+void SRTNode::update();
 //////////////////////////////////////////////////////////////////////
 // NodeMgr class functions
 //////////////////////////////////////////////////////////////////////
