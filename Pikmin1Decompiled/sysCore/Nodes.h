@@ -8,6 +8,7 @@
 #define NODES_H
 
 #include "Stream/RandomAccessStream.h"
+#include "Vector3f.h"
 
 class AgeServer;
 
@@ -55,10 +56,10 @@ public:
 	void genRead(AgeServer*);				   // TODO
 };
 
-class Graphics;
-class Matrix4f;
-class SRT;
-class VQS;
+class Graphics {};
+class Matrix4f {};
+class SRT {};
+class VQS {};
 
 class SYSCORE_API Node : public CoreNode {
 public:
@@ -78,7 +79,7 @@ public:
 	virtual void concat(VQS&);		//this+40	
 	virtual void concat(SRT&);		//this+36
 	virtual void concat(Matrix4f&);	//this+32
-	virtual Matrix4f* getModelMatrix();	//this+48
+	//virtual Matrix4f* getModelMatrix();	//this+48
 
 	bool getFlag(int);
 };
@@ -118,8 +119,7 @@ public:
 	MemInfoNode();
 };
 
-class Vector3f;
-
+/*
 class SYSCORE_API SRTNode : public Node {
 public:
 	//vtable 0h
@@ -128,7 +128,7 @@ public:
 	Matrix4f m_mat4f; // 20h
 	SRT m_srt; // 60 h
 
-	SRTNode(char*);
+	SRTNode(char* = "<SRTNode>");
 
 	//(CoreNode: 0 - 16)
 	virtual void update();			//this+20
@@ -144,8 +144,7 @@ public:
 	void setPosition(Vector3f&);
 	void setRotation(Vector3f&);
 	void setScale(Vector3f&);
-	void update();
-};
+};*/
 
 static unsigned char foundNode;
 static CoreNode* unkNode;

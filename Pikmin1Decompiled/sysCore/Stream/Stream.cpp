@@ -74,12 +74,12 @@ void Stream::readString(String & str)
 {
 	int stringLength = this->readInt();
 
-	if (str.stringLen < stringLength)
+	if (str.m_stringLen < stringLength)
 		str.init(stringLength);
 
-	this->read(str.string, stringLength);
+	this->read(str.m_string, stringLength);
 
-	str.string[stringLength] = 0; // null terminate string
+	str.m_string[stringLength] = 0; // null terminate string
 }
 
 void Stream::readString(char* string, int stringLength)
@@ -116,7 +116,7 @@ void Stream::writeString(String & str)
 {
 	int strleng = (str.getLength() + 3) & ~3;
 	this->writeInt(strleng);
-	this->write(str.string, str.getLength());
+	this->write(str.m_string, str.getLength());
 
 	char tempBuf = 0;
 	for (int i = 0; ; ++i)

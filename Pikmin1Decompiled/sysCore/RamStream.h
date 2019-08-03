@@ -22,9 +22,9 @@ class SYSCORE_API RamStream : public RandomAccessStream
 public:
 	//0h - vtblPtr
 	int m_unk1; //4h
-	char * buffer; //Ch
-	int position; //10h
-	int length; //14h
+	char * m_buffer; //Ch
+	int m_position; //10h
+	int m_length; //14h
 	
 	RamStream(void *, int);
 
@@ -34,10 +34,10 @@ public:
 	virtual int		getPending();
 
 	virtual int		getPosition();
-	virtual void	setPosition(int);
+	virtual void	setLength(int);
 
 	virtual int		getLength();
-	virtual void	setLength(int);
+	virtual void	setPosition(int);
 };
 
 #endif // !defined(AFX_RAMSTREAM_H__CCD290D9_3EEE_4EE0_BE2E_0ED103F3223F__INCLUDED_)

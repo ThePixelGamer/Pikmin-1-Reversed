@@ -9,8 +9,8 @@
 
 class SYSCORE_API String {
 public:
-	int stringLen;
-	char* string;
+	int m_stringLen;
+	char* m_string;
 
 	String();
 	String(int stringLength);

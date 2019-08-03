@@ -7,12 +7,19 @@
 #ifndef CONTROLLERMANAGER_H
 #define CONTROLLERMANAGER_H
 
-class ControllerManager
+#include <windows.h>
+
+class ControllerMgr
 {
 public:
-	ControllerManager();
-	virtual ~ControllerManager();
+	//4h - vtbl pointer
+	PBYTE lpKeyState;
 
+	ControllerMgr();
+
+	void update();
+
+	virtual bool keyDown(int key);
 };
 
 #endif 

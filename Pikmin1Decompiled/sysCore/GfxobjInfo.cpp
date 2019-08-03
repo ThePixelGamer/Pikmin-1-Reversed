@@ -1,2 +1,0 @@
-#include "GfxobjInfo.h"
-

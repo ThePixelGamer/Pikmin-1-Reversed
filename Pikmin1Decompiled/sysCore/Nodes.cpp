@@ -146,9 +146,9 @@ void Node::concat(Matrix4f&) {
 
 }
 
-Matrix4f* Node::getModelMatrix() {
-
-}
+//Matrix4f* Node::getModelMatrix() {
+//	return new Matrix4f;
+//}
 
 bool Node::getFlag(int f) {
 	return (f & this->flags) != 0;
@@ -193,12 +193,14 @@ MemInfoNode::MemInfoNode() : CoreNode("meminfo") {}
 //////////////////////////////////////////////////////////////////////
 // SRTNode class functions
 //////////////////////////////////////////////////////////////////////
-
+/*
 SRTNode::SRTNode(char*) : Node() {
 	Vector3f pos(0.0, 0.0, 0.0);
-	setPosition(tmp);
+	setPosition(pos);
+
 	Vector3f rot(1.0, 1.0, 1.0);
-	setRotation(tmp);
+	setRotation(rot);
+
 	Vector3f sc(0.0, 0.0, 0.0);
 	setScale(sc);
 }
@@ -206,7 +208,7 @@ SRTNode::SRTNode(char*) : Node() {
 void SRTNode::update();
 void SRTNode::concat();
 void SRTNode::concat(Matrix4f&);
-Matrix4f* SRTNode::getModelMatrix();
+//Matrix4f* SRTNode::getModelMatrix();
 
 void SRTNode::genAge(AgeServer&);
 Vector3f* SRTNode::getPosition();
@@ -216,7 +218,7 @@ Vector3f* SRTNode::getWorldPosition();
 void SRTNode::setPosition(Vector3f&);
 void SRTNode::setRotation(Vector3f&);
 void SRTNode::setScale(Vector3f&);
-void SRTNode::update();
+void SRTNode::update();*/
 //////////////////////////////////////////////////////////////////////
 // NodeMgr class functions
 //////////////////////////////////////////////////////////////////////

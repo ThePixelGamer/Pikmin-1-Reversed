@@ -9,9 +9,9 @@
 //////////////////////////////////////////////////////////////////////
 
 RamStream::RamStream(void * _buffer, int _length) : RandomAccessStream() {
-	this->buffer = (char *)_buffer;
-	this->position = 0;
-	this->length = _length;
+	this->m_buffer = (char *)_buffer;
+	this->m_position = 0;
+	this->m_length = _length;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -19,39 +19,32 @@ RamStream::RamStream(void * _buffer, int _length) : RandomAccessStream() {
 //////////////////////////////////////////////////////////////////////
 
 void RamStream::read(void * buffer, int amount) {
-	memcpy(buffer, &this->buffer[this->position], amount);
-	this->position += amount;
+	memcpy(buffer, &this->m_buffer[this->m_position], amount);
+	this->m_position += amount;
 }
 
 void RamStream::write(void * src, int amount) {
-	memcpy(&this->buffer[this->position], src, amount);
-	this->position += amount;
+	memcpy(&this->m_buffer[this->m_position], src, amount);
+	this->m_position += amount;
 }
-
-//////////////////////////////////////////////////////////////////////
-// 'Getter' functions
-//////////////////////////////////////////////////////////////////////
 
 int RamStream::getLength() {
-	return this->length;
-}
-
-int RamStream::getPosition() {
-	return this->position;
-}
-
-int RamStream::getPending() {
-	return this->length - this->position;
-}
-
-//////////////////////////////////////////////////////////////////////
-// 'Setter' functions
-//////////////////////////////////////////////////////////////////////
-
-void RamStream::setLength(int _length) {
-	this->length = _length;
+	return this->m_length;
 }
 
 void RamStream::setPosition(int _position) {
-	this->position = _position;
+	this->m_position = _position;
+}
+
+int RamStream::getPosition() {
+	return this->m_position;
+}
+
+
+void RamStream::setLength(int _length) {
+	this->m_length = _length;
+}
+
+int RamStream::getPending() {
+	return this->m_length - this->m_position;
 }
