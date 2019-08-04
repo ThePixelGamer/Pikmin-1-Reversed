@@ -12,63 +12,61 @@ String::String(char* string, int stringLength) {
 	this->init(string, stringLength);
 }
 
-void String::init(int stringLength) {
-	char* tempString;
+void String::init(int _stringLength) {
+	char * _tempStr;
 
-	if (stringLength)
-		tempString = new char[stringLength + 1]; // v2 = allocateBytesOnHeap(a2 + 1);
+	if (_stringLength)
+		_tempStr = new char[_stringLength + 1]; // v2 = allocateBytesOnHeap(a2 + 1);
 	else
-		tempString = 0;
-	this->m_string = tempString;
-	this->m_stringLen = stringLength;
+		_tempStr = 0;
+	this->m_string = _tempStr;
+	this->m_stringLen = _stringLength;
 }
 
-void String::init(char* string, int stringLength) {
-	this->m_string = string;
-	this->m_stringLen = stringLength;
+void String::init(char* _string, int _stringLength) {
+	this->m_string = _string;
+	this->m_stringLen = _stringLength;
 }
 
 int String::calcHash() {
-	int returnValue = 0;
-	char* tempString = this->m_string;
-	while (*tempString)
+	int hash = 0;
+	char* string = this->m_string;
+
+	while (*string)
 	{
-		int unkPurpose = 16 * returnValue + *tempString++;
+		int unkPurpose = 16 * hash + *string++;
+
 		unsigned int unkPurpose2 = unkPurpose & 0xF0000000;
 		if (unkPurpose2)
 			unkPurpose ^= unkPurpose2 >> 24;
-		returnValue = ~unkPurpose2 & unkPurpose;
+		hash = ~unkPurpose2 & unkPurpose;
 	}
 
-	return returnValue;
+	return hash;
 }
 
-unsigned __int32 String::calcHash(char* str) {
-	String tempString(str, 0);
-	return this->calcHash();
+unsigned __int32 String::calcHash(char* _string) {
+	String toCalcHash(_string, 0);
+
+	return toCalcHash.calcHash();
 }
 
 bool String::contains(char* arg) {
 	return this->contains(this->m_string, arg);
 }
 
-bool String::contains(char* a1, char* a2) {
-	char* tempChar; // [esp+4Ch] [ebp-4h]
-
-	tempChar = a2;
-	while (*a1 && *a2)
+bool String::contains(char* str1, char* str2) {
+	char* tempChar = str2;
+	while (*str1 && *str2)
 	{
-		int a1Iter = *a1;
-		int a2Iter = *a2++;
-		++a1;
-		if (a1Iter == a2Iter)
-		{
-			if (!*a2)
+		if (*str1++ == *str2++) {
+			if (!*str2) {
 				return 1;
+			}
 		}
 		else
 		{
-			a2 = tempChar;
+			str2 = tempChar;
 		}
 	}
 	return 0;
