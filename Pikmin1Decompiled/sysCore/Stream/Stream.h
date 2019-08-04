@@ -11,9 +11,10 @@
 #include <cstdarg>
 #include <algorithm>
 
-class SYSCORE_API Stream
-{
+class SYSCORE_API Stream {
 public:
+	//there's a 4 byte var here
+
 	Stream();
 
 	// Reading functions

@@ -11,7 +11,7 @@
 
 class Vector3f;
 
-class Matrix4f {
+class SYSCORE_API Matrix4f {
 public:
 	float m_matrix[4][4];
 

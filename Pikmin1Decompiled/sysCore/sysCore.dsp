@@ -71,6 +71,10 @@ SOURCE=.\ControllerManager.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Graphics.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Matrix4f.cpp
 # End Source File
 # Begin Source File
@@ -132,6 +136,10 @@ SOURCE=.\Stream\CmdStream.h
 # Begin Source File
 
 SOURCE=.\ControllerManager.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Graphics.h
 # End Source File
 # Begin Source File
 

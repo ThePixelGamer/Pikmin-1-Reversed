@@ -9,7 +9,6 @@
 
 #include "Stream/Stream.h"
 #include "Matrix4f.h"
-#include "Quat.h"
 
 class AgeServer;
 class Matrix4f;
@@ -59,11 +58,22 @@ public:
 	void scale2(float, Vector3f&);
 	void set(const Vector3f&);
 	void set(const float&, const float&, const float&);
-	void squaredLength();
+	float squaredLength();
 	void sub(Vector3f&);
 	void sub(Vector3f&, Vector3f&);
 	void sub2(Vector3f&, Vector3f&);
 	void write(Stream&);
+};
+
+class SYSCORE_API Quat : public Vector3f {
+public:
+	// (Vector3f: 0h-8h)
+	float m_w; //Ch
+
+	Quat();
+	Quat(float, float, float, float);
+
+	void set(float, float, float, float);
 };
 
 #endif
