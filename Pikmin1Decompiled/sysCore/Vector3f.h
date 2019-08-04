@@ -9,6 +9,7 @@
 
 #include "Stream/Stream.h"
 #include "Matrix4f.h"
+#include "Quat.h"
 
 class AgeServer;
 class Matrix4f;
@@ -44,8 +45,8 @@ public:
 	void multMatrixTo(Matrix4f&, Vector3f&);
 	void multiply(float);
 	void negate();
-	void normalise();
-	void normalize();
+	float normalise();
+	float normalize();
 	void output(Vector3f&);
 	void project(Vector3f&);
 	void read(Stream&);

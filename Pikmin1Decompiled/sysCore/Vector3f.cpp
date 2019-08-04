@@ -127,40 +127,53 @@ void Vector3f::middle(Vector3f& a2, Vector3f& a3) {
 
 void Vector3f::multMatrix(Matrix4f& a2) {
     Vector3f tmp;
-    /*tmp.m_x = a2.one  * this->m_x + a2.two * this->m_y + a2.three  * this->m_z + a2.four;
-    tmp.m_y = a2.five * this->m_x + a2.six * this->m_y + a2.seven  * this->m_z + a2.eight;
-    tmp.m_z = a2.nine * this->m_x + a2.ten * this->m_y + a2.eleven * this->m_z + a2.twelve;
+    tmp.m_x = a2.m_matrix[0][0] * this->m_x + a2.m_matrix[0][1] * this->m_y + a2.m_matrix[0][2] * this->m_z + a2.m_matrix[0][3];
+    tmp.m_y = a2.m_matrix[1][0] * this->m_x + a2.m_matrix[1][1] * this->m_y + a2.m_matrix[1][2] * this->m_z + a2.m_matrix[1][3];
+    tmp.m_z = a2.m_matrix[2][0] * this->m_x + a2.m_matrix[2][1] * this->m_y + a2.m_matrix[2][2] * this->m_z + a2.m_matrix[2][3];
     this->m_x = tmp.m_x;
     this->m_y = tmp.m_y;
-    this->m_z = tmp.m_z;*/
+    this->m_z = tmp.m_z;
 }
 
-void Vector3f::multMatrixTo(Matrix4f&, Vector3f&) {
-
+void Vector3f::multMatrixTo(Matrix4f& a2, Vector3f& a3) {
+    a3.m_x = a2.m_matrix[0][0] * this->m_x + a2.m_matrix[0][1] * this->m_y + a2.m_matrix[0][2] * this->m_z + a2.m_matrix[0][3];
+    a3.m_y = a2.m_matrix[1][0] * this->m_x + a2.m_matrix[1][1] * this->m_y + a2.m_matrix[1][2] * this->m_z + a2.m_matrix[1][3];
+    a3.m_z = a2.m_matrix[2][0] * this->m_x + a2.m_matrix[2][1] * this->m_y + a2.m_matrix[2][2] * this->m_z + a2.m_matrix[2][3];
 }
 
-void Vector3f::multiply(float) {
-
+void Vector3f::multiply(float a2) {
+    this->m_x *= a2;
+    this->m_y *= a2;
+    this->m_z *= a2;
 }
 
 void Vector3f::negate() {
-
+    this->m_x = -this->m_x;
+    this->m_y = -this->m_y;
+    this->m_z = -this->m_z;
 }
 
-void Vector3f::normalise() {
-
+float Vector3f::normalise() {
+    float v2 = this->length();
+    if(v2 != 0.0) {
+        this->div(v2);
+    }
+    return v2;
 }
 
-void Vector3f::normalize() {
-
+float Vector3f::normalize() {
+    return normalise();
 }
 
-void Vector3f::output(Vector3f&) {
-
+void Vector3f::output(Vector3f& a2) {
+    a2.set(this->m_x, this->m_y, this->m_z);
 }
 
-void Vector3f::project(Vector3f&) {
-
+void Vector3f::project(Vector3f& a2) {
+    float v3 = this->DP(a2);
+    this->m_x = -(v3 * a2.m_x - this->m_x);
+    this->m_y = -(v3 * a2.m_y - this->m_y);
+    this->m_z = -(v3 * a2.m_z - this->m_z);
 }
 
 void Vector3f::read(Stream& a3) {
@@ -169,12 +182,25 @@ void Vector3f::read(Stream& a3) {
     this->m_z = a3.readFloat();
 }
 
-void Vector3f::rotate(Matrix4f&) {
-
+void Vector3f::rotate(Matrix4f& a2) {
+    Vector3f tmp;
+    tmp.m_x = a2.m_matrix[0][0] * this->m_x + a2.m_matrix[0][1] * this->m_y + a2.m_matrix[0][2] * this->m_z;
+    tmp.m_y = a2.m_matrix[1][0] * this->m_x + a2.m_matrix[1][1] * this->m_y + a2.m_matrix[1][2] * this->m_z;
+    tmp.m_z = a2.m_matrix[2][0] * this->m_x + a2.m_matrix[2][1] * this->m_y + a2.m_matrix[2][2] * this->m_z;
+    this->m_x = tmp.m_x;
+    this->m_y = tmp.m_y;
+    this->m_z = tmp.m_z;
 }
 
-void Vector3f::rotate(Quat&) {
-
+void Vector3f::rotate(Quat& a2) {
+    /*Vector3f tmp;
+    Quat tmp2;
+    tmp.m_x = a2.m_matrix[0][0] * this->m_x + a2.m_matrix[0][1] * this->m_y + a2.m_matrix[0][2] * this->m_z;
+    tmp.m_y = a2.m_matrix[1][0] * this->m_x + a2.m_matrix[1][1] * this->m_y + a2.m_matrix[1][2] * this->m_z;
+    tmp.m_z = a2.m_matrix[2][0] * this->m_x + a2.m_matrix[2][1] * this->m_y + a2.m_matrix[2][2] * this->m_z;
+    this->m_x = tmp.m_x;
+    this->m_y = tmp.m_y;
+    this->m_z = tmp.m_z;*/
 }
 
 void Vector3f::rotateInverse(Quat&) {
