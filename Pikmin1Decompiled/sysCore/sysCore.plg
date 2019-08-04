@@ -6,88 +6,75 @@
 --------------------Configuration: sysCore - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C5.tmp" with contents
+Creating temporary file "C:\DOCUME~1\Pixel-PC\LOCALS~1\Temp\RSP41.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "SYSCORE_EXPORTS" /FR"Debug/" /Fp"Debug/sysCore.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\AgeAtx.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\Stream\CmdStream.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\ControllerManager.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\Nodes.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\RamStream.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\Stream\RandomAccessStream.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\System\StdSystem.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\Stream\Stream.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\String.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\sysCore.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\System\System.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\UI\UI.cpp"
-"Z:\PIKMIN-1-REVERSED\PIKMIN1DECOMPILED\SYSCORE\Vector3f.cpp"
-"Z:\Pikmin-1-Reversed\Pikmin1Decompiled\sysCore\Module.cpp"
+"\\VBOXSVR\Pikmin1Decompiled\sysCore\Module.cpp"
+"\\VBOXSVR\Pikmin1Decompiled\sysCore\Nodes.cpp"
+"\\VBOXSVR\Pikmin1Decompiled\sysCore\sysCore.cpp"
+"\\VBOXSVR\Pikmin1Decompiled\sysCore\System\System.cpp"
+"\\VBOXSVR\Pikmin1Decompiled\sysCore\UI\UI.cpp"
+"\\VBOXSVR\Pikmin1Decompiled\sysCore\Vector3f.cpp"
+"\\VBOXSVR\PIKMIN1DECOMPILED\sysCore\Matrix4f.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C5.tmp" 
-Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C6.tmp" with contents
+Creating command line "cl.exe @"C:\DOCUME~1\Pixel-PC\LOCALS~1\Temp\RSP41.tmp"" 
+Creating temporary file "C:\DOCUME~1\Pixel-PC\LOCALS~1\Temp\RSP42.tmp" with contents
 [
 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:yes /pdb:"Debug/sysCore.pdb" /debug /machine:I386 /out:"Debug/sysCore.dll" /implib:"Debug/sysCore.lib" /pdbtype:sept 
-".\Debug\AgeAtx.obj"
-".\Debug\CmdStream.obj"
-".\Debug\ControllerManager.obj"
-".\Debug\Nodes.obj"
-".\Debug\RamStream.obj"
-".\Debug\RandomAccessStream.obj"
-".\Debug\StdSystem.obj"
-".\Debug\Stream.obj"
-".\Debug\String.obj"
-".\Debug\sysCore.obj"
-".\Debug\System.obj"
-".\Debug\UI.obj"
-".\Debug\Vector3f.obj"
-".\Debug\Module.obj"
+.\Debug\AgeAtx.obj
+.\Debug\CmdStream.obj
+.\Debug\ControllerManager.obj
+.\Debug\Module.obj
+.\Debug\Nodes.obj
+.\Debug\RamStream.obj
+.\Debug\RandomAccessStream.obj
+.\Debug\StdSystem.obj
+.\Debug\Stream.obj
+.\Debug\String.obj
+.\Debug\sysCore.obj
+.\Debug\System.obj
+.\Debug\UI.obj
+.\Debug\Vector3f.obj
+.\Debug\Matrix4f.obj
 ]
-Creating command line "link.exe @C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C6.tmp"
+Creating command line "link.exe @"C:\DOCUME~1\Pixel-PC\LOCALS~1\Temp\RSP42.tmp""
 <h3>Output Window</h3>
 Compiling...
-AgeAtx.cpp
-CmdStream.cpp
-ControllerManager.cpp
+Matrix4f.cpp
+Skipping... (no relevant changes detected)
+Module.cpp
 Nodes.cpp
-RamStream.cpp
-RandomAccessStream.cpp
-StdSystem.cpp
-Stream.cpp
-String.cpp
 sysCore.cpp
 System.cpp
 UI.cpp
 Vector3f.cpp
-Module.cpp
-z:\pikmin-1-reversed\pikmin1decompiled\syscore\module.cpp(33) : error C2664: 'free' : cannot convert parameter 1 from 'const char *' to 'void *'
-        Conversion loses qualifiers
-Error executing cl.exe.
-Creating temporary file "C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C7.tmp" with contents
+Linking...
+Creating temporary file "C:\DOCUME~1\Pixel-PC\LOCALS~1\Temp\RSP43.tmp" with contents
 [
 /nologo /o"Debug/sysCore.bsc" 
-".\Debug\AgeAtx.sbr"
-".\Debug\CmdStream.sbr"
-".\Debug\ControllerManager.sbr"
-".\Debug\Nodes.sbr"
-".\Debug\RamStream.sbr"
-".\Debug\RandomAccessStream.sbr"
-".\Debug\StdSystem.sbr"
-".\Debug\Stream.sbr"
-".\Debug\String.sbr"
-".\Debug\sysCore.sbr"
-".\Debug\System.sbr"
-".\Debug\UI.sbr"
-".\Debug\Vector3f.sbr"
-".\Debug\Module.sbr"]
-Creating command line "bscmake.exe @C:\DOCUME~1\Main\LOCALS~1\Temp\RSP1C7.tmp"
+.\Debug\AgeAtx.sbr
+.\Debug\CmdStream.sbr
+.\Debug\ControllerManager.sbr
+.\Debug\Module.sbr
+.\Debug\Nodes.sbr
+.\Debug\RamStream.sbr
+.\Debug\RandomAccessStream.sbr
+.\Debug\StdSystem.sbr
+.\Debug\Stream.sbr
+.\Debug\String.sbr
+.\Debug\sysCore.sbr
+.\Debug\System.sbr
+.\Debug\UI.sbr
+.\Debug\Vector3f.sbr
+.\Debug\Matrix4f.sbr]
+Creating command line "bscmake.exe @"C:\DOCUME~1\Pixel-PC\LOCALS~1\Temp\RSP43.tmp""
 Creating browse info file...
 <h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-sysCore.dll - 1 error(s), 0 warning(s)
+sysCore.dll - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>

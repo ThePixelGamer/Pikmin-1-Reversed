@@ -56,10 +56,10 @@ public:
 	void genRead(AgeServer*);				   // TODO
 };
 
-class Graphics {};
-class Matrix4f {};
-class SRT {};
-class VQS {};
+class Graphics;
+class Matrix4f;
+class SRT;
+class VQS;
 
 class SYSCORE_API Node : public CoreNode {
 public:

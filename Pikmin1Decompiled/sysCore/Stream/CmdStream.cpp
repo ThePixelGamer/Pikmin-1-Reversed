@@ -54,13 +54,14 @@ bool CmdStream::LineIsComment()
 
 void CmdStream::copyToToken(int length)
 {
-	for (int i = 0; i < length; ++i)
-	{
+	int i = 0;
+	while(i < length) {
 		char currentChar = *(this->buffer + i + this->currentChar);
 
 		if (currentChar == '\t')
 			currentChar = ' ';
 		this->currentToken[i] = currentChar;
+		i++;
 	}
 	this->currentToken[i] = 0;
 }
@@ -68,9 +69,7 @@ void CmdStream::copyToToken(int length)
 bool CmdStream::endOfCmds()
 {
 	this->fillBuffer(0);
-	while (this->currentChar < this->pending &&
-		this->whiteSpace(*(this->buffer + this->currentChar)))
-	{
+	while (this->currentChar < this->pending && this->whiteSpace(*(this->buffer + this->currentChar))) {
 		this->currentChar++;
 	}
 

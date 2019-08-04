@@ -8,6 +8,7 @@
 #define VECTOR3F_H
 
 #include "Stream/Stream.h"
+#include "Matrix4f.h"
 
 class AgeServer;
 class Matrix4f;
@@ -30,13 +31,13 @@ public:
 	void add2(Vector3f&, Vector3f&);
 	void bounce(Vector3f&, float);
 	void cross(Vector3f&, Vector3f&);
-	void distance(Vector3f&);
+	float distance(Vector3f&);
 	void div(float);
-	void dot(Vector3f&);
+	float dot(Vector3f&);
 	void genAge(AgeServer&, char*, Vector3f&, Vector3f&);
 	void input(Vector3f&);
-	void isSame(Vector3f&);
-	void length();
+	bool isSame(Vector3f&);
+	float length();
 	void lerpTo(Vector3f&, float, Vector3f&);
 	void middle(Vector3f&, Vector3f&);
 	void multMatrix(Matrix4f&);
