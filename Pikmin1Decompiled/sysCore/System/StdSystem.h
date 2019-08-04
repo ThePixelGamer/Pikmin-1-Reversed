@@ -4,13 +4,13 @@
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
-#ifndef STDSYSTEM_H
-#define STDSYSTEM_H
-
 #include <cstdarg>
 #include <algorithm>
 #include <Windows.h>
 #include "../Stream/RandomAccessStream.h"
+
+#ifndef FRAS
+#define FRAS
 
 class FileRandomAccessStream : public RandomAccessStream {
 public:
@@ -23,6 +23,11 @@ public:
 	FileRandomAccessStream(FILE* fpointer, char* cwd);
 	virtual int getPosition();
 };
+
+#endif
+
+#ifndef STDSYSTEM_H
+#define STDSYSTEM_H
 
 class CacheTexture;
 class LoadIdler;

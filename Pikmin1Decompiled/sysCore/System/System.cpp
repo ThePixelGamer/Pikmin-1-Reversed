@@ -80,7 +80,7 @@ void System::genAge(AgeServer*) {
 
 }
 
-struct AtxRouter* System::getAtxRouter() {
+AtxRouter* System::getAtxRouter() {
 	return this->mainRouter;
 }
 
@@ -142,7 +142,7 @@ int System::run(BaseApp*) {
 	return message.wParam;
 }
 
-/*void System::searchFiles(char*, char*, IDelegate2<char*, unsigned int>*, bool) {
+/*void System::searchFiles(char* base, char* type, IDelegate2<char*, unsigned int>*, bool) {
 
 }*/
 

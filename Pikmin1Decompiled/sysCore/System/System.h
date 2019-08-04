@@ -8,19 +8,23 @@
 #define SYSTEM_H
 
 #include "StdSystem.h"
+#include "../AgeAtx.h"
 
 #include "../UI/UI.h"
 
-class BaseApp { public: BaseApp() {} };
-class AgeServer { public: AgeServer() {} };
+
 class IDelegate2 { public: IDelegate2() {} };
+class BaseApp { public: BaseApp() {} };
+// baseapp member variables (base class = node)
+// 4h - vtbl ptr
+// gap (28h)
 
 class SYSCORE_API System : public StdSystem {
 public:
 	char* currentWorkingDirectory; // this + 80
 	char* fileName; // ??? this + 84
 	int streamType;	  // this + 688
-	struct AtxRouter* mainRouter; // 438h
+	AtxRouter* mainRouter; // 438h
 	double frameTime; // this + 1112
 	double frameRate; // this + 1116
 	int frameCount;   // this + 1128
@@ -38,9 +42,9 @@ public:
 	UIWindow* createDebugStream(UIWindow*);
 	FileRandomAccessStream* createFile(char*, bool);
 	void					doneRender();
-	BaseApp* firstApp();
+	BaseApp*				firstApp();
 	void					genAge(AgeServer*);
-	struct AtxRouter* getAtxRouter();
+	AtxRouter*				getAtxRouter();
 	int						getFrameCount();
 	float					getFrameRate();
 	float					getFrameTime();

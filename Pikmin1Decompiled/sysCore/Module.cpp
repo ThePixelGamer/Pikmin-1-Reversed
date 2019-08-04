@@ -30,7 +30,7 @@ Module::~Module()
 		this->m_autoStartAddr = 0;
 		FreeLibrary(this->pHInstance);
 		this->pHInstance = 0;
-		free(this->libName);
+		free(&this->libName);
 	}
 }
 
