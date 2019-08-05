@@ -4,18 +4,25 @@
 #include "..\sysCore\System\System.h"
 #include "..\sysCore\sysCore.h"
 
-MenuPlugin menuP; //0: wParam,  4: char* name, 8: MenuPlugin* (next one or something?)
+struct MenuPlugin {
+	WPARAM wParam; // 0h
+	char* name; // 4h
+	MenuPlugin* next; // 8h
+};
+
+MenuPlugin menuP;
 System unused;
 
 void isLast() { menuP.next = 0; } //may be autogen?
 
 class UIMain : public UIWindow { //not an official name
 public:
+	UIMain() : UIWindow() {}
 	UIMain(UIWindow* parent, int unk1, int dwStyle, int dwExStyle, bool unk2) : UIWindow(parent, unk1, dwStyle, dwExStyle, unk2) {}
 
-	virtual int processMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
+	virtual int processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
 		if(Msg == WM_COMMAND)
-			for(MenuPlugin* i = menuP; i; i = i->next) 
+			for(MenuPlugin* i = &menuP; i; i = i->next) 
 				if(i->wParam == wParam)
 					modMgr->Alloc(i->name);
 
@@ -40,8 +47,8 @@ void print(const char* fmt, ...) {
 
 void createUIWindow(const char* str) {
 	window = new UIMain();
-	window->setFrame(new RectArea(690, 32, 1260, 300));
-	window->createWindow("DUIClearWin", "OpenGL / Dolphin System", LoadMenuA(sysHInst, 101)); //load menu from resource file
+	window->setFrame(RectArea(690, 32, 1260, 300));
+	window->createWindow("DUIClearWin", "OpenGL / Dolphin System", LoadMenuA(sysHInst, "101")); //load menu from resource file
 	gsys->createDebugStream();
 	window->refreshWindow();
 	ShowWindow(window->m_hWnd, SW_SHOWNORMAL);

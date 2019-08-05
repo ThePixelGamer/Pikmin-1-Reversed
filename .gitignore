@@ -10,11 +10,8 @@ Debug/
 *.til
 *.id2
 *.bat
-Pikmin1Decompiled/sysBootup/Original/log.txt
-Pikmin1Decompiled/sysBootup/Original/MSVCRTD.DLL
-Pikmin1Decompiled/sysBootup/Original/sysCore.dll
-*.plg
-*.opt
-*.ncb
-*.dsp
 *.positions
+sysBootup/Original/log.txt
+sysBootup/Original/MSVCRTD.DLL
+sysBootup/Original/sysCore.dll
+*.plg

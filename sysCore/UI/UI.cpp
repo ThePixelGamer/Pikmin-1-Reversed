@@ -109,7 +109,7 @@ void UIWindow::activate() {
 
 }
 
-int UIWindow::processMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
+int UIWindow::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
 	/*unsigned int v6; // [esp+4Ch] [ebp-18h]
 	unsigned int unusedInt; // [esp+50h] [ebp-14h]
 	struct Node* v10; // [esp+5Ch] [ebp-8h]
@@ -155,8 +155,8 @@ int UIWindow::processMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, l
 	//}
 }
 
-LRESULT UIWindow::returnMessage(HWND hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
-	return DefWindowProc(hWnd, (UINT)Msg, (WPARAM)wParam, lParam);
+LRESULT UIWindow::returnMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
+	return DefWindowProc(hWnd, (UINT)Msg, wParam, lParam);
 }
 
 HDWP UIWindow::resizeChildren(HDWP hWinPosInfo, RectArea & rect) {
