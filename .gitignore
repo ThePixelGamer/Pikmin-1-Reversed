@@ -14,5 +14,4 @@ Debug/
 sysBootup/Original/log.txt
 sysBootup/Original/MSVCRTD.DLL
 sysBootup/Original/sysCore.dll
-graphics/
 *.plg
