@@ -7,6 +7,8 @@
 #ifndef VECTOR3F_H
 #define VECTOR3F_H
 
+#include <math.h>
+
 #include "Stream/Stream.h"
 #include "Matrix4f.h"
 
@@ -22,9 +24,10 @@ public:
 
 	Vector3f();
 	Vector3f(const float&, const float&, const float&);
+	Vector3f(const Vector3f&);
 
-	void CP(Vector3f&);
-	float DP(Vector3f&);
+	void CP(Vector3f&); //cross product
+	float DP(Vector3f&); //dot product
 	void add(Vector3f&);
 	void add(Vector3f&, Vector3f&);
 	void add(float, float, float);

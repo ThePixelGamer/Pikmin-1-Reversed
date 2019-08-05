@@ -13,7 +13,8 @@
 
 class SYSCORE_API Stream {
 public:
-	//there's a 4 byte var here
+	// 0h - vtable
+	char* currentWorkingDir; // 4h
 
 	Stream();
 

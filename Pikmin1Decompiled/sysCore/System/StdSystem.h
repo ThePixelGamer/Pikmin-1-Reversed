@@ -14,8 +14,8 @@
 
 class FileRandomAccessStream : public RandomAccessStream {
 public:
-	// 0 | 4 bytes for vtbl ptr
-	char* currentWorkingDir; // 4h
+	// 0h - vtable
+	//(Stream: 4h)
 	FILE* fStream; // 8h
 	int dwordC; // Ch
 	int fileSize; // 10h 

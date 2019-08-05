@@ -11,6 +11,9 @@
 
 class SYSCORE_API RandomAccessStream : public Stream {
 public:
+	// 0h - vtable
+	// (Stream: 4h)
+
 	// (Stream VTable 0 - 76)
 	RandomAccessStream();
 	virtual int getPending();// 80

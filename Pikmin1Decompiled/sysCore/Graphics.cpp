@@ -1,7 +1,5 @@
 #include "Graphics.h"
 
-Graphics::Graphics() : Vector3f() {
-
-}
+Graphics::Graphics() {}
 
 void Graphics::setVerticalFilter(char* a2) {}

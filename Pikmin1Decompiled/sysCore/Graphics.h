@@ -9,8 +9,10 @@
 
 #include "Vector3f.h"
 
-class SYSCORE_API Graphics : public Vector3f {
+class SYSCORE_API Graphics {
 public:
+	Vector3f test;
+
 	Graphics();
 	virtual void setVerticalFilter(char*);
 };

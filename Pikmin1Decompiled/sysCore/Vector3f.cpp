@@ -6,9 +6,23 @@
 // Vector3f class functions
 //////////////////////////////////////////////////////////////////////
 
-Vector3f::Vector3f() : m_x(0), m_y(0), m_z(0) {}
+Vector3f::Vector3f() { 
+    this->m_z = 0;
+    this->m_y = 0;
+    this->m_x = 0;
+}
 
-Vector3f::Vector3f(const float& x, const float& y, const float& z) : m_x(x), m_y(y), m_z(z) {}
+Vector3f::Vector3f(const float& x, const float& y, const float& z) {
+    this->m_x = x;
+    this->m_y = y;
+    this->m_z = z;
+}
+
+Vector3f::Vector3f(const Vector3f& a2) {
+    this->m_x = a2.m_x;
+    this->m_y = a2.m_y;
+    this->m_z = a2.m_z;
+}
 
 void Vector3f::CP(Vector3f& a2) { //done
     Vector3f tmp;
