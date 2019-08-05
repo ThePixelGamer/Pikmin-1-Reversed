@@ -1,4 +1,6 @@
 <h1 align="center"> Distant Forest </hr>
+<br>
+<img src = "graphics/SelectScreen.png" alt = "Map selection screen of Pikmin 1">
 
 ## Table of Contents
 
@@ -19,7 +21,7 @@
 	**DLL names**
 	
 	- `sysCore` is the main .dll that is `imported` by all of the other .dlls and `sysBootup.exe`.
-		- This .dll is the most important, which explains the size of the folder and the size of the .dll.
+		- This .dll is the most important, and contains a **LOT** of classes/functions, which explains the size of the folder and the size of the .dll.
 		
 	- `sysBootup` is the .exe of the project, it has the capability to load the seperate .dll files and is what initialises everything within `sysCore`.
 	
@@ -30,9 +32,27 @@
 
 # Setup
 
-* **NOTE: you will need a Windows XP ISO, or a machine that has Windows XP installed***
+* **NOTE: you will need a Windows XP ISO, or a machine that has Windows XP installed**
 	- The first and only tool that we'll need is a Visual Studio 6.0 ISO, or installer, to get that go [here and download it](https://winworldpc.com/product/microsoft-visual-stu/60)
 	- Once that is done, find a suitable directory and download the project (using GIT or the internet) into that folder.
-	- Then open up any of the 4 folders we currently have, and open the .dsp project file, and... violá! You're ready to start reversing!
+	- Then open up any of the 4 folders we currently have, and open the .dsp project file, and... violá! ***You're ready to start reversing!***
 
+# Contributing
 
+* **NOTE: you will need a reverse engineering tool, [IDA](https://www.hex-rays.com/products/decompiler/) Is an expensive feature-full decompiler. However if you haven't got a lot of money, go for [Ghidra](https://ghidra-sre.org/), which is free.
+
+	- First, some rules:
+		- All new classes need to be in seperate `.cpp` and `.h` files 
+			- this is for ease-of-use and to try and stop confusion about where a class is defined.
+		- You must compare your compiled ASM against the target compiled ASM
+			- this is for accuracy and assurance that the code you have produced is correct.
+	
+	- Now that we have that out of the way, heres how to contribute:
+		<br>
+		- After checking your code is correct, submit a **pull request** and me / Pixel will take a look and either accept it, reject it, or point out some places that could be improved!
+		
+# Credits
+
+### Main Programmers
+* **John Fiddleystein / Ambrosia**
+* **Pixel**
