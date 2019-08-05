@@ -1,4 +1,4 @@
-<h1 align="center"> Distant Forest </hr> <br>
+<h1 align="center"> Distant Forest </hr>
 
 ## Table of Contents
 
@@ -30,7 +30,9 @@
 
 # Setup
 
-***NOTE: you will need a Windows XP ISO, or a machine that has Windows XP installed***
-	- The first and only tool that we'll need is a Visual Studio 6.0 ISO, or installer, to get that go ![here and download it](https://winworldpc.com/product/microsoft-visual-stu/60)
+* **NOTE: you will need a Windows XP ISO, or a machine that has Windows XP installed***
+	- The first and only tool that we'll need is a Visual Studio 6.0 ISO, or installer, to get that go [here and download it](https://winworldpc.com/product/microsoft-visual-stu/60)
+	- Once that is done, find a suitable directory and download the project (using GIT or the internet) into that folder.
+	- Then open up any of the 4 folders we currently have, and open the .dsp project file, and... violá! You're ready to start reversing!
 
 
