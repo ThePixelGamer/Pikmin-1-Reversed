@@ -1,12 +1,11 @@
-# Distant Forest
+<h1 align="center"> Distant Forest </hr> <br>
 
-## Contents
+## Table of Contents
 
 * **What is this?**
 	- A faithful recreation of the Pikmin 1 debug programs source code.
 		- Using the same tools and compiler available back in 2001 when the program was being developed.
 		- And has the compiled ASM compared side-by-side for accuracy and veracity.
-
 
 
 * **Overview** 
@@ -27,3 +26,11 @@
 	- `plugTexConv` is the .dll we know least about, it is assumed that it could convert formats to/from the file formats of Pikmin 1.
 	
 	- `plugAtxServer` is literally a server, but is by far the most intruiging because it has hidden functionality that accesses most of `sysCore.dll`
+	
+
+# Setup
+
+***NOTE: you will need a Windows XP ISO, or a machine that has Windows XP installed***
+	- The first and only tool that we'll need is a Visual Studio 6.0 ISO, or installer, to get that go ![here and download it](https://winworldpc.com/product/microsoft-visual-stu/60)
+
+
