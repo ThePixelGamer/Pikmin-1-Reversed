@@ -4,7 +4,7 @@
 
 ## Table of Contents
 
-* **What is this?**
+* ***What is this?***
 	- A faithful recreation of the Pikmin 1 debug programs source code.
 		- Using the same tools and compiler available back in 2001 when the program was being developed.
 		- And has the compiled ASM compared side-by-side for accuracy and veracity.
