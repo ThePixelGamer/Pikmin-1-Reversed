@@ -6,25 +6,25 @@
 // Vector3f class functions
 //////////////////////////////////////////////////////////////////////
 
-Vector3f::Vector3f() { 
+Vector3f::Vector3f() {  //asm matches
     this->m_z = 0;
     this->m_y = 0;
     this->m_x = 0;
 }
 
-Vector3f::Vector3f(const float& x, const float& y, const float& z) {
+Vector3f::Vector3f(const float& x, const float& y, const float& z) { //asm matches
     this->m_x = x;
     this->m_y = y;
     this->m_z = z;
 }
 
-Vector3f::Vector3f(const Vector3f& a2) {
+Vector3f::Vector3f(const Vector3f& a2) { //asm matches
     this->m_x = a2.m_x;
     this->m_y = a2.m_y;
     this->m_z = a2.m_z;
 }
 
-void Vector3f::CP(Vector3f& a2) { //done
+void Vector3f::CP(Vector3f& a2) { //asm matches
     Vector3f tmp;
     tmp.m_x = this->m_y * a2.m_z - this->m_z * a2.m_y;
     tmp.m_y = this->m_z * a2.m_x - this->m_x * a2.m_z;
@@ -34,37 +34,37 @@ void Vector3f::CP(Vector3f& a2) { //done
     this->m_z = tmp.m_z;
 }
 
-float Vector3f::DP(Vector3f& a2) {
+float Vector3f::DP(Vector3f& a2) { //asm matches
     return (this->m_x * a2.m_x) + (this->m_y * a2.m_y) + (this->m_z * a2.m_z);
 }
 
-void Vector3f::add(Vector3f& a2) {
+void Vector3f::add(Vector3f& a2) { //asm matches
     this->m_x += a2.m_x;
     this->m_y += a2.m_y;
     this->m_z += a2.m_z;
 }
 
-void Vector3f::add(Vector3f& a2, Vector3f& a3) {
+void Vector3f::add(Vector3f& a2, Vector3f& a3) { //asm matches
     this->m_x = a2.m_x + a3.m_x;
     this->m_y = a2.m_y + a3.m_y;
     this->m_z = a2.m_z + a3.m_z;
 }
 
-void Vector3f::add(float a2, float a3, float a4) {
+void Vector3f::add(float a2, float a3, float a4) { //asm matches
     this->m_x += a2;
     this->m_y += a3;
     this->m_z += a4;
 }
 
-void Vector3f::add2(Vector3f& a2, Vector3f& a3) {
+void Vector3f::add2(Vector3f& a2, Vector3f& a3) { //asm matches
     float z = a2.m_z + a3.m_z;
     float y = a2.m_y + a3.m_y;
     float x = a2.m_x + a3.m_x;
     set(x, y, z);
 }
 
-void Vector3f::bounce(Vector3f& a2, float a3) {
-    float v3 = -Vector3f::DP(a2) * 3;
+void Vector3f::bounce(Vector3f& a2, float a3) { //asm matches
+    float v3 = -Vector3f::DP(a2) * a3;
     if(v3 > 0.0) {
         this->m_x += v3 * a2.m_x;
         this->m_y += v3 * a2.m_y;
@@ -72,51 +72,48 @@ void Vector3f::bounce(Vector3f& a2, float a3) {
     }
 }
 
-void Vector3f::cross(Vector3f& a2, Vector3f& a3) {
+void Vector3f::cross(Vector3f& a2, Vector3f& a3) { //asm matches
     float z = a2.m_x * a3.m_y - a2.m_y * a3.m_x;
     float y = a2.m_z * a3.m_x - a2.m_x * a3.m_z;
-    float x = a2.m_y * a3.m_z - a2.m_x * a3.m_y;
+    float x = a2.m_y * a3.m_z - a2.m_z * a3.m_y;
     set(x, y, z);
 }
 
-float Vector3f::distance(Vector3f& a2) {
+float Vector3f::distance(Vector3f& a2) { //asm matches
     Vector3f tmp;
     tmp.sub2(a2, *this);
     return tmp.length();
 }
 
-void Vector3f::div(float a2) {
-    this->m_x = this->m_x / a2;
-    this->m_y = this->m_y / a2;
-    this->m_z = this->m_z / a2;
+void Vector3f::div(float a2) { //asm matches
+    this->m_x /= a2;
+    this->m_y /= a2;
+    this->m_z /= a2;
 }
 
-float Vector3f::dot(Vector3f& a2) {
+float Vector3f::dot(Vector3f& a2) { //asm matches
     return (this->m_x * a2.m_x) + (this->m_y * a2.m_y) + (this->m_z * a2.m_z);
 }
 
-void Vector3f::genAge(AgeServer& a2, char* a3, Vector3f& a4, Vector3f& a5) {} 
+void Vector3f::genAge(AgeServer& a2, char* a3, Vector3f& a4, Vector3f& a5) {} //asm matches
 
-void Vector3f::input(Vector3f& a2) {
+void Vector3f::input(Vector3f& a2) { //asm matches
     this->set(a2.m_x, a2.m_y, a2.m_z);
 }
 
-bool Vector3f::isSame(Vector3f& a2) {
-    float v2 = this->m_x - a2.m_x;
-    bool ret = false;
+float doFabs(float a2) { //asm matches (used elsewhere)
+    return fabs(a2);
+}
 
-    if(fabs(v2) < 0.000099999997) {
-        float v3 = this->m_y - a2.m_y;
-
-        if(fabs(v3) < 0.000099999997) {
-            float v4 = this->m_z - a2.m_z;
-
-            if(fabs(v4) < 0.000099999997)
-                ret = true;
+bool Vector3f::isSame(Vector3f& a2) { //asm matches
+    if(doFabs(this->m_x - a2.m_x) < 0.000099999997f) {
+        if(doFabs(this->m_y - a2.m_y) < 0.000099999997f) {
+            if(doFabs(this->m_z - a2.m_z) < 0.000099999997f)
+                return true;
         }
     }
 
-    return ret;
+    return false;
 }
 
 float Vector3f::length() {
