@@ -28,6 +28,21 @@ bool AyuStack::checkOverflow() {
 
 void AyuStack::checkStack() {
 	if (this->m_allocType & 2)
-		if ( &this->m_unk2[-*(this->m_unk2 - 8)] != this->m_unk1 )
+		if ( &this->m_unk2[-*this->m_unk1] != this->m_unk1 )
 			haltAyuStack("trashed memory stack (%s)\n", this->name);
+}
+
+
+int AyuStack::getFree() {
+	return this->m_size - this->m_used;
+}
+
+int AyuStack::getMaxFree() {
+	int ret; // [esp+4Ch] [ebp-8h]
+	
+	if ( this->m_size - this->m_used - 8 > 0 )
+		ret = this->m_size - this->m_used - 8;
+	else
+		ret = 0;
+	return ret;
 }
