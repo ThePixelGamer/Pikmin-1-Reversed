@@ -80,15 +80,15 @@ public:
 
 	void fromEuler(Vector3f&);
 	void fromMat3f(Matrix3f&);
-	void genVectorX();
-	void genVectorY();
-	void genVectorZ();
-	void multiply();
+	void genVectorX(Vector3f&);
+	void genVectorY(Vector3f&);
+	void genVectorZ(Vector3f&);
+	void multiply(Quat&);
 	void multiplyTo(Quat&, Quat&);
 	void normalise();
-	void rotate();
+	void rotate(Vector3f&, float);
 	void set(float, float, float, float);
-	void slerp();
+	void slerp(Quat&, float, int);
 };
 
 #endif
