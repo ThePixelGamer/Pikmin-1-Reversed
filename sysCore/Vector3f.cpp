@@ -325,8 +325,120 @@ void Quat::fromEuler(Vector3f& a2) { //asm matches
     this->normalise();
 }
 
-void Quat::fromMat3f(Matrix3f& a2) {
-    float tmp1 = (a2.mMatrix3f[0][0] + a2.mMatrix3f[1][0] + a2.mMatrix3f[2][0] + 1.0f) * 0.25f;
+float doSqrt(float a2) { //asm matches (used elsewhere)
+    return sqrt(a2);
+}
+
+void Quat::fromMat3f(Matrix3f& mtx) {
+    float tmp1 = (mtx.mMatrix3f[0][0] + mtx.mMatrix3f[1][1] + mtx.mMatrix3f[2][2] + 1.0f) * 0.25f;
+    float tmp2 = tmp1 - (mtx.mMatrix3f[1][1] + mtx.mMatrix3f[2][2]) * 0.5f;
+    float tmp3 = tmp1 - (mtx.mMatrix3f[2][2] + mtx.mMatrix3f[0][0]) * 0.5f;
+    float tmp4 = tmp1 - (mtx.mMatrix3f[0][0] + mtx.mMatrix3f[1][1]) * 0.5f;
+
+	float tmp7;
+    int tmp6; 
+
+    int wtf1; 
+    int wtf2;
+    int wtf3;
+    int wtf4;
+    int wtf5; 
+    int wtf6;
+    int wtf7;
+
+    if(tmp1 > tmp2) {
+        if(tmp1 > tmp3) {
+            if(tmp1 > tmp4) {
+                wtf1 = 0;
+            }
+            else {
+                wtf1 = 3;
+            }
+            wtf2 = wtf1;
+        }
+        else { 
+            if(tmp3 > tmp4) {
+                wtf3 = 2;
+            }
+            else {
+                wtf3 = 3;
+            }
+            wtf2 = wtf3;
+        }
+        wtf4 = wtf2;
+    }
+    else {
+        if(tmp2 > tmp3) {
+            if(tmp2 > tmp4) {
+                wtf5 = 1;
+            }
+            else {
+                wtf5 = 3;
+            }
+            wtf6 = wtf5;
+        }
+        else {
+            if(tmp3 > tmp4) {
+                wtf7 = 2;
+            }
+            else {
+                wtf7 = 3;
+            }
+            wtf6 = wtf7;
+        }
+        wtf4 = wtf6;
+    }
+    
+    tmp6 = wtf4;
+
+    switch(tmp6) {
+        case 0: {
+            this->mW = doSqrt(tmp1);
+            tmp7 = 0.25f / this->mW;
+            this->mX = (mtx.mMatrix3f[2][1] - mtx.mMatrix3f[1][2]) * tmp7;
+            this->mY = (mtx.mMatrix3f[0][2] - mtx.mMatrix3f[2][0]) * tmp7;
+            this->mZ = (mtx.mMatrix3f[1][0] - mtx.mMatrix3f[0][1]) * tmp7;
+        } break;
+
+        case 1: {
+            this->mX = doSqrt(tmp2);
+            tmp7 = 0.25f / this->mX;
+            this->mW = (mtx.mMatrix3f[2][1] - mtx.mMatrix3f[1][2]) * tmp7;
+            this->mY = (mtx.mMatrix3f[0][1] + mtx.mMatrix3f[1][0]) * tmp7;
+            this->mZ = (mtx.mMatrix3f[0][2] + mtx.mMatrix3f[2][0]) * tmp7;
+        } break;
+
+        case 2: {
+            this->mY = doSqrt(tmp3);
+            tmp7 = 0.25f / this->mY;
+            this->mW = (mtx.mMatrix3f[0][2] - mtx.mMatrix3f[2][0]) * tmp7;
+            this->mZ = (mtx.mMatrix3f[1][2] + mtx.mMatrix3f[2][1]) * tmp7;
+            this->mX = (mtx.mMatrix3f[1][0] + mtx.mMatrix3f[0][1]) * tmp7;
+        } break;
+
+        case 3: {
+            this->mZ = doSqrt(tmp4);
+            tmp7 = 0.25f / this->mZ;
+            this->mW = (mtx.mMatrix3f[1][0] - mtx.mMatrix3f[0][1]) * tmp7;
+            this->mX = (mtx.mMatrix3f[2][0] + mtx.mMatrix3f[0][2]) * tmp7;
+            this->mY = (mtx.mMatrix3f[2][1] + mtx.mMatrix3f[1][2]) * tmp7;
+        } break;
+
+        default: break;
+    }
+
+    if(this->mW < 0.0f) {
+        this->mW = -this->mW;
+        this->mX = -this->mX;
+        this->mY = -this->mY;
+        this->mZ = -this->mZ;
+    }
+
+    tmp7 = 1.0f / doSqrt(this->mW * this->mW + this->mX * this->mX + this->mY * this->mY + this->mZ * this->mZ);
+    this->mW *= tmp7;
+    this->mX *= tmp7;
+    this->mY *= tmp7;
+    this->mZ *= tmp7;
 }
 
 void Quat::genVectorX() {
