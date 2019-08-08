@@ -49,7 +49,7 @@ public:
 	float					getFrameRate();
 	float					getFrameTime();
 	float 					getTime();
-	void 					halt(char*, int, char*);
+	static void 			halt(char*, int, char*);
 	void 					hardReset();
 	int 					run(BaseApp*);
 	//void 					searchFiles(char*, char*, IDelegate2<char*, unsigned int>*, bool);
