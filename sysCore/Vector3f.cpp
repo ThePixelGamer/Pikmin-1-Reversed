@@ -325,8 +325,8 @@ void Quat::fromEuler(Vector3f& a2) { //asm matches
     this->normalise();
 }
 
-void Quat::fromMat3f(Matrix3f&) {
-
+void Quat::fromMat3f(Matrix3f& a2) {
+    float tmp1 = (a2.mMatrix3f[0][0] + a2.mMatrix3f[1][0] + a2.mMatrix3f[2][0] + 1.0f) * 0.25f;
 }
 
 void Quat::genVectorX() {

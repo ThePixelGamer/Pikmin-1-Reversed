@@ -13,10 +13,19 @@ class Vector3f;
 
 class Matrix3f {
 public:
+	enum mode; // unknown
+	enum do_not_initialize;
+
 	float mMatrix3f[3][3];
 
-	Matrix3f();
+protected:
+	Matrix3f(do_not_initialize);
 
+public:
+	Matrix3f(mode);
+	Matrix3f(const Vector3f&, mode);
+	Matrix3f(float[3][3]);
+	Matrix3f();
 };
 
 #endif
