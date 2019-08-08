@@ -64,6 +64,10 @@ SOURCE=.\AgeAtx.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\AyuStack.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Stream\CmdStream.cpp
 # End Source File
 # Begin Source File
@@ -133,6 +137,10 @@ SOURCE=.\Vector3f.cpp
 # Begin Source File
 
 SOURCE=.\AgeAtx.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\AyuStack.h
 # End Source File
 # Begin Source File
 
