@@ -11,16 +11,18 @@
 
 #include "Stream/Stream.h"
 #include "Matrix4f.h"
+#include "Matrix3f.h"
 
 class AgeServer;
 class Matrix4f;
+class Matrix3f;
 class Quat;
 
 class SYSCORE_API Vector3f {
 public:
-	float m_x; // 0h
-	float m_y; // 4h
-	float m_z; // 8h
+	float mX; // 0h
+	float mY; // 4h
+	float mZ; // 8h
 
 	Vector3f();
 	Vector3f(const float&, const float&, const float&);
@@ -71,12 +73,22 @@ public:
 class SYSCORE_API Quat : public Vector3f {
 public:
 	// (Vector3f: 0h-8h)
-	float m_w; //Ch
+	float mW; //Ch
 
 	Quat();
 	Quat(float, float, float, float);
 
+	void fromEuler(Vector3f&);
+	void fromMat3f(Matrix3f&);
+	void genVectorX();
+	void genVectorY();
+	void genVectorZ();
+	void multiply();
+	void multiplyTo(Quat&, Quat&);
+	void normalise();
+	void rotate();
 	void set(float, float, float, float);
+	void slerp();
 };
 
 #endif

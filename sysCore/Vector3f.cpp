@@ -7,75 +7,75 @@
 //////////////////////////////////////////////////////////////////////
 
 Vector3f::Vector3f() {  //asm matches
-    this->m_z = 0;
-    this->m_y = 0;
-    this->m_x = 0;
+    this->mZ = 0;
+    this->mY = 0;
+    this->mX = 0;
 }
 
 Vector3f::Vector3f(const float& x, const float& y, const float& z) { //asm matches
-    this->m_x = x;
-    this->m_y = y;
-    this->m_z = z;
+    this->mX = x;
+    this->mY = y;
+    this->mZ = z;
 }
 
 Vector3f::Vector3f(const Vector3f& a2) { //asm matches
-    this->m_x = a2.m_x;
-    this->m_y = a2.m_y;
-    this->m_z = a2.m_z;
+    this->mX = a2.mX;
+    this->mY = a2.mY;
+    this->mZ = a2.mZ;
 }
 
 void Vector3f::CP(Vector3f& a2) { //asm matches
     Vector3f tmp;
-    tmp.m_x = this->m_y * a2.m_z - this->m_z * a2.m_y;
-    tmp.m_y = this->m_z * a2.m_x - this->m_x * a2.m_z;
-    tmp.m_z = this->m_x * a2.m_y - this->m_y * a2.m_x;
-    this->m_x = tmp.m_x;
-    this->m_y = tmp.m_y;
-    this->m_z = tmp.m_z;
+    tmp.mX = this->mY * a2.mZ - this->mZ * a2.mY;
+    tmp.mY = this->mZ * a2.mX - this->mX * a2.mZ;
+    tmp.mZ = this->mX * a2.mY - this->mY * a2.mX;
+    this->mX = tmp.mX;
+    this->mY = tmp.mY;
+    this->mZ = tmp.mZ;
 }
 
 float Vector3f::DP(Vector3f& a2) { //asm matches
-    return (this->m_x * a2.m_x) + (this->m_y * a2.m_y) + (this->m_z * a2.m_z);
+    return (this->mX * a2.mX) + (this->mY * a2.mY) + (this->mZ * a2.mZ);
 }
 
 void Vector3f::add(Vector3f& a2) { //asm matches
-    this->m_x += a2.m_x;
-    this->m_y += a2.m_y;
-    this->m_z += a2.m_z;
+    this->mX += a2.mX;
+    this->mY += a2.mY;
+    this->mZ += a2.mZ;
 }
 
 void Vector3f::add(Vector3f& a2, Vector3f& a3) { //asm matches
-    this->m_x = a2.m_x + a3.m_x;
-    this->m_y = a2.m_y + a3.m_y;
-    this->m_z = a2.m_z + a3.m_z;
+    this->mX = a2.mX + a3.mX;
+    this->mY = a2.mY + a3.mY;
+    this->mZ = a2.mZ + a3.mZ;
 }
 
 void Vector3f::add(float a2, float a3, float a4) { //asm matches
-    this->m_x += a2;
-    this->m_y += a3;
-    this->m_z += a4;
+    this->mX += a2;
+    this->mY += a3;
+    this->mZ += a4;
 }
 
 void Vector3f::add2(Vector3f& a2, Vector3f& a3) { //asm matches
-    float z = a2.m_z + a3.m_z;
-    float y = a2.m_y + a3.m_y;
-    float x = a2.m_x + a3.m_x;
+    float z = a2.mZ + a3.mZ;
+    float y = a2.mY + a3.mY;
+    float x = a2.mX + a3.mX;
     set(x, y, z);
 }
 
 void Vector3f::bounce(Vector3f& a2, float a3) { //asm matches
-    float v3 = -Vector3f::DP(a2) * a3;
+    float v3 = -this->DP(a2) * a3;
     if(v3 > 0.0) {
-        this->m_x += v3 * a2.m_x;
-        this->m_y += v3 * a2.m_y;
-        this->m_z += v3 * a2.m_z;
+        this->mX += v3 * a2.mX;
+        this->mY += v3 * a2.mY;
+        this->mZ += v3 * a2.mZ;
     }
 }
 
 void Vector3f::cross(Vector3f& a2, Vector3f& a3) { //asm matches
-    float z = a2.m_x * a3.m_y - a2.m_y * a3.m_x;
-    float y = a2.m_z * a3.m_x - a2.m_x * a3.m_z;
-    float x = a2.m_y * a3.m_z - a2.m_z * a3.m_y;
+    float z = a2.mX * a3.mY - a2.mY * a3.mX;
+    float y = a2.mZ * a3.mX - a2.mX * a3.mZ;
+    float x = a2.mY * a3.mZ - a2.mZ * a3.mY;
     set(x, y, z);
 }
 
@@ -86,19 +86,19 @@ float Vector3f::distance(Vector3f& a2) { //asm matches
 }
 
 void Vector3f::div(float a2) { //asm matches
-    this->m_x /= a2;
-    this->m_y /= a2;
-    this->m_z /= a2;
+    this->mX /= a2;
+    this->mY /= a2;
+    this->mZ /= a2;
 }
 
 float Vector3f::dot(Vector3f& a2) { //asm matches
-    return (this->m_x * a2.m_x) + (this->m_y * a2.m_y) + (this->m_z * a2.m_z);
+    return (this->mX * a2.mX) + (this->mY * a2.mY) + (this->mZ * a2.mZ);
 }
 
 void Vector3f::genAge(AgeServer& a2, char* a3, Vector3f& a4, Vector3f& a5) {} //asm matches
 
 void Vector3f::input(Vector3f& a2) { //asm matches
-    this->set(a2.m_x, a2.m_y, a2.m_z);
+    this->set(a2.mX, a2.mY, a2.mZ);
 }
 
 float doFabs(float a2) { //asm matches (used elsewhere)
@@ -106,9 +106,9 @@ float doFabs(float a2) { //asm matches (used elsewhere)
 }
 
 bool Vector3f::isSame(Vector3f& a2) { //asm matches
-    if(doFabs(this->m_x - a2.m_x) < 0.000099999997f) {
-        if(doFabs(this->m_y - a2.m_y) < 0.000099999997f) {
-            if(doFabs(this->m_z - a2.m_z) < 0.000099999997f)
+    if(doFabs(this->mX - a2.mX) < 0.000099999997f) {
+        if(doFabs(this->mY - a2.mY) < 0.000099999997f) {
+            if(doFabs(this->mZ - a2.mZ) < 0.000099999997f)
                 return true;
         }
     }
@@ -117,13 +117,13 @@ bool Vector3f::isSame(Vector3f& a2) { //asm matches
 }
 
 float Vector3f::length() { //asm matches
-    return doFabs((this->m_x * this->m_x) + (this->m_y * this->m_y) + (this->m_z * this->m_z));
+    return doFabs((this->mX * this->mX) + (this->mY * this->mY) + (this->mZ * this->mZ));
 }
 
 void Vector3f::lerpTo(Vector3f& a2, float a3, Vector3f& a4) { //asm matches
-    a4.m_x = (a2.m_x - this->m_x) * a3 + this->m_x;
-    a4.m_y = (a2.m_y - this->m_y) * a3 + this->m_y;
-    a4.m_z = (a2.m_z - this->m_z) * a3 + this->m_z;
+    a4.mX = (a2.mX - this->mX) * a3 + this->mX;
+    a4.mY = (a2.mY - this->mY) * a3 + this->mY;
+    a4.mZ = (a2.mZ - this->mZ) * a3 + this->mZ;
 }
 
 void Vector3f::middle(Vector3f& a2, Vector3f& a3) { //asm matches
@@ -133,28 +133,28 @@ void Vector3f::middle(Vector3f& a2, Vector3f& a3) { //asm matches
 
 void Vector3f::multMatrix(Matrix4f& a2) { //asm matches
     Vector3f tmp;
-    tmp.m_x = a2.m_matrix[0][0] * this->m_x + a2.m_matrix[0][1] * this->m_y + a2.m_matrix[0][2] * this->m_z + a2.m_matrix[0][3];
-    tmp.m_y = a2.m_matrix[1][0] * this->m_x + a2.m_matrix[1][1] * this->m_y + a2.m_matrix[1][2] * this->m_z + a2.m_matrix[1][3];
-    tmp.m_z = a2.m_matrix[2][0] * this->m_x + a2.m_matrix[2][1] * this->m_y + a2.m_matrix[2][2] * this->m_z + a2.m_matrix[2][3];
+    tmp.mX = a2.mMatrix4f[0][0] * this->mX + a2.mMatrix4f[0][1] * this->mY + a2.mMatrix4f[0][2] * this->mZ + a2.mMatrix4f[0][3];
+    tmp.mY = a2.mMatrix4f[1][0] * this->mX + a2.mMatrix4f[1][1] * this->mY + a2.mMatrix4f[1][2] * this->mZ + a2.mMatrix4f[1][3];
+    tmp.mZ = a2.mMatrix4f[2][0] * this->mX + a2.mMatrix4f[2][1] * this->mY + a2.mMatrix4f[2][2] * this->mZ + a2.mMatrix4f[2][3];
     *this = tmp;
 }
 
 void Vector3f::multMatrixTo(Matrix4f& a2, Vector3f& a3) { //asm matches
-    a3.m_x = a2.m_matrix[0][0] * this->m_x + a2.m_matrix[0][1] * this->m_y + a2.m_matrix[0][2] * this->m_z + a2.m_matrix[0][3];
-    a3.m_y = a2.m_matrix[1][0] * this->m_x + a2.m_matrix[1][1] * this->m_y + a2.m_matrix[1][2] * this->m_z + a2.m_matrix[1][3];
-    a3.m_z = a2.m_matrix[2][0] * this->m_x + a2.m_matrix[2][1] * this->m_y + a2.m_matrix[2][2] * this->m_z + a2.m_matrix[2][3];
+    a3.mX = a2.mMatrix4f[0][0] * this->mX + a2.mMatrix4f[0][1] * this->mY + a2.mMatrix4f[0][2] * this->mZ + a2.mMatrix4f[0][3];
+    a3.mY = a2.mMatrix4f[1][0] * this->mX + a2.mMatrix4f[1][1] * this->mY + a2.mMatrix4f[1][2] * this->mZ + a2.mMatrix4f[1][3];
+    a3.mZ = a2.mMatrix4f[2][0] * this->mX + a2.mMatrix4f[2][1] * this->mY + a2.mMatrix4f[2][2] * this->mZ + a2.mMatrix4f[2][3];
 }
 
 void Vector3f::multiply(float a2) { //asm matches
-    this->m_x *= a2;
-    this->m_y *= a2;
-    this->m_z *= a2;
+    this->mX *= a2;
+    this->mY *= a2;
+    this->mZ *= a2;
 }
 
 void Vector3f::negate() { //asm matches
-    this->m_x = -this->m_x;
-    this->m_y = -this->m_y;
-    this->m_z = -this->m_z;
+    this->mX = -this->mX;
+    this->mY = -this->mY;
+    this->mZ = -this->mZ;
 }
 
 float Vector3f::normalise() { //asm matches
@@ -170,124 +170,200 @@ void Vector3f::normalize() { //asm matches
 }
 
 void Vector3f::output(Vector3f& a2) { //asm matches
-    a2.set(this->m_x, this->m_y, this->m_z);
+    a2.set(this->mX, this->mY, this->mZ);
 }
 
 void Vector3f::project(Vector3f& a2) { //asm matches
     float v3 = this->DP(a2);
-    this->m_x = -(v3 * a2.m_x - this->m_x);
-    this->m_y = -(v3 * a2.m_y - this->m_y);
-    this->m_z = -(v3 * a2.m_z - this->m_z);
+    this->mX = -(v3 * a2.mX - this->mX);
+    this->mY = -(v3 * a2.mY - this->mY);
+    this->mZ = -(v3 * a2.mZ - this->mZ);
 }
 
 void Vector3f::read(Stream& a3) { //asm matches
-    this->m_x = a3.readFloat();
-    this->m_y = a3.readFloat();
-    this->m_z = a3.readFloat();
+    this->mX = a3.readFloat();
+    this->mY = a3.readFloat();
+    this->mZ = a3.readFloat();
 }
 
 void Vector3f::rotate(Matrix4f& a2) { //asm matches
     Vector3f tmp;
-    tmp.m_x = a2.m_matrix[0][0] * this->m_x + a2.m_matrix[0][1] * this->m_y + a2.m_matrix[0][2] * this->m_z;
-    tmp.m_y = a2.m_matrix[1][0] * this->m_x + a2.m_matrix[1][1] * this->m_y + a2.m_matrix[1][2] * this->m_z;
-    tmp.m_z = a2.m_matrix[2][0] * this->m_x + a2.m_matrix[2][1] * this->m_y + a2.m_matrix[2][2] * this->m_z;
+    tmp.mX = a2.mMatrix4f[0][0] * this->mX + a2.mMatrix4f[0][1] * this->mY + a2.mMatrix4f[0][2] * this->mZ;
+    tmp.mY = a2.mMatrix4f[1][0] * this->mX + a2.mMatrix4f[1][1] * this->mY + a2.mMatrix4f[1][2] * this->mZ;
+    tmp.mZ = a2.mMatrix4f[2][0] * this->mX + a2.mMatrix4f[2][1] * this->mY + a2.mMatrix4f[2][2] * this->mZ;
     *this = tmp;
 }
 
 void Vector3f::rotate(Quat& a2) { //asm matches
     Quat tmp;
-    tmp.m_x =  a2.m_y * this->m_z - a2.m_z * this->m_y + a2.m_w * this->m_x;
-    tmp.m_y = -a2.m_x * this->m_z + a2.m_z * this->m_x + a2.m_w * this->m_y;
-    tmp.m_z =  a2.m_x * this->m_y - a2.m_y * this->m_x + a2.m_w * this->m_z;
-    tmp.m_w = -a2.m_x * this->m_x - a2.m_y * this->m_y - a2.m_z * this->m_z;
-    this->m_x =  tmp.m_x * a2.m_w + -a2.m_z * tmp.m_y - -a2.m_y * tmp.m_z + -a2.m_x * tmp.m_w;
-    this->m_y = -tmp.m_x * -a2.m_z + tmp.m_y * a2.m_w + -a2.m_x * tmp.m_z + -a2.m_y * tmp.m_w;
-    this->m_z = -a2.m_y  * tmp.m_x - -a2.m_x * tmp.m_y + tmp.m_z * a2.m_w + -a2.m_z * tmp.m_w;
+    tmp.mX =  a2.mY * this->mZ - a2.mZ * this->mY + a2.mW * this->mX;
+    tmp.mY = -a2.mX * this->mZ + a2.mZ * this->mX + a2.mW * this->mY;
+    tmp.mZ =  a2.mX * this->mY - a2.mY * this->mX + a2.mW * this->mZ;
+    tmp.mW = -a2.mX * this->mX - a2.mY * this->mY - a2.mZ * this->mZ;
+    this->mX =  tmp.mX * a2.mW + -a2.mZ * tmp.mY - -a2.mY * tmp.mZ + -a2.mX * tmp.mW;
+    this->mY = -tmp.mX * -a2.mZ + tmp.mY * a2.mW + -a2.mX * tmp.mZ + -a2.mY * tmp.mW;
+    this->mZ = -a2.mY  * tmp.mX - -a2.mX * tmp.mY + tmp.mZ * a2.mW + -a2.mZ * tmp.mW;
 }
 
 void Vector3f::rotateInverse(Quat& a2) { //asm matches
-    Quat temp(-a2.m_x, -a2.m_y, -a2.m_z, -a2.m_w);
+    Quat temp(-a2.mX, -a2.mY, -a2.mZ, -a2.mW);
     this->rotate(temp);
 }
 
 void Vector3f::rotateTo(Matrix4f& a2, Vector3f& a3) { //asm matches
-    a3.m_x = a2.m_matrix[0][0] * this->m_x + a2.m_matrix[0][1] * this->m_y + a2.m_matrix[0][2] * this->m_z;
-    a3.m_y = a2.m_matrix[1][0] * this->m_x + a2.m_matrix[1][1] * this->m_y + a2.m_matrix[1][2] * this->m_z;
-    a3.m_z = a2.m_matrix[2][0] * this->m_x + a2.m_matrix[2][1] * this->m_y + a2.m_matrix[2][2] * this->m_z;
+    a3.mX = a2.mMatrix4f[0][0] * this->mX + a2.mMatrix4f[0][1] * this->mY + a2.mMatrix4f[0][2] * this->mZ;
+    a3.mY = a2.mMatrix4f[1][0] * this->mX + a2.mMatrix4f[1][1] * this->mY + a2.mMatrix4f[1][2] * this->mZ;
+    a3.mZ = a2.mMatrix4f[2][0] * this->mX + a2.mMatrix4f[2][1] * this->mY + a2.mMatrix4f[2][2] * this->mZ;
 }
 
 void Vector3f::rotateTranspose(Matrix4f& a2) { //asm matches
     Vector3f tmp;
-    tmp.m_x = a2.m_matrix[0][0] * this->m_x + a2.m_matrix[1][0] * this->m_y + a2.m_matrix[2][0] * this->m_z;
-    tmp.m_y = a2.m_matrix[0][1] * this->m_x + a2.m_matrix[1][1] * this->m_y + a2.m_matrix[2][1] * this->m_z;
-    tmp.m_z = a2.m_matrix[0][2] * this->m_x + a2.m_matrix[1][2] * this->m_y + a2.m_matrix[2][2] * this->m_z;
+    tmp.mX = a2.mMatrix4f[0][0] * this->mX + a2.mMatrix4f[1][0] * this->mY + a2.mMatrix4f[2][0] * this->mZ;
+    tmp.mY = a2.mMatrix4f[0][1] * this->mX + a2.mMatrix4f[1][1] * this->mY + a2.mMatrix4f[2][1] * this->mZ;
+    tmp.mZ = a2.mMatrix4f[0][2] * this->mX + a2.mMatrix4f[1][2] * this->mY + a2.mMatrix4f[2][2] * this->mZ;
     *this = tmp;
 }
 
 void Vector3f::scale(float a2) { //asm matches
-    this->m_x *= a2;
-    this->m_y *= a2;
-    this->m_z *= a2;
+    this->mX *= a2;
+    this->mY *= a2;
+    this->mZ *= a2;
 }
 
 void Vector3f::scale2(float a2, Vector3f& a3) { //asm matches
-    this->m_x = a3.m_x * a2;
-    this->m_y = a3.m_y * a2;
-    this->m_z = a3.m_z * a2;
+    this->mX = a3.mX * a2;
+    this->mY = a3.mY * a2;
+    this->mZ = a3.mZ * a2;
 }
 
 void Vector3f::set(const Vector3f& a2) { //asm matches
-    this->set(a2.m_x, a2.m_y, a2.m_z);
+    this->set(a2.mX, a2.mY, a2.mZ);
 }
 
 void Vector3f::set(const float& a2, const float& a3, const float& a4) { //asm matches
-    this->m_x = a2;
-    this->m_y = a3;
-    this->m_z = a4;
+    this->mX = a2;
+    this->mY = a3;
+    this->mZ = a4;
 }
 
 float Vector3f::squaredLength() { //asm matches
-    return (this->m_x * this->m_x) + (this->m_y * this->m_y) + (this->m_z * this->m_z);
+    return (this->mX * this->mX) + (this->mY * this->mY) + (this->mZ * this->mZ);
 }
 
 void Vector3f::sub(Vector3f& a2) { //asm matches
-    this->m_x -= a2.m_x;
-    this->m_y -= a2.m_y;
-    this->m_z -= a2.m_z;
+    this->mX -= a2.mX;
+    this->mY -= a2.mY;
+    this->mZ -= a2.mZ;
 }
 
 void Vector3f::sub(Vector3f& a2, Vector3f& a3) { //asm matches
-    this->m_x = a2.m_x - a3.m_x;
-    this->m_y = a2.m_y - a3.m_y;
-    this->m_z = a2.m_z - a3.m_z;
+    this->mX = a2.mX - a3.mX;
+    this->mY = a2.mY - a3.mY;
+    this->mZ = a2.mZ - a3.mZ;
 }
 
 void Vector3f::sub2(Vector3f& a2, Vector3f& a3) { //asm matches
-    float z = a2.m_z - a3.m_z;
-    float y = a2.m_y - a3.m_y;
-    float x = a2.m_x - a3.m_x;
+    float z = a2.mZ - a3.mZ;
+    float y = a2.mY - a3.mY;
+    float x = a2.mX - a3.mX;
     set(x, y, z);
 }
 
 void Vector3f::write(Stream& a2) { //asm matches
-    a2.writeFloat(this->m_x);
-    a2.writeFloat(this->m_y);
-    a2.writeFloat(this->m_z);
+    a2.writeFloat(this->mX);
+    a2.writeFloat(this->mY);
+    a2.writeFloat(this->mZ);
 }
 
 //////////////////////////////////////////////////////////////////////
 // Quat class functions
 //////////////////////////////////////////////////////////////////////
 
-Quat::Quat() : Vector3f() {} //done
+Quat::Quat() : Vector3f() {} //asm matches
 
-Quat::Quat(float a2, float a3, float a4, float a5) : Vector3f() { //done
+Quat::Quat(float a2, float a3, float a4, float a5) : Vector3f() { //asm matches
     this->set(a2, a3, a4, a5);
 }
 
-void Quat::set(float a2, float a3, float a4, float a5) { //done
-  this->m_x = a2;
-  this->m_y = a3;
-  this->m_z = a4;
-  this->m_w = a5;
+float doSin(float a2) { //asm matches (used elsewhere)
+    return sin(a2);
+}
+
+float doCos(float a2) { //asm matches (used elsewhere)
+    return cos(a2);
+}
+
+void Quat::fromEuler(Vector3f& a2) { //asm matches
+    float tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
+    Quat tmp1, tmp2, tmp3;
+
+    tmp4 = a2.mX;
+    tmp5 = a2.mY;
+    tmp6 = a2.mZ;
+
+    tmp7 = tmp4 * 0.5f;
+    tmp8 = tmp5 * 0.5f;
+    tmp9 = tmp6 * 0.5f;
+
+    tmp1.mX = doSin(tmp7);
+    tmp1.mY = 0;
+    tmp1.mZ = 0;
+    tmp1.mW = doCos(tmp7);
+
+    tmp2.mX = 0;
+    tmp2.mY = doSin(tmp8);
+    tmp2.mZ = 0;
+    tmp2.mW = doCos(tmp8);
+
+    tmp3.mX = 0;
+    tmp3.mY = 0;
+    tmp3.mZ = doSin(tmp9);
+    tmp3.mW = doCos(tmp9);
+
+    this->multiplyTo(tmp1, tmp2);
+    this->multiplyTo(*this, tmp3);
+    this->normalise();
+}
+
+void Quat::fromMat3f(Matrix3f&) {
+
+}
+
+void Quat::genVectorX() {
+
+}
+
+void Quat::genVectorY() {
+
+}
+
+void Quat::genVectorZ() {
+
+}
+
+void Quat::multiply() {
+
+}
+
+void Quat::multiplyTo(Quat& a2, Quat& a3) {
+
+}
+
+void Quat::normalise() {
+
+}
+
+void Quat::rotate() {
+
+}
+
+void Quat::set(float a2, float a3, float a4, float a5) { //asm matches
+  this->mX = a2;
+  this->mY = a3;
+  this->mZ = a4;
+  this->mW = a5;
+}
+	
+void Quat::slerp() {
+
 }

@@ -76,6 +76,10 @@ SOURCE=.\Graphics.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Matrix3f.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Matrix4f.cpp
 # End Source File
 # Begin Source File
@@ -141,6 +145,10 @@ SOURCE=.\ControllerManager.h
 # Begin Source File
 
 SOURCE=.\Graphics.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Matrix3f.h
 # End Source File
 # Begin Source File
 

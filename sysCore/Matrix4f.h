@@ -13,7 +13,7 @@ class Vector3f;
 
 class SYSCORE_API Matrix4f {
 public:
-	float m_matrix[4][4];
+	float mMatrix4f[4][4];
 
 	Matrix4f(float[4][4]);
 	Matrix4f();
