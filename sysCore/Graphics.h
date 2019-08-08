@@ -7,7 +7,7 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
-#include "Vector3f.h"
+#include "Geometry/Vector3f.h"
 
 class SYSCORE_API Graphics {
 public:

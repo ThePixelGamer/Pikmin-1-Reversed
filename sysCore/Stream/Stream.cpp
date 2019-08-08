@@ -51,12 +51,12 @@ short Stream::readShort()
 	return ((c & 0xFF00) >> 8) | (c << 8);
 }
 
-double Stream::readFloat()
+float Stream::readFloat()
 {
 	int c;
 	this->read(&c, sizeof(float));
-	c = ((c & 0xFF000000) >> 24) | ((c & 0xFF0000) >> 8) | ((c & 0xFF00) << 8) | (c << 24);
-	return *(float*)(&c);
+	c = (c << 24) | ((c & 0xFF00) << 8) | ((c & 0xFF0000) >> 8) | ((c & 0xFF000000) >> 24);
+	return static_cast<float>(c);
 }
 
 char* Stream::readString()

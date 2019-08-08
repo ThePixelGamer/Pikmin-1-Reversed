@@ -22,7 +22,7 @@ public:
 	virtual int readInt();
 	virtual char readByte();
 	virtual short readShort();
-	virtual double readFloat();
+	virtual float readFloat();
 	virtual char* readString();
 	virtual void readString(String&);
 	virtual void readString(char*, int);

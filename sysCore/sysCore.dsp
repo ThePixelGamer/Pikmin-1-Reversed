@@ -104,6 +104,10 @@ SOURCE=.\Stream\RandomAccessStream.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\SRT.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\System\StdSystem.cpp
 # End Source File
 # Begin Source File
@@ -129,6 +133,10 @@ SOURCE=.\UI\UI.cpp
 # Begin Source File
 
 SOURCE=.\Vector3f.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\VQS.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -180,6 +188,10 @@ SOURCE=.\Stream\RandomAccessStream.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\SRT.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\System\StdSystem.h
 # End Source File
 # Begin Source File
@@ -205,6 +217,10 @@ SOURCE=.\UI\UI.h
 # Begin Source File
 
 SOURCE=.\Vector3f.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\VQS.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

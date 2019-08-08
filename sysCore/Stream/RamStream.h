@@ -7,7 +7,7 @@
 #ifndef RAMSTREAM_H
 #define RAMSTREAM_H
 
-#include "Stream/RandomAccessStream.h"
+#include "RandomAccessStream.h"
 
 class SYSCORE_API RamStream : public RandomAccessStream { 
 public:
