@@ -25,7 +25,7 @@ public:
 	int m_used; //8h
 	char* m_unk1; //Ch
 	int m_topSize; //10h
-	char* m_unk2; //14h ( this + 20 )
+	char* m_unk2; //14h ( this + 20 ) | <- top probably???
 	int m_topFree; //18h
 
 	bool active; //1Dh ( this + 29 )
@@ -46,7 +46,7 @@ public:
 	void inactivate();
 
 	void pop();
-	void push(int);
+	char* push(int);
 
 	void reset(int);
 };
