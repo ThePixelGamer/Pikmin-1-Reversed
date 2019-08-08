@@ -48,7 +48,7 @@ public:
 	void multiply(float);
 	void negate();
 	float normalise();
-	float normalize();
+	void normalize();
 	void output(Vector3f&);
 	void project(Vector3f&);
 	void read(Stream&);
