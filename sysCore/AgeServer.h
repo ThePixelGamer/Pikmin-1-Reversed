@@ -10,6 +10,18 @@
 #include "AgeAtx.h"
 class Colour;
 
+enum PROP_TYPE {
+	UNK1 = 0,
+	UNK2, // 1
+	UNK3, // 2
+	UNK4, // 3
+	COLOUR, // 4
+	UNK5, // 5
+	UNK6, // 6
+	UNK7, // 7
+	UNK8 // 8
+};
+
 class SYSCORE_API AgeServer : public AtxStream {
 public:
 	// 16h - AtxStream
@@ -25,12 +37,18 @@ public:
 	void EndSection(); // this->writeInt(301); this->m_unk = false
 
 	// NEW SECTION
-	//void NewBit(char *, unsigned __int32, unsigned __int32 ); // this->writeInt(1); blah blah
+	void NewBit(char*, unsigned __int32, unsigned __int32); // this->writeInt(1); blah blah
 	// UH OH
 	// void NewButton(char *, IDelegate *, int);
 	// void NewButton(char *, IDelegate <AgeServer &> *, int);
 	// void NewEditor(char *, AyuImage *, bool);
-	void NewEditor(char *, Colour&);
+	void NewEditor(char*, Colour&);
+	void NewEditor(char*, char*, int);
+	void NewEditor(char*, char*, int, int, int);
+	void NewEditor(char *, float *, float, float, int);
+
+	int writeProp(PROP_TYPE, void*);
+	int writePropValue(PROP_TYPE, void*);
 };
 
 #endif
