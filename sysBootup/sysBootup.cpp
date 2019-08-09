@@ -31,12 +31,13 @@ public:
 UIMain* window;
 
 void print(const char* fmt, ...) {
-	char dest[1024];
 	va_list args;
 	va_start(args, fmt);
+	char dest[1024];
 
 	if(sysCon) {
-		sysCon->print("%s: ", "sysBootup");
+		if ("sysBootup")
+			sysCon->print("%s: ", "sysBootup");
 		vsprintf(dest, fmt, args);
 		if(strlen(dest)) {
 			sysCon->write(dest, strlen(dest));
@@ -55,33 +56,37 @@ void createUIWindow(HINSTANCE hInst) {
 }
 
 void loadDLLsInDir(const char* dir) {
-	HMENU hSubMenu;
-	char dest[1024];
-	char src[1024];
 	_finddata_t fd_file;
-
+	long dll;
+	HMENU hSubMenu = 0;
 	if(window) {
 		HMENU hMenu = GetMenu(window->m_hWnd);
 		if(hMenu)
 			hSubMenu = GetSubMenu(hMenu, 0);
 	}
 
+	char dest[256];
 	sprintf(dest, "%s/*.dll", dir);
-	long dll = _findfirst(dest, &fd_file);
+	
+	dll = _findfirst(dest, &fd_file);
 
-	for(bool dll_count = (dll == -1); !dll_count; dll_count = (_findnext(dll, &fd_file) != 0)) {
+	bool dll_count;
+	char src[256];
+	for(dll_count = (dll == -1); !dll_count; dll_count = (_findnext(dll, &fd_file) != 0)) {
 		sprintf(src, "%s/%s", dir, fd_file.name);
+		Module* temp = modMgr->loadModule(strdup(src));
 		if(hSubMenu)
-			modMgr->loadModule(strdup(src))->menuPlugins(menuP, hSubMenu);
+			temp->menuPlugins(menuP, hSubMenu);
 	}
 	
 	_findclose(dll);
 }
 
-char* passCmdParams(const char* str) {
+size_t passCmdParams(const char* str, const char* unused) {
 	loadDLLsInDir("plugins");
 
-	if(strlen(str)) {
+	int result = strlen(str);
+	if(result) {
 		print("got cmdParams [%d] : %s\n", strlen(str), str);
 		CmdStream* cmd = new CmdStream(new RamStream(str, strlen(str)));
 
@@ -104,10 +109,10 @@ char* passCmdParams(const char* str) {
 		}
 
 		if(!cmd->endOfCmds()) 
-			return cmd->getToken(true);
+			return (int)cmd->getToken(true);
 	} 
 
-	return 0;
+	return result;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
@@ -117,7 +122,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	modMgr  = new ModuleMgr();
 	uiMgr   = new UIMgr();
 
-	passCmdParams(lpCmdLine);
+	passCmdParams(lpCmdLine, "config.ini");
 
 	if(!uiMgr->isActive() && !gsys->firstApp())
 		MessageBoxA(NULL, "A top level window does not exist,\nthe application will now close.", "Warning!", MB_OK | MB_ICONWARNING);

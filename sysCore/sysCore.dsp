@@ -104,6 +104,10 @@ SOURCE=.\Nodes.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Stream\RamStream.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Stream\RandomAccessStream.cpp
 # End Source File
 # Begin Source File
@@ -185,10 +189,6 @@ SOURCE=.\Module.h
 # Begin Source File
 
 SOURCE=.\Nodes.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\RamStream.cpp
 # End Source File
 # Begin Source File
 

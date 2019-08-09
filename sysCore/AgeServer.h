@@ -8,7 +8,7 @@
 #define AGESERVER_H
 
 #include "AgeAtx.h"
-#include "Colour.h"
+class Colour;
 
 class SYSCORE_API AgeServer : public AtxStream {
 public:
@@ -30,6 +30,7 @@ public:
 	// void NewButton(char *, IDelegate *, int);
 	// void NewButton(char *, IDelegate <AgeServer &> *, int);
 	// void NewEditor(char *, AyuImage *, bool);
+	void NewEditor(char *, Colour&);
 };
 
 #endif

@@ -1,13 +1,13 @@
-// olour.h: interface for the Colour class.
-//
-//////////////////////////////////////////////////////////////////////
+#ifdef SYSCORE_EXPORTS
+#define SYSCORE_API __declspec(dllexport)
+#else
+#define SYSCORE_API __declspec(dllimport)
+#endif
 
-#if !defined(AFX_OLOUR_H__84878EA3_C165_4F21_B504_2A7E4E5CC245__INCLUDED_)
-#define AFX_OLOUR_H__84878EA3_C165_4F21_B504_2A7E4E5CC245__INCLUDED_
+#ifndef COLOUR_H
+#define COLOUR_H
 
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
+#include "AgeServer.h"
 
 class Colour  
 {
@@ -20,6 +20,13 @@ public:
 	Colour(char r, char g, char b, char a);
 	Colour () {}
 
+	void add(Colour &);
+	void genAge(AgeServer &, char *);
+	void lerp(Colour &, float);
+	void lerpTo(Colour &, float, Colour &);
+	void read(Stream &);
+	void set(unsigned __int8 r, unsigned __int8 g, unsigned __int8 b, unsigned __int8 a);
+	void write(Stream &);
 };
 
-#endif // !defined(AFX_OLOUR_H__84878EA3_C165_4F21_B504_2A7E4E5CC245__INCLUDED_)
+#endif // #ifndef COLOUR_H

@@ -1,11 +1,11 @@
+#ifndef MODULE_H
+#define MODULE_H
+
 #ifdef SYSCORE_EXPORTS
 #define SYSCORE_API __declspec(dllexport)
 #else
 #define SYSCORE_API __declspec(dllimport)
 #endif
-
-#ifndef MODULE_H
-#define MODULE_H
 
 #include <windows.h>
 #include "sysCore.h"
@@ -18,7 +18,7 @@ struct MenuPlugin {
 
 struct Object { 
 	char* str; 
-	int load; 
+	bool load; 
 	void* ptrToClass; 
 };
 

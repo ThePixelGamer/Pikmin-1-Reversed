@@ -45,14 +45,25 @@ void Module::Load(char* source) {
 	}
 }
 
+static int itemCount;
+
 void Module::menuPlugins(MenuPlugin* unused, HMENU hmenu) {
 	int unk1, unk2, unk3;
 
 	for(Object* i = (Object*)(this->m_objListAddr)(); i; i++) {
-		if(i->unk) {
-			RegisterWindowMessageA(i->str);
+		if(i->load) {
+			UINT msg = RegisterWindowMessageA(i->str);
 			//hmenu = globalHeapAllocator();
-
+			MENUITEMINFO mi;
+			//mi.hbmpItem = HBMMENU_SYSTEM;
+			mi.cbSize = 44;
+			mi.fMask = 18;
+			mi.wID = msg;
+			mi.fType = 0;
+			mi.dwTypeData = i->str;
+			mi.cch = strlen(i->str);
+			int item = itemCount++;
+			InsertMenuItemA(hmenu, item, 1, &mi);
 		}
 	}
 }
