@@ -29,7 +29,7 @@ public:
 	void copyToToken(int);
 
 	char nextChar();
-	char isToken(char* Str);
+	bool isToken(char* Str);
 	char* getToken(bool hasComments);
 	char* skipLine();
 
