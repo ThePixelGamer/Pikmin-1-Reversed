@@ -1,18 +1,17 @@
 #include "RamStream.h"
 
-RamStream::RamStream(void * _buffer, int _length) : RandomAccessStream() {
-	this->m_buffer = (char *)_buffer;
+RamStream::RamStream(const char* _buffer, size_t _length) : RandomAccessStream(), m_buffer(_buffer) {
 	this->m_position = 0;
 	this->m_length = _length;
 }
 
-void RamStream::read(void * buffer, int amount) {
+void RamStream::read(void* buffer, int amount) {
 	memcpy(buffer, &this->m_buffer[this->m_position], amount);
 	this->m_position += amount;
 }
 
-void RamStream::write(void * src, int amount) {
-	memcpy(&this->m_buffer[this->m_position], src, amount);
+void RamStream::write(void* src, int amount) {
+	memcpy((void*)&this->m_buffer[this->m_position], src, amount);
 	this->m_position += amount;
 }
 

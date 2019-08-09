@@ -13,11 +13,11 @@ class SYSCORE_API RamStream : public RandomAccessStream {
 public:
 	//0h - vtblPtr
 	int m_unk1; //4h
-	char * m_buffer; //Ch
+	const char* m_buffer; //Ch
 	int m_position; //10h
-	int m_length; //14h
+	size_t m_length; //14h
 	
-	RamStream(void *, int);
+	RamStream(const char*, size_t);
 
 	virtual void	read(void *, int);
 	virtual void	write(void *, int);

@@ -1,5 +1,9 @@
 #include "Module.h"
 
+//////////////////////////////////////////////////////////////////////
+// Module class functions
+//////////////////////////////////////////////////////////////////////
+
 void printModuleMgr(const char* fmt, ...) {
 	char* dest;
 	va_list args;
@@ -47,8 +51,39 @@ void Module::menuPlugins(MenuPlugin* unused, HMENU hmenu) {
 	//weird struct thingy {char*, }
 
 	for(INT_PTR i = (this->m_objListAddr)(); i; i += 12) { //this only runs once :)
-		if(this->m_autoStartAddr) {
-
+		if((i+4)) {
 		}
 	}
+}
+
+//////////////////////////////////////////////////////////////////////
+// ModuleMgr class functions
+//////////////////////////////////////////////////////////////////////
+
+SYSCORE_API ModuleMgr* modMgr;
+
+ModuleMgr::ModuleMgr() {}
+
+ModuleMgr::~ModuleMgr() {
+
+}
+
+void ModuleMgr::Alloc(char* a2) {
+	
+}
+
+void ModuleMgr::UnLoad() {
+	
+}
+
+void ModuleMgr::findModule() {
+	
+}
+
+void ModuleMgr::listModules() {
+	
+}
+
+Module* ModuleMgr::loadModule(char* a2) {
+	
 }

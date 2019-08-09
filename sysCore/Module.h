@@ -25,8 +25,18 @@ public:
 	~Module();
 };
 
-class ModuleMgr {
+class SYSCORE_API ModuleMgr {
+public:
+	ModuleMgr();
+	~ModuleMgr();
 
+	void Alloc(char*);
+	void UnLoad();
+	void findModule();
+	void listModules();
+	Module* loadModule(char*);
 };
+
+extern SYSCORE_API ModuleMgr* modMgr;
 
 #endif 

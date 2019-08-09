@@ -1,8 +1,14 @@
 #include <windows.h>
 #include <string.h>
 #include <stdio.h>
-#include "..\sysCore\System\System.h"
-#include "..\sysCore\sysCore.h"
+
+#define SYSCORE_EXPORTS
+
+#include "../sysCore/sysCore.h"
+#include "../sysCore/System/System.h"
+#include "../sysCore/Module.h"
+#include "../sysCore/Stream/CmdStream.h"
+#include "../sysCore/Stream/RamStream.h"
 
 struct MenuPlugin {
 	WPARAM wParam; // 0h
@@ -10,10 +16,10 @@ struct MenuPlugin {
 	MenuPlugin* next; // 8h
 };
 
-MenuPlugin menuP;
+MenuPlugin* menuP = new MenuPlugin();
 System unused;
 
-void isLast() { menuP.next = 0; } //may be autogen?
+void isLast() { menuP->next = 0; } //may be autogen?
 
 class UIMain : public UIWindow { //not an official name
 public:
@@ -22,7 +28,7 @@ public:
 
 	virtual int processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
 		if(Msg == WM_COMMAND)
-			for(MenuPlugin* i = &menuP; i; i = i->next) 
+			for(MenuPlugin* i = menuP; i; i = i->next) 
 				if(i->wParam == wParam)
 					modMgr->Alloc(i->name);
 
@@ -45,11 +51,11 @@ void print(const char* fmt, ...) {
 	}
 } 
 
-void createUIWindow(const char* str) {
+void createUIWindow(HINSTANCE hInst) {
 	window = new UIMain();
 	window->setFrame(RectArea(690, 32, 1260, 300));
 	window->createWindow("DUIClearWin", "OpenGL / Dolphin System", LoadMenuA(sysHInst, "101")); //load menu from resource file
-	gsys->createDebugStream();
+	gsys->createDebugStream(window);
 	window->refreshWindow();
 	ShowWindow(window->m_hWnd, SW_SHOWNORMAL);
 	print("Basedir = %s\n", gsys->baseDir);
@@ -113,14 +119,13 @@ size_t passCmdParams(const char* str) {
 	return result;
 }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
-{
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
 	sysHInst = hInstance;
 
-	nodeMgr	  = new NodeMgr();
-	moduleMgr = new ModuleMgr();
-	uiMgr     = new UIMgr();
-	
+	nodeMgr	= new NodeMgr();
+	modMgr  = new ModuleMgr();
+	uiMgr   = new UIMgr();
+
 	passCmdParams(lpCmdLine);
 
 	if(!uiMgr->isActive() && !gsys->firstApp())
@@ -129,7 +134,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int returnValue = gsys->run();
 
 	delete nodeMgr;
-	delete moduleMgr;
+	delete modMgr;
 	delete uiMgr;
 
     return returnValue;

@@ -266,7 +266,7 @@ void SRTNode::update();*/
 // NodeMgr class functions
 //////////////////////////////////////////////////////////////////////
 
-SYSCORE_API NodeMgr * nodeMgr;
+SYSCORE_API NodeMgr* nodeMgr;
 
 NodeMgr::NodeMgr() {
 	unk = 0;
