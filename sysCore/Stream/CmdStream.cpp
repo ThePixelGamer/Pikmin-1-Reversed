@@ -172,19 +172,19 @@ char CmdStream::nextChar()
 	return *(this->buffer + this->currentChar);
 }
 
-char CmdStream::isToken(char* Str)
+bool CmdStream::isToken(char* Str)
 {
 	if (!strlen(this->currentToken))
-		return 0;
+		return false;
 
 	if (strlen(this->currentToken) != strlen(Str))
-		return 0;
+		return false;
 
 	for (int i = 0; i < strlen(this->currentToken); ++i)
 	{
 		if (Str[i] != this->currentToken[i])
-			return 0;
+			return false;
 	}
 
-	return 1;
+	return true;
 }

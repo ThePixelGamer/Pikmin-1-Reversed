@@ -82,11 +82,10 @@ void loadDLLsInDir(const char* dir) {
 	_findclose(dll);
 }
 
-size_t passCmdParams(const char* str, const char* unused) {
+void passCmdParams(const char* str, char* unused) {
 	loadDLLsInDir("plugins");
 
-	int result = strlen(str);
-	if(result) {
+	if(strlen(str)) {
 		print("got cmdParams [%d] : %s\n", strlen(str), str);
 		CmdStream* cmd = new CmdStream(new RamStream(str, strlen(str)));
 
@@ -96,23 +95,23 @@ size_t passCmdParams(const char* str, const char* unused) {
 				createUIWindow(sysHInst);
 			} 
 			else if(cmd->isToken("+plugins")) {
-				loadDLLsInDir(cmd->getToken(true));
+				char* tmp = cmd->getToken(true);
+				loadDLLsInDir(tmp);
 			} 
 			else if(cmd->isToken("+direct")) {
 				print("Creating atxDirectRouter\n");
 				gsys->mainRouter = new AtxDirectRouter(cmd->getToken(true));
 				print("done\n");
 			}
-			else if (cmd->isToken("+client")) {
-				modMgr->Alloc(cmd->getToken(true));
+			else if(cmd->isToken("+client")) {
+				char* tmp = cmd->getToken(true);
+				modMgr->Alloc(tmp);
 			}
 		}
 
 		if(!cmd->endOfCmds()) 
-			return (int)cmd->getToken(true);
-	} 
-
-	return result;
+			cmd->getToken(true);
+	}
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
