@@ -159,7 +159,7 @@ bool System::setVideoMode(bool a1, int a2, int a3, int a4) {
 	OSVERSIONINFO versionInfo;
 
 	versionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-	if (!GetVersionExA(&versionInfo))
+	if (!GetVersionEx(&versionInfo))
 		MessageBox(NULL, "setVideoMode - GetVersionEx failed!!\n", " ", MB_OK);
 	if (a1)
 	{

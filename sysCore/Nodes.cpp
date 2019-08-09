@@ -272,6 +272,10 @@ NodeMgr::NodeMgr() {
 	unk = 0;
 }
 
+NodeMgr::~NodeMgr() {
+	
+}
+
 CoreNode* NodeMgr::findNode(char* a1, CoreNode * a2) {
 	unkNode = 0;
 	foundNode = 0;

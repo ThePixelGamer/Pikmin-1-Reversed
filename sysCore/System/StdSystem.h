@@ -109,10 +109,10 @@ public:
 		void		 setFrameClamp(int);
 		void		 setHeap(int);
 		void		 setTextureBase(char*, char*);
-		void		 softReset();
-		char*		 stringDup(char*);
+		void		 softReset();*/
+		static char* stringDup(char*);
 
-		StdSystem operator=(const StdSystem&);*/
+		//StdSystem operator=(const StdSystem&);
 };
 
 #endif

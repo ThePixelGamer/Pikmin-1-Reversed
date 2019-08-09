@@ -188,6 +188,14 @@ SOURCE=.\Nodes.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\Stream\RamStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stream\RamStream.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\Stream\RandomAccessStream.h
 # End Source File
 # Begin Source File

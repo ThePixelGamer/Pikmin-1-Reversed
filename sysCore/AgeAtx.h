@@ -26,18 +26,21 @@ public:
 	int m_dword8;
 	int m_dwordC;
 
-	AtxStream() { this->init(); }
+	AtxStream() : Stream() { this->init(); }
 
 	void init() {}
 };
 
 class SYSCORE_API AtxDirectRouter : public AtxRouter {
 public:
-	int m_dword4; //4h
+	//0h - vtable
+	char* m_dword4; //4h
 	int m_dword8; //8h
 	char m_byteC; //Ch
 	bool m_connected; //Dh
 	struct TcpStream* m_networkStream; //10h
+
+	AtxDirectRouter(char*);
 
 	virtual bool openRoute(AtxStream*, int) { return false; } // to do
 	virtual void closeRoute(AtxStream*) {}

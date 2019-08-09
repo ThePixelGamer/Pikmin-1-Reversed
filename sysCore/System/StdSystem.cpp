@@ -117,8 +117,18 @@ void StdSystem::setFade(float, float) {}
 void StdSystem::setFrameClamp(int) {}
 void StdSystem::setHeap(int) {}
 void StdSystem::setTextureBase(char*, char*) {}
-void StdSystem::softReset() {}
-char* StdSystem::stringDup(char*) {}
+void StdSystem::softReset() {}*/
 
-StdSystem StdSystem::operator=(const StdSystem&) {}*/
+char* allocateBytesOnHeap(size_t size) {
+	return 0;
+}
+
+char* StdSystem::stringDup(char* str) {
+	size_t size = strlen(str) + 1;
+	char* dst = allocateBytesOnHeap(size);
+	memcpy(dst, str, size);
+	return dst;
+}
+
+//StdSystem StdSystem::operator=(const StdSystem&) {}
 

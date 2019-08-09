@@ -1,20 +1,13 @@
 #include <windows.h>
 #include <string.h>
 #include <stdio.h>
-
-#define SYSCORE_EXPORTS
+#include <io.h>
 
 #include "../sysCore/sysCore.h"
 #include "../sysCore/System/System.h"
 #include "../sysCore/Module.h"
 #include "../sysCore/Stream/CmdStream.h"
 #include "../sysCore/Stream/RamStream.h"
-
-struct MenuPlugin {
-	WPARAM wParam; // 0h
-	char* name; // 4h
-	MenuPlugin* next; // 8h
-};
 
 MenuPlugin* menuP = new MenuPlugin();
 System unused;
@@ -38,7 +31,7 @@ public:
 UIMain* window;
 
 void print(const char* fmt, ...) {
-	char* dest;
+	char dest[1024];
 	va_list args;
 	va_start(args, fmt);
 
@@ -63,8 +56,8 @@ void createUIWindow(HINSTANCE hInst) {
 
 void loadDLLsInDir(const char* dir) {
 	HMENU hSubMenu;
-	char* dest;
-	char* src;
+	char dest[1024];
+	char src[1024];
 	_finddata_t fd_file;
 
 	if(window) {
@@ -74,7 +67,7 @@ void loadDLLsInDir(const char* dir) {
 	}
 
 	sprintf(dest, "%s/*.dll", dir);
-	intptr_t dll = _findfirst(dest, &fd_file);
+	long dll = _findfirst(dest, &fd_file);
 
 	for(bool dll_count = (dll == -1); !dll_count; dll_count = (_findnext(dll, &fd_file) != 0)) {
 		sprintf(src, "%s/%s", dir, fd_file.name);
@@ -82,12 +75,11 @@ void loadDLLsInDir(const char* dir) {
 			modMgr->loadModule(strdup(src))->menuPlugins(menuP, hSubMenu);
 	}
 	
-	_findclose(fd_file);
+	_findclose(dll);
 }
 
-size_t passCmdParams(const char* str) {
+char* passCmdParams(const char* str) {
 	loadDLLsInDir("plugins");
-	size_t result = strlen(str); //seems to be unused, maybe for debugging purposes
 
 	if(strlen(str)) {
 		print("got cmdParams [%d] : %s\n", strlen(str), str);
@@ -111,12 +103,11 @@ size_t passCmdParams(const char* str) {
 			}
 		}
 
-		result = cmd->endOfCmds();
-		if(!result) 
-			result = cmd->getToken(true);
+		if(!cmd->endOfCmds()) 
+			return cmd->getToken(true);
 	} 
 
-	return result;
+	return 0;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
@@ -131,11 +122,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if(!uiMgr->isActive() && !gsys->firstApp())
 		MessageBoxA(NULL, "A top level window does not exist,\nthe application will now close.", "Warning!", MB_OK | MB_ICONWARNING);
 
-	int returnValue = gsys->run();
-
 	delete nodeMgr;
 	delete modMgr;
 	delete uiMgr;
 
-    return returnValue;
+    //return gsys->run(gsys->firstApp());
+	return 0;
 }

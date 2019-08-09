@@ -24,6 +24,7 @@ public:
 	char* currentWorkingDirectory; // this + 80
 	char* fileName; // ??? this + 84
 	int streamType;	  // this + 688
+	char* m3B8h; // 3B8h
 	AtxRouter* mainRouter; // 438h
 	double frameTime; // this + 1112
 	double frameRate; // this + 1116

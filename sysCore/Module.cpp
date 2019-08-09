@@ -85,5 +85,5 @@ void ModuleMgr::listModules() {
 }
 
 Module* ModuleMgr::loadModule(char* a2) {
-	
+	return 0;
 }

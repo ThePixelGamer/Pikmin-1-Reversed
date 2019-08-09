@@ -10,7 +10,11 @@
 #include <windows.h>
 #include "sysCore.h"
 
-class MenuPlugin;
+struct MenuPlugin {
+	WPARAM wParam; // 0h
+	char* name; // 4h
+	MenuPlugin* next; // 8h
+};
 
 class SYSCORE_API Module {
 public:
