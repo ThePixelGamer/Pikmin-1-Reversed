@@ -64,11 +64,19 @@ SOURCE=.\AgeAtx.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\AgeServer.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\AyuStack.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\Stream\CmdStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Colour.cpp
 # End Source File
 # Begin Source File
 
@@ -140,11 +148,19 @@ SOURCE=.\AgeAtx.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\AgeServer.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\AyuStack.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\Stream\CmdStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Colour.h
 # End Source File
 # Begin Source File
 

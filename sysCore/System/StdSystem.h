@@ -35,7 +35,6 @@ class AnimData;
 class GfxobjInfo;
 class Texture;
 class Graphics;
-class AgeServer;
 class AyuHeap;
 class LFInfo;
 class Shape;
