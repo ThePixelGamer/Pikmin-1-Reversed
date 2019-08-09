@@ -1,12 +1,4 @@
-// Module.cpp: implementation of the Module class.
-//
-//////////////////////////////////////////////////////////////////////
-
 #include "Module.h"
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
 
 void printModuleMgr(const char* fmt, ...) {
 	char* dest;
@@ -22,39 +14,41 @@ void printModuleMgr(const char* fmt, ...) {
 	}
 }
 
-Module::~Module()
-{
-	if (this->pHInstance)
-	{
+Module::~Module() {
+	if (this->pHInstance) {
 		this->m_newObjAddr = 0;
 		this->m_autoStartAddr = 0;
 		FreeLibrary(this->pHInstance);
 		this->pHInstance = 0;
-		free(&this->libName);
+		free(this->libName);
 	}
 }
 
-void Module::Load(char * source)
-{
+void Module::Load(char* source) {
 	this->libName = strdup(source);
 	printModuleMgr("opening %s\n", this->libName);
 
-	this->pHInstance = LoadLibrary(this->libName);
-	if (this->pHInstance)
-	{
+	this->pHInstance = LoadLibraryA(this->libName);
+	if (this->pHInstance) {
 		this->m_newObjAddr = GetProcAddress(this->pHInstance, "NewObject");
 		this->m_objListAddr = GetProcAddress(this->pHInstance, "GetObjectList");
 		this->m_autoStartAddr = GetProcAddress(this->pHInstance, "AutoStart");
 	}
-	else
-	{
+	else {
 		this->m_newObjAddr = 0;
 		this->m_objListAddr = 0;
 		this->m_autoStartAddr = 0;
 	}
 }
 
-void Module::menuPlugins(struct MenuPlugin * unused, HMENU hmenu)
-{
+void Module::menuPlugins(MenuPlugin* unused, HMENU hmenu) {
+	int unk1, unk2, unk3;
 
+	//weird struct thingy {char*, }
+
+	for(INT_PTR i = (this->m_objListAddr)(); i; i += 12) { //this only runs once :)
+		if(this->m_autoStartAddr) {
+
+		}
+	}
 }

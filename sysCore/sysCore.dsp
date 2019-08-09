@@ -80,11 +80,11 @@ SOURCE=.\Graphics.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Matrix3f.cpp
+SOURCE=.\Geometry\Matrix3f.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Matrix4f.cpp
+SOURCE=.\Geometry\Matrix4f.cpp
 # End Source File
 # Begin Source File
 
@@ -96,15 +96,11 @@ SOURCE=.\Nodes.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\RamStream.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\Stream\RandomAccessStream.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SRT.cpp
+SOURCE=.\Geometry\SRT.cpp
 # End Source File
 # Begin Source File
 
@@ -132,11 +128,7 @@ SOURCE=.\UI\UI.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Vector3f.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\VQS.cpp
+SOURCE=.\Geometry\Vector3f.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -164,11 +156,11 @@ SOURCE=.\Graphics.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Matrix3f.h
+SOURCE=.\Geometry\Matrix3f.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Matrix4f.h
+SOURCE=.\Geometry\Matrix4f.h
 # End Source File
 # Begin Source File
 
@@ -180,15 +172,11 @@ SOURCE=.\Nodes.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\RamStream.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\Stream\RandomAccessStream.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SRT.h
+SOURCE=.\Geometry\SRT.h
 # End Source File
 # Begin Source File
 
@@ -216,11 +204,7 @@ SOURCE=.\UI\UI.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Vector3f.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\VQS.h
+SOURCE=.\Geometry\Vector3f.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

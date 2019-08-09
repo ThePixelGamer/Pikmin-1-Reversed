@@ -8,7 +8,7 @@
 #define NODES_H
 
 #include "Stream/RandomAccessStream.h"
-#include "Vector3f.h"
+#include "Geometry/Vector3f.h"
 
 class AgeServer;
 
@@ -59,7 +59,7 @@ public:
 class Graphics;
 class Matrix4f;
 class SRT;
-class VQS;
+class VQS; //never made /shrug
 
 class SYSCORE_API Node : public CoreNode {
 public:
@@ -79,9 +79,18 @@ public:
 	virtual void concat(VQS&);		//this+40	
 	virtual void concat(SRT&);		//this+36
 	virtual void concat(Matrix4f&);	//this+32
-	//virtual Matrix4f* getModelMatrix();	//this+48
+	virtual Matrix4f* getModelMatrix();	//this+48
 
-	bool getFlag(int);
+	void clearFlag(int);
+	int getFlag(int);
+	int getFlags();
+	int getType();
+	void init(char*);
+	void setFlag(int);
+	void setFlag(int, bool);
+	void setFlags(int);
+	void setType(int);
+	void togFlag(int);
 };
 
 class DataMsg;

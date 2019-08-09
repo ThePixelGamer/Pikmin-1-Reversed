@@ -9,7 +9,7 @@
 
 #include <math.h>
 
-#include "Stream/Stream.h"
+#include "../Stream/Stream.h"
 #include "Matrix4f.h"
 #include "Matrix3f.h"
 

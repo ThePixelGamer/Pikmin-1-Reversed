@@ -118,7 +118,7 @@ char* AyuStack::push(int toPush) {
 		this->m_used += unk;
 		this->m_topFree -= unk;
 		//what *this->m_topFree = unk;
-		return this->m_topFree + 8;
+		return (char*)this->m_topFree + 8; //fix this
 	}
 	else
 		return 0;
