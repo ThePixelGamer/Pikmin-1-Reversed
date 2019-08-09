@@ -42,10 +42,16 @@ class LFlareGroup;
 
 class SYSCORE_API StdSystem {
 public:
+	bool pending;	//4h
+	double fade;	//8h this + 8
 
-	char* baseDir; // 50h
-	char* dataRoot;	 // this + 84
-	int unkShutdownCode; //1C8h
+	char* baseDir;	//50h
+
+	char* bloRoot;  //48h this + 72
+	char* texRoot;  //4Ch this + 76
+
+	char* dataRoot;	//54h this + 84
+	int unkShutdownCode; //1C8h this + 456
 
 	StdSystem();
 
@@ -64,6 +70,11 @@ public:
 	bool							isShutdown();
 	bool							isActive() { return (this->unkShutdownCode & 0x200000) == 0x200000; }
 	void							setActive(bool set) { }
+	double							getHalfRand(float a);
+	double							getRand(float a);
+	bool							resetPending();
+	void							set2DRoot(char* _bloroot, char* _texroot);
+	
 	/*
 		void		 Shutdown();
 		void		 addAnimation(AnimData*, char*);
