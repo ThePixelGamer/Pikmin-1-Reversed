@@ -48,10 +48,11 @@ void Module::Load(char* source) {
 void Module::menuPlugins(MenuPlugin* unused, HMENU hmenu) {
 	int unk1, unk2, unk3;
 
-	//weird struct thingy {char*, }
+	for(Object* i = (Object*)(this->m_objListAddr)(); i; i++) {
+		if(i->unk) {
+			RegisterWindowMessageA(i->str);
+			//hmenu = globalHeapAllocator();
 
-	for(INT_PTR i = (this->m_objListAddr)(); i; i += 12) { //this only runs once :)
-		if((i+4)) {
 		}
 	}
 }

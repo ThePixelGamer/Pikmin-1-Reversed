@@ -16,6 +16,12 @@ struct MenuPlugin {
 	MenuPlugin* next; // 8h
 };
 
+struct Object { 
+	char* str; 
+	int load; 
+	void* ptrToClass; 
+};
+
 class SYSCORE_API Module {
 public:
 	FARPROC m_newObjAddr; //0h

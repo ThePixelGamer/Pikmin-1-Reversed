@@ -113,7 +113,7 @@ char* passCmdParams(const char* str) {
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
 	sysHInst = hInstance;
 
-	nodeMgr	= new NodeMgr();
+	nodeMgr = new NodeMgr();
 	modMgr  = new ModuleMgr();
 	uiMgr   = new UIMgr();
 
@@ -122,10 +122,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if(!uiMgr->isActive() && !gsys->firstApp())
 		MessageBoxA(NULL, "A top level window does not exist,\nthe application will now close.", "Warning!", MB_OK | MB_ICONWARNING);
 
-	delete nodeMgr;
-	delete modMgr;
-	delete uiMgr;
+    int ret = gsys->run(0);
 
-    //return gsys->run(gsys->firstApp());
-	return 0;
+	if(uiMgr)
+		delete uiMgr;
+	uiMgr = 0;
+
+	if(modMgr)
+		delete modMgr;
+	modMgr = 0;
+
+	if(nodeMgr)
+		delete nodeMgr;
+	nodeMgr = 0;
+
+	return ret;
 }
