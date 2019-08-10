@@ -37,7 +37,7 @@ public:
 
 class SYSCORE_API ModuleMgr {
 public:
-	Module* unk3 = new Module();
+	//Module* unk3 = new Module();
 	ModuleMgr* unk1; //14h
 	ModuleMgr* unk2; //18h
 

@@ -76,16 +76,16 @@ public:
 		void* unk; // 38h
 		void* unk; // 3Ch
 		void* unk; // 40h
-		void* unk; // 44h
 	*/
+	Matrix4f* unk;
 	char* bloRoot; // 48h
 	char* texRoot; // 4Ch	
 	char* baseDir; // 50h
 	char* fileName;	 // 54h
 	/* current unknown members
-		char unk[8][40]; //58h (known but not sure about type)
-		void* unk; // 198h
-		void* unk; // 19Ch
+		char unk[8][40]; //58h (known but not sure about type)*/
+		int heapNum; // 198h
+	/*	void* unk; // 19Ch
 		void* unk; // 1A0h
 		void* unk; // 1A4h
 		void* unk; // 1A8h
@@ -107,7 +107,7 @@ public:
 	/* current unknown members
 		void* unk; // 1F4h
 		void* unk; // 1F8h
-		void* unk; // 1FCh
+		Shape* unk; // 1FCh
 	*/
 	CoreNode core1; // 200h
 	CoreNode core2; // 214h
@@ -142,37 +142,36 @@ public:
 	void		 ageAnyAnimations();
 	void		 attachObjs();
 	void		 detachObjs();
-	AnimData* findAnimation(char*);
-	AnimData* findAnyAnimation(char*);
-	GfxobjInfo* findAnyGfxObject(char*, unsigned int);
+	//AnimData* findAnimation(char*);
+	//AnimData* findAnyAnimation(char*);
+	//GfxobjInfo* findAnyGfxObject(char*, unsigned int);
 	int			 findAnyIndex(char*, char*);
-	GfxobjInfo* findGfxObject(char*, unsigned int);
-	AnimData* findIndexAnimation(char*, int);
-	GfxobjInfo* findTexture(Texture*);
+	//GfxobjInfo* findGfxObject(char*, unsigned int);
+	//AnimData* findIndexAnimation(char*, int);
+	//GfxobjInfo* findTexture(Texture*);
 	void		 flushLFlares(Graphics*);
 	void		 genAge(AgeServer*);
 	void		 getAppMemory(char*);
 	float		 getFade();
 	float		 getHalfRand(float);
-	AyuHeap* getHeap(int);
+	//AyuHeap* getHeap(int);
 	int			 getHeapNum();
-	LFInfo* getLFlareInfo();
+	//LFInfo* getLFlareInfo();
 	double		 getRand(float);
-	Shape* getShape(char*, char*, char*, bool);
+	//Shape* getShape(char*, char*, char*, bool);
 	void		 initLFlares(int);
 	void		 invalidateObjs(unsigned int, unsigned int);
 	bool		 isActive();
 	bool		 isShutdown();
-	AnimData* loadAnimation(Shape*, char*, bool);
+	//AnimData* loadAnimation(Shape*, char*, bool);
 	void		 loadBundle(char*, bool);
-	Shape* loadShape(char*, bool);
-	Texture* loadTexture(char*, bool);
+	//Shape* loadShape(char*, bool);
+	//Texture* loadTexture(char*, bool);
 	void		 onceInit();
-	void		 parseArchiveDirectory(char*, char*);
-	LFlareGroup* registerLFlare(Texture*);
+	//LFlareGroup* registerLFlare(Texture*);
 	void		 resetHeap(int, int);
 	void		 resetLFlares();
-	void		 resetPending();
+	bool		 resetPending();
 	void		 set2DRoot(char*, char*);
 	void		 setActive(bool);
 	void		 setDataRoot(char*);
@@ -182,8 +181,6 @@ public:
 	void		 setTextureBase(char*, char*);
 	void		 softReset();
 	static char* stringDup(char*);
-
-	//StdSystem operator=(const StdSystem&);
 };
 
 #endif

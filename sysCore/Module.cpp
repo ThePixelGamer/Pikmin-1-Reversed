@@ -77,10 +77,10 @@ SYSCORE_API ModuleMgr* modMgr;
 
 ModuleMgr::ModuleMgr() { //very confusing
 	//print("Creating moduleMgr ...\n");
-	ModuleMgr* memory = new ModuleMgr();
+	/*ModuleMgr* memory = new ModuleMgr();
 	this->unk3 = ((memory != 0) ? memory->unk3 : 0);
 	this->unk1 = memory;
-	this->unk2 = this->unk1;
+	this->unk2 = this->unk1;*/
 }
 
 ModuleMgr::~ModuleMgr() {

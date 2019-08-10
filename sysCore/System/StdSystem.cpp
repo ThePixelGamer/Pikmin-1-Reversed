@@ -79,21 +79,24 @@ void StdSystem::addTexture(Texture*, char*) {}
 void StdSystem::ageAnyAnimations() {}
 void StdSystem::attachObjs() {}
 void StdSystem::detachObjs() {}
-AnimData* StdSystem::findAnimation(char*) {}
-AnimData* StdSystem::findAnyAnimation(char*) {}
-GfxobjInfo* StdSystem::findAnyGfxObject(char*, unsigned int) {}
-int StdSystem::findAnyIndex(char*, char*) {}
-GfxobjInfo* StdSystem::findGfxObject(char*, unsigned int) {}
-AnimData* StdSystem::findIndexAnimation(char*, int) {}
-GfxobjInfo* StdSystem::findTexture(Texture*) {}
+//AnimData* StdSystem::findAnimation(char*) {}
+//AnimData* StdSystem::findAnyAnimation(char*) {}
+//GfxobjInfo* StdSystem::findAnyGfxObject(char*, unsigned int) {}
+int StdSystem::findAnyIndex(char*, char*) {
+	return 0;
+}
+//GfxobjInfo* StdSystem::findGfxObject(char*, unsigned int) {}
+//AnimData* StdSystem::findIndexAnimation(char*, int) {}
+//GfxobjInfo* StdSystem::findTexture(Texture*) {}
 void StdSystem::flushLFlares(Graphics*) {}
 void StdSystem::genAge(AgeServer*) {}
 void StdSystem::getAppMemory(char*) {}
-float StdSystem::getHalfRand(float) {}
-AyuHeap* StdSystem::getHeap(int) {}
-int StdSystem::getHeapNum() {}
-LFInfo* StdSystem::getLFlareInfo() {}
-Shape* StdSystem::getShape(char*, char*, char*, bool) {}
+//AyuHeap* StdSystem::getHeap(int) {}
+int StdSystem::getHeapNum() {
+	return 0;
+}
+//LFInfo* StdSystem::getLFlareInfo() {}
+//Shape* StdSystem::getShape(char*, char*, char*, bool) {}
 void StdSystem::initLFlares(int) {}
 void StdSystem::invalidateObjs(unsigned int, unsigned int) {}
 bool StdSystem::isActive() {
@@ -104,17 +107,14 @@ bool StdSystem::isShutdown() {
 	return (this->unkShutdownCode) == 0x80000000;
 }
 
-AnimData* StdSystem::loadAnimation(Shape*, char*, bool) {}
+//AnimData* StdSystem::loadAnimation(Shape*, char*, bool) {}
 void StdSystem::loadBundle(char*, bool) {}
-Shape* StdSystem::loadShape(char*, bool) {}
-Texture* StdSystem::loadTexture(char*, bool) {}
+//Shape* StdSystem::loadShape(char*, bool) {}
+//Texture* StdSystem::loadTexture(char*, bool) {}
 void StdSystem::onceInit() {}
-void StdSystem::parseArchiveDirectory(char*, char*) {}
-LFlareGroup* StdSystem::registerLFlare(Texture*) {}
+//LFlareGroup* StdSystem::registerLFlare(Texture*) {}
 void StdSystem::resetHeap(int, int) {}
 void StdSystem::resetLFlares() {}
-void StdSystem::resetPending() {}
-void StdSystem::set2DRoot(char*, char*) {}
 void StdSystem::setActive(bool) {}
 void StdSystem::setDataRoot(char*) {}
 void StdSystem::setFade(float, float) {}
@@ -130,7 +130,7 @@ char* StdSystem::stringDup(char* str) {
 	return dst;
 }
 
-double StdSystem::getHalfRand(float a) {
+float StdSystem::getHalfRand(float a) {
 	return (rand() / 32767.0 - 0.5) * a;
 }
 
