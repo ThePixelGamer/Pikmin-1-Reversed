@@ -5,11 +5,11 @@
 #include "AyuStack.h"
 #include <stdarg.h>
 
-void haltAyuStack(char * fmt, ...)
+void haltAyuStack(char* fmt, ...)
 {
 	char Dest; // [esp+4Ch] [ebp-804h]
 	va_list va; // [esp+85Ch] [ebp+Ch]
-	
+
 	va_start(va, fmt);
 	vsprintf(&Dest, fmt, va);
 	System::halt("c:\\development\\dolphinpiki\\syscommon\\ayustack.cpp", 7, &Dest);
@@ -28,7 +28,7 @@ bool AyuStack::checkOverflow() {
 
 void AyuStack::checkStack() {
 	if (this->m_allocType & 2)
-		if ( &this->m_unk2[-*this->m_unk1] != this->m_unk1 )
+		if (&this->m_unk2[-*this->m_unk1] != this->m_unk1)
 			haltAyuStack("trashed memory stack (%s)\n", this->name);
 }
 
@@ -39,8 +39,8 @@ int AyuStack::getFree() {
 
 int AyuStack::getMaxFree() {
 	int ret; // [esp+4Ch] [ebp-8h]
-	
-	if ( this->m_size - this->m_used - 8 > 0 )
+
+	if (this->m_size - this->m_used - 8 > 0)
 		ret = this->m_size - this->m_used - 8;
 	else
 		ret = 0;
@@ -103,7 +103,7 @@ char* AyuStack::push(int toPush) {
 				unk2 = *(this->m_unk2 - 2);
 				top_maybe = this->m_unk2 - 8;
 			}
-			
+
 			this->m_used += unk;
 			this->m_unk2 = (this->m_unk2 + unk);
 			*(this->m_unk2 - 2) = unk2 + unk;

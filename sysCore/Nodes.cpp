@@ -122,23 +122,23 @@ void Node::update() { //asm matches
 	}
 }
 
-void Node::draw(Graphics& a2) { //asm matches
-	for(Node* tmp = static_cast<Node*>(this->child); tmp; tmp = static_cast<Node*>(tmp->next)) {
+void Node::draw(Graphics & a2) { //asm matches
+	for (Node* tmp = static_cast<Node*>(this->child); tmp; tmp = static_cast<Node*>(tmp->next)) {
 		tmp->draw(a2);
 	}
 }
 
-void Node::render(Graphics& a2) { //asm matches
+void Node::render(Graphics & a2) { //asm matches
 	this->draw(a2);
 }
 
 void Node::concat() {} //asm matches
 
-void Node::concat(VQS& a2) { //asm matches
+void Node::concat(VQS & a2) { //asm matches
 	this->concat();
 }
 
-void Node::concat(SRT& a2) { //asm matches
+void Node::concat(SRT & a2) { //asm matches
 	this->concat();
 }
 
@@ -177,7 +177,7 @@ void Node::setFlag(int a2) { //asm matches
 }
 
 void Node::setFlag(int a2, bool a3) { //asm matches
-	if(a3) {
+	if (a3) {
 		this->setFlag(a2);
 	}
 	else {
@@ -203,8 +203,8 @@ void Node::togFlag(int a2) { //asm matches
 
 EditNode::EditNode(char* unk) : CoreNode(unk) {}
 
-void EditNode::msgCommand(DataMsg& unk) {}
-void EditNode::render2d(Graphics& unk, int& unk1) {}
+void EditNode::msgCommand(DataMsg & unk) {}
+void EditNode::render2d(Graphics & unk, int& unk1) {}
 
 //////////////////////////////////////////////////////////////////////
 // FaceNode class functions
@@ -212,16 +212,16 @@ void EditNode::render2d(Graphics& unk, int& unk1) {}
 
 FaceNode::FaceNode() : CoreNode("face") {}
 FaceNode::FaceNode(int unk) : CoreNode("face") {
-	this->m_facenode_0  = unk; 
-	this->m_facenode_1  = 0; 
-	this->m_facenode_2  = 0; 
-	this->m_facenode_3  = 0; 
-	this->m_facenode_4  = 0; 
-	this->m_facenode_5  = 0; 
-	this->m_facenode_6  = 0; 
-	this->m_facenode_7  = 0; 
-	this->m_facenode_8  = 0; 
-	this->m_facenode_9  = 0; 
+	this->m_facenode_0 = unk;
+	this->m_facenode_1 = 0;
+	this->m_facenode_2 = 0;
+	this->m_facenode_3 = 0;
+	this->m_facenode_4 = 0;
+	this->m_facenode_5 = 0;
+	this->m_facenode_6 = 0;
+	this->m_facenode_7 = 0;
+	this->m_facenode_8 = 0;
+	this->m_facenode_9 = 0;
 	this->m_facenode_10 = 0;
 	this->m_facenode_11 = 0;
 	this->m_facenode_12 = 0;
@@ -273,7 +273,7 @@ NodeMgr::NodeMgr() {
 }
 
 NodeMgr::~NodeMgr() {
-	
+
 }
 
 CoreNode* NodeMgr::findNode(char* a1, CoreNode * a2) {
@@ -308,9 +308,9 @@ void NodeMgr::Del(Node * toDelete)
 	this->unk = 1;
 	if (toDelete && toDelete->parent)
 	{
-		CoreNode * toDeleteChild = toDelete->parent->child;
-		
-		CoreNode * tempNext = 0;
+		CoreNode* toDeleteChild = toDelete->parent->child;
+
+		CoreNode* tempNext = 0;
 		while (toDeleteChild)
 		{
 			if (toDeleteChild == toDelete)

@@ -17,7 +17,7 @@
 
 #include "System/System.h"
 
-class SYSCORE_API AyuStack  
+class SYSCORE_API AyuStack
 {
 public:
 	int m_allocType; //0h

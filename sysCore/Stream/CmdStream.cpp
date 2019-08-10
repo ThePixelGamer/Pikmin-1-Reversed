@@ -55,7 +55,7 @@ bool CmdStream::LineIsComment()
 void CmdStream::copyToToken(int length)
 {
 	int i = 0;
-	while(i < length) {
+	while (i < length) {
 		char currentChar = *(this->buffer + i + this->currentChar);
 
 		if (currentChar == '\t')
@@ -153,7 +153,7 @@ char* CmdStream::skipLine()
 {
 	this->fillBuffer(0);
 	int i = this->currentChar;
-	while(i < this->pending && *(this->buffer + i) != '\n' && *(this->buffer + i) != '\r') {
+	while (i < this->pending && *(this->buffer + i) != '\n' && *(this->buffer + i) != '\r') {
 		i++;
 	}
 

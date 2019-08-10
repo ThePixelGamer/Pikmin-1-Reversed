@@ -73,7 +73,7 @@ void System::doneRender() {
 }
 
 BaseApp* System::firstApp() {
-	return (BaseApp *)nodeMgr->firstNode()->Child()->Next();
+	return (BaseApp*)nodeMgr->firstNode()->Child()->Next();
 }
 
 void System::genAge(AgeServer*) {

@@ -45,7 +45,7 @@ public:
 	void NewEditor(char*, Colour&);
 	void NewEditor(char*, char*, int);
 	void NewEditor(char*, char*, int, int, int);
-	void NewEditor(char *, float *, float, float, int);
+	void NewEditor(char*, float*, float, float, int);
 
 	int writeProp(PROP_TYPE, void*);
 	int writePropValue(PROP_TYPE, void*);

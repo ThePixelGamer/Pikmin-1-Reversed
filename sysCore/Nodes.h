@@ -104,7 +104,7 @@ public:
 };
 
 class SYSCORE_API FaceNode : public CoreNode {
-public: 
+public:
 	int m_facenode_0; // 14h
 	int m_facenode_1; // 18h
 	int m_facenode_2; // 1Ch
@@ -141,7 +141,7 @@ public:
 
 	//(CoreNode: 0 - 16)
 	virtual void update();			//this+20
-	virtual void concat();			//this+44	
+	virtual void concat();			//this+44
 	virtual void concat(Matrix4f&);	//this+32
 	virtual Matrix4f* getModelMatrix();	//this+48
 
@@ -171,9 +171,9 @@ public:
 	CoreNode* findNode(char*, CoreNode*);
 	CoreNode* firstNode();
 	void recFindNode(CoreNode*, char*);
-	void Del(Node *);
+	void Del(Node*);
 };
 
-extern SYSCORE_API NodeMgr * nodeMgr;
+extern SYSCORE_API NodeMgr* nodeMgr;
 
 #endif 

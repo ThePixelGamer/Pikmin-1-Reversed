@@ -118,7 +118,7 @@ public:
 		void* unk; // 234h
 		void* unk; // 238h
 		void* unk; // 23Ch
-		void* unk; // 240h	
+		void* unk; // 240h
 	*/
 
 	StdSystem();
@@ -142,31 +142,31 @@ public:
 	void		 ageAnyAnimations();
 	void		 attachObjs();
 	void		 detachObjs();
-	AnimData*	 findAnimation(char*);
-	AnimData*	 findAnyAnimation(char*);
-	GfxobjInfo*  findAnyGfxObject(char*, unsigned int);
+	AnimData* findAnimation(char*);
+	AnimData* findAnyAnimation(char*);
+	GfxobjInfo* findAnyGfxObject(char*, unsigned int);
 	int			 findAnyIndex(char*, char*);
-	GfxobjInfo*	 findGfxObject(char*, unsigned int);
-	AnimData*	 findIndexAnimation(char*, int);
-	GfxobjInfo*	 findTexture(Texture*);
+	GfxobjInfo* findGfxObject(char*, unsigned int);
+	AnimData* findIndexAnimation(char*, int);
+	GfxobjInfo* findTexture(Texture*);
 	void		 flushLFlares(Graphics*);
 	void		 genAge(AgeServer*);
 	void		 getAppMemory(char*);
 	float		 getFade();
 	float		 getHalfRand(float);
-	AyuHeap*	 getHeap(int);
+	AyuHeap* getHeap(int);
 	int			 getHeapNum();
-	LFInfo*		 getLFlareInfo();
+	LFInfo* getLFlareInfo();
 	double		 getRand(float);
-	Shape*		 getShape(char*, char*, char*, bool);
+	Shape* getShape(char*, char*, char*, bool);
 	void		 initLFlares(int);
 	void		 invalidateObjs(unsigned int, unsigned int);
 	bool		 isActive();
 	bool		 isShutdown();
-	AnimData*	 loadAnimation(Shape*, char*, bool);
+	AnimData* loadAnimation(Shape*, char*, bool);
 	void		 loadBundle(char*, bool);
-	Shape*		 loadShape(char*, bool);
-	Texture*	 loadTexture(char*, bool);
+	Shape* loadShape(char*, bool);
+	Texture* loadTexture(char*, bool);
 	void		 onceInit();
 	void		 parseArchiveDirectory(char*, char*);
 	LFlareGroup* registerLFlare(Texture*);
@@ -183,7 +183,7 @@ public:
 	void		 softReset();
 	static char* stringDup(char*);
 
-		//StdSystem operator=(const StdSystem&);
+	//StdSystem operator=(const StdSystem&);
 };
 
 #endif

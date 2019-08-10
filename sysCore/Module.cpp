@@ -5,15 +5,15 @@ void print(const char* fmt, ...) {
 	va_start(args, fmt);
 	char dest[1024];
 
-	if(sysCon) {
+	if (sysCon) {
 		if ("ModuleMgr")
 			sysCon->print("%s: ", "ModuleMgr");
 		vsprintf(dest, fmt, args);
-		if(strlen(dest)) {
+		if (strlen(dest)) {
 			sysCon->write(dest, strlen(dest));
 		}
 	}
-} 
+}
 
 //////////////////////////////////////////////////////////////////////
 // Module class functions
@@ -51,8 +51,8 @@ static int itemCount;
 void Module::menuPlugins(MenuPlugin* unused, HMENU hmenu) {
 	int unk1, unk2, unk3;
 
-	for(Object* i = (Object*)(this->m_objListAddr)(); i; i++) {
-		if(i->load) {
+	for (Object* i = (Object*)(this->m_objListAddr)(); i; i++) {
+		if (i->load) {
 			UINT msg = RegisterWindowMessageA(i->str);
 			//hmenu = globalHeapAllocator();
 			MENUITEMINFO mi;
@@ -77,8 +77,8 @@ SYSCORE_API ModuleMgr* modMgr;
 
 ModuleMgr::ModuleMgr() { //very confusing
 	//print("Creating moduleMgr ...\n");
-    ModuleMgr* memory = new ModuleMgr();
-    this->unk3 = ((memory != 0) ? memory->unk3 : 0);
+	ModuleMgr* memory = new ModuleMgr();
+	this->unk3 = ((memory != 0) ? memory->unk3 : 0);
 	this->unk1 = memory;
 	this->unk2 = this->unk1;
 }
@@ -88,19 +88,19 @@ ModuleMgr::~ModuleMgr() {
 }
 
 void ModuleMgr::Alloc(char* a2) {
-	
+
 }
 
 void ModuleMgr::UnLoad() {
-	
+
 }
 
 void ModuleMgr::findModule() {
-	
+
 }
 
 void ModuleMgr::listModules() {
-	
+
 }
 
 Module* ModuleMgr::loadModule(char* a2) {

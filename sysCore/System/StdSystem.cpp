@@ -96,8 +96,8 @@ LFInfo* StdSystem::getLFlareInfo() {}
 Shape* StdSystem::getShape(char*, char*, char*, bool) {}
 void StdSystem::initLFlares(int) {}
 void StdSystem::invalidateObjs(unsigned int, unsigned int) {}
-bool StdSystem::isActive() { 
-	return (this->unkShutdownCode & 0x200000) == 0x200000; 
+bool StdSystem::isActive() {
+	return (this->unkShutdownCode & 0x200000) == 0x200000;
 
 }
 bool StdSystem::isShutdown() {

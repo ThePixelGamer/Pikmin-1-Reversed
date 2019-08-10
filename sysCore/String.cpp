@@ -13,7 +13,7 @@ String::String(char* string, int stringLength) {
 }
 
 void String::init(int _stringLength) {
-	char * _tempStr;
+	char* _tempStr;
 
 	if (_stringLength)
 		_tempStr = new char[_stringLength + 1]; // v2 = allocateBytesOnHeap(a2 + 1);
@@ -190,43 +190,43 @@ int String::toInt() {
 				unk2 = true;
 			}
 			unk3 = (nextChar - '0') + unk1;
-			unk1 = 10 * unk3;		
+			unk1 = 10 * unk3;
 		}
 		if (unk2)
 			unk3 = -unk3;
 		return unk3;
 	}
-	  else
-  {
-    int unk3 = 0;
-    char* unk4 = string + 2;
-	int unk5;
-    while ( 1 )
-    {
-      nextChar = *unk4++;
-      if ( !nextChar )
-        break;
-      if ( nextChar < '0' || nextChar > '9' )
-      {
-        if ( nextChar < 'a' || nextChar > 'f' )
-        {
-          if ( nextChar < 'A' || nextChar > 'F' )
-            return 0;
-          unk5 = nextChar - '7';
-        }
-        else
-        {
-          unk5 = nextChar - 'W';
-        }
-      }
-      else
-      {
-        unk5 = nextChar - '0';
-      }
-      unk3 += unk5;
-      if ( *unk4 )
-        unk3 *= 16;
-    }
-    return unk3;
-  }
+	else
+	{
+		int unk3 = 0;
+		char* unk4 = string + 2;
+		int unk5;
+		while (1)
+		{
+			nextChar = *unk4++;
+			if (!nextChar)
+				break;
+			if (nextChar < '0' || nextChar > '9')
+			{
+				if (nextChar < 'a' || nextChar > 'f')
+				{
+					if (nextChar < 'A' || nextChar > 'F')
+						return 0;
+					unk5 = nextChar - '7';
+				}
+				else
+				{
+					unk5 = nextChar - 'W';
+				}
+			}
+			else
+			{
+				unk5 = nextChar - '0';
+			}
+			unk3 += unk5;
+			if (*unk4)
+				unk3 *= 16;
+		}
+		return unk3;
+	}
 }

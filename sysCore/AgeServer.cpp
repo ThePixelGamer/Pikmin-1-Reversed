@@ -43,7 +43,7 @@ void AgeServer::NewBit(char* str, unsigned __int32 a2, unsigned __int32 a3) {
 void AgeServer::NewEditor(char* unk, Colour& col) {
 	this->writeInt(102);
 	this->writeString(unk);
-	this->writeProp(COLOUR, (void*)&col);
+	this->writeProp(COLOUR, (void*)& col);
 }
 
 void AgeServer::NewEditor(char* unk, char* unk2, int unk3) {

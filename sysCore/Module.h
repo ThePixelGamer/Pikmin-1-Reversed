@@ -16,10 +16,10 @@ struct MenuPlugin {
 	MenuPlugin* next; // 8h
 };
 
-struct Object { 
-	char* str; 
-	bool load; 
-	void* ptrToClass; 
+struct Object {
+	char* str;
+	bool load;
+	void* ptrToClass;
 };
 
 class SYSCORE_API Module {

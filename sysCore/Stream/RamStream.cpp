@@ -11,7 +11,7 @@ void RamStream::read(void* buffer, int amount) {
 }
 
 void RamStream::write(void* src, int amount) {
-	memcpy((void*)&this->m_buffer[this->m_position], src, amount);
+	memcpy((void*)& this->m_buffer[this->m_position], src, amount);
 	this->m_position += amount;
 }
 
