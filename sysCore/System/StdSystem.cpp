@@ -68,13 +68,13 @@ void StdSystem::endLoading() {
 
 }
 
-bool StdSystem::isShutdown() {
-	return (this->unkShutdownCode) == 0x80000000;
-}
-/*
-void StdSystem::Shutdown() {}
+
 void StdSystem::addAnimation(AnimData*, char*) {}
-void StdSystem::addGfxObject(GfxobjInfo*) {}
+void StdSystem::addGfxObject(GfxobjInfo* a2) {
+	this->gfx.insertAfter(a2);
+	this->unkBool = true; //or 1
+}
+
 void StdSystem::addTexture(Texture*, char*) {}
 void StdSystem::ageAnyAnimations() {}
 void StdSystem::attachObjs() {}
@@ -98,8 +98,14 @@ double StdSystem::getRand(float) {}
 Shape* StdSystem::getShape(char*, char*, char*, bool) {}
 void StdSystem::initLFlares(int) {}
 void StdSystem::invalidateObjs(unsigned int, unsigned int) {}
-bool StdSystem::isActive() {}
-bool StdSystem::isShutdown() {}
+bool StdSystem::isActive() { 
+	return (this->unkShutdownCode & 0x200000) == 0x200000; 
+
+}
+bool StdSystem::isShutdown() {
+	return (this->unkShutdownCode) == 0x80000000;
+}
+
 AnimData* StdSystem::loadAnimation(Shape*, char*, bool) {}
 void StdSystem::loadBundle(char*, bool) {}
 Shape* StdSystem::loadShape(char*, bool) {}
@@ -117,15 +123,11 @@ void StdSystem::setFade(float, float) {}
 void StdSystem::setFrameClamp(int) {}
 void StdSystem::setHeap(int) {}
 void StdSystem::setTextureBase(char*, char*) {}
-void StdSystem::softReset() {}*/
-
-char* allocateBytesOnHeap(size_t size) {
-	return 0;
-}
+void StdSystem::softReset() {}
 
 char* StdSystem::stringDup(char* str) {
 	size_t size = strlen(str) + 1;
-	char* dst = allocateBytesOnHeap(size);
+	char* dst = new char[size];
 	memcpy(dst, str, size);
 	return dst;
 }

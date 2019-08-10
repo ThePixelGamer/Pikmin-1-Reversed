@@ -1,22 +1,23 @@
 #include "Module.h"
 
-//////////////////////////////////////////////////////////////////////
-// Module class functions
-//////////////////////////////////////////////////////////////////////
-
-void printModuleMgr(const char* fmt, ...) {
-	char* dest;
+void print(const char* fmt, ...) {
 	va_list args;
 	va_start(args, fmt);
+	char dest[1024];
 
 	if(sysCon) {
-		sysCon->print("%s: ", "moduleMgr");
+		if ("ModuleMgr")
+			sysCon->print("%s: ", "ModuleMgr");
 		vsprintf(dest, fmt, args);
 		if(strlen(dest)) {
 			sysCon->write(dest, strlen(dest));
 		}
 	}
-}
+} 
+
+//////////////////////////////////////////////////////////////////////
+// Module class functions
+//////////////////////////////////////////////////////////////////////
 
 Module::~Module() {
 	if (this->pHInstance) {
@@ -30,7 +31,7 @@ Module::~Module() {
 
 void Module::Load(char* source) {
 	this->libName = strdup(source);
-	printModuleMgr("opening %s\n", this->libName);
+	print("opening %s\n", this->libName);
 
 	this->pHInstance = LoadLibraryA(this->libName);
 	if (this->pHInstance) {
@@ -74,7 +75,13 @@ void Module::menuPlugins(MenuPlugin* unused, HMENU hmenu) {
 
 SYSCORE_API ModuleMgr* modMgr;
 
-ModuleMgr::ModuleMgr() {}
+ModuleMgr::ModuleMgr() { //very confusing
+	//print("Creating moduleMgr ...\n");
+    ModuleMgr* memory = new ModuleMgr();
+    this->unk3 = ((memory != 0) ? memory->unk3 : 0);
+	this->unk1 = memory;
+	this->unk2 = this->unk1;
+}
 
 ModuleMgr::~ModuleMgr() {
 

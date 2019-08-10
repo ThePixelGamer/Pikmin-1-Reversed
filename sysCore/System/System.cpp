@@ -8,7 +8,7 @@ System::System() : StdSystem() {
 
 	char Dest[512];
 	sprintf(Dest, "%s\\", getcwd(0, 0));
-	this->currentWorkingDirectory = strdup(Dest);
+	this->baseDir = strdup(Dest);
 
 }
 
@@ -46,7 +46,7 @@ UIWindow* System::createDebugStream(UIWindow*) {
 FileRandomAccessStream* System::createFile(char* cwd, bool hasCwd) {
 	char* workingDir;
 	if (hasCwd)
-		workingDir = this->currentWorkingDirectory;
+		workingDir = this->baseDir;
 	else
 		workingDir = "";
 

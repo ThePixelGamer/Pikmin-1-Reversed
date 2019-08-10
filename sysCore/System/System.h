@@ -21,14 +21,38 @@ class BaseApp { public: BaseApp() {} };
 
 class SYSCORE_API System : public StdSystem {
 public:
-	char* currentWorkingDirectory; // this + 80
-	char* fileName; // ??? this + 84
-	int streamType;	  // this + 688
-	char* m3B8h; // 3B8h
+	//(StdSystem: 4h-240h)
+	/* current unknown members
+		void* unk; // 244h
+		void* unk; // 248h
+		bool  unk; // 24Ch
+		bool  unk; // 24Dh
+		bool  unk; // 24Eh
+		void* unk; // 250h
+		void* unk; // 254h
+		void* unk; // 258h
+		void* unk; // 25Ch
+		void* unk; // 260h
+		AtxFileStream unk; // 264h
+		BufferedStream unk; // 284h
+	*/
+	int streamType;	  // 2B0h
+	//ControllerMgr controllerMgr; // 2B0h
+	char m3B8h[128]; // 3B8h
 	AtxRouter* mainRouter; // 438h
-	double frameTime; // this + 1112
-	double frameRate; // this + 1116
-	int frameCount;   // this + 1128
+	/* current unknown members
+		void* unk; // 440h
+		void* unk; // 444h
+		void* unk; // 448h
+		void* unk; // 44Ch
+		void* unk; // 450h
+		void* unk; // 454h
+	*/
+	double frameTime; // 458h
+	//void* unk; // 45Ch
+	double frameRate; // 460h
+	int frameCount;   // 464h
+	//void* unk; // 468h
 
 	System();
 	System(const System&);

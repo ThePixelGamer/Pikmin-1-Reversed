@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "cstdarg": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "xutility": "cpp"
     }
 }
