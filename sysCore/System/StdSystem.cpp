@@ -89,12 +89,10 @@ GfxobjInfo* StdSystem::findTexture(Texture*) {}
 void StdSystem::flushLFlares(Graphics*) {}
 void StdSystem::genAge(AgeServer*) {}
 void StdSystem::getAppMemory(char*) {}
-float StdSystem::getFade() {}
 float StdSystem::getHalfRand(float) {}
 AyuHeap* StdSystem::getHeap(int) {}
 int StdSystem::getHeapNum() {}
 LFInfo* StdSystem::getLFlareInfo() {}
-double StdSystem::getRand(float) {}
 Shape* StdSystem::getShape(char*, char*, char*, bool) {}
 void StdSystem::initLFlares(int) {}
 void StdSystem::invalidateObjs(unsigned int, unsigned int) {}
@@ -132,5 +130,19 @@ char* StdSystem::stringDup(char* str) {
 	return dst;
 }
 
-//StdSystem StdSystem::operator=(const StdSystem&) {}
+double StdSystem::getHalfRand(float a) {
+	return (rand() / 32767.0 - 0.5) * a;
+}
 
+double StdSystem::getRand(float a) {
+	return rand() / 32767.0 * a;
+}
+
+bool StdSystem::resetPending() {
+	return this->pending;
+}
+
+void StdSystem::set2DRoot(char* _bloroot, char* _texroot) {
+	this->bloRoot = _bloroot;
+	this->texRoot = _texroot;
+}

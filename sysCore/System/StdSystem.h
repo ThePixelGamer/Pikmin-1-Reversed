@@ -59,9 +59,9 @@ struct GfxobjInfo { //used elsewhere
 
 class SYSCORE_API StdSystem {
 public:
+	bool pending; // 4h
+	float fade; // 8h
 	/* current unknown members
-		void* unk; // 4h
-		void* unk; // 8h
 		void* unk; // Ch
 		void* unk; // 10h
 		void* unk; // 14h
@@ -77,9 +77,9 @@ public:
 		void* unk; // 3Ch
 		void* unk; // 40h
 		void* unk; // 44h
-		void* unk; // 48h
-		void* unk; // 4Ch	
 	*/
+	char* bloRoot; // 48h
+	char* texRoot; // 4Ch	
 	char* baseDir; // 50h
 	char* fileName;	 // 54h
 	/* current unknown members
