@@ -49,8 +49,6 @@ void Module::Load(char* source) {
 static int itemCount;
 
 void Module::menuPlugins(MenuPlugin* menu, HMENU hmenu) {
-	int unk1, unk2, unk3;
-
 	for (Object* i = (Object*)(this->m_objListAddr)(); i; i++) {
 		if (i->load) {
 			UINT message = RegisterWindowMessageA(i->str);
