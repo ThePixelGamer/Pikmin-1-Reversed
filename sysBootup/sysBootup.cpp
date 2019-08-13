@@ -12,7 +12,7 @@
 MenuPlugin* menuP = new MenuPlugin();
 System unused;
 
-void isLast() { menuP->next = 0; } //may be autogen?
+void isLast() { menuP->prev = 0; } //may be autogen?
 
 class UIMain : public UIWindow { //not an official name
 public:
@@ -20,9 +20,9 @@ public:
 	UIMain(UIWindow* parent, int unk1, int dwStyle, int dwExStyle, bool unk2) : UIWindow(parent, unk1, dwStyle, dwExStyle, unk2) {}
 
 	virtual int processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
-		if(Msg == WM_COMMAND)
+		if(Msg == 0x111)
 			for(MenuPlugin* i = menuP; i; i = i->next) 
-				if(i->wParam == wParam)
+				if(i->prev == wParam)
 					modMgr->Alloc(i->name);
 
 		return UIWindow::processMessage(hWnd, Msg, wParam, lParam);

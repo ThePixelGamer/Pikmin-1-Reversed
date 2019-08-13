@@ -48,23 +48,25 @@ void Module::Load(char* source) {
 
 static int itemCount;
 
-void Module::menuPlugins(MenuPlugin* unused, HMENU hmenu) {
+void Module::menuPlugins(MenuPlugin* menu, HMENU hmenu) {
 	int unk1, unk2, unk3;
 
 	for (Object* i = (Object*)(this->m_objListAddr)(); i; i++) {
 		if (i->load) {
-			UINT msg = RegisterWindowMessageA(i->str);
-			//hmenu = globalHeapAllocator();
+			UINT message = RegisterWindowMessageA(i->str);
+			MenuPlugin* unk = new MenuPlugin();
+			unk->prev = message;
+			unk->name = i->str;
+			menu->setNext(unk);
+
 			MENUITEMINFO mi;
-			//mi.hbmpItem = HBMMENU_SYSTEM;
-			mi.cbSize = 44;
-			mi.fMask = 18;
-			mi.wID = msg;
-			mi.fType = 0;
+			mi.cbSize = sizeof(MENUITEMINFO);
+			mi.fMask = MIIM_TYPE | MIIM_ID;
+			mi.wID = message;
+			mi.fType = MFT_STRING;
 			mi.dwTypeData = i->str;
 			mi.cch = strlen(i->str);
-			int item = itemCount++;
-			InsertMenuItemA(hmenu, item, 1, &mi);
+			InsertMenuItemA(hmenu, itemCount++, 1, &mi);
 		}
 	}
 }
@@ -77,10 +79,9 @@ SYSCORE_API ModuleMgr* modMgr;
 
 ModuleMgr::ModuleMgr() { //very confusing
 	//print("Creating moduleMgr ...\n");
-	/*ModuleMgr* memory = new ModuleMgr();
-	this->unk3 = ((memory != 0) ? memory->unk3 : 0);
-	this->unk1 = memory;
-	this->unk2 = this->unk1;*/
+	this->unk3 = new Module();
+	this->unk3->next = this->unk3;
+	this->unk3->prev = this->unk3->next;
 }
 
 ModuleMgr::~ModuleMgr() {

@@ -11,9 +11,16 @@
 #include "sysCore.h"
 
 struct MenuPlugin {
-	WPARAM wParam; // 0h
+	WPARAM prev; // 0h
 	char* name; // 4h
 	MenuPlugin* next; // 8h
+
+	MenuPlugin() : next(0) {}
+
+	void setNext(MenuPlugin* nxt) {
+		nxt->next = this->next;
+		this->next = nxt;
+	}
 };
 
 struct Object {
@@ -29,6 +36,8 @@ public:
 	FARPROC m_autoStartAddr; //8h
 	HMODULE pHInstance; //Ch
 	char* libName; //10h
+	Module* prev; //14h
+	Module* next; //18h
 
 	void Load(char*);
 	void menuPlugins(MenuPlugin*, HMENU);
@@ -37,9 +46,8 @@ public:
 
 class SYSCORE_API ModuleMgr {
 public:
-	//Module* unk3 = new Module();
-	ModuleMgr* unk1; //14h
-	ModuleMgr* unk2; //18h
+	Module* unk3;
+	int moduleCount;
 
 	ModuleMgr();
 	~ModuleMgr();
