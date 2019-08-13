@@ -160,7 +160,7 @@ static CoreNode* unkNode;
 
 class SYSCORE_API NodeMgr {
 public:
-	//Var
+	//0h - vtbl
 	int unk; //4h
 	CoreNode firstnode; //32h
 

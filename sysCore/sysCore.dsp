@@ -142,6 +142,10 @@ SOURCE=.\UI\UI.cpp
 
 SOURCE=.\Geometry\Vector3f.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\WSocket.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -229,6 +233,10 @@ SOURCE=.\UI\UI.h
 # Begin Source File
 
 SOURCE=.\Geometry\Vector3f.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\WSocket.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
