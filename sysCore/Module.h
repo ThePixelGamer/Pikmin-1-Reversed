@@ -50,15 +50,15 @@ public:
 
 class SYSCORE_API ModuleMgr {
 public:
-	Module* unk3;
+	Module* topModule;
 	int moduleCount;
 
 	ModuleMgr();
 	~ModuleMgr();
 
 	void* Alloc(char*);
-	void UnLoad();
-	void findModule();
+	void UnLoad(Module*);
+	Module* findModule(char*);
 	void listModules();
 	Module* loadModule(char*);
 };

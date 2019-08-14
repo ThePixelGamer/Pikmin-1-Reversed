@@ -77,19 +77,24 @@ SYSCORE_API ModuleMgr* modMgr;
 
 ModuleMgr::ModuleMgr() {
 	print("Creating moduleMgr ...\n");
-	this->unk3 = new Module();
-	this->unk3->next = this->unk3;
-	this->unk3->prev = this->unk3->next;
+	this->topModule = new Module();
+	this->topModule->next = this->topModule;
+	this->topModule->prev = this->topModule->next;
 	this->moduleCount = 0;
 }
 
 ModuleMgr::~ModuleMgr() {
-
+	Module* nxt;
+	for(Module* i = this->topModule->prev; i != this->topModule;) {
+		nxt = i->prev;
+		this->UnLoad(i);
+		i = nxt;
+	}
 }
 
 void* ModuleMgr::Alloc(char* a2) {
 	void* tmp;
-	for(Module* i = this->unk3->prev; i != unk3; i = i->prev) {
+	for(Module* i = this->topModule->prev; i != topModule; i = i->prev) {
 		tmp = (i->m_newObjAddr)(a2);
 		if(tmp) {
 			return tmp;
@@ -99,18 +104,50 @@ void* ModuleMgr::Alloc(char* a2) {
 	return 0;
 }
 
-void ModuleMgr::UnLoad() {
-
+void ModuleMgr::UnLoad(Module* a2) {
+	a2->prev->next = a2->next;
+	a2->next->prev = a2->prev;
+	this->moduleCount--;
+	delete a2;
 }
 
-void ModuleMgr::findModule() {
-
+Module* ModuleMgr::findModule(char* str) {
+	for(Module* i = this->topModule->prev; i != this->topModule; i = i->prev) {
+		if(!strcmp(i->libName, str))
+			return i;
+	}
+	return 0;
 }
 
-void ModuleMgr::listModules() {
+void ModuleMgr::listModules() { //accurate but could be shortened a bit on that unused char*
+	if(this->topModule->prev == this->topModule) {}
+	else {
+		Module* i;
+		
+		char* unk;
+		if(this->moduleCount != 1)
+			unk = "es";
+		else
+			unk = "e";
 
+		for(i = this->topModule->prev; i != this->topModule; i = i->prev) {}
+	}
 }
 
 Module* ModuleMgr::loadModule(char* a2) {
-	return 0;
+	Module* ret = this->findModule(a2);
+	if(!ret) {
+		ret = new Module();
+		ret->Load(a2);
+		ret->prev = this->topModule;
+		ret->next = this->topModule->next;
+		this->topModule->next = ret;
+		ret->next->prev = ret;
+		this->moduleCount++;
+
+		if(ret->m_autoStartAddr) 
+			(ret->m_autoStartAddr)();
+	}
+
+	return ret;
 }
