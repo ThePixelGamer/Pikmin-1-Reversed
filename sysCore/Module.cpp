@@ -35,9 +35,9 @@ void Module::Load(char* source) {
 
 	this->pHInstance = LoadLibraryA(this->libName);
 	if (this->pHInstance) {
-		this->m_newObjAddr = GetProcAddress(this->pHInstance, "NewObject");
-		this->m_objListAddr = GetProcAddress(this->pHInstance, "GetObjectList");
-		this->m_autoStartAddr = GetProcAddress(this->pHInstance, "AutoStart");
+		this->m_newObjAddr    = (DLLFuncChar)GetProcAddress(this->pHInstance, "NewObject"); //(char)
+		this->m_objListAddr   = (DLLFuncVoid)GetProcAddress(this->pHInstance, "GetObjectList"); //(void)
+		this->m_autoStartAddr = (DLLFuncVoid)GetProcAddress(this->pHInstance, "AutoStart"); //(void)
 	}
 	else {
 		this->m_newObjAddr = 0;
@@ -49,7 +49,7 @@ void Module::Load(char* source) {
 static int itemCount;
 
 void Module::menuPlugins(MenuPlugin* menu, HMENU hmenu) {
-	for (Object* i = (Object*)(this->m_objListAddr)(); i; i++) {
+	for (Object* i = (this->m_objListAddr)(); i->str; i++) {
 		if (i->load) {
 			UINT message = RegisterWindowMessageA(i->str);
 			MenuPlugin* unk = new MenuPlugin();
@@ -75,19 +75,28 @@ void Module::menuPlugins(MenuPlugin* menu, HMENU hmenu) {
 
 SYSCORE_API ModuleMgr* modMgr;
 
-ModuleMgr::ModuleMgr() { //very confusing
-	//print("Creating moduleMgr ...\n");
+ModuleMgr::ModuleMgr() {
+	print("Creating moduleMgr ...\n");
 	this->unk3 = new Module();
 	this->unk3->next = this->unk3;
 	this->unk3->prev = this->unk3->next;
+	this->moduleCount = 0;
 }
 
 ModuleMgr::~ModuleMgr() {
 
 }
 
-void ModuleMgr::Alloc(char* a2) {
-
+void* ModuleMgr::Alloc(char* a2) {
+	void* tmp;
+	for(Module* i = this->unk3->prev; i != unk3; i = i->prev) {
+		tmp = (i->m_newObjAddr)(a2);
+		if(tmp) {
+			return tmp;
+		}
+	}
+	print("ModuleMgr: !!!!! could not allocate %s !!!!!\n", a2);
+	return 0;
 }
 
 void ModuleMgr::UnLoad() {

@@ -26,14 +26,18 @@ struct MenuPlugin {
 struct Object {
 	char* str;
 	bool load;
-	void* ptrToClass;
+	void* funcPtr;
 };
+
+typedef Object* (*DLLFuncVoid)();
+typedef void* (*DLLFuncChar)(char*);
+typedef int (*allocFunc)(void);
 
 class SYSCORE_API Module {
 public:
-	FARPROC m_newObjAddr; //0h
-	FARPROC m_objListAddr; //4h
-	FARPROC m_autoStartAddr; //8h
+	DLLFuncChar m_newObjAddr; //0h
+	DLLFuncVoid m_objListAddr; //4h
+	DLLFuncVoid m_autoStartAddr; //8h
 	HMODULE pHInstance; //Ch
 	char* libName; //10h
 	Module* prev; //14h
@@ -52,7 +56,7 @@ public:
 	ModuleMgr();
 	~ModuleMgr();
 
-	void Alloc(char*);
+	void* Alloc(char*);
 	void UnLoad();
 	void findModule();
 	void listModules();
