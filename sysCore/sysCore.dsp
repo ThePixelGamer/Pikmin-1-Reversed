@@ -88,6 +88,10 @@ SOURCE=.\Graphics.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ID32.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Geometry\Matrix3f.cpp
 # End Source File
 # Begin Source File
@@ -101,6 +105,10 @@ SOURCE=.\Module.cpp
 # Begin Source File
 
 SOURCE=.\Nodes.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ObjInfo.cpp
 # End Source File
 # Begin Source File
 
@@ -180,6 +188,10 @@ SOURCE=.\Graphics.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\ID32.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\Geometry\Matrix3f.h
 # End Source File
 # Begin Source File
@@ -193,6 +205,10 @@ SOURCE=.\Module.h
 # Begin Source File
 
 SOURCE=.\Nodes.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ObjInfo.h
 # End Source File
 # Begin Source File
 
