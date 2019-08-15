@@ -14,12 +14,13 @@ public:
 	// 0h - vtable
 	// (Stream: 4h)
 
-	// (Stream VTable 0 - 76)
 	RandomAccessStream();
-	virtual int getPending();// 80
-	virtual int getPosition() { return 0; }//92
-	virtual void setPosition(int) { }//88
-	virtual int getLength() { return this->getAvailable(); } //84
+
+	// (Stream VTable 0h - 4Ch)
+	virtual int getPending(); // 50h
+	virtual int getPosition() { return 0; } // 54h
+	virtual void setPosition(int) { } // 58h
+	virtual int getLength() { return this->getAvailable(); } // 5Ch
 
 	void padFile(unsigned __int32 toPad);
 	void padFileTo(unsigned __int32 a1, unsigned __int32 a2);

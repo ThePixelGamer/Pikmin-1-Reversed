@@ -43,7 +43,7 @@ void print(const char* fmt, ...) {
 			sysCon->write(dest, strlen(dest));
 		}
 	}
-} 
+}
 
 void createUIWindow(HINSTANCE hInst) {
 	window = new UIMain();

@@ -42,20 +42,7 @@ class LFInfo;
 class Shape;
 class LFlareGroup;
 
-struct ID32 {
-	//0h - 8h
-};
-
-struct GfxobjInfo { //used elsewhere
-	//vtable - 0h
-	int unk1; //4h
-	int unk2; //8h
-	char* str; //Ch
-	ID32 unk3; //10h
-	int unk4; //1Ch
-
-	void insertAfter(GfxobjInfo* a2) {}
-};
+#include "../ObjInfo.h"
 
 class SYSCORE_API StdSystem {
 public:
