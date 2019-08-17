@@ -11,9 +11,9 @@
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
-#include "../sysCore.h"
-#include <Wsock32.h>
-#pragma comment(lib, "winsock.lib")
+#include "../System/System.h"
+#include <winsock.h>
+#pragma comment(lib, "wsock32.lib")
 
 class SYSCORE_API WSocket  
 {
@@ -21,17 +21,19 @@ public:
 	SOCKET m_listeningSock;
 	SOCKET m_acceptedSock;
 
-	bool checkForConnections();
+	bool checkForConnections(); // incomplete
 	void close();
 	bool closing();
+	void connect();
+	bool create(char* unused, int port); // if statement compiles wrong
 	void flushWrite();
 	void init();
 	bool open(char* name, int port);
 	unsigned long pending();
-	void setASync(HWND hWnd, unsigned __int32 wMsg, unsigned __int32 lEvent, int sock);
+	void setASync(HWND hWnd, unsigned __int32 wMsg, unsigned __int32 lEvent, int sock); // if statement compiles wrong
 
 	void read(char* buf, int length);
-	void write(void* buf, int length);	
+	void write(void* buf, int length); // unsure if correct, check asm please!
 };
 
 #endif
