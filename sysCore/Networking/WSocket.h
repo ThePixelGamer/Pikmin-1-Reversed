@@ -26,14 +26,14 @@ public:
 	bool closing();
 	void connect();
 	bool create(char* unused, int port); // if statement compiles wrong
-	void flushWrite();
+	static void flushWrite();
 	void init();
 	bool open(char* name, int port);
 	unsigned long pending();
 	void setASync(HWND hWnd, unsigned __int32 wMsg, unsigned __int32 lEvent, int sock); // if statement compiles wrong
 
 	void read(char* buf, int length);
-	void write(void* buf, int length); // unsure if correct, check asm please!
+	void write(char* buf, int length);
 };
 
 #endif

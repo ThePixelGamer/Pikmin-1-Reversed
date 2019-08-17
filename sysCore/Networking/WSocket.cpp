@@ -166,25 +166,24 @@ void WSocket::read(char* buf, int len) {
 }
 
 void WSocket::setASync(HWND hWnd, unsigned __int32 wMsg, unsigned __int32 lEvent, int sock) {
-  int _sock; // [esp+4Ch] [ebp-Ch]
-
-  if ( sock == -1 )
-    _sock = this->m_acceptedSock;
-  else
-    _sock = sock;
-  if ( WSAAsyncSelect(_sock, hWnd, wMsg, lEvent) == -1 )
-    WSOCKETPRINT("Error switching to Async mode\n");
+	int _sock; // [esp+4Ch] [ebp-Ch]
+	if ( sock != -1 )
+		_sock = sock; 
+	else
+		_sock = this->m_acceptedSock;
+	if ( WSAAsyncSelect(_sock, hWnd, wMsg, lEvent) == -1 )
+		WSOCKETPRINT("Error switching to Async mode\n");
 }
 
-void WSocket::write(void* buf, int len) {
+void WSocket::write(char* buf, int len) {
 	signed int writeLimit = 200; // unsure of name
 	while (len) {
-		int sentData = send(this->m_acceptedSock, (const char *)buf, len, 0);
+		int sentData = send(this->m_acceptedSock, buf, len, 0);
 		if (sentData < 0) {
 			int lastError = WSAGetLastError();
 			if (lastError != WSAEWOULDBLOCK)
 				WSOCKETHALT("send error %d", lastError);
-			if (--writeLimit <= 0)
+			if ((writeLimit--) <= 0)
 				WSOCKETHALT("write timeout");
 			gsys->sleep(0.0099999998);
 			sentData = 0;
@@ -194,6 +193,6 @@ void WSocket::write(void* buf, int len) {
 				WSOCKETPRINT("!!! Not sent all data !!\n");
 		}
 		len -= sentData;
-		buf = (char*)buf + sentData;
+		buf += sentData;
 	}
 }

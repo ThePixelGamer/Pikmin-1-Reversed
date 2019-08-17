@@ -22,7 +22,6 @@ System::~System() {
 
 RandomAccessStream* System::openFile(char*, bool, bool)
 {
-
 	return new FileRandomAccessStream(0, 0);
 }
 
@@ -38,12 +37,16 @@ void System::buildModeList() {
 
 }
 
-UIWindow* System::createDebugStream(UIWindow*) {
+UIWindow* System::createDebugStream(UIWindow* wind) {
+	// class here that is 0x118 or 280 bytes big :( uh oh
+	DebugStream* strm = new DebugStream(wind);
 
-	return new UIWindow();
+	errCon = strm;
+	sysCon = strm;
+	return strm->m_window;
 }
 
-FileRandomAccessStream* System::createFile(char* cwd, bool hasCwd) {
+RandomAccessStream* System::createFile(char* cwd, bool hasCwd) {
 	char* workingDir;
 	if (hasCwd)
 		workingDir = this->baseDir;
@@ -180,8 +183,8 @@ bool System::setVideoMode(bool a1, int a2, int a3, int a4) {
 	return 1;
 }
 
-void System::sleep(float) {
-
+void System::sleep(float toSleep) {
+	SleepEx( (toSleep * 1000.0) , true);
 }
 
 void System::updateSysClock() {

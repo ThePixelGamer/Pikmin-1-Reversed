@@ -53,9 +53,9 @@ public:
 		void* unk; // 10h
 		void* unk; // 14h
 		void* unk; // 18h
-		void* unk; // 1Ch
-		void* unk; // 20h
-		void* unk; // 24h
+		void* unk; // 1Ch*/
+	void* m_debugStreamUnk; // 20h
+		/*void* unk; // 24h
 		void* unk; // 28h
 		void* unk; // 2Ch
 		void* unk; // 30h

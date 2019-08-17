@@ -38,7 +38,7 @@ public:
 	int m_dword8; //8h
 	char m_byteC; //Ch
 	bool m_connected; //Dh
-	struct TcpStream* m_networkStream; //10h
+	class TcpStream* m_networkStream; //10h
 
 	AtxDirectRouter(char*);
 

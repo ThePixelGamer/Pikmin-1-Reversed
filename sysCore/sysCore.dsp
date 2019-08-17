@@ -144,6 +144,10 @@ SOURCE=.\System\System.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Networking\TcpStream.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\UI\UI.cpp
 # End Source File
 # Begin Source File
@@ -241,6 +245,10 @@ SOURCE=.\sysCore.h
 # Begin Source File
 
 SOURCE=.\System\System.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Networking\TcpStream.h
 # End Source File
 # Begin Source File
 
