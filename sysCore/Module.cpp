@@ -1,6 +1,6 @@
 #include "Module.h"
 
-void print(const char* fmt, ...) {
+void MODULEPRINT(const char* fmt, ...) {
 	va_list args;
 	va_start(args, fmt);
 	char dest[1024];
@@ -31,7 +31,7 @@ Module::~Module() {
 
 void Module::Load(char* source) {
 	this->libName = strdup(source);
-	print("opening %s\n", this->libName);
+	MODULEPRINT("opening %s\n", this->libName);
 
 	this->pHInstance = LoadLibraryA(this->libName);
 	if (this->pHInstance) {
@@ -76,7 +76,7 @@ void Module::menuPlugins(MenuPlugin* menu, HMENU hmenu) {
 SYSCORE_API ModuleMgr* modMgr;
 
 ModuleMgr::ModuleMgr() {
-	print("Creating moduleMgr ...\n");
+	MODULEPRINT("Creating moduleMgr ...\n");
 	this->topModule = new Module();
 	this->topModule->next = this->topModule;
 	this->topModule->prev = this->topModule->next;
@@ -100,7 +100,7 @@ void* ModuleMgr::Alloc(char* a2) {
 			return tmp;
 		}
 	}
-	print("ModuleMgr: !!!!! could not allocate %s !!!!!\n", a2);
+	MODULEPRINT("ModuleMgr: !!!!! could not allocate %s !!!!!\n", a2);
 	return 0;
 }
 

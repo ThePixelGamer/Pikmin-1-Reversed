@@ -152,7 +152,7 @@ SOURCE=.\Geometry\Vector3f.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\WSocket.cpp
+SOURCE=.\Networking\WSocket.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -252,7 +252,7 @@ SOURCE=.\Geometry\Vector3f.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\WSocket.h
+SOURCE=.\Networking\WSocket.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
