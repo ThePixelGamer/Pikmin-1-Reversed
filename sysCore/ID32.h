@@ -4,12 +4,10 @@
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
-#ifndef ID
-#define ID
+#ifndef ID32_H
+#define ID32_H
 
-#include "Stream/RandomAccessStream.h"
-#include "sysCore.h"
-
+class RandomAccessStream;
 class AgeServer;
 
 class SYSCORE_API ID32 { // this will definitely have to be relooked at later

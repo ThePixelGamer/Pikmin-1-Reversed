@@ -12,12 +12,8 @@
 
 #include "../UI/UI.h"
 
-
-class IDelegate2 { public: IDelegate2() {} };
-class BaseApp { public: BaseApp() {} };
-// baseapp member variables (base class = node)
-// 4h - vtbl ptr
-// gap (28h)
+#include "../BaseApp.h"
+#include "../IDelegate2.h"
 
 class SYSCORE_API System : public StdSystem {
 public:

@@ -1,5 +1,8 @@
 #include "ID32.h"
 
+#include "Stream/RandomAccessStream.h"
+#include "sysCore.h"
+
 void print(const char* fmt, ...) {
 	va_list args;
 	va_start(args, fmt);

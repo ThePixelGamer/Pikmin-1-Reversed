@@ -8,6 +8,7 @@
 #define AGESERVER_H
 
 #include "AgeAtx.h"
+#include "IDelegate.h"
 class Colour;
 
 enum PROP_TYPE {
@@ -29,6 +30,8 @@ public:
 
 	AgeServer(); // empty
 
+	virtual void close();
+
 	void Done(); // this->writeInt(200);
 	void EndBitGroup(); // this->writeInt(0);
 	void EndGroup(); // this->writeInt(303);
@@ -46,6 +49,8 @@ public:
 	void NewEditor(char*, char*, int);
 	void NewEditor(char*, char*, int, int, int);
 	void NewEditor(char*, float*, float, float, int);
+
+	void setOnChange(IDelegate1<AgeServer&>*);
 
 	int writeProp(PROP_TYPE, void*);
 	int writePropValue(PROP_TYPE, void*);
