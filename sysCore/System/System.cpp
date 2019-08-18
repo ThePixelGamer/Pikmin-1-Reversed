@@ -18,6 +18,15 @@ void SYSTEMPRINT(const char* fmt, ...) {
 	}
 }
 
+void SYSTEMHALT(const char* fmt, ...) {
+	va_list args;
+	va_start(args, fmt);
+	char dest[1024];
+	vsprintf(dest, fmt, args);
+	System::halt("c:\\development\\dolphinpiki\\syscore\\system.cpp", 21, dest);
+	// file, line, error
+}
+
 System::System() : StdSystem() {
 	gsys = this;
 
@@ -178,29 +187,27 @@ int System::setStreamType(int strTyp) {
 	return strTyp;
 }
 
-bool System::setVideoMode(bool a1, int a2, int a3, int a4) {
+bool System::setVideoMode(bool a1, int width, int height, int bits) {
 	OSVERSIONINFO versionInfo;
 
 	versionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
 	if (!GetVersionEx(&versionInfo))
-		MessageBox(NULL, "setVideoMode - GetVersionEx failed!!\n", " ", MB_OK);
-	if (a1)
-	{
+		SYSTEMHALT("setVideoMode - GetVersionEx failed!!\n");
+	if (a1) {
 		DEVMODEA dst;
 		memset(&dst, 0, sizeof(OSVERSIONINFO));
 		dst.dmSize = sizeof(OSVERSIONINFO);
-		dst.dmPelsWidth = a2;
-		dst.dmPelsHeight = a3;
-		dst.dmBitsPerPel = a4;
+		dst.dmPelsWidth = width;
+		dst.dmPelsHeight = height;
+		dst.dmBitsPerPel = bits;
 		dst.dmFields = 0x1C0000;
 		ChangeDisplaySettings(&dst, 4);
 		// this is actually an if inside of a foor loop but it contains member variables and tbh cba doing the entire class
 	}
-	else
-	{
+	else {
 		ChangeDisplaySettings(0, 0);
 	}
-	return 1;
+	return true;
 }
 
 void System::sleep(float toSleep) {
