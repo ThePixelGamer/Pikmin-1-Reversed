@@ -44,9 +44,26 @@ System::~System() {
 
 }
 
-RandomAccessStream* System::openFile(char*, bool, bool)
+RandomAccessStream* System::openFile(char* cwd, bool hasCwd)
 {
-	return new FileRandomAccessStream(0, 0);
+	char* _workingDir;
+	if (hasCwd)
+		_workingDir = this->baseDir;
+	else
+		_workingDir = "";
+
+	char fPath[256];
+	sprintf(fPath, "%s", _workingDir);
+
+	char* _fName = (hasCwd ? this->fileName : "");
+
+	sprintf(fPath, "%s%s", _fName, cwd);
+
+	FILE* fptr = fopen(fPath, "wb");
+	if (!fptr)
+		return 0;
+
+	return new FileRandomAccessStream(fptr, cwd);
 }
 
 void System::sndPlaySe(unsigned int) {
@@ -62,7 +79,6 @@ void System::buildModeList() {
 }
 
 UIWindow* System::createDebugStream(UIWindow* wind) {
-	// class here that is 0x118 or 280 bytes big :( uh oh
 	DebugStream* strm = new DebugStream(wind);
 
 	errCon = strm;

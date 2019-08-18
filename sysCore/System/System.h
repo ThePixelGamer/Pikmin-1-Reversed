@@ -58,7 +58,7 @@ public:
 	System(const System&);
 	~System();
 
-	virtual RandomAccessStream* openFile(char*, bool, bool);
+	virtual RandomAccessStream* openFile(char*, bool);
 	//virtual void 			parseArchiveDirectory(char * );
 	virtual void 			sndPlaySe(unsigned int);
 

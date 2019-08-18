@@ -185,7 +185,7 @@ void WSocket::write(char* buf, int len) {
 				WSOCKETHALT("send error %d", lastError);
 			if ((writeLimit--) <= 0)
 				WSOCKETHALT("write timeout");
-			gsys->sleep(0.0099999998);
+			gsys->sleep((float)0.0099999998);
 			sentData = 0;
 		}
 		else {
