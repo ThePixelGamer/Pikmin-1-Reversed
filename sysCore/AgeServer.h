@@ -25,7 +25,7 @@ enum PROP_TYPE {
 class SYSCORE_API AgeServer : public AtxStream {
 public:
 	// 16h - AtxStream
-	bool m_unk1;// 10h
+	bool m_unkOpen;// 10h
 
 	AgeServer(); // empty
 
@@ -49,6 +49,8 @@ public:
 
 	int writeProp(PROP_TYPE, void*);
 	int writePropValue(PROP_TYPE, void*);
+
+	bool Open();
 };
 
 #endif
