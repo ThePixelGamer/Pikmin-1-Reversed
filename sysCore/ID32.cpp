@@ -1,7 +1,9 @@
 #include "ID32.h"
 
-#include "Stream/RandomAccessStream.h"
 #include "sysCore.h"
+#include "IDelegate.h"
+#include "Stream/RandomAccessStream.h"
+#include "AgeServer.h"
 
 void print(const char* fmt, ...) {
 	va_list args;
@@ -30,8 +32,9 @@ void ID32::ageChangeID() {
     this->updateID();
 }
 
-void ID32::genAge(AgeServer&, char*) {
-    
+void ID32::genAge(AgeServer& a2, char* a3) {
+    IDelegate* test = new Callback<ID32*, void (ID32::*)()>(this, ageChangeID);
+    a2.setOnChange(test);
 }
 
 void ID32::match(unsigned __int32, char) {

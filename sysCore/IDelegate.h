@@ -9,24 +9,35 @@
 
 class IDelegate {
 public:
-
-
-	IDelegate();
-
+    virtual void invoke() = 0;
 };
 
-template<typename T>
+template <typename Param0>
 class IDelegate1 {
 public:
-	IDelegate1();
-
+    virtual void invoke(Param0 param) = 0;
 };
 
-template<typename E, typename M>
+template <typename Param0, typename Param1>
 class IDelegate2 {
 public:
-	IDelegate2(E, M);
+    virtual void invoke(Param0 param0, Param1 param1) = 0;
+};
 
+template <class T, class Method>
+class Callback : public IDelegate {
+public:
+    T target;
+    Method op;
+
+	Callback(T trg, Method method) {
+		target = trg;
+		op = method;
+	}
+
+	virtual void invoke() {
+		(target->*op)();
+	}
 };
 
 #endif

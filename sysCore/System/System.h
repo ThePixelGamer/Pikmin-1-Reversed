@@ -13,7 +13,7 @@
 #include "../UI/UI.h"
 
 #include "../BaseApp.h"
-#include "../IDelegate2.h"
+#include "../IDelegate.h"
 
 class SYSCORE_API System : public StdSystem {
 public:

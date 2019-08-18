@@ -78,6 +78,10 @@ void AgeServer::NewEditor(char* unk, char* unk2, int unk3, int unk4, int unk5) {
 	this->writeInt(unk5);
 }
 
+void AgeServer::setOnChange(IDelegate*) {
+	
+}
+
 void AgeServer::setOnChange(IDelegate1<AgeServer&>*) {
 	
 }

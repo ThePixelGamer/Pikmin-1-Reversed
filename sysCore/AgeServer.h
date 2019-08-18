@@ -30,7 +30,7 @@ public:
 
 	AgeServer(); // empty
 
-	virtual void close();
+	virtual void close() {}
 
 	void Done(); // this->writeInt(200);
 	void EndBitGroup(); // this->writeInt(0);
@@ -50,6 +50,7 @@ public:
 	void NewEditor(char*, char*, int, int, int);
 	void NewEditor(char*, float*, float, float, int);
 
+	void setOnChange(IDelegate*);
 	void setOnChange(IDelegate1<AgeServer&>*);
 
 	int writeProp(PROP_TYPE, void*);
