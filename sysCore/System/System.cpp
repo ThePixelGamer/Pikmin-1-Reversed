@@ -3,6 +3,30 @@
 
 SYSCORE_API System* gsys;
 
+void SYSTEMPRINT(const char* fmt, ...) {
+	va_list args;
+	va_start(args, fmt);
+	char dest[1024];
+
+	if(sysCon) {
+		if ("system")
+			sysCon->print("%s: ", "system");
+		vsprintf(dest, fmt, args);
+		if(strlen(dest)) {
+			sysCon->write(dest, strlen(dest));
+		}
+	}
+}
+
+void SYSTEMHALT(const char* fmt, ...) {
+	va_list args;
+	va_start(args, fmt);
+	char dest[1024];
+	vsprintf(dest, fmt, args);
+	System::halt("c:\\development\\dolphinpiki\\syscore\\system.cpp", 21, dest);
+	// file, line, error
+}
+
 System::System() : StdSystem() {
 	gsys = this;
 
@@ -20,10 +44,26 @@ System::~System() {
 
 }
 
-RandomAccessStream* System::openFile(char*, bool, bool)
+RandomAccessStream* System::openFile(char* cwd, bool hasCwd)
 {
+	char* _workingDir;
+	if (hasCwd)
+		_workingDir = this->baseDir;
+	else
+		_workingDir = "";
 
-	return new FileRandomAccessStream(0, 0);
+	char fPath[256];
+	sprintf(fPath, "%s", _workingDir);
+
+	char* _fName = (hasCwd ? this->fileName : "");
+
+	sprintf(fPath, "%s%s", _fName, cwd);
+
+	FILE* fptr = fopen(fPath, "wb");
+	if (!fptr)
+		return 0;
+
+	return new FileRandomAccessStream(fptr, cwd);
 }
 
 void System::sndPlaySe(unsigned int) {
@@ -38,12 +78,15 @@ void System::buildModeList() {
 
 }
 
-UIWindow* System::createDebugStream(UIWindow*) {
+UIWindow* System::createDebugStream(UIWindow* wind) {
+	DebugStream* strm = new DebugStream(wind);
 
-	return new UIWindow();
+	errCon = strm;
+	sysCon = strm;
+	return strm->m_window;
 }
 
-FileRandomAccessStream* System::createFile(char* cwd, bool hasCwd) {
+RandomAccessStream* System::createFile(char* cwd, bool hasCwd) {
 	char* workingDir;
 	if (hasCwd)
 		workingDir = this->baseDir;
@@ -125,11 +168,16 @@ int System::run(BaseApp*) {
 	{
 		while (!PeekMessageA(&message, 0, 0, 0, 0))
 		{
+			if (!uiMgr->isActive() && !this->firstApp()) {
+				SYSTEMPRINT("shutting down because no toplevel windows");
+				gsys->Shutdown();
+			}
 			if (gsys->isShutdown())
 				PostQuitMessage(0);
 			else
 			{
-
+				this->updateSysClock();
+				//this->controllerMgr->update();
 			}
 		}
 		if (!GetMessageA(&message, 0, 0, 0))
@@ -155,33 +203,31 @@ int System::setStreamType(int strTyp) {
 	return strTyp;
 }
 
-bool System::setVideoMode(bool a1, int a2, int a3, int a4) {
+bool System::setVideoMode(bool a1, int width, int height, int bits) {
 	OSVERSIONINFO versionInfo;
 
 	versionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
 	if (!GetVersionEx(&versionInfo))
-		MessageBox(NULL, "setVideoMode - GetVersionEx failed!!\n", " ", MB_OK);
-	if (a1)
-	{
+		SYSTEMHALT("setVideoMode - GetVersionEx failed!!\n");
+	if (a1) {
 		DEVMODEA dst;
 		memset(&dst, 0, sizeof(OSVERSIONINFO));
 		dst.dmSize = sizeof(OSVERSIONINFO);
-		dst.dmPelsWidth = a2;
-		dst.dmPelsHeight = a3;
-		dst.dmBitsPerPel = a4;
+		dst.dmPelsWidth = width;
+		dst.dmPelsHeight = height;
+		dst.dmBitsPerPel = bits;
 		dst.dmFields = 0x1C0000;
 		ChangeDisplaySettings(&dst, 4);
 		// this is actually an if inside of a foor loop but it contains member variables and tbh cba doing the entire class
 	}
-	else
-	{
+	else {
 		ChangeDisplaySettings(0, 0);
 	}
-	return 1;
+	return true;
 }
 
-void System::sleep(float) {
-
+void System::sleep(float toSleep) {
+	SleepEx( (toSleep * 1000.0) , true);
 }
 
 void System::updateSysClock() {

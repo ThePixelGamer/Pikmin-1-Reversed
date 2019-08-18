@@ -11,3 +11,19 @@ AtxDirectRouter::AtxDirectRouter(char* a2) {
 	}
 	this->m_networkStream = 0;
 }
+
+void AtxStream::init() {
+	this->m_dwordC = 0;
+}
+
+bool AtxStream::open(char* unk, int unk2) {
+	AtxRouter* router = gsys->getAtxRouter();
+	if (!router)
+		return false;
+
+	if (router->openRoute(this, unk2)) {
+		this->write(unk, 4);
+
+	}
+	return true;
+}

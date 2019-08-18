@@ -52,13 +52,9 @@ void StdSystem::copyCacheToTexture(CacheTexture*) {
 
 }
 
-void StdSystem::Activate(bool) {
+void StdSystem::Activate(bool) {}
 
-}
-
-void StdSystem::parseArchiveDirectory(char*, char*) {
-
-}
+void StdSystem::parseArchiveDirectory(char*, char*) {}
 
 void StdSystem::startLoading(LoadIdler*, bool, unsigned int) {
 
@@ -145,4 +141,8 @@ bool StdSystem::resetPending() {
 void StdSystem::set2DRoot(char* _bloroot, char* _texroot) {
 	this->bloRoot = _bloroot;
 	this->texRoot = _texroot;
+}
+
+void StdSystem::Shutdown() {
+	this->unkShutdownCode = 0x80000000;
 }

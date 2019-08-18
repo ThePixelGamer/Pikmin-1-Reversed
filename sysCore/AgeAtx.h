@@ -23,12 +23,17 @@ public:
 
 class SYSCORE_API AtxStream : public Stream {
 public:
-	int m_dword8;
-	int m_dwordC;
+	//0h - vtbl
+	//4h - stream var
+	int m_dword8; //8h = what fucking class is this>? it inherits stream!
+	int m_dwordC; //Ch
 
 	AtxStream() : Stream() { this->init(); }
 
-	void init() {}
+	void init();
+	bool open(char*, int);
+
+	void close() {}
 };
 
 class SYSCORE_API AtxDirectRouter : public AtxRouter {
@@ -38,7 +43,7 @@ public:
 	int m_dword8; //8h
 	char m_byteC; //Ch
 	bool m_connected; //Dh
-	struct TcpStream* m_networkStream; //10h
+	class TcpStream* m_networkStream; //10h
 
 	AtxDirectRouter(char*);
 

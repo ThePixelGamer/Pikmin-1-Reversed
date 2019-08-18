@@ -1,4 +1,20 @@
-#include "AgeServer.h"
+#include "AgeServer.h" 
+#include "sysCore.h"
+
+void AGEPRINT(const char* fmt, ...) {
+	va_list args;
+	va_start(args, fmt);
+	char dest[1024];
+
+	if(sysCon) {
+		if ("Age")
+			sysCon->print("%s: ", "Age");
+		vsprintf(dest, fmt, args);
+		if(strlen(dest)) {
+			sysCon->write(dest, strlen(dest));
+		}
+	}
+}
 
 AgeServer::AgeServer() {
 
@@ -28,7 +44,7 @@ void AgeServer::EndOptionBox() {
 
 void AgeServer::EndSection() {
 	this->writeInt(301);
-	this->m_unk1 = false;
+	this->m_unkOpen = false;
 }
 
 //NEW
@@ -76,4 +92,16 @@ int AgeServer::writeProp(PROP_TYPE type, void* buffer) {
 
 int AgeServer::writePropValue(PROP_TYPE type, void* buffer) {
 	return 0;
+}
+
+bool AgeServer::Open() {
+	AGEPRINT("!!!!! Opening Age server\n");
+	if (this->open("age", 3)) {
+		this->m_unkOpen = false;
+		return true;
+	}
+	else {
+		AGEPRINT("cant open AgeServer\n");
+		return false;
+	}
 }
