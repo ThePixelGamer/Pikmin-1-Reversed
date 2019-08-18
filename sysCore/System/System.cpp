@@ -3,6 +3,21 @@
 
 SYSCORE_API System* gsys;
 
+void SYSTEMPRINT(const char* fmt, ...) {
+	va_list args;
+	va_start(args, fmt);
+	char dest[1024];
+
+	if(sysCon) {
+		if ("system")
+			sysCon->print("%s: ", "system");
+		vsprintf(dest, fmt, args);
+		if(strlen(dest)) {
+			sysCon->write(dest, strlen(dest));
+		}
+	}
+}
+
 System::System() : StdSystem() {
 	gsys = this;
 
@@ -128,11 +143,16 @@ int System::run(BaseApp*) {
 	{
 		while (!PeekMessageA(&message, 0, 0, 0, 0))
 		{
+			if (!uiMgr->isActive() && !this->firstApp()) {
+				SYSTEMPRINT("shutting down because no toplevel windows");
+				gsys->Shutdown();
+			}
 			if (gsys->isShutdown())
 				PostQuitMessage(0);
 			else
 			{
-
+				this->updateSysClock();
+				//this->controllerMgr->update();
 			}
 		}
 		if (!GetMessageA(&message, 0, 0, 0))
