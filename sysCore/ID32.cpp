@@ -33,7 +33,7 @@ void ID32::ageChangeID() {
 }
 
 void ID32::genAge(AgeServer& a2, char* a3) {
-    IDelegate* test = new Callback<ID32*, void (ID32::*)()>(this, ageChangeID);
+    IDelegate* test = new Callback<ID32*, void (ID32::*)()>(this, &ID32::ageChangeID);
     a2.setOnChange(test);
 }
 
