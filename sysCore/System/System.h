@@ -133,7 +133,7 @@ public:
 	}
 
 	virtual void flush() {
-		char *newline;
+		char *newline; //this is probably a set size
 		this->m_unk[this->m_written] = 0;
 		if (this->m_window) {
 			if (gsys->m_debugStreamUnk) {

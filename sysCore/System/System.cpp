@@ -116,7 +116,7 @@ void System::doneRender() {
 }
 
 BaseApp* System::firstApp() {
-	return dynamic_cast<BaseApp*>(nodeMgr->firstNode()->Child()->Next());
+	return static_cast<BaseApp*>(nodeMgr->firstNode()->Child()->Next());
 }
 
 void System::genAge(AgeServer*) {

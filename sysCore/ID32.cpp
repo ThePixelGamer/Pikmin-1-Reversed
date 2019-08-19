@@ -24,70 +24,88 @@ ID32::ID32() {
     this->setID(0x6E6F6E65);
 }
 
-ID32::ID32(unsigned __int32 a2) {
-    this->setID(a2);
+ID32::ID32(unsigned __int32 _id) {
+    this->setID(_id);
 }
 
 void ID32::ageChangeID() {
     this->updateID();
 }
 
-void ID32::genAge(AgeServer& a2, char* a3) {
-    IDelegate* test = new Callback<ID32*, void (ID32::*)()>(this, &ID32::ageChangeID);
-    a2.setOnChange(test);
+void ID32::genAge(AgeServer& server, char* name) {
+    server.setOnChange(new Callback<ID32*, void (ID32::*)()>(this, &ID32::ageChangeID));
+    server.NewEditor(name, this->sId, 5);
+    server.setOnChange(static_cast<IDelegate*>(0));
 }
 
-void ID32::match(unsigned __int32, char) {
-    
+bool ID32::match(unsigned __int32 _id, char exception) {
+    char* p_id = reinterpret_cast<char*>(&_id);
+    char* m_id = reinterpret_cast<char*>(&this->id);
+
+    for(int i = 0; i < 4; i++) {
+        if(p_id[i] != exception && p_id[i] != m_id[i])
+            return 0;
+    }
+    return 1;
 }
 
 void ID32::print() {
-    char a2[5];
-    a2[0] = (this->id & 0xFF000000) >> 24;
-    a2[1] = (this->id & 0xFF0000) >> 16;
-    a2[2] = (this->id & 0xFF00) >> 8;
-    a2[3] = this->id & 0xFF;
-    a2[4] = 0;
-    ::print("id (%x) is %s\n", this->id, a2);
+    char str[5];
+    str[0] = (this->id & 0xFF000000) >> 24;
+    str[1] = (this->id & 0xFF0000) >> 16;
+    str[2] = (this->id & 0xFF00) >> 8;
+    str[3] = this->id & 0xFF;
+    str[4] = 0;
+    ::print("id (%x) is %s\n", this->id, str);
 }
 
-void ID32::read(RandomAccessStream&) {
-    
+void ID32::read(RandomAccessStream& stream) {
+    char* m_id = reinterpret_cast<char*>(&this->id);
+    m_id[0] = stream.readByte();
+    m_id[1] = stream.readByte();
+    m_id[2] = stream.readByte();
+    m_id[3] = stream.readByte();
+
+    char* m_id2 = reinterpret_cast<char*>(&this->id);
+    for(int i = 0; i < 4; i++) {
+        this->sId[i] = m_id2[3-i];
+    }
+    this->sId[4] = 0;
 }
 
-void ID32::setID(unsigned __int32 a2) {
-    this->id = a2;
+void ID32::setID(unsigned __int32 _id) {
+    this->id = _id;
     this->updateString();
 }
 
-void ID32::sprint(char* a2) {
-    a2[0] = (this->id & 0xFF000000) >> 24;
-    a2[1] = (this->id & 0xFF0000) >> 16;
-    a2[2] = (this->id & 0xFF00) >> 8;
-    a2[3] = this->id & 0xFF;
-    a2[4] = 0;
+void ID32::sprint(char* str) {
+    str[0] = (this->id & 0xFF000000) >> 24;
+    str[1] = (this->id & 0xFF0000) >> 16;
+    str[2] = (this->id & 0xFF00) >> 8;
+    str[3] = this->id & 0xFF;
+    str[4] = 0;
 }
 
 void ID32::updateID() {
-    ID32* probAutoGen = this;
+    char* m_id = reinterpret_cast<char*>(&this->id);
 
     for(int i = 0; i < 4; i++)
-        probAutoGen->cId[i] = this->sId[3 - i];
+        m_id[i] = this->sId[3 - i];
 }
 
 void ID32::updateString() {
-    ID32* probAutoGen = this;
+    char* m_id = reinterpret_cast<char*>(&this->id);
 
     for(int i = 0; i < 4; i++)
-        this->sId[i] = probAutoGen->cId[3 - i];
+        this->sId[i] = m_id[3 - i];
     sId[4] = 0;
 }
 
-void ID32::write(RandomAccessStream& a2) {
-    ID32* probAutoGen = this;
+void ID32::write(RandomAccessStream& stream) {
+    char* m_id = reinterpret_cast<char*>(&this->id);
     
-    a2.writeByte(probAutoGen->cId[0]);
-    a2.writeByte(probAutoGen->cId[1]);
-    a2.writeByte(probAutoGen->cId[2]);
-    a2.writeByte(probAutoGen->cId[3]);
+    stream.writeByte(m_id[0]);
+    stream.writeByte(m_id[1]);
+    stream.writeByte(m_id[2]);
+    stream.writeByte(m_id[3]);
 }

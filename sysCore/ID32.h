@@ -12,10 +12,7 @@ class AgeServer;
 
 class SYSCORE_API ID32 { // this will definitely have to be relooked at later
 public:
-	union {
-		unsigned __int32 id;
-		unsigned char cId[4];
-	}; //unsure if they did this but it works and it's clean :)
+	unsigned __int32 id;
 	char sId[5]; // 0h
 
 	ID32();
@@ -23,7 +20,7 @@ public:
 
 	void ageChangeID();
 	void genAge(AgeServer&, char*);
-	void match(unsigned __int32, char);
+	bool match(unsigned __int32, char);
 	void print();
 	void read(RandomAccessStream&);
 	void setID(unsigned __int32);

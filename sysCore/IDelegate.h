@@ -40,4 +40,36 @@ public:
 	}
 };
 
+template <class T, class Method, class Param0>
+class Callback1 : public IDelegate1<Param0> {
+public:
+    T target;
+    Method op;
+
+	Callback1(T trg, Method method) {
+		target = trg;
+		op = method;
+	}
+
+	virtual void invoke() {
+		(target->*op)(Param0);
+	}
+};
+
+template <class T, class Method, class Param0, class Param1>
+class Callback2 : public IDelegate2<Param0, Param1> {
+public:
+    T target;
+    Method op;
+
+	Callback2(T trg, Method method) {
+		target = trg;
+		op = method;
+	}
+
+	virtual void invoke() {
+		(target->*op)(Param0, Param1);
+	}
+};
+
 #endif
