@@ -15,7 +15,7 @@ public:
 template <typename Param0>
 class IDelegate1 {
 public:
-    virtual void invoke(Param0 param) = 0;
+    virtual void invoke(Param0 param0) = 0;
 };
 
 template <typename Param0, typename Param1>
@@ -51,8 +51,8 @@ public:
 		op = method;
 	}
 
-	virtual void invoke() {
-		(target->*op)(Param0);
+	virtual void invoke(Param0 param0) {
+		(target->*op)(param0);
 	}
 };
 
@@ -67,8 +67,8 @@ public:
 		op = method;
 	}
 
-	virtual void invoke() {
-		(target->*op)(Param0, Param1);
+	virtual void invoke(Param0 param0, Param1 param1) {
+		(target->*op)(param0, param1);
 	}
 };
 

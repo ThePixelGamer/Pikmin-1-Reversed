@@ -10,7 +10,7 @@
 class RandomAccessStream;
 class AgeServer;
 
-class SYSCORE_API ID32 { // this will definitely have to be relooked at later
+class SYSCORE_API ID32 { 
 public:
 	unsigned __int32 id;
 	char sId[5]; // 0h
@@ -28,6 +28,10 @@ public:
 	void updateID();
 	void updateString();
 	void write(RandomAccessStream&);
+
+	void operator=(unsigned __int32);
+	bool operator!=(unsigned __int32);
+	bool operator==(unsigned __int32);
 };
 
 #endif

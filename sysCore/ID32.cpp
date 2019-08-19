@@ -109,3 +109,15 @@ void ID32::write(RandomAccessStream& stream) {
     stream.writeByte(m_id[2]);
     stream.writeByte(m_id[3]);
 }
+
+void ID32::operator=(unsigned __int32 _id) {
+    this->setID(_id);
+}
+
+bool ID32::operator!=(unsigned __int32 _id) {
+    return (this->id != _id);
+}
+
+bool ID32::operator==(unsigned __int32 _id) {
+    return (this->id == _id);
+}
