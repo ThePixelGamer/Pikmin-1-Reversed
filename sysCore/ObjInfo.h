@@ -12,15 +12,19 @@
 class SYSCORE_API GfxobjInfo {
 public:
 	//vtable - 0h
-	int unk1; //4h
-	int unk2; //8h
+	GfxobjInfo* prev; //4h
+	GfxobjInfo* next; //8h
 	char* str; //Ch
-	ID32 unk3; //10h
-	int unk4; //1Ch
+	ID32 id32; //10h
+	void* unused; //1Ch
 
 	GfxobjInfo();
 
+	virtual void attach();
+	virtual void detach();
+
 	void insertAfter(GfxobjInfo* a2);
+	void remove();
 };
 
 #endif 

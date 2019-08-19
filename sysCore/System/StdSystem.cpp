@@ -1,4 +1,5 @@
 #include "StdSystem.h"
+#include "System.h"
 
 //////////////////////////////////////////////////////////////////////
 // FileRandomAccessStream class functions
@@ -92,7 +93,12 @@ int StdSystem::getHeapNum() {
 	return 0;
 }
 //LFInfo* StdSystem::getLFlareInfo() {}
-//Shape* StdSystem::getShape(char*, char*, char*, bool) {}
+
+Shape* StdSystem::getShape(char* a2, char* a3, char* a4, bool a5) { //not done
+	gsys->setTextureBase("", a4);
+	return (Shape*)0;
+}
+
 void StdSystem::initLFlares(int) {}
 void StdSystem::invalidateObjs(unsigned int, unsigned int) {}
 bool StdSystem::isActive() {

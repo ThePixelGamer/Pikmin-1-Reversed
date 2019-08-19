@@ -145,7 +145,7 @@ public:
 	int			 getHeapNum();
 	//LFInfo* getLFlareInfo();
 	double		 getRand(float);
-	//Shape* getShape(char*, char*, char*, bool);
+	Shape* getShape(char*, char*, char*, bool);
 	void		 initLFlares(int);
 	void		 invalidateObjs(unsigned int, unsigned int);
 	bool		 isActive();
