@@ -180,11 +180,11 @@ void UIWindow::createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu) {
 		hWndParent = 0;
 
 	this->m_hWnd = CreateWindowExA(this->m_dwExStyle, className,
-		windowName, this->m_dwStyle,
-		this->m_frame.x1, this->m_frame.y1,
-		this->m_frame.width(), this->m_frame.height(),
-		hWndParent, this->m_hMenu,
-		sysHInst, 0);
+									windowName, this->m_dwStyle,
+									this->m_frame.x1, this->m_frame.y1,
+									this->m_frame.width(), this->m_frame.height(),
+									hWndParent, this->m_hMenu,
+									sysHInst, 0);
 
 	if (windowName)
 		this->setName((char*)windowName);
@@ -199,8 +199,13 @@ void UIWindow::dockTop(int, RectArea&, RectArea&) {
 
 }
 
-void UIWindow::closeChildren() {
-
+void UIWindow::closeChildren() { // asm matches
+	UIWindow* childNext;
+	for (UIWindow* child = (UIWindow*)this->Child(); child; child = childNext)
+	{
+		childNext = (UIWindow*)child->Next();
+		SendMessage(child->m_hWnd, WM_CLOSE, 0, 0);
+	} 
 }
 
 void UIWindow::initFrame(UIWindow * parent, int a2, int style, int exstyle, bool a5) {
@@ -223,6 +228,7 @@ void UIWindow::initFrame(UIWindow * parent, int a2, int style, int exstyle, bool
 
 	AdjustWindowRectEx(&rect, this->m_dwStyle, false, this->m_dwExStyle);
 
+	// literally no point in this because 32 - 32 = 0 and 128 - 128
 	this->m_zero.x1 = rect.left - x1;
 	this->m_zero.y1 = rect.top - y1;
 	this->m_zero.x2 = rect.right - x2;
