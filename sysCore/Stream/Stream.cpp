@@ -30,9 +30,9 @@ int Stream::readInt() {
 	return ((c & 0xFF000000) >> 24) | ((c & 0xFF0000) >> 8) | ((c & 0xFF00) << 8) | (c << 24);
 }
 
-char Stream::readByte() {
-	char c;
-	this->read(&c, sizeof(unsigned char));
+unsigned __int8 Stream::readByte() {
+	unsigned __int8 c;
+	this->read(&c, sizeof(unsigned __int8));
 	return c;
 }
 

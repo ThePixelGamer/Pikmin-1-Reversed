@@ -1,33 +1,24 @@
-// AyuStack.h: interface for the AyuStack class.
-//
-//////////////////////////////////////////////////////////////////////
-
-#if !defined(AFX_AYUSTACK_H__90695B59_0425_4268_BF1F_EF8B26449CFA__INCLUDED_)
-#define AFX_AYUSTACK_H__90695B59_0425_4268_BF1F_EF8B26449CFA__INCLUDED_
-
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
-
 #ifdef SYSCORE_EXPORTS
 #define SYSCORE_API __declspec(dllexport)
 #else
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
+#ifndef AYUSTACK_H
+#define AYUSTACK_H
+
 #include "System/System.h"
 
-class SYSCORE_API AyuStack
-{
+class SYSCORE_API AyuStack {
 public:
 	int m_allocType; //0h
 	int m_size; //4h
 	int m_used; //8h
-	char* m_unk1; //Ch
+	unsigned __int32* top; //Ch
 	int m_topSize; //10h
-	char* m_unk2; //14h ( this + 20 ) | <- top probably???
+	unsigned __int32* sp; //14h ( this + 20 ) | <- top probably???
 	int m_topFree; //18h
-
+	bool overflowProtect; //1Ch
 	bool active; //1Dh ( this + 29 )
 	char* name; //20h ( this + 32 )
 
@@ -36,6 +27,7 @@ public:
 	bool checkOverflow();
 	void checkStack();
 	void create();
+	void create(char*, int, void*, int, bool);
 
 	int getFree();
 	int getMaxFree();
@@ -46,9 +38,10 @@ public:
 	void inactivate();
 
 	void pop();
-	char* push(int);
+	unsigned __int32* push(int);
 
+	void reset();
 	void reset(int);
 };
 
-#endif // !defined(AFX_AYUSTACK_H__90695B59_0425_4268_BF1F_EF8B26449CFA__INCLUDED_)
+#endif

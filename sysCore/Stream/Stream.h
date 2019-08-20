@@ -20,7 +20,7 @@ public:
 
 	// Reading functions
 	virtual int readInt(); // 0h
-	virtual char readByte(); // 4h
+	virtual unsigned __int8 readByte(); // 4h
 	virtual short readShort(); // 8h
 	virtual float readFloat(); // Ch
 	virtual void readString(char*, int); // 10h

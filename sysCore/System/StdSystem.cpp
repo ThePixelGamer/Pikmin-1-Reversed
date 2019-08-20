@@ -1,6 +1,8 @@
 #include "StdSystem.h"
 #include "System.h"
 
+#include "../Stream/CmdStream.h"
+
 //////////////////////////////////////////////////////////////////////
 // FileRandomAccessStream class functions
 //////////////////////////////////////////////////////////////////////
@@ -24,13 +26,13 @@ int FileRandomAccessStream::getPosition() {
 // StdSystem class functions
 //////////////////////////////////////////////////////////////////////
 
-StdSystem::StdSystem()
-{
+StdSystem::StdSystem() {
 
 }
 
 void StdSystem::initSoftReset() {
-
+	CmdStream::statbuff = 0;
+	this->shape = 0;
 }
 
 RandomAccessStream* StdSystem::openFile(char*, bool, bool) {

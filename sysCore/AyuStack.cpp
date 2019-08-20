@@ -5,8 +5,7 @@
 #include "AyuStack.h"
 #include <stdarg.h>
 
-void haltAyuStack(char* fmt, ...)
-{
+void haltAyuStack(char* fmt, ...) {
 	char Dest; // [esp+4Ch] [ebp-804h]
 	va_list va; // [esp+85Ch] [ebp+Ch]
 
@@ -21,17 +20,29 @@ AyuStack::AyuStack() {
 
 bool AyuStack::checkOverflow() {
 	if (this->active)
-		return *this->m_unk1 != 0x12345678;
+		return *this->top != 0x12345678;
 	else
 		return false;
 }
 
 void AyuStack::checkStack() {
 	if (this->m_allocType & 2)
-		if (&this->m_unk2[-*this->m_unk1] != this->m_unk1)
+		if (&this->sp[-*this->top] != this->top)
 			haltAyuStack("trashed memory stack (%s)\n", this->name);
 }
 
+void AyuStack::create(char* nme, int allocType, void* allocMem, int size, bool overflow) {
+	this->m_allocType = allocType;
+	this->active = true;
+	this->name = nme;
+	this->top = static_cast<unsigned __int32*>(allocMem);
+	this->m_topSize = reinterpret_cast<int>(this->top) + size;
+	this->m_size = m_topSize - reinterpret_cast<int>(this->top);
+	this->overflowProtect = overflow;
+	if(this->overflowProtect)
+		*this->top = 0x12345678;
+	this->reset();
+}
 
 int AyuStack::getFree() {
 	return this->m_size - this->m_used;
@@ -66,9 +77,9 @@ void AyuStack::inactivate() {
 void AyuStack::pop() {
 	if (this->m_allocType == 2)
 	{
-		int used = 2; // *(this->m_unk2 - 2);
+		int used = 2; // *(this->sp - 2);
 		this->m_used -= used;
-		//this->m_unk2 = this->m_unk2 - used;
+		//this->sp = this->sp - used;
 	}
 	else
 	{
@@ -78,48 +89,50 @@ void AyuStack::pop() {
 	}
 }
 
-char* AyuStack::push(int toPush) {
+/*
+unsigned __int32* AyuStack::push(int toPush) {
 	if (!toPush)
 		toPush = 1;
 	if (toPush & 7)
 		toPush = (toPush + 7) & 0xFFFFFFF8;
 
 	int unk = toPush + 8;
-	if (this->m_allocType == 2)
-	{
-		// this makes me think m_unk2 is the top of the stack
-		if (this->m_unk2[unk] <= m_topFree)
-		{
-			char* unused = this->m_unk2;
+	if (this->m_allocType == 2) {
+		// this makes me think sp is the top of the stack
+		if (this->sp[unk] <= m_topFree) {
+			unsigned __int32* unused = this->sp;
 			int unk2;
-			char* top_maybe;
-			if (this->m_unk2 == this->m_unk1)
-			{
+			unsigned __int32* top_maybe;
+			if (this->sp == this->sp) {
 				unk2 = 0;
-				top_maybe = this->m_unk2;
+				top_maybe = this->sp;
 			}
-			else
-			{
-				unk2 = *(this->m_unk2 - 2);
-				top_maybe = this->m_unk2 - 8;
+			else {
+				unk2 = *(this->sp - 2);
+				top_maybe = this->sp - 8;
 			}
 
 			this->m_used += unk;
-			this->m_unk2 = (this->m_unk2 + unk);
-			*(this->m_unk2 - 2) = unk2 + unk;
+			this->sp = (this->sp + unk);
+			*(this->sp - 2) = unk2 + unk;
 			this->checkStack();
 			return top_maybe;
 		}
 		else
 			return 0;
 	}
-	else if ((this->m_topFree - unk) >= *this->m_unk2)
+	else if ((this->m_topFree - unk) >= *this->sp)
 	{
 		this->m_used += unk;
 		this->m_topFree -= unk;
 		//what *this->m_topFree = unk;
-		return (char*)this->m_topFree + 8; //fix this
+		return this->m_topFree + 8; //fix this
 	}
 	else
 		return 0;
+}
+*/
+
+void AyuStack::reset() {
+
 }

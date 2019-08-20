@@ -31,6 +31,7 @@ public:
 
 #include "../AgeServer.h"
 #include "../Nodes.h"
+#include "../ObjInfo.h"
 
 class CacheTexture;
 class LoadIdler;
@@ -41,8 +42,6 @@ class AyuHeap;
 class LFInfo;
 class Shape;
 class LFlareGroup;
-
-#include "../ObjInfo.h"
 
 class SYSCORE_API StdSystem {
 public:
@@ -64,13 +63,12 @@ public:
 		void* unk; // 3Ch
 		void* unk; // 40h
 	*/
-	Matrix4f* unk;
+	Matrix4f* matrix;
 	char* bloRoot; // 48h
 	char* texRoot; // 4Ch	
 	char* baseDir; // 50h
 	char* fileName;	 // 54h
-	/* current unknown members
-		char unk[8][40]; //58h (known but not sure about type)*/
+	AyuHeap* heaps[8][40]; //58h
 		int heapNum; // 198h
 	/*	void* unk; // 19Ch
 		void* unk; // 1A0h
@@ -94,8 +92,8 @@ public:
 	/* current unknown members
 		void* unk; // 1F4h
 		void* unk; // 1F8h
-		Shape* unk; // 1FCh
 	*/
+	Shape* shape; // 1FCh
 	CoreNode core1; // 200h
 	CoreNode core2; // 214h
 	/* current unknown members
