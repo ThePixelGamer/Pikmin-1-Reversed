@@ -4,12 +4,12 @@
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
-#ifndef RAMSTREAM_H
-#define RAMSTREAM_H
+#ifndef FILEIO_H
+#define FILEIO_H
 
 #include "RandomAccessStream.h"
 
-class SYSCORE_API RamStream : public RandomAccessStream {
+class SYSCORE_API FileIO : public RandomAccessStream {
 public:
 	//0h - vtblPtr
 	int m_unk1; //4h
@@ -17,7 +17,7 @@ public:
 	int m_position; //10h
 	size_t m_length; //14h
 
-	RamStream(const char*, size_t);
+	FileIO(const char*, size_t);
 
 	virtual void	read(void*, int);
 	virtual void	write(void*, int);

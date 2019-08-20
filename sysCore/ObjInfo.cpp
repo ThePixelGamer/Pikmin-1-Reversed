@@ -27,3 +27,17 @@ void GfxobjInfo::remove() {
     this->next->prev = this->prev;
     this->prev->next = this->next;
 }
+
+//////////////////////////////////////////////////////////////////////
+// AnmobjInfo class functions
+//////////////////////////////////////////////////////////////////////
+
+#include "AnimData.h"
+
+AnmobjInfo::AnmobjInfo() {
+    this->animData = 0;
+}
+
+void AnmobjInfo::detach() {
+   animData->detach();
+}

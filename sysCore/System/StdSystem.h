@@ -32,6 +32,7 @@ public:
 #include "../AgeServer.h"
 #include "../Nodes.h"
 #include "../ObjInfo.h"
+#include "../AyuHeap.h"
 
 class CacheTexture;
 class LoadIdler;
@@ -68,8 +69,8 @@ public:
 	char* texRoot; // 4Ch	
 	char* baseDir; // 50h
 	char* fileName;	 // 54h
-	AyuHeap* heaps[8][40]; //58h
-		int heapNum; // 198h
+	AyuHeap heaps[8]; //58h
+	int heapNum; // 198h
 	/*	void* unk; // 19Ch
 		void* unk; // 1A0h
 		void* unk; // 1A4h
@@ -81,7 +82,6 @@ public:
 		void* unk; // 1BCh
 		void* unk; // 1C0h
 		void* unk; // 1C4h
-		void* unk; // 1C8h
 	*/
 	int unkShutdownCode; // 1C8h
 	/* current unknown members

@@ -67,8 +67,12 @@ void StdSystem::endLoading() {
 
 }
 
+void StdSystem::Shutdown() {
+	this->unkShutdownCode = 0x80000000;
+}
 
 void StdSystem::addAnimation(AnimData*, char*) {}
+
 void StdSystem::addGfxObject(GfxobjInfo* a2) {
 	this->gfx.insertAfter(a2);
 	this->unkBool = true; //or 1
@@ -149,8 +153,4 @@ bool StdSystem::resetPending() {
 void StdSystem::set2DRoot(char* _bloroot, char* _texroot) {
 	this->bloRoot = _bloroot;
 	this->texRoot = _texroot;
-}
-
-void StdSystem::Shutdown() {
-	this->unkShutdownCode = 0x80000000;
 }

@@ -5,6 +5,8 @@
 #include "AyuStack.h"
 #include <stdarg.h>
 
+#include "System/System.h"
+
 void haltAyuStack(char* fmt, ...) {
 	char Dest; // [esp+4Ch] [ebp-804h]
 	va_list va; // [esp+85Ch] [ebp+Ch]

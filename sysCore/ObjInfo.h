@@ -4,8 +4,8 @@
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
-#ifndef ObjInfo
-#define ObjInfo
+#ifndef OBJINFO_H
+#define OBJINFO_H
 
 #include "ID32.h"
 
@@ -25,6 +25,18 @@ public:
 
 	void insertAfter(GfxobjInfo* a2);
 	void remove();
+};
+
+class AnimData;
+
+class SYSCORE_API AnmobjInfo : public GfxobjInfo {
+public:
+	//(GfxobjInfo: 0h-1Ch)
+	AnimData* animData; 
+
+	AnmobjInfo();
+
+	virtual void detach();
 };
 
 #endif 
