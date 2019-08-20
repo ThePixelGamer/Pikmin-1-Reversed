@@ -68,11 +68,19 @@ SOURCE=.\AgeServer.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\AnimData.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\AyuHeap.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\AyuStack.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\CacheInfo.cpp
 # End Source File
 # Begin Source File
 
@@ -176,11 +184,19 @@ SOURCE=.\AgeServer.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\AnimData.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\AyuHeap.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\AyuStack.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\CacheInfo.h
 # End Source File
 # Begin Source File
 

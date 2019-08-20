@@ -1,6 +1,6 @@
 #include "AnimData.h"
 
-#include "AnimCacheInfo.h"
+#include "CacheInfo.h"
 
 AnimData::AnimData() {
 
