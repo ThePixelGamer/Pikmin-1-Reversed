@@ -76,11 +76,11 @@ UIWindow::UIWindow() : UIFrame() {
 	this->m_unk1.set(0, 0, 0, 0);
 }
 
-UIWindow::UIWindow(UIWindow * unk1, int unk2, int unk3, int unk4, bool unk5) : UIFrame() {
+UIWindow::UIWindow(UIWindow * parent, int unk2, int style, int exstyle, bool unk5) : UIFrame() {
 	this->m_unk7 = 0;
 	this->m_unk10 = 0;
 	this->m_hMenu = 0; //HMENU
-	initFrame(unk1, unk2, unk3, unk4, unk5);
+	initFrame(parent, unk2, style, exstyle, unk5);
 }
 
 UIWindow::~UIWindow() {
@@ -203,17 +203,17 @@ void UIWindow::closeChildren() {
 
 }
 
-void UIWindow::initFrame(UIWindow * a1, int a2, int a3, int a4, bool a5) {
-	this->m_parent = a1;
-	this->m_dwStyle = a3;
-	this->m_dwExStyle = a4;
+void UIWindow::initFrame(UIWindow * parent, int a2, int style, int exstyle, bool a5) {
+	this->m_parent = parent;
+	this->m_dwStyle = style;
+	this->m_dwExStyle = exstyle;
 	this->m_unk6 = a2;
 	this->m_unk10 = a5;
 
 	int x1 = 32;
 	int y1 = 32;
-	int unk1 = 128;
-	int unk2 = 128;
+	int x2 = 128;
+	int y2 = 128;
 
 	tagRECT rect;
 	rect.left = 32;
@@ -225,8 +225,8 @@ void UIWindow::initFrame(UIWindow * a1, int a2, int a3, int a4, bool a5) {
 
 	this->m_zero.x1 = rect.left - x1;
 	this->m_zero.y1 = rect.top - y1;
-	this->m_zero.x2 = rect.right - unk1;
-	this->m_zero.y2 = rect.bottom - unk2;
+	this->m_zero.x2 = rect.right - x2;
+	this->m_zero.y2 = rect.bottom - y2;
 
 	if (this->m_unk10)
 		this->m_zero.y1 -= GetSystemMetrics(SM_CYMENU);//     The height of a single-line menu bar, in pixels.
@@ -235,7 +235,7 @@ void UIWindow::initFrame(UIWindow * a1, int a2, int a3, int a4, bool a5) {
 	if (this->m_dwStyle & WS_HSCROLL)
 		this->m_zero.y2 += GetSystemMetrics(SM_CYHSCROLL);// The height of a horizontal scroll bar, in pixels.
 
-	if (a3 & WS_CHILDWINDOW)
+	if (style & WS_CHILDWINDOW)
 		this->m_parent->add(this);
 	else
 		uiMgr->add(this);

@@ -104,7 +104,7 @@ public:
 		this->m_window->createWindow("ListBox", 0, 0);
 		WPARAM obj = (WPARAM)GetStockObject(DEFAULT_GUI_FONT);
 		SendMessage(this->m_window->m_hWnd, 0x30, obj, 0);
-		this->m_RAStream = gsys->createFile("../log.txt", 1);
+		this->m_RAStream = gsys->createFile("../log.txt", true);
 	}
 
 	void writeChar(char toWrite) { // unsure of name
