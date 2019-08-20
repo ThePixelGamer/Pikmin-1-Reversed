@@ -68,6 +68,10 @@ SOURCE=.\AgeServer.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\AyuHeap.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\AyuStack.cpp
 # End Source File
 # Begin Source File
@@ -169,6 +173,10 @@ SOURCE=.\AgeAtx.h
 # Begin Source File
 
 SOURCE=.\AgeServer.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\AyuHeap.h
 # End Source File
 # Begin Source File
 
