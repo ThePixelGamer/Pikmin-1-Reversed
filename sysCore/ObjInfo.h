@@ -39,4 +39,16 @@ public:
 	virtual void detach();
 };
 
+class Texture;
+
+class SYSCORE_API TexobjInfo : public GfxobjInfo {
+public:
+	//(GfxobjInfo: 0h-1Ch)
+	Texture* texData; 
+
+	TexobjInfo();
+
+	virtual void detach();
+};
+
 #endif 

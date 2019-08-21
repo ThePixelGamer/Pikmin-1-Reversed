@@ -41,3 +41,17 @@ AnmobjInfo::AnmobjInfo() {
 void AnmobjInfo::detach() {
    animData->detach();
 }
+
+//////////////////////////////////////////////////////////////////////
+// TexobjInfo class functions
+//////////////////////////////////////////////////////////////////////
+
+#include "Texture.h"
+
+TexobjInfo::TexobjInfo() {
+    this->texData = 0;
+}
+
+void TexobjInfo::detach() {
+   texData->detach();
+}

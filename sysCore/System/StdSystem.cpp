@@ -71,7 +71,13 @@ void StdSystem::Shutdown() {
 	this->unkShutdownCode = 0x80000000;
 }
 
-void StdSystem::addAnimation(AnimData*, char*) {}
+void StdSystem::addAnimation(AnimData* anim, char* dup) {
+	AnmobjInfo* gfxobj = new AnmobjInfo();
+	gfxobj->str = StdSystem::stringDup(dup);
+	gfxobj->id32.setID(0x5F616E6D);
+	gfxobj->animData = anim;
+	this->addGfxObject(gfxobj);
+}
 
 void StdSystem::addGfxObject(GfxobjInfo* a2) {
 	this->gfx.insertAfter(a2);
