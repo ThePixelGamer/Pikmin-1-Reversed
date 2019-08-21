@@ -47,16 +47,16 @@ void CmdStream::fillBuffer(bool canFill)
 
 bool CmdStream::LineIsComment()
 {
-	return  *(this->buffer + this->currentChar) == '#'
-		|| *(this->buffer + this->currentChar) == '/'
-		&& *(this->buffer + this->currentChar + 1) == '/';
+	return  this->buffer[this->currentChar] == '#'
+		|| this->buffer[this->currentChar] == '/'
+		&& this->buffer[this->currentChar + 1] == '/';
 }
 
 void CmdStream::copyToToken(int length)
 {
 	int i = 0;
 	while (i < length) {
-		char currentChar = *(this->buffer + i + this->currentChar);
+		char currentChar = this->buffer[this->currentChar + i];
 
 		if (currentChar == '\t')
 			currentChar = ' ';
@@ -69,12 +69,12 @@ void CmdStream::copyToToken(int length)
 bool CmdStream::endOfCmds()
 {
 	this->fillBuffer(0);
-	while (this->currentChar < this->pending && this->whiteSpace(*(this->buffer + this->currentChar))) {
+	while (this->currentChar < this->pending && this->whiteSpace(this->buffer[this->currentChar])) {
 		this->currentChar++;
 	}
 
 	if (this->currentChar < this->pending)
-		return *(this->buffer + this->currentChar) == -1;
+		return this->buffer[this->currentChar] == -1;
 
 	else
 		return 1;
@@ -94,7 +94,7 @@ bool CmdStream::whiteSpace(char toCheck)
 bool CmdStream::endOfSection()
 {
 	this->fillBuffer(0);
-	return *(this->buffer + this->currentChar) == '}';
+	return this->buffer[this->currentChar] == '}';
 }
 
 char* CmdStream::getToken(bool hasComments)
@@ -110,7 +110,7 @@ char* CmdStream::getToken(bool hasComments)
 	int currChar = this->currentChar;
 	char tempIdentifier = 0;
 
-	if (*(this->buffer + currChar) == '"' || *(this->buffer + currChar) == '\'')
+	if (this->buffer[currChar] == '"' || this->buffer[currChar] == '\'')
 	{
 		tempIdentifier = 1;
 		++currChar;
@@ -122,12 +122,12 @@ char* CmdStream::getToken(bool hasComments)
 		int shouldBreak;
 		if (tempIdentifier)
 		{
-			shouldBreak = *(this->buffer + currChar) == '"' || *(this->buffer + currChar) == '\'' ? 0 : 1;;
+			shouldBreak = this->buffer[currChar] == '"' || this->buffer[currChar] == '\'' ? 0 : 1;;
 		}
 
 		else
 		{
-			shouldBreak = this->whiteSpace(*(this->buffer + currChar)) == 0;
+			shouldBreak = this->whiteSpace(this->buffer[currChar]) == 0;
 		}
 
 		if (!shouldBreak)
@@ -142,7 +142,7 @@ char* CmdStream::getToken(bool hasComments)
 	if (tempIdentifier)
 		this->currentToken[currChar++ - this->currentChar] = 0;
 
-	while (currChar < this->pending && this->whiteSpace(*(this->buffer + currChar)))
+	while (currChar < this->pending && this->whiteSpace(this->buffer[currChar]))
 		++currChar;
 
 	this->currentChar = currChar;
@@ -153,13 +153,13 @@ char* CmdStream::skipLine()
 {
 	this->fillBuffer(0);
 	int i = this->currentChar;
-	while (i < this->pending && *(this->buffer + i) != '\n' && *(this->buffer + i) != '\r') {
+	while (i < this->pending && this->buffer[i] != '\n' && this->buffer[i] != '\r') {
 		i++;
 	}
 
 	this->copyToToken(i - this->currentChar);
 
-	while (*(this->buffer + i) == '\n' || *(this->buffer + i) == '\r')
+	while (this->buffer[i] == '\n' || this->buffer[i] == '\r')
 		++i;
 
 	this->currentChar = i;
@@ -169,7 +169,7 @@ char* CmdStream::skipLine()
 
 char CmdStream::nextChar()
 {
-	return *(this->buffer + this->currentChar);
+	return this->buffer[this->currentChar];
 }
 
 bool CmdStream::isToken(char* Str)
