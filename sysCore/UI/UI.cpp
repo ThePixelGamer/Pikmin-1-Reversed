@@ -247,12 +247,14 @@ void UIWindow::sizeWindow(int, int, int) {
 
 }
 
-void UIWindow::updateMove(int x, int y) {
+void UIWindow::updateMove(int x, int y) { // unsure if asm matches
 	int newX = this->m_frame.x1 + x;
 	int newY = this->m_frame.y1 + y;
 	RectArea newRect(newX, newY,
 		this->m_frame.width() + newX,
-		this->m_frame.height() + newY;
+		this->m_frame.height() + newY);
+	this->m_frame = newRect;
+	this->calcClientFromFrame(this->m_client);
 }
 
 //////////////////////////////////////////////////////////////////////
