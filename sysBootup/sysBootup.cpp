@@ -20,11 +20,14 @@ public:
 	UIMain(UIWindow* parent, int unk1, int dwStyle, int dwExStyle, bool unk2) : UIWindow(parent, unk1, dwStyle, dwExStyle, unk2) {}
 
 	virtual int processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
-		if(Msg == 0x111)
-			for(MenuPlugin* i = menuP; i; i = i->next) 
-				if(i->prev == wParam)
+		if(Msg == WM_COMMAND) {
+			for(MenuPlugin* i = menuP; i; i = i->next) {
+				if(i->prev == wParam) {
 					modMgr->Alloc(i->name);
-
+					return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
+				}
+			}
+		}
 		return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
 	}
 }; 
@@ -46,7 +49,7 @@ void print(const char* fmt, ...) {
 }
 
 void createUIWindow(HINSTANCE hInst) {
-	window = new UIMain();
+	window = new UIMain(0, 0, 0x16C40000, 0, true);
 	window->setFrame(RectArea(690, 32, 1260, 300));
 	window->createWindow("DUIClearWin", "OpenGL / Dolphin System", LoadMenuA(sysHInst, "101")); //load menu from resource file
 	gsys->createDebugStream(window);

@@ -119,16 +119,12 @@ Module* ModuleMgr::findModule(char* str) {
 	return 0;
 }
 
-void ModuleMgr::listModules() { //accurate but could be shortened a bit on that unused char*
+void ModuleMgr::listModules() {
 	if(this->topModule->prev == this->topModule) {}
 	else {
 		Module* i;
 		
-		char* unk;
-		if(this->moduleCount != 1)
-			unk = "es";
-		else
-			unk = "e";
+		char* unk = (this->moduleCount!=1) ? "es" : "e";
 
 		for(i = this->topModule->prev; i != this->topModule; i = i->prev) {}
 	}

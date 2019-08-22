@@ -110,49 +110,45 @@ void UIWindow::activate() {
 }
 
 int UIWindow::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
-	/*unsigned int v6; // [esp+4Ch] [ebp-18h]
-	unsigned int unusedInt; // [esp+50h] [ebp-14h]
-	struct Node* v10; // [esp+5Ch] [ebp-8h]
-
-	unusedInt = Msg - 3;
 	switch (Msg)
 	{
-	case WM_MOVE:
-		UIWindow* uiWind = (UIWindow*)GetWindowLongA(hWnd, 0);
-		if (v8)
-			uiWind->updateMove(lParam, lParam >> 16);
-		return 0;
-
-	case WM_SIZE:
-		long windowLong = GetWindowLongA(hWnd, 0);
-		if (windowLong)
-			(*(*v9 + 56))(v9, lParam, lParam >> 16);
-		return 0;
-
-	case WM_CLOSE:
-		v10 = GetWindowLongA(hWnd, 0);
-		if (v10)
+	case WM_MOVE: 
 		{
-			UIWindow::closeChildren(this);
-			NodeMgr::Del(nodeMgr, v10);
-			SetWindowLongA(hWnd, 0, 0);
+			UIWindow* windLong = (UIWindow*)GetWindowLongA(hWnd, 0);
+			if (windLong)
+				windLong->updateMove(lParam, lParam >> 16);
+			return 0;
 		}
-		return (*(*this + 68))(this, hWnd, Msg, wParam, lParam);
-
+	case WM_SIZE:
+		{
+			UIWindow* windLong = (UIWindow*)GetWindowLongA(hWnd, 0);
+			if (windLong)
+				windLong->updateSizes(lParam, lParam >> 16);
+			return 0;
+		}
+	case WM_CLOSE:
+		{
+			UIWindow* windLong = (UIWindow*)GetWindowLongA(hWnd, 0);
+			if(windLong)
+			{
+				this->closeChildren();
+				nodeMgr->Del(windLong);
+				SetWindowLong(hWnd, 0, 0);
+			}
+			return this->returnMessage(hWnd, Msg, wParam, lParam);
+		}
 	case WM_NCLBUTTONDOWN:
 		if (wParam == 2 && GetFocus() != hWnd)
 			SetFocus(hWnd);
 		break;
-
 	case WM_KEYDOWN:
-		v6 = wParam;
-		if (wParam == 27)
-			SendMessageA(hWnd, WM_CLOSE, 0, 0);
+		if (wParam == VK_ESCAPE)
+			SendMessage(hWnd, WM_CLOSE, 0, 0);
 		break;
-
-	default:*/
+	default:
+		return this->returnMessage(hWnd, Msg, wParam, lParam);
+	}
 	return this->returnMessage(hWnd, Msg, wParam, lParam);
-	//}
 }
 
 LRESULT UIWindow::returnMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
@@ -251,8 +247,12 @@ void UIWindow::sizeWindow(int, int, int) {
 
 }
 
-void UIWindow::updateMove(int, int) {
-
+void UIWindow::updateMove(int x, int y) {
+	int newX = this->m_frame.x1 + x;
+	int newY = this->m_frame.y1 + y;
+	RectArea newRect(newX, newY,
+		this->m_frame.width() + newX,
+		this->m_frame.height() + newY;
 }
 
 //////////////////////////////////////////////////////////////////////
