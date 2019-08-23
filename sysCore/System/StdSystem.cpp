@@ -9,7 +9,7 @@
 
 FileRandomAccessStream::FileRandomAccessStream(FILE* fpointer, char* cwd) : RandomAccessStream() {
 	this->fStream = fpointer;
-	this->currentWorkingDir = cwd;
+	this->filePath = cwd;
 	this->dwordC = 0;
 
 	int offset = this->getPosition();

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <io.h>
+#include "resource.h"
 
 #include "../sysCore/sysCore.h"
 #include "../sysCore/System/System.h"
@@ -11,6 +12,7 @@
 
 MenuPlugin* menuP = new MenuPlugin();
 System unused;
+const char* systemName = "OpenGL / Dolphin System";
 
 void isLast() { menuP->prev = 0; } //may be autogen?
 
@@ -30,8 +32,7 @@ public:
 		}
 		return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
 	}
-}; 
-UIMain* window;
+}; UIMain* window;
 
 void print(const char* fmt, ...) {
 	va_list args;
@@ -48,11 +49,12 @@ void print(const char* fmt, ...) {
 	}
 }
 
-void createUIWindow(HINSTANCE hInst) {
+void createUIWindow(HINSTANCE hInst) { // 0x16C40000
+	RectArea newFrame(690, 32, 1260, 300);
 	window = new UIMain(0, 0, 0x16C40000, 0, true);
-	window->setFrame(RectArea(690, 32, 1260, 300));
-	window->createWindow("DUIClearWin", "OpenGL / Dolphin System", LoadMenuA(sysHInst, "101")); //load menu from resource file
-	gsys->createDebugStream(window);
+	window->setFrame(RectArea(newFrame.x1, newFrame.x2, newFrame.y1, newFrame.y2));
+	window->createWindow("DUIClearWin", systemName, LoadMenu(sysHInst, MAKEINTRESOURCE(IDR_MENU1)));
+	UIWindow* debugStream = gsys->createDebugStream(window);
 	window->refreshWindow();
 	ShowWindow(window->m_hWnd, SW_SHOWNORMAL);
 	print("Basedir = %s\n", gsys->baseDir);

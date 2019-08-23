@@ -14,7 +14,7 @@
 class SYSCORE_API Stream {
 public:
 	// 0h - vtable
-	char* currentWorkingDir; // 4h
+	char* filePath; // 4h
 
 	Stream();
 

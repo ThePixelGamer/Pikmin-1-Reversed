@@ -66,6 +66,21 @@ void UIFrame::setFrame(RectArea & frame) {
 // UIWindow class functions
 //////////////////////////////////////////////////////////////////////
 
+void UIWINDOWPRINT(const char* fmt, ...) {
+	va_list args;
+	va_start(args, fmt);
+	char dest[1024];
+
+	if(sysCon) {
+		if ("uiWindow")
+			sysCon->print("%s: ", "uiWindow");
+		vsprintf(dest, fmt, args);
+		if(strlen(dest)) {
+			sysCon->write(dest, strlen(dest));
+		}
+	}
+}
+
 UIWindow::UIWindow() : UIFrame() {
 	this->m_parent = 0;
 	this->m_dwExStyle = 0;
@@ -84,11 +99,11 @@ UIWindow::UIWindow(UIWindow * parent, int unk2, int style, int exstyle, bool unk
 }
 
 UIWindow::~UIWindow() {
-	// print("now closing window %s", this->name);
+	UIWINDOWPRINT("now closing window %s", this->name);
 }
 
 void UIWindow::refreshWindow() {
-	updateSizes(this->m_client.width(), this->m_client.height());
+	this->updateSizes(this->m_client.width(), this->m_client.height());
 }
 
 void UIWindow::updateSizes(int w, int h) {
@@ -97,10 +112,10 @@ void UIWindow::updateSizes(int w, int h) {
 	int v10 = w + (-this->m_zero.x1 + this->m_zero.x2);
 	int v9 = h + (-this->m_zero.y1 + this->m_zero.y2);
 	this->m_frame = RectArea(v12, v11, v12 + v10, v11 + v9);
-	calcClientFromFrame(this->m_client);
+	this->calcClientFromFrame(this->m_client);
 	HDWP hWinPosInfo = BeginDeferWindowPos(40);
-	if (Child()) {
-		hWinPosInfo = resizeChildren(hWinPosInfo, RectArea(0, 0, w, h));
+	if (this->Child()) {
+		hWinPosInfo = this->resizeChildren(hWinPosInfo, RectArea(0, 0, w, h));
 	}
 	EndDeferWindowPos(hWinPosInfo);
 }
@@ -157,7 +172,7 @@ LRESULT UIWindow::returnMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long
 
 HDWP UIWindow::resizeChildren(HDWP hWinPosInfo, RectArea & rect) {
 	for (CoreNode* i = Child(); i; i = i->Next()) {
-		hWinPosInfo = resizeFrame(hWinPosInfo, rect);
+		hWinPosInfo = this->resizeFrame(hWinPosInfo, rect);
 	}
 	return hWinPosInfo;
 }
@@ -173,14 +188,14 @@ void UIWindow::createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu) {
 	if (this->m_parent)
 		hWndParent = this->m_parent->m_hWnd;
 	else
-		hWndParent = 0;
+		hWndParent = 0; 
 
 	this->m_hWnd = CreateWindowExA(this->m_dwExStyle, className,
 									windowName, this->m_dwStyle,
 									this->m_frame.x1, this->m_frame.y1,
 									this->m_frame.width(), this->m_frame.height(),
 									hWndParent, this->m_hMenu,
-									sysHInst, 0);
+									sysHInst, NULL);
 
 	if (windowName)
 		this->setName((char*)windowName);
@@ -191,8 +206,11 @@ void UIWindow::createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu) {
 		SetWindowLong(this->m_hWnd, 0, (long)this);
 }
 
-void UIWindow::dockTop(int, RectArea&, RectArea&) {
-
+void UIWindow::dockTop(int _height, RectArea& old, RectArea& newarea) {
+	old.y1 = newarea.y1;
+	int newY2 = (_height < newarea.height()) ? _height : newarea.height();
+	old.y2 = newY2 + old.y1;
+	newarea.y1 = old.y2;
 }
 
 void UIWindow::closeChildren() { // asm matches
@@ -283,12 +301,11 @@ void UIWindow::sizeWindow(int x, int y, int a2) {
 }
 
 void UIWindow::updateMove(int x, int y) { // unsure if asm matches
-	int newX = this->m_frame.x1 + x;
-	int newY = this->m_frame.y1 + y;
-	RectArea newRect(newX, newY,
-		this->m_frame.width() + newX,
-		this->m_frame.height() + newY);
-	this->m_frame = newRect;
+	int newX = x + this->m_zero.x1;
+	int newY = y + this->m_zero.y1;
+	int addedX = this->m_frame.width();
+	int addedY = this->m_frame.height();
+	this->m_frame = RectArea(newX, newY, newX + addedX, newY + addedY);
 	this->calcClientFromFrame(this->m_client);
 }
 

@@ -133,13 +133,12 @@ public:
 	}
 
 	virtual void flush() {
-		char *newline; //this is probably a set size
+		char *newline; //char newline[2] is what IDA thinks it is, and it makes sense, however it doesnt decompile properly if i do that
 		this->m_unk[this->m_written] = 0;
 		if (this->m_window) {
 			if (gsys->m_debugStreamUnk) {
 				SendMessage(this->m_window->m_hWnd, 0x180, 0, (LPARAM)this->m_unk);
 				SendMessage(this->m_window->m_hWnd, 0x186, this->m_dwordC++, 0);
-
 
 				if (this->m_RAStream) { // has file open
 					strcpy(newline, "\n");
