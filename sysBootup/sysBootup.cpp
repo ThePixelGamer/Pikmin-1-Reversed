@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <io.h>
+#include "resource.h"
 
 #include "../sysCore/sysCore.h"
 #include "../sysCore/System/System.h"
@@ -51,7 +52,7 @@ void print(const char* fmt, ...) {
 void createUIWindow(HINSTANCE hInst) {
 	window = new UIMain(0, 0, 0x16C40000, 0, true);
 	window->setFrame(RectArea(690, 32, 1260, 300));
-	window->createWindow("DUIClearWin", "OpenGL / Dolphin System", LoadMenuA(sysHInst, "101")); //load menu from resource file
+	window->createWindow("DUIClearWin\0", "OpenGL / Dolphin System", LoadMenu(sysHInst, MAKEINTRESOURCE(IDR_MENU1)));
 	gsys->createDebugStream(window);
 	window->refreshWindow();
 	ShowWindow(window->m_hWnd, SW_SHOWNORMAL);

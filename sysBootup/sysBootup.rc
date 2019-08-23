@@ -1,0 +1,41 @@
+#include "resource.h"
+
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+
+IDR_MENU1 MENU
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+{
+  POPUP "&Tools"
+  {
+    MENUITEM SEPARATOR
+  }
+}
+
+
+1 VERSIONINFO
+FILEVERSION 1,0,0,1
+PRODUCTVERSION 1,0,0,1
+FILEOS 0x40004
+FILETYPE 0x1
+{
+BLOCK "StringFileInfo"
+{
+	BLOCK "041104b0"
+	{
+		VALUE "CompanyName", "任天堂株式会社"
+		VALUE "FileDescription", "sysBootup"
+		VALUE "FileVersion", "1, 0, 0, 1"
+		VALUE "InternalName", "sysBootup"
+		VALUE "LegalCopyright", "Copyright c 2001"
+		VALUE "OriginalFilename", "sysBootup.exe"
+		VALUE "ProductName", "任天堂株式会社 sysBootup"
+		VALUE "ProductVersion", "1, 0, 0, 1"
+	}
+}
+
+BLOCK "VarFileInfo"
+{
+	VALUE "Translation", 0x0411 0x04B0  
+}
+}
+
