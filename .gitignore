@@ -17,3 +17,4 @@ sysBootup/Original/sysCore.dll
 *.plg
 *.json
 .vscode/
+*.map

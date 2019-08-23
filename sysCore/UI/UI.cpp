@@ -243,8 +243,43 @@ void UIWindow::initFrame(UIWindow * parent, int a2, int style, int exstyle, bool
 		uiMgr->add(this);
 }
 
-void UIWindow::sizeWindow(int, int, int) {
+void UIWindow::sizeWindow(int x, int y, int a2) {
+	int w;
+	int h;
+	x += -this->m_zero.x1 + this->m_zero.x2;
+	y += -this->m_zero.y1 + this->m_zero.y2;
+	this->m_unk8 = x;
+	this->m_unk9 = y;
+	if(a2) {
+		RectArea rect;
+		if(m_dwStyle & 0x40000000) {
+			rect.x1 = this->m_parent->m_client.x1;
+			rect.y1 = this->m_parent->m_client.y1;
+			rect.x2 = this->m_parent->m_client.x2;
+			rect.y2 = this->m_parent->m_client.y2;
+		}
+		else {
+			SystemParametersInfoA(SPI_GETWORKAREA, 0, &rect, 0);
+		}
 
+		w = rect.width() / 2 + rect.x1 - this->m_unk8 / 2;
+		h = rect.height() / 2 + rect.y1 - this->m_unk9 / 2;
+
+		if(w < 0)
+			w = 0;
+		if(h < 0)
+			h = 0;
+		if(this->m_unk8 > rect.width())
+			this->m_unk8 = rect.width();
+		if(this->m_unk9 > rect.height())
+			this->m_unk9 = rect.height();
+	}
+	else {
+		h = 0;
+		w = 0;
+	}
+
+	this->setFrame(RectArea(w, h, w + x, h + y));
 }
 
 void UIWindow::updateMove(int x, int y) { // unsure if asm matches
