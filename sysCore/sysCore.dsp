@@ -58,10 +58,82 @@ LINK32=link.exe
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Group "ATX SOURCE FILES"
+
+# PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\AgeAtx.cpp
+SOURCE=.\Atx\AtxDirectRouter.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\Atx\AtxFileStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Atx\AtxRouter.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Atx\AtxStream.cpp
+# End Source File
+# End Group
+# Begin Group "GEOMETRY SOURCE FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Geometry\Matrix3f.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Geometry\Matrix4f.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Geometry\SRT.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Geometry\Vector2f.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Geometry\Vector3f.cpp
+# End Source File
+# End Group
+# Begin Group "NETWORK SOURCE FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Networking\TcpStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Networking\WSocket.cpp
+# End Source File
+# End Group
+# Begin Group "STREAM SOURCE FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Stream\CmdStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stream\RamStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stream\RandomAccessStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stream\Stream.cpp
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\AgeServer.cpp
@@ -81,10 +153,6 @@ SOURCE=.\AyuStack.cpp
 # Begin Source File
 
 SOURCE=.\CacheInfo.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\CmdStream.cpp
 # End Source File
 # Begin Source File
 
@@ -108,11 +176,7 @@ SOURCE=.\ID32.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Geometry\Matrix3f.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Matrix4f.cpp
+SOURCE=.\IDelegate.cpp
 # End Source File
 # Begin Source File
 
@@ -128,23 +192,7 @@ SOURCE=.\ObjInfo.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream\RamStream.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\RandomAccessStream.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\SRT.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\System\StdSystem.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\Stream.cpp
 # End Source File
 # Begin Source File
 
@@ -160,32 +208,92 @@ SOURCE=.\System\System.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Networking\TcpStream.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\Texture.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\UI\UI.cpp
 # End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Vector3f.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Networking\WSocket.cpp
-# End Source File
 # End Group
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Group "ATX HEADER FILES"
+
+# PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\AgeAtx.h
+SOURCE=.\Atx\AtxDirectRouter.h
 # End Source File
+# Begin Source File
+
+SOURCE=.\Atx\AtxFileStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Atx\AtxRouter.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Atx\AtxStream.h
+# End Source File
+# End Group
+# Begin Group "GEOMETRY HEADER FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Geometry\Matrix3f.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Geometry\Matrix4f.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Geometry\SRT.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Geometry\Vector2f.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Geometry\Vector3f.h
+# End Source File
+# End Group
+# Begin Group "NETWORK HEADER FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Networking\TcpStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Networking\WSocket.h
+# End Source File
+# End Group
+# Begin Group "STREAM HEADER FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Stream\CmdStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stream\RamStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stream\RandomAccessStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stream\Stream.h
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\AgeServer.h
@@ -204,11 +312,11 @@ SOURCE=.\AyuStack.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\CacheInfo.h
+SOURCE=.\BaseApp.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream\CmdStream.h
+SOURCE=.\CacheInfo.h
 # End Source File
 # Begin Source File
 
@@ -232,11 +340,7 @@ SOURCE=.\ID32.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Geometry\Matrix3f.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Matrix4f.h
+SOURCE=.\IDelegate.h
 # End Source File
 # Begin Source File
 
@@ -252,23 +356,7 @@ SOURCE=.\ObjInfo.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream\RamStream.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\RandomAccessStream.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\SRT.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\System\StdSystem.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\Stream.h
 # End Source File
 # Begin Source File
 
@@ -284,23 +372,11 @@ SOURCE=.\System\System.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Networking\TcpStream.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\Texture.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\UI\UI.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Vector3f.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Networking\WSocket.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

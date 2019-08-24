@@ -8,12 +8,10 @@
 #define SYSTEM_H
 
 #include "StdSystem.h"
-#include "../AgeAtx.h"
-
 #include "../UI/UI.h"
-
 #include "../BaseApp.h"
 #include "../IDelegate.h"
+#include "../Atx/AtxRouter.h"
 
 class SYSCORE_API System : public StdSystem {
 public:

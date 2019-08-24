@@ -34,7 +34,7 @@ bool WSocket::checkForConnections() {
 	readfds.fd_array[(readfds.fd_count)++] = this->m_listeningSock;
 
 	const struct timeval* timeout;
-	memset((void*)timeout, 0, sizeof(struct timeval));
+	ZeroMemory((PVOID)timeout, sizeof(timeout));
 	unsigned int unused = 1;
 
 	int selectVal = select(1, &readfds, 0, 0, timeout);

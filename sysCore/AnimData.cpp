@@ -6,11 +6,11 @@ AnimData::AnimData() {
 
 }
 
-void AnimData::genAge(AgeServer*) {
+void AnimData::genAge(AgeServer&) {
 
 }
 
-void AnimData::extractSRT(SRT*, int, AnimDataInfo*, float) {
+void AnimData::extractSRT(SRT&, int, AnimDataInfo*, float) {
 
 }
 
@@ -23,6 +23,6 @@ void AnimData::detach() {
     animCache = new AnimCacheInfo[size];
 }
 
-void AnimData::writeType(RandomAccessStream*) {
+void AnimData::writeType(RandomAccessStream&) {
 
 }

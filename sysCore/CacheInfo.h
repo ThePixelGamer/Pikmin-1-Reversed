@@ -19,6 +19,9 @@ public:
 	void* unused3; //Ch
 	CacheInfo* cacheInfo; //10h
 	void* unk2; //14h
+	void* unk3; //18h
+	void* unk4; //1Ch
+	// sizeof(AnimCacheInfo) must be 0x1C, (check operator=)
 
 	AnimCacheInfo();
 

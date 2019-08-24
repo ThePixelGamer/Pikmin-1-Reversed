@@ -14,8 +14,8 @@ class AgeServer;
 
 class SYSCORE_API ANode {
 public:
-	virtual void genAge(AgeServer*);
-	virtual void genAgeNode(AgeServer*);
+	virtual void genAge(AgeServer&);
+	virtual void genAgeNode(AgeServer&);
 	virtual int getAgeNodeType();
 };
 
@@ -29,8 +29,8 @@ public:
 
 	CoreNode(char* = "CoreNode");
 
-	virtual void genAge(AgeServer*) {}			//this+0 TODO
-	virtual void genAgeNode(AgeServer*) {}		//this+4 TODO
+	virtual void genAge(AgeServer&) {}			//this+0 TODO
+	virtual void genAgeNode(AgeServer&) {}		//this+4 TODO
 	virtual int getAgeNodeType();				//this+8
 	virtual void write(RandomAccessStream*) {}	//this+12
 	virtual void read(RandomAccessStream*) {}	//this+16

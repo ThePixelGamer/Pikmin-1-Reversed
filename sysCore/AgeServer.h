@@ -7,7 +7,7 @@
 #ifndef AGESERVER_H
 #define AGESERVER_H
 
-#include "AgeAtx.h"
+#include "Atx/AtxStream.h"
 #include "IDelegate.h"
 class Colour;
 

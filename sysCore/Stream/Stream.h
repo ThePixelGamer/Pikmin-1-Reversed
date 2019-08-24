@@ -11,6 +11,8 @@
 #include <cstdarg>
 #include <algorithm>
 
+#define NETWORK_STREAM 2
+
 class SYSCORE_API Stream {
 public:
 	// 0h - vtable

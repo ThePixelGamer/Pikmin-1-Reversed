@@ -9,6 +9,6 @@ AnimCacheInfo::AnimCacheInfo() {
 }
 
 void AnimCacheInfo::initData() {
-    this->unk2 = 0;
     this->cacheInfo = 0;
+	this->unk2 = 0;
 }

@@ -4,8 +4,8 @@
 // ANode class functions
 //////////////////////////////////////////////////////////////////////
 
-void ANode::genAge(AgeServer* tmp) {}
-void ANode::genAgeNode(AgeServer* tmp) {}
+void ANode::genAge(AgeServer&) {}
+void ANode::genAgeNode(AgeServer&) {}
 int ANode::getAgeNodeType() { return 0; }
 
 //////////////////////////////////////////////////////////////////////
