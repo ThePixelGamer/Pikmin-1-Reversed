@@ -7,6 +7,7 @@
 AtxDirectRouter::AtxDirectRouter(char* _name) {
 	this->m_hostname = strcmp(_name, "self") ? StdSystem::stringDup(_name) : gsys->m3B8h;
 	this->m_networkStream = 0;
+}
 
 bool AtxDirectRouter::openRoute(AtxStream* stream, int port) {
 	this->m_networkStream = new TcpStream();
