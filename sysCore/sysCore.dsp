@@ -63,6 +63,10 @@ LINK32=link.exe
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE=.\Atx\AtxCommandStream.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Atx\AtxDirectRouter.cpp
 # End Source File
 # Begin Source File
@@ -152,6 +156,10 @@ SOURCE=.\AyuStack.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\BaseApp.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\CacheInfo.cpp
 # End Source File
 # Begin Source File
@@ -221,6 +229,10 @@ SOURCE=.\UI\UI.cpp
 # Begin Group "ATX HEADER FILES"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Atx\AtxCommandStream.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\Atx\AtxDirectRouter.h

@@ -78,6 +78,11 @@ void AgeServer::NewEditor(char* unk, char* unk2, int unk3, int unk4, int unk5) {
 	this->writeInt(unk5);
 }
 
+void AgeServer::NewNodeWindow(char* name) {
+	this->writeInt(100);
+	this->writeString(name);
+}
+
 void AgeServer::setOnChange(IDelegate* a2) {
 	
 }

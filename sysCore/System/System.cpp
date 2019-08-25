@@ -119,7 +119,7 @@ BaseApp* System::firstApp() {
 	return static_cast<BaseApp*>(nodeMgr->firstNode()->Child()->Next());
 }
 
-void System::genAge(AgeServer*) {
+void System::genAge(AgeServer&) {
 
 }
 

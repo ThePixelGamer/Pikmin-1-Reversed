@@ -49,6 +49,7 @@ public:
 	void NewEditor(char*, char*, int);
 	void NewEditor(char*, char*, int, int, int);
 	void NewEditor(char*, float*, float, float, int);
+	void NewNodeWindow(char*);
 
 	void setOnChange(IDelegate*);
 	void setOnChange(IDelegate1<AgeServer&>*);

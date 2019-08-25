@@ -61,8 +61,9 @@ public:
 	UIWindow*				createDebugStream(UIWindow*);
 	RandomAccessStream	*	createFile(char*, bool);
 	void					doneRender();
-	BaseApp* firstApp();
-	void					genAge(AgeServer*);
+	BaseApp*				firstApp();
+
+	virtual void			genAge(AgeServer&);
 	AtxRouter*				getAtxRouter();
 	int						getFrameCount();
 	float					getFrameRate();

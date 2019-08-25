@@ -8,14 +8,25 @@
 #define BASEAPP_H
 
 #include "Nodes.h"
+#include "Atx/AtxCommandStream.h"
+#include "AgeServer.h"
 
 class SYSCORE_API BaseApp : public Node {
 public:
 // baseapp member variables (base class = node)
-// 4h - vtbl ptr
-// gap (28h)
+// 0h - vtbl ptr
+	AtxCommandStream* m_cmdStream; //20h
+	AgeServer* m_server; //24h
+	bool m_unkByte;	// 28h
+	int m_unkInt; //2Ch
+	Node m_node1; //30h
 
 	BaseApp();
+
+	virtual void genAge(AgeServer&);
+
+	void startAgeServer();
+	void stopAgeServer();
 };
 
 #endif
