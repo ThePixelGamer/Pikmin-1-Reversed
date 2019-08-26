@@ -62,7 +62,7 @@ void Colour::lerp(Colour& l, float t) {
 }
 
 
-void Colour::lerpTo(Colour & col1, float t, Colour & col2) {
+void Colour::lerpTo(Colour& col1, float t, Colour& col2) {
 	col2.R = ((col1.R - this->R) * t + this->R);
 	col2.G = ((col1.G - this->G) * t + this->G);
 	col2.B = ((col1.B - this->B) * t + this->B);
