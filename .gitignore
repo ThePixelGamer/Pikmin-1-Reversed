@@ -18,3 +18,4 @@ sysBootup/Original/sysCore.dll
 *.json
 .vscode/
 *.map
+sysPlug
