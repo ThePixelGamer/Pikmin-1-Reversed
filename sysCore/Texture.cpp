@@ -35,4 +35,16 @@ unsigned __int8 Texture::getAlpha(int unk1, int unk2) {
 
 unsigned __int8 Texture::getRed(int unk1, int unk2) {
 	return this->pixels[unk1 + this->width * unk2];
-};
+}
+
+void Texture::read(RandomAccessStream& stream) {
+	if (!strcmp(stream.filePath + strlen(stream.filePath) - 3, "txe"))
+	{
+		//new teximg, import txe
+	}
+	else if (!strcmp(stream.filePath + strlen(stream.filePath) - 3, "bti"))
+	{
+		// if statement and texturehalt
+		//new teximg, import bti
+	}
+}

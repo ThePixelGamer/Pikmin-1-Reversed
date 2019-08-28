@@ -13,11 +13,11 @@
 #include <GL/glu.h>
 
 #include "GfxObject.h"
+#include "Stream/RandomAccessStream.h"
 
 class SYSCORE_API Texture : public GfxObject {
 public:
-	/*
-	  _WORD word0;
+	/*_WORD word0;
 	  __declspec(align(4)) _WORD word4;
 	  _WORD word6;
 	  _WORD x;
@@ -47,6 +47,7 @@ public:
 	virtual void detach();
 	virtual void makeResident();
 
+	void read(RandomAccessStream&);
 	void grabBuffer(GLsizei, GLsizei, bool, bool);
 	unsigned __int8 getAlpha(int, int);
 	unsigned __int8 getRed(int, int);
