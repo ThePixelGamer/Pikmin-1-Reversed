@@ -132,7 +132,6 @@ public:
 	}
 
 	virtual void flush() {
-		char *newline; //char newline[2] is what IDA thinks it is, and it makes sense, however it doesnt decompile properly if i do that
 		this->m_unk[this->m_written] = 0;
 		if (this->m_window) {
 			if (gsys->m_debugStreamUnk) {
@@ -140,6 +139,7 @@ public:
 				SendMessage(this->m_window->m_hWnd, 0x186, this->m_dwordC++, 0);
 
 				if (this->m_RAStream) { // has file open
+					char newline[2];
 					strcpy(newline, "\n");
 					this->m_RAStream->write(this->m_unk, strlen(this->m_unk));
 					this->m_RAStream->write(newline, strlen(newline));
