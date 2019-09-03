@@ -42,9 +42,9 @@ public:
 	// NEW SECTION
 	void NewBit(char*, unsigned __int32, unsigned __int32); // this->writeInt(1); blah blah
 	// UH OH
-	// void NewButton(char *, IDelegate *, int);
-	// void NewButton(char *, IDelegate <AgeServer &> *, int);
-	// void NewEditor(char *, AyuImage *, bool);
+	void NewButton(char *, IDelegate *, int);
+	void NewButton(char *, IDelegate1<AgeServer &> *, int);
+	//void NewEditor(char *, AyuImage *, bool);
 	void NewEditor(char*, Colour&);
 	void NewEditor(char*, char*, int);
 	void NewEditor(char*, char*, int, int, int);

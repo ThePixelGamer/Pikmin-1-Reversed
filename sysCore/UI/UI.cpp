@@ -310,6 +310,172 @@ void UIWindow::updateMove(int x, int y) { // unsure if asm matches
 }
 
 //////////////////////////////////////////////////////////////////////
+// ToolWindow class functions
+//////////////////////////////////////////////////////////////////////
+
+ToolWindow::ToolWindow(UIWindow * parent, int unk2, int style, int exstyle, bool unk5) 
+	: UIWindow(parent, unk2, style, exstyle, unk5) {}
+
+void ToolWindow::createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu) {
+	UIWindow::createWindow(className, windowName, hMenu);
+
+	this->m_toolWindow = new UIWindow(this, 15, 0x52000340, 0, 0);
+	this->m_toolWindow->sizeWindow(this->m_unk8, this->m_unk9, 0);
+	this->m_toolWindow->createWindow("ToolbarWindow32", "toolbar", NULL);
+}
+
+void ToolWindow::initTools(HINSTANCE inst, int tickFreq, TBBUTTON* unkBut, tagTBADDBITMAP* unkMap) {
+	this->m_unk11 = inst;
+	HBITMAP bitMap = LoadBitmap(inst, (const char*)unkMap->nID);
+	LPARAM param = NULL;
+	SendMessage(this->m_toolWindow->m_hWnd, TBM_GETTOOLTIPS, 0x14, 0);
+	SendMessage(this->m_toolWindow->m_hWnd, TBM_SETBUDDY, 0, 0x190019);
+	SendMessage(this->m_toolWindow->m_hWnd, TBM_CLEARSEL, tickFreq, param);
+	SendMessage(this->m_toolWindow->m_hWnd, TBM_SETTICFREQ, tickFreq, (LPARAM)unkBut);
+	SendMessage(this->m_toolWindow->m_hWnd, TBM_GETBUDDY, 0, 0);
+}
+
+int ToolWindow::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
+	if (Msg == WM_NOTIFY) {
+		char buffer[512];
+		if ((int)*(&lParam + 8) == -520) { // because i haven't figured out the class yet
+			char* lparamStructEquivalent = (char*)&lParam;
+			LoadString(this->m_unk11, (int)*(&lParam + 4), buffer, 256);
+			sprintf((char *)(*(lparamStructEquivalent + 8)), buffer);
+		}
+	}
+	return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
+}
+
+//////////////////////////////////////////////////////////////////////
+// ComboBox class functions
+//////////////////////////////////////////////////////////////////////
+
+ComboBox::ComboBox(UIWindow * parent, int unk2, int style, int exstyle, bool unk5) : UIWindow(parent, unk2, style, exstyle, unk5) {
+	this->m_boxExStyle = WM_CHAR;
+}
+
+void ComboBox::addOption(char* option, bool unsure) {
+	SendMessage(this->m_boxWindow->m_hWnd, CB_ADDSTRING, 0, (LPARAM)option);
+
+	LRESULT foundString = SendMessage(this->m_boxWindow->m_hWnd, LB_FINDSTRINGEXACT, NULL, (LPARAM)option);
+	if (foundString != -1)
+		this->selOption(foundString);
+}
+
+void ComboBox::selOption(int option) {
+	SendMessage(this->m_boxWindow->m_hWnd, CB_SETCURSEL, option, NULL);
+}
+
+static char cBoxStringBuf[256];
+
+int ComboBox::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
+	if (wParam == WM_USER) {
+		SendMessage(this->m_boxWindow->m_hWnd, WM_GETTEXT, sizeof(cBoxStringBuf), (LPARAM)cBoxStringBuf); 
+		this->entryHandler(cBoxStringBuf);
+
+		LRESULT foundString = SendMessage(this->m_boxWindow->m_hWnd, CB_FINDSTRINGEXACT, 0xFFFFFFFF, (LPARAM)cBoxStringBuf);
+		if (foundString == -1)
+			SendMessage(this->m_boxWindow->m_hWnd, CB_ADDSTRING, 0, (LPARAM)cBoxStringBuf);
+	}
+	return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
+}
+
+void ComboBox::entryHandler(char*) { }
+
+LRESULT ComboBox_WndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam) {
+	switch (Msg) 
+	{
+	case WM_SETFOCUS:
+		::hWnd = GetParent(GetParent(hWnd));
+		break;
+	case WM_KILLFOCUS:
+		PostMessage(::hWnd, WM_USER, 0, 0);
+		break;
+	case WM_KEYDOWN:
+		if (wParam == WM_GETTEXT)
+			PostMessage(::hWnd, WM_USER, 0, 0);
+		break;
+
+	}
+
+	return CallWindowProcA(lpPrevWndFunc,hWnd, Msg, wParam, lParam);
+}
+
+void ComboBox::createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu) {
+	UIWindow::createWindow(className, windowName, hMenu);
+
+	/*Create ComboBox window, and resize window based on client.width*/
+	this->m_boxWindow = new UIWindow(this, 15, this->m_boxExStyle | 0x50200000, NULL, NULL);
+	this->m_boxWindow->sizeWindow((this->m_client.width()) - 16, 150, 0);
+	this->m_boxWindow->createWindow("ComboBox",0 ,0);
+
+	/*Set the font to the default GUI font for Windows*/
+	WPARAM font = (WPARAM)GetStockObject(DEFAULT_GUI_FONT);
+	SendMessage(this->m_boxWindow->m_hWnd, WM_SETFONT, font, NULL);
+
+	POINT unk;
+	unk.y = 4;
+	unk.x = 4;
+
+	::hWnd = this->m_hWnd;
+
+	HWND window = ChildWindowFromPoint(this->m_boxWindow->m_hWnd, unk);
+	::lpPrevWndFunc = (WNDPROC)SetWindowLong(window, -4, (LPARAM)ComboBox_WndProc);
+}
+
+//////////////////////////////////////////////////////////////////////
+// EditBox class functions
+//////////////////////////////////////////////////////////////////////
+
+EditBox::EditBox(UIWindow * parent, int unk2, int style, int exstyle, bool unk5) 
+	: ComboBox(parent, unk2, style, exstyle, unk5) {
+	this->m_boxExStyle = 0x41;
+}
+
+void EditBox::entryHandler(char* msg) {
+	UIWINDOWPRINT("got new text %s\n", msg);
+	UIWINDOWPRINT("sending message to %s\n", this->m_parent->name);
+	SendMessage(this->m_parent->m_hWnd, WM_USER, 0, (LPARAM)msg);
+}
+
+static char eBoxStringBuf[256];
+
+int EditBox::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
+	if (Msg == WM_COMMAND && lParam >> 16 == 1) {
+		LRESULT ret = SendMessage(this->m_boxWindow->m_hWnd, CB_GETCURSEL, 0, 0);
+		SendMessage(this->m_boxWindow->m_hWnd, CB_GETLBTEXT, ret, (LPARAM)eBoxStringBuf);
+		PostMessage(this->m_parent->m_hWnd, WM_USER, 0, (LPARAM)eBoxStringBuf);
+	}
+	return ComboBox::processMessage(hWnd, Msg, wParam, lParam);
+}
+
+//////////////////////////////////////////////////////////////////////
+// OptionBox class functions
+//////////////////////////////////////////////////////////////////////
+
+OptionBox::OptionBox(UIWindow * parent, int unk2, int style, int exstyle, bool unk5) 
+	: ComboBox(parent, unk2, style, exstyle, unk5) {
+	this->m_boxExStyle = 0x3;
+}
+
+int OptionBox::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
+	if (Msg == WM_COMMAND) {
+		UINT wParamShifted = wParam >> 16;
+		if (wParam >> 16 == 1) {
+			LRESULT selChange = SendMessage((HWND)lParam, CB_GETCURSEL, 0, 0);
+			UIWINDOWPRINT("got selection change %d, %08x\n", lParam, selChange);
+			this->selectionChanged(selChange);
+		}
+		else if (wParamShifted == 5)
+			UIWINDOWPRINT("got edit change\n");
+	}
+	return ComboBox::processMessage(hWnd, Msg, wParam, lParam);
+}
+
+void OptionBox::selectionChanged(int) { } // empty vFunction
+
+//////////////////////////////////////////////////////////////////////
 // UIMgr class functions
 //////////////////////////////////////////////////////////////////////
 

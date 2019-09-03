@@ -82,6 +82,74 @@ public:
 	void updateMove(int, int);
 };
 
+class SYSCORE_API ToolWindow : public UIWindow {
+public:
+	UIWindow* m_toolWindow; // 88h
+	HINSTANCE m_unk11; // 8Ch
+
+	ToolWindow(UIWindow*, int, int, int, bool);
+
+	void initTools(HINSTANCE, int, TBBUTTON*, tagTBADDBITMAP*);
+	virtual int processMessage(HWND, unsigned int, WPARAM, long); // todo: find out class type 
+	virtual void createWindow(LPCSTR, LPCSTR, HMENU);
+
+};
+
+//////////////////////////////////////////////////////////////////////
+// UI 'box classes
+//////////////////////////////////////////////////////////////////////
+
+class SYSCORE_API ComboBox : public UIWindow {
+public:
+	//vtable 0h
+	//(CoreNode: 4h-10h)
+	//(Node: 14h-1Ch)
+	//(UIFrame: 20h-40h)
+	//(UIWindow: 50h-84h)
+	UIWindow* m_boxWindow; //88h
+	int m_boxExStyle; //8Ch
+
+	ComboBox(UIWindow*, int, int, int, bool);
+	// destructor gets auto-gen'd
+
+	void addOption(char*, bool);
+	void selOption(int);
+
+	virtual int processMessage(HWND, unsigned int, WPARAM, long);
+	virtual void createWindow(LPCSTR, LPCSTR, HMENU);
+	virtual void entryHandler(char*); //58h
+};
+
+class SYSCORE_API EditBox : public ComboBox {
+public:
+	//vtable 0h
+	//(CoreNode: 4h-10h)
+	//(Node: 14h-1Ch)
+	//(UIFrame: 20h-40h)
+	//(UIWindow: 50h-84h)
+	//(ComboBox: 88h-8Ch)
+
+	EditBox(UIWindow*, int, int, int, bool);
+
+	virtual void entryHandler(char* msg);
+	virtual int processMessage(HWND, unsigned int, WPARAM, long);
+};
+
+class SYSCORE_API OptionBox : public ComboBox {
+public:
+	//vtable 0h
+	//(CoreNode: 4h-10h)
+	//(Node: 14h-1Ch)
+	//(UIFrame: 20h-40h)
+	//(UIWindow: 50h-84h)
+	//(ComboBox: 88h-8Ch)
+
+	OptionBox(UIWindow*, int, int, int, bool);
+
+	virtual void selectionChanged(int);
+	virtual int processMessage(HWND, unsigned int, WPARAM, long);
+};
+
 class SYSCORE_API UIMgr : public Node {
 public:
 	//vtable 0h

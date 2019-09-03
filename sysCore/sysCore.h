@@ -23,5 +23,7 @@ extern SYSCORE_API HINSTANCE sysHInst;
 extern SYSCORE_API Stream* sysCon;
 extern SYSCORE_API Stream* errCon;
 extern SYSCORE_API HWND sysCurrWnd;
+static HWND hWnd;
+static WNDPROC lpPrevWndFunc;
 
 #endif
