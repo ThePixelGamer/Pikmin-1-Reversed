@@ -107,11 +107,11 @@ void UIWindow::refreshWindow() {
 }
 
 void UIWindow::updateSizes(int w, int h) {
-	int v12 = this->m_frame.x1;
-	int v11 = this->m_frame.y1;
+	int frameX1 = this->m_frame.x1;
+	int frameY1 = this->m_frame.y1;
 	int v10 = w + (-this->m_zero.x1 + this->m_zero.x2);
 	int v9 = h + (-this->m_zero.y1 + this->m_zero.y2);
-	this->m_frame = RectArea(v12, v11, v12 + v10, v11 + v9);
+	this->m_frame = RectArea(frameX1, frameY1, frameX1 + v10, frameY1 + v9);
 	this->calcClientFromFrame(this->m_client);
 	HDWP hWinPosInfo = BeginDeferWindowPos(40);
 	if (this->Child()) {
@@ -336,13 +336,11 @@ void ToolWindow::initTools(HINSTANCE inst, int tickFreq, TBBUTTON* unkBut, tagTB
 }
 
 int ToolWindow::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
-	if (Msg == WM_NOTIFY) {
+	if (Msg == WM_NOTIFY && ((tagNMTTDISPINFOA*)lParam)->hdr.code == TTN_NEEDTEXT)
+	{
 		char buffer[512];
-		if ((int)*(&lParam + 8) == -520) { // because i haven't figured out the class yet
-			char* lparamStructEquivalent = (char*)&lParam;
-			LoadString(this->m_unk11, (int)*(&lParam + 4), buffer, 256);
-			sprintf((char *)(*(lparamStructEquivalent + 8)), buffer);
-		}
+		LoadString(this->m_unk11, ((tagNMTTDISPINFOA*)lParam)->hdr.idFrom, buffer, FORMAT_MESSAGE_ALLOCATE_BUFFER);
+		sprintf(((tagNMTTDISPINFOA*)lParam)->lpszText, buffer);
 	}
 	return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
 }
@@ -366,8 +364,6 @@ void ComboBox::addOption(char* option, bool unsure) {
 void ComboBox::selOption(int option) {
 	SendMessage(this->m_boxWindow->m_hWnd, CB_SETCURSEL, option, NULL);
 }
-
-static char cBoxStringBuf[256];
 
 int ComboBox::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
 	if (wParam == WM_USER) {
@@ -438,8 +434,6 @@ void EditBox::entryHandler(char* msg) {
 	UIWINDOWPRINT("sending message to %s\n", this->m_parent->name);
 	SendMessage(this->m_parent->m_hWnd, WM_USER, 0, (LPARAM)msg);
 }
-
-static char eBoxStringBuf[256];
 
 int EditBox::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
 	if (Msg == WM_COMMAND && lParam >> 16 == 1) {
@@ -561,8 +555,8 @@ void UIMgr::RegisterGenWindowClass(LPCSTR lpszClass, void* wndProcAddr, bool a3)
 
 void UIMgr::activateWindow(HWND hWnd, UIWindow * window)
 {
-	for (UIWindow* i = (UIWindow*)window->Child(); i; i = (UIWindow*)i->Next())
-		i->activate();
+	for (CoreNode* i = this->child; i; i = i->next)
+		((UIWindow*) i)->activate();
 }
 
 bool UIMgr::isActive()

@@ -12,14 +12,14 @@
 class Colour;
 
 enum PROP_TYPE {
-	UNK1 = 0,
-	UNK2, // 1
+	INT_PROP = 0,
+	FLOAT_PROP, // 1
 	UNK3, // 2
 	UNK4, // 3
 	COLOUR, // 4
 	UNK5, // 5
-	UNK6, // 6
-	UNK7, // 7
+	STRING_PROP, // 6
+	OPTIONBOX, // 7
 	UNK8 // 8
 };
 

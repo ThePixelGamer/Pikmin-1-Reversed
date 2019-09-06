@@ -21,6 +21,7 @@ public:
 
 	void init(int stringLength);
 	void init(char* string, int stringLength);
+	void init(char* string);
 
 	int calcHash();
 	unsigned __int32 calcHash(char*);

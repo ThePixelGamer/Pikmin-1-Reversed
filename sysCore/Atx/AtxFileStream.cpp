@@ -1,21 +1,6 @@
 #include "AtxFileStream.h"
 #include "../System/System.h"
 
-void ATXFILESTREAMPRINT(const char* fmt, ...) {
-	va_list args;
-	va_start(args, fmt);
-	char dest[1024];
-
-	if(sysCon) {
-		if ("Atx")
-			sysCon->print("%s: ", "Atx");
-		vsprintf(dest, fmt, args);
-		if(strlen(dest)) {
-			sysCon->write(dest, strlen(dest));
-		}
-	}
-}
-
 bool AtxFileStream::open(char* name, unsigned __int32 port) {
 	if (this->stream.open("fil", 3))
 	{
@@ -37,7 +22,7 @@ bool AtxFileStream::open(char* name, unsigned __int32 port) {
 		}
 	}
 	else {
-		ATXFILESTREAMPRINT("Could not open file service!!\n");
+		ATXPRINT("Could not open file service!!\n");
 		return false;
 	}
 }

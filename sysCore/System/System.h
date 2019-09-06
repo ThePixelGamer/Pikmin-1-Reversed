@@ -12,6 +12,7 @@
 #include "../BaseApp.h"
 #include "../IDelegate.h"
 #include "../Atx/AtxRouter.h"
+#include "../Networking/WSocket.h"
 
 class SYSCORE_API System : public StdSystem {
 public:
@@ -134,9 +135,9 @@ public:
 	virtual void flush() {
 		this->m_unk[this->m_written] = 0;
 		if (this->m_window) {
-			if (gsys->m_debugStreamUnk) {
-				SendMessage(this->m_window->m_hWnd, 0x180, 0, (LPARAM)this->m_unk);
-				SendMessage(this->m_window->m_hWnd, 0x186, this->m_dwordC++, 0);
+			if (gsys->m_debugStreamUnk == nullptr) {
+				SendMessage(this->m_window->m_hWnd, LB_ADDSTRING, 0, (LPARAM)this->m_unk);
+				SendMessage(this->m_window->m_hWnd, LB_SETCURSEL, this->m_dwordC++, 0);
 
 				if (this->m_RAStream) { // has file open
 					char newline[2];

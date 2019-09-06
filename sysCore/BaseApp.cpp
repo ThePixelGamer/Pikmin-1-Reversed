@@ -1,7 +1,7 @@
 #include "BaseApp.h"
 #include "Networking/TcpStream.h"
-
 #include "System/System.h"
+
 void BASEAPPPRINT(const char* fmt, ...) {
 	va_list args;
 	va_start(args, fmt);

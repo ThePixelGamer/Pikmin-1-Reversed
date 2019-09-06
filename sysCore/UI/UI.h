@@ -19,7 +19,7 @@ public:
 	int y2; //Ch
 
 	RectArea();
-	RectArea(int, int, int, int);
+	RectArea(int x1, int y1, int x2, int y2);
 
 	int height();
 	int width();
@@ -98,6 +98,7 @@ public:
 //////////////////////////////////////////////////////////////////////
 // UI 'box classes
 //////////////////////////////////////////////////////////////////////
+static char cBoxStringBuf[256];
 
 class SYSCORE_API ComboBox : public UIWindow {
 public:
@@ -119,6 +120,8 @@ public:
 	virtual void createWindow(LPCSTR, LPCSTR, HMENU);
 	virtual void entryHandler(char*); //58h
 };
+
+static char eBoxStringBuf[256];
 
 class SYSCORE_API EditBox : public ComboBox {
 public:

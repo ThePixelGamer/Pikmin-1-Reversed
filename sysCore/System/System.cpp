@@ -34,6 +34,7 @@ System::System() : StdSystem() {
 	sprintf(Dest, "%s\\", getcwd(0, 0));
 	this->baseDir = strdup(Dest);
 
+	WSocket::init();
 }
 
 System::System(const System& sys) : StdSystem(sys) {
@@ -46,11 +47,7 @@ System::~System() {
 
 RandomAccessStream* System::openFile(char* cwd, bool hasCwd)
 {
-	char* _workingDir;
-	if (hasCwd)
-		_workingDir = this->baseDir;
-	else
-		_workingDir = "";
+	char* _workingDir = (hasCwd ? this->baseDir : "");
 
 	char fPath[256];
 	sprintf(fPath, "%s", _workingDir);
@@ -59,11 +56,11 @@ RandomAccessStream* System::openFile(char* cwd, bool hasCwd)
 
 	sprintf(fPath, "%s%s", _fName, cwd);
 
-	FILE* fptr = fopen(fPath, "wb");
+	FILE* fptr = fopen(fPath, "rb");
 	if (!fptr)
 		return 0;
 
-	return new FileRandomAccessStream(fptr, cwd);
+	return new fileIO(fptr, cwd);
 }
 
 void System::sndPlaySe(unsigned int) {
@@ -87,28 +84,23 @@ UIWindow* System::createDebugStream(UIWindow* wind) {
 }
 
 RandomAccessStream* System::createFile(char* cwd, bool hasCwd) {
-	char* workingDir;
-	if (hasCwd)
-		workingDir = this->baseDir;
-	else
-		workingDir = "";
+	/*Get working directory to properly place file*/
+	char* workingDir = (hasCwd ? this->baseDir : "");
 
 	char Dest[256];
 	sprintf(Dest, "%s", workingDir);
 
-	char* fname;
-	if (cwd)
-		fname = this->fileName;
-	else
-		fname = "";
+	/*get filename*/
+	char* fname = (hasCwd ? "" : this->fileName);
 
+	/*combine current working directory with filename*/
 	sprintf(Dest, "%s%s", fname, cwd);
 
 	FILE* fptr = fopen(Dest, "wb");
 	if (!fptr)
 		return 0;
 
-	return new FileRandomAccessStream(fptr, cwd);
+	return new fileIO(fptr, cwd);
 }
 
 void System::doneRender() {

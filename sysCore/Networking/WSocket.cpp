@@ -33,11 +33,11 @@ bool WSocket::checkForConnections() {
 	readfds.fd_count = 0;
 	readfds.fd_array[(readfds.fd_count)++] = this->m_listeningSock;
 
-	const struct timeval* timeout;
-	ZeroMemory((PVOID)timeout, sizeof(timeout));
+	struct timeval timeout;
+	memset(&timeout, 0, sizeof(timeval));
 	unsigned int unused = 1;
 
-	int selectVal = select(1, &readfds, 0, 0, timeout);
+	int selectVal = select(1, &readfds, 0, 0, &timeout);
 	if (selectVal < 0)
 		return false;
 	if (selectVal > 0 && __WSAFDIsSet(this->m_listeningSock, &readfds))
@@ -167,10 +167,12 @@ void WSocket::read(char* buf, int len) {
 
 void WSocket::setASync(HWND hWnd, unsigned __int32 wMsg, unsigned __int32 lEvent, int sock) {
 	int _sock; // [esp+4Ch] [ebp-Ch]
+
 	if ( sock != -1 )
 		_sock = sock; 
 	else
 		_sock = this->m_acceptedSock;
+
 	if ( WSAAsyncSelect(_sock, hWnd, wMsg, lEvent) == -1 )
 		WSOCKETPRINT("Error switching to Async mode\n");
 }

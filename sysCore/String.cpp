@@ -13,12 +13,7 @@ String::String(char* string, int stringLength) {
 }
 
 void String::init(int _stringLength) {
-	char* _tempStr;
-
-	if (_stringLength)
-		_tempStr = new char[_stringLength + 1]; // v2 = allocateBytesOnHeap(a2 + 1);
-	else
-		_tempStr = 0;
+	char* _tempStr = (_stringLength ? new char[_stringLength + 1] : nullptr);
 	this->m_string = _tempStr;
 	this->m_stringLen = _stringLength;
 }
@@ -26,6 +21,10 @@ void String::init(int _stringLength) {
 void String::init(char* _string, int _stringLength) {
 	this->m_string = _string;
 	this->m_stringLen = _stringLength;
+}
+
+void String::init(char* _string) {
+	this->m_string = _string;
 }
 
 int String::calcHash() {

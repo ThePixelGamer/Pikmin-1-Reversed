@@ -4,25 +4,6 @@
 #include "../Stream/CmdStream.h"
 
 //////////////////////////////////////////////////////////////////////
-// FileRandomAccessStream class functions
-//////////////////////////////////////////////////////////////////////
-
-FileRandomAccessStream::FileRandomAccessStream(FILE* fpointer, char* cwd) : RandomAccessStream() {
-	this->fStream = fpointer;
-	this->filePath = cwd;
-	this->dwordC = 0;
-
-	int offset = this->getPosition();
-	fseek(this->fStream, 0, SEEK_END);
-	this->fileSize = ftell(this->fStream);
-	fseek(this->fStream, offset, SEEK_SET);
-}
-
-int FileRandomAccessStream::getPosition() {
-	return ftell(this->fStream);
-}
-
-//////////////////////////////////////////////////////////////////////
 // StdSystem class functions
 //////////////////////////////////////////////////////////////////////
 
@@ -36,7 +17,7 @@ void StdSystem::initSoftReset() {
 }
 
 RandomAccessStream* StdSystem::openFile(char*, bool, bool) {
-	return new FileRandomAccessStream(0, 0);
+	return NULL;
 }
 
 void StdSystem::copyRamToCache(unsigned int, unsigned int, unsigned int) {

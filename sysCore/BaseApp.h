@@ -20,6 +20,7 @@ public:
 	bool m_unkByte;	// 28h
 	int m_unkInt; //2Ch
 	Node m_node1; //30h
+	int heapType; //50h
 
 	BaseApp();
 

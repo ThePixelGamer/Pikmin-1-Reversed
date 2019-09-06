@@ -9,6 +9,8 @@
 
 #include "../Stream/Stream.h"
 
+void ATXPRINT(const char* fmt, ...);
+
 class SYSCORE_API AtxStream : public Stream {
 public:
 	//0h - vtbl

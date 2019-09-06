@@ -9,6 +9,8 @@
 #include "Geometry/Matrix4f.h"
 #include "System/System.h"
 #include "Colour.h"
+#pragma comment(lib, "opengl32.lib")
+#include <gl/GL.h>
 
 #define TAU 6.2831855
 

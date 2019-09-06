@@ -27,7 +27,7 @@ public:
 	void connect();
 	bool create(char* unused, int port); // if statement compiles wrong
 	static void flushWrite();
-	void init();
+	static void init();
 	bool open(char* name, int port);
 	unsigned long pending();
 	void setASync(HWND hWnd, unsigned __int32 wMsg, unsigned __int32 lEvent, int sock); // if statement compiles wrong

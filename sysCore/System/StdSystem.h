@@ -12,16 +12,40 @@
 #ifndef FRAS
 #define FRAS
 
-class FileRandomAccessStream : public RandomAccessStream {
+class fileIO : public RandomAccessStream {
 public:
 	// 0h - vtable
 	//(Stream: 4h)
 	FILE* fStream; // 8h
-	int dwordC; // Ch
+	int fileStreamPointer; // Ch
 	int fileSize; // 10h 
 
-	FileRandomAccessStream(FILE* fpointer, char* cwd);
-	virtual int getPosition();
+	fileIO(FILE* fpointer, char* cwd) {
+		this->fStream = fpointer;
+		this->filePath = cwd;
+		this->fileStreamPointer = 0;
+
+		int offset = this->getPosition();
+		fseek(this->fStream, 0, SEEK_END);
+		this->fileSize = ftell(this->fStream);
+		fseek(this->fStream, offset, SEEK_SET);
+	}
+
+	virtual int getPosition() { return ftell(this->fStream); }
+	virtual void read(void* buf, int count) {
+		fread(buf, 1, count, this->fStream);
+		this->fileStreamPointer += count;
+	}
+	virtual void write(void* buf, int count) {
+		fwrite(buf, 1, count, this->fStream);
+	}
+	virtual int getPending() { return this->fileSize - this->fileStreamPointer; }
+	virtual int getAvailable() { return this->fileSize; }
+	virtual void close() {
+		fflush(this->fStream);
+		fclose(this->fStream);
+	}
+	virtual void setPosition(int offset) { fseek(this->fStream, offset, SEEK_SET); }
 };
 
 #endif
