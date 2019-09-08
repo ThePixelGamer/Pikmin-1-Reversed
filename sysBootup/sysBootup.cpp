@@ -9,6 +9,7 @@
 #include "../sysCore/Module.h"
 #include "../sysCore/Stream/CmdStream.h"
 #include "../sysCore/Stream/RamStream.h"
+#include "../sysCore/Atx/AtxDirectRouter.h"
 
 MenuPlugin* menuP = new MenuPlugin();
 System unused;
@@ -25,7 +26,7 @@ public:
 		if(Msg == WM_COMMAND) {
 			for(MenuPlugin* i = menuP; i; i = i->next) {
 				if(i->prev == wParam) {
-					modMgr->Alloc(i->name);
+					((void (*)(void)) modMgr->Alloc(i->name))();
 					return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
 				}
 			}
@@ -52,7 +53,7 @@ void print(const char* fmt, ...) {
 void createUIWindow(HINSTANCE hInst) { // 0x16C40000
 	RectArea newFrame(690, 32, 1260, 300);
 	window = new UIMain(0, 0, 0x16C40000, 0, true);
-	window->setFrame(RectArea(newFrame.x1, newFrame.x2, newFrame.y1, newFrame.y2));
+	window->setFrame(RectArea(newFrame.x1, newFrame.y1, newFrame.x2, newFrame.y2));
 	window->createWindow("DUIClearWin", systemName, LoadMenu(sysHInst, MAKEINTRESOURCE(IDR_MENU1)));
 	UIWindow* debugStream = gsys->createDebugStream(window);
 	window->refreshWindow();
