@@ -20,7 +20,8 @@ enum PROP_TYPE {
 	UNK5, // 5
 	STRING_PROP, // 6
 	OPTIONBOX, // 7
-	UNK8 // 8
+	UNK8, // 8
+	UNK9 // 9
 };
 
 class SYSCORE_API AgeServer : public AtxStream {
