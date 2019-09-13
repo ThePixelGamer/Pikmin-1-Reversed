@@ -13,7 +13,7 @@ String::String(char* string, int stringLength) {
 }
 
 void String::init(int _stringLength) {
-	char* _tempStr = (_stringLength ? new char[_stringLength + 1] : nullptr);
+	char* _tempStr = (_stringLength ? new char[_stringLength + 1] : 0);
 	this->m_string = _tempStr;
 	this->m_stringLen = _stringLength;
 }

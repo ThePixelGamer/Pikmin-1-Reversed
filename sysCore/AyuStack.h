@@ -24,7 +24,6 @@ public:
 
 	bool checkOverflow();
 	void checkStack();
-	void create();
 	void create(char*, int, void*, int, bool);
 
 	int getFree();
@@ -40,6 +39,8 @@ public:
 
 	void reset();
 	void reset(int);
+
+	int setAllocType(int);
 };
 
 #endif

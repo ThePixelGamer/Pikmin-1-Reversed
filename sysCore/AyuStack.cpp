@@ -135,6 +135,35 @@ unsigned __int32* AyuStack::push(int toPush) {
 }
 */
 
-void AyuStack::reset() {
+void AyuStack::reset(int allocType) {
+	if (allocType & 2)
+	{
+		int prevAllocType = this->setAllocType(allocType);
+		gsys->invalidateObjs(*this->top, *this->sp);
+		while (this->sp != this->top)
+			this->pop();
+		this->setAllocType(prevAllocType);
+	}
+	if (allocType & 1)
+	{
+		int prevAllocType = this->setAllocType(allocType);
+		gsys->invalidateObjs(this->m_topFree, this->m_topSize);
+		while (this->m_topFree != this->m_topSize)
+			this->pop();
+		this->setAllocType(prevAllocType);
+	}
+}
 
+void AyuStack::reset()
+{
+	this->sp = this->top;
+	this->m_topFree = this->m_topSize;
+	this->m_used = 0;
+}
+
+int AyuStack::setAllocType(int allocType)
+{
+	int prev = this->m_allocType;
+	this->m_allocType = allocType;
+	return prev;
 }
