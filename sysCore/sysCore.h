@@ -26,4 +26,6 @@ extern SYSCORE_API HWND sysCurrWnd;
 static HWND hWnd;
 static WNDPROC lpPrevWndFunc;
 
+#define nullptr 0
+
 #endif

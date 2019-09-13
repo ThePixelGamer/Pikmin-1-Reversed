@@ -268,13 +268,10 @@ void UIWindow::sizeWindow(int x, int y, int a2) {
 	y += -this->m_zero.y1 + this->m_zero.y2;
 	this->m_unk8 = x;
 	this->m_unk9 = y;
-	if(a2) {
+	if(a2 == 1) {
 		RectArea rect;
-		if(m_dwStyle & 0x40000000) {
-			rect.x1 = this->m_parent->m_client.x1;
-			rect.y1 = this->m_parent->m_client.y1;
-			rect.x2 = this->m_parent->m_client.x2;
-			rect.y2 = this->m_parent->m_client.y2;
+		if(m_dwStyle & WS_CHILDWINDOW) {
+			rect = this->m_parent->m_client;
 		}
 		else {
 			SystemParametersInfoA(SPI_GETWORKAREA, 0, &rect, 0);
@@ -336,11 +333,11 @@ void ToolWindow::initTools(HINSTANCE inst, int tickFreq, TBBUTTON* unkBut, tagTB
 }
 
 int ToolWindow::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam) {
-	if (Msg == WM_NOTIFY && ((tagNMTTDISPINFOA*)lParam)->hdr.code == TTN_NEEDTEXT)
+	if (Msg == WM_NOTIFY && ((NMTTDISPINFOA*)lParam)->hdr.code == TTN_NEEDTEXT)
 	{
 		char buffer[512];
-		LoadString(this->m_unk11, ((tagNMTTDISPINFOA*)lParam)->hdr.idFrom, buffer, FORMAT_MESSAGE_ALLOCATE_BUFFER);
-		sprintf(((tagNMTTDISPINFOA*)lParam)->lpszText, buffer);
+		LoadString(this->m_unk11, ((NMTTDISPINFOA*)lParam)->hdr.idFrom, buffer, FORMAT_MESSAGE_ALLOCATE_BUFFER);
+		sprintf(((NMTTDISPINFOA*)lParam)->lpszText, buffer);
 	}
 	return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
 }
