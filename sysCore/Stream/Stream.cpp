@@ -46,7 +46,7 @@ float Stream::readFloat() {
 	int c;
 	this->read(&c, sizeof(float));
 	c = (c << 24) | ((c & 0xFF00) << 8) | ((c & 0xFF0000) >> 8) | ((c & 0xFF000000) >> 24);
-	return static_cast<float>(c);
+	return *reinterpret_cast<float*>(&c);
 }
 
 char* Stream::readString() {

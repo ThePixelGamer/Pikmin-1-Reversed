@@ -37,7 +37,7 @@ int RandomAccessStream::readIntFrom(int position)
 
 void RandomAccessStream::skipPadding(unsigned __int32 paddingAmount)
 {
-	int length = this->getLength();
+	int length = this->getPosition();
 	int resultAmount = (~(paddingAmount - 1) & (length + paddingAmount - 1)) - length;
 	for (int i = 0; i < resultAmount; ++i)
 		char temp = this->readByte();
