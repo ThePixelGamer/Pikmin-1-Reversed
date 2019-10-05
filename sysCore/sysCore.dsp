@@ -123,6 +123,10 @@ SOURCE=.\Networking\WSocket.cpp
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE=.\Stream\BufferedStream.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Stream\CmdStream.cpp
 # End Source File
 # Begin Source File
@@ -289,6 +293,10 @@ SOURCE=.\Networking\WSocket.h
 # Begin Group "STREAM HEADER FILES"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Stream\BufferedStream.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\Stream\CmdStream.h

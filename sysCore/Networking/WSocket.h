@@ -32,8 +32,8 @@ public:
 	unsigned long pending();
 	void setASync(HWND hWnd, unsigned __int32 wMsg, unsigned __int32 lEvent, int sock); // if statement compiles wrong
 
-	void read(char* buf, int length);
-	void write(char* buf, int length);
+	void read(void* buf, int length);
+	void write(void* buf, int length);
 };
 
 #endif

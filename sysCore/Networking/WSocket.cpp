@@ -150,9 +150,9 @@ unsigned long WSocket::pending() {
 		return argp;
 }
 
-void WSocket::read(char* buf, int len) {
+void WSocket::read(void* buf, int len) {
 	while (len) {
-		int recieved = recv(this->m_acceptedSock, buf, len, 0);
+		int recieved = recv(this->m_acceptedSock, static_cast<char*>(buf), len, 0);
 		if (recieved < 0) {
 			int lastError = WSAGetLastError();
 			if (lastError != WSAEWOULDBLOCK)
@@ -161,7 +161,7 @@ void WSocket::read(char* buf, int len) {
 			recieved = 0;
 		}
 		len -= recieved;
-		buf += recieved;
+		buf = static_cast<char*>(buf) + recieved;
 	}
 }
 
@@ -177,10 +177,10 @@ void WSocket::setASync(HWND hWnd, unsigned __int32 wMsg, unsigned __int32 lEvent
 		WSOCKETPRINT("Error switching to Async mode\n");
 }
 
-void WSocket::write(char* buf, int len) {
+void WSocket::write(void* buf, int len) {
 	signed int writeLimit = 200; // unsure of name
 	while (len) {
-		int sentData = send(this->m_acceptedSock, buf, len, 0);
+		int sentData = send(this->m_acceptedSock, static_cast<char*>(buf), len, 0);
 		if (sentData < 0) {
 			int lastError = WSAGetLastError();
 			if (lastError != WSAEWOULDBLOCK)
@@ -195,6 +195,6 @@ void WSocket::write(char* buf, int len) {
 				WSOCKETPRINT("!!! Not sent all data !!\n");
 		}
 		len -= sentData;
-		buf += sentData;
+		buf = static_cast<char*>(buf) + sentData;
 	}
 }
