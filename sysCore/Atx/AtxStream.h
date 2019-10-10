@@ -22,8 +22,11 @@ public:
 
 	void init();
 	bool open(char*, int);
-
-	void close() {}
+	virtual void close();
+	virtual void flush();
+	virtual int getPending();
+	virtual void read(void*, int);
+	virtual void write(void*, int);
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "AtxStream.h"
 #include "AtxRouter.h"
 #include "../System/System.h"
+#include "../Networking/TcpStream.h"
 
 void ATXPRINT(const char* fmt, ...) {
 	va_list args;
@@ -28,11 +29,10 @@ bool AtxStream::open(char* unk, int unk2) {
 
 	if (router->openRoute(this, unk2)) {
 		this->write(unk, 4);
-		int identifier = this->readInt();
+		const int identifier = m_stream->readInt();
 		if (identifier == 0xFFFF)
 			return false;
-		else
-		{
+		else {
 			this->flush();
 			return true;
 		}
@@ -43,4 +43,42 @@ bool AtxStream::open(char* unk, int unk2) {
 		gsys->setAtxRouter(NULL);
 		return false;
 	}
+}
+
+void AtxStream::close()
+{
+	gsys->getAtxRouter()->closeRoute(this);
+}
+
+void AtxStream::flush()
+{
+	AtxRouter* router = gsys->getAtxRouter();
+	router->lock();
+	m_stream->flush();
+	router->unlock();
+}
+
+int AtxStream::getPending()
+{
+	AtxRouter* router = gsys->getAtxRouter();
+	router->lock();
+	const int pending = m_stream->getPending();
+	router->unlock();
+	return pending;
+}
+
+void AtxStream::read(void* buffer, int count)
+{
+	AtxRouter* router = gsys->getAtxRouter();
+	router->lock();
+	m_stream->read(buffer, count);
+	router->unlock();
+}
+
+void AtxStream::write(void* buffer, int count)
+{
+	AtxRouter* router = gsys->getAtxRouter();
+	router->lock();
+	m_stream->write(buffer, count);
+	router->unlock();
 }

@@ -19,20 +19,20 @@ void ATXCOMMANDSTREAMPRINT(const char* fmt, ...) {
 bool AtxCommandStream::checkCommands() {
 	if (this->m_stream->getPending())
 		return false;
-	
-	int command = this->m_stream->readInt();
-	if (command == 1) {
-		ATXCOMMANDSTREAMPRINT("Atx - Sending identification information\n");
-		this->writeString(this->filePath);
-	}
-	else {
-		if (command == 0xFFFF) {
-			ATXCOMMANDSTREAMPRINT("Atx - Server is closing\n");
-			this->m_baseApp->stopAgeServer();
-			return false;
-		}
-		if (command == 'age\0')
+
+	const int command = this->m_stream->readInt();
+	switch (command) {
+		case 0xFFFF:
+		ATXCOMMANDSTREAMPRINT("Atx - Server is closing\n");
+		this->m_baseApp->stopAgeServer();
+		return false;
+		case 1:
+			ATXCOMMANDSTREAMPRINT("Atx - Sending identification information\n");
+			this->writeString(this->filePath);
+		break;
+		case 'age\0':
 			this->m_baseApp->startAgeServer();
+			break;
 	}
 	return true;
 }

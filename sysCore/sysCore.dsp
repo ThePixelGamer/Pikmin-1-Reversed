@@ -142,6 +142,14 @@ SOURCE=.\Stream\RandomAccessStream.cpp
 SOURCE=.\Stream\Stream.cpp
 # End Source File
 # End Group
+# Begin Group "MODEL SOURCE"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Model_File\Envelope.cpp
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\AgeServer.cpp
@@ -312,6 +320,14 @@ SOURCE=.\Stream\RandomAccessStream.h
 # Begin Source File
 
 SOURCE=.\Stream\Stream.h
+# End Source File
+# End Group
+# Begin Group "MODEL HEADER"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Model_File\Envelope.h
 # End Source File
 # End Group
 # Begin Source File

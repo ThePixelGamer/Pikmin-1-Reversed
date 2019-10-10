@@ -21,14 +21,14 @@ AyuStack::AyuStack() {
 }
 
 bool AyuStack::checkOverflow() {
-	if (this->active)
-		return *this->top != 0x12345678;
-	else
-		return false;
+	return (this->active) 
+		? *this->top != 0x12345678 
+		: false;
 }
 
 void AyuStack::checkStack() {
 	if (this->m_allocType & 2)
+		//TODO: line below is wrong, fix!
 		if (&this->sp[-*this->top] != this->top)
 			haltAyuStack("trashed memory stack (%s)\n", this->name);
 }
