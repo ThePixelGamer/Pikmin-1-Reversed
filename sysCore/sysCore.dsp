@@ -149,6 +149,10 @@ SOURCE=.\Stream\Stream.cpp
 
 SOURCE=.\Model_File\Envelope.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\Model_File\VtxMatrix.cpp
+# End Source File
 # End Group
 # Begin Source File
 
@@ -328,6 +332,10 @@ SOURCE=.\Stream\Stream.h
 # Begin Source File
 
 SOURCE=.\Model_File\Envelope.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Model_File\VtxMatrix.h
 # End Source File
 # End Group
 # Begin Source File
