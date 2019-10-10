@@ -12,8 +12,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "GfxObject.h"
-#include "Stream/RandomAccessStream.h"
+#include "../GfxObject.h"
+#include "../Stream/RandomAccessStream.h"
 #pragma comment(lib, "opengl32.lib")
 
 class SYSCORE_API Texture : public GfxObject {

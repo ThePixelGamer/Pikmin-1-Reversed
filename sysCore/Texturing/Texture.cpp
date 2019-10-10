@@ -1,5 +1,5 @@
 #include "Texture.h"
-#include "sysCore.h"
+#include "../sysCore.h"
 
 Texture::Texture() : GfxObject() {
     this->tex = -1;
@@ -33,6 +33,7 @@ void Texture::grabBuffer(GLsizei width, GLsizei height, bool unused1, bool unuse
 }
 
 unsigned __int8 Texture::getAlpha(int unk1, int unk2) {
+	// gets rightmost byte
 	return this->pixels[unk1 + this->width * unk2] >> 24;
 }
 

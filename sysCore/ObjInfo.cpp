@@ -46,7 +46,7 @@ void AnmobjInfo::detach() {
 // TexobjInfo class functions
 //////////////////////////////////////////////////////////////////////
 
-#include "Texture.h"
+#include "Texturing/Texture.h"
 
 TexobjInfo::TexobjInfo() {
     this->texData = 0;

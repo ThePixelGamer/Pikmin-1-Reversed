@@ -142,7 +142,7 @@ SOURCE=.\Stream\RandomAccessStream.cpp
 SOURCE=.\Stream\Stream.cpp
 # End Source File
 # End Group
-# Begin Group "MODEL SOURCE"
+# Begin Group "MODEL SOURCE FILES"
 
 # PROP Default_Filter ""
 # Begin Source File
@@ -152,6 +152,18 @@ SOURCE=.\Model_File\Envelope.cpp
 # Begin Source File
 
 SOURCE=.\Model_File\VtxMatrix.cpp
+# End Source File
+# End Group
+# Begin Group "TEXTURE SOURCE FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Texturing\TexImg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Texturing\Texture.cpp
 # End Source File
 # End Group
 # Begin Source File
@@ -229,10 +241,6 @@ SOURCE=.\sysCore.cpp
 # Begin Source File
 
 SOURCE=.\System\System.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Texture.cpp
 # End Source File
 # Begin Source File
 
@@ -326,7 +334,7 @@ SOURCE=.\Stream\RandomAccessStream.h
 SOURCE=.\Stream\Stream.h
 # End Source File
 # End Group
-# Begin Group "MODEL HEADER"
+# Begin Group "MODEL HEADER FILES"
 
 # PROP Default_Filter ""
 # Begin Source File
@@ -336,6 +344,18 @@ SOURCE=.\Model_File\Envelope.h
 # Begin Source File
 
 SOURCE=.\Model_File\VtxMatrix.h
+# End Source File
+# End Group
+# Begin Group "TEXTURE HEADER FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Texturing\TexImg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Texturing\Texture.h
 # End Source File
 # End Group
 # Begin Source File
@@ -413,10 +433,6 @@ SOURCE=.\sysCore.h
 # Begin Source File
 
 SOURCE=.\System\System.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Texture.h
 # End Source File
 # Begin Source File
 
