@@ -1,4 +1,5 @@
 #include "Texture.h"
+#include "sysCore.h"
 
 Texture::Texture() : GfxObject() {
     this->tex = -1;
@@ -24,9 +25,11 @@ void Texture::makeResident() {
 }
 
 void Texture::grabBuffer(GLsizei width, GLsizei height, bool unused1, bool unused2) {
-    if(this->tex != -1) {
-
-    }
+	glReadPixels(0, glnHeight - width, width, height, GL_RGBA, GL_UNSIGNED_BYTE, this->pixels);
+	// TODO: figure out what makes the variable below 'zf' not 'ST70_4'
+	bool unused = this->tex == 0;
+	glBindTexture(GL_TEXTURE_2D, this->tex);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, this->pixels);
 }
 
 unsigned __int8 Texture::getAlpha(int unk1, int unk2) {

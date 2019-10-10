@@ -5,6 +5,8 @@ SYSCORE_API HINSTANCE sysHInst;
 SYSCORE_API Stream* sysCon;
 SYSCORE_API class Stream* errCon;
 SYSCORE_API HWND sysCurrWnd;
+SYSCORE_API int glnHeight = 640;
+SYSCORE_API int glnWidth = 480;
 
 BOOL __stdcall DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {

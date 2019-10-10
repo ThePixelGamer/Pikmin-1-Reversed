@@ -26,6 +26,10 @@ extern SYSCORE_API HWND sysCurrWnd;
 static HWND hWnd;
 static WNDPROC lpPrevWndFunc;
 
+// Not sure where to put these
+extern SYSCORE_API int glnHeight;
+extern SYSCORE_API int glnWidth;
+
 #define nullptr 0
 
 #endif
