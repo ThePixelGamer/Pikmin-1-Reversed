@@ -131,6 +131,10 @@ SOURCE=.\Stream\CmdStream.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Stream\FileIO.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Stream\RamStream.cpp
 # End Source File
 # Begin Source File
@@ -352,6 +356,10 @@ SOURCE=.\Stream\BufferedStream.h
 # Begin Source File
 
 SOURCE=.\Stream\CmdStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stream\FileIO.h
 # End Source File
 # Begin Source File
 

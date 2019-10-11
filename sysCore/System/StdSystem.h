@@ -4,59 +4,19 @@
 #define SYSCORE_API __declspec(dllimport)
 #endif
 
-#include <cstdarg>
-#include <algorithm>
-#include <Windows.h>
-#include "../Stream/RandomAccessStream.h"
-
-#ifndef FRAS
-#define FRAS
-
-class fileIO : public RandomAccessStream {
-public:
-	// 0h - vtable
-	//(Stream: 4h)
-	FILE* fStream; // 8h
-	int fileStreamPointer; // Ch
-	int fileSize; // 10h 
-
-	fileIO(FILE* fpointer, char* cwd) {
-		this->fStream = fpointer;
-		this->filePath = cwd;
-		this->fileStreamPointer = 0;
-
-		int offset = this->getPosition();
-		fseek(this->fStream, 0, SEEK_END);
-		this->fileSize = ftell(this->fStream);
-		fseek(this->fStream, offset, SEEK_SET);
-	}
-
-	virtual int getPosition() { return ftell(this->fStream); }
-	virtual void read(void* buf, int count) {
-		fread(buf, 1, count, this->fStream);
-		this->fileStreamPointer += count;
-	}
-	virtual void write(void* buf, int count) {
-		fwrite(buf, 1, count, this->fStream);
-	}
-	virtual int getPending() { return this->fileSize - this->fileStreamPointer; }
-	virtual int getAvailable() { return this->fileSize; }
-	virtual void close() {
-		fflush(this->fStream);
-		fclose(this->fStream);
-	}
-	virtual void setPosition(int offset) { fseek(this->fStream, offset, SEEK_SET); }
-};
-
-#endif
 
 #ifndef STDSYSTEM_H
 #define STDSYSTEM_H
 
+#include <Windows.h>
 #include "../AgeServer.h"
 #include "../Nodes.h"
 #include "../ObjInfo.h"
 #include "../AyuHeap.h"
+#include "../Stream/FileIO.h"
+
+#include <cstdarg>
+#include <algorithm>
 
 class CacheTexture;
 class LoadIdler;
