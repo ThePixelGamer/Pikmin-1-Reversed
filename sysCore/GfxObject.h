@@ -9,8 +9,8 @@
 
 class SYSCORE_API GfxObject {
 public:
-	virtual void attach();
-	virtual void detach();
+  virtual void attach();
+  virtual void detach();
 };
 
 #endif

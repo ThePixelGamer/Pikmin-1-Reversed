@@ -5,27 +5,27 @@
 //////////////////////////////////////////////////////////////////////
 
 GfxobjInfo::GfxobjInfo() {
-    this->next = 0;
-    this->prev = 0;
-    this->str = "";
-    this->id32.setID(0x6E6F6E65);
-    this->unused = 0;
+  this->next = 0;
+  this->prev = 0;
+  this->str = "";
+  this->id32.setID(0x6E6F6E65);
+  this->unused = 0;
 }
 
 void GfxobjInfo::attach() {}
 
 void GfxobjInfo::detach() {}
 
-void GfxobjInfo::insertAfter(GfxobjInfo* a2) {
-    a2->next = this->next;
-    a2->prev = this;
-    this->next->prev = a2;
-    this->next = a2;
+void GfxobjInfo::insertAfter(GfxobjInfo *a2) {
+  a2->next = this->next;
+  a2->prev = this;
+  this->next->prev = a2;
+  this->next = a2;
 }
 
 void GfxobjInfo::remove() {
-    this->next->prev = this->prev;
-    this->prev->next = this->next;
+  this->next->prev = this->prev;
+  this->prev->next = this->next;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -34,13 +34,9 @@ void GfxobjInfo::remove() {
 
 #include "AnimData.h"
 
-AnmobjInfo::AnmobjInfo() {
-    this->animData = 0;
-}
+AnmobjInfo::AnmobjInfo() { this->animData = 0; }
 
-void AnmobjInfo::detach() {
-   animData->detach();
-}
+void AnmobjInfo::detach() { animData->detach(); }
 
 //////////////////////////////////////////////////////////////////////
 // TexobjInfo class functions
@@ -48,10 +44,6 @@ void AnmobjInfo::detach() {
 
 #include "Texturing/Texture.h"
 
-TexobjInfo::TexobjInfo() {
-    this->texData = 0;
-}
+TexobjInfo::TexobjInfo() { this->texData = 0; }
 
-void TexobjInfo::detach() {
-   texData->detach();
-}
+void TexobjInfo::detach() { texData->detach(); }

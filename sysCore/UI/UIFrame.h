@@ -12,19 +12,19 @@
 
 class SYSCORE_API UIFrame : public Node {
 public:
-	//vtable 0h
-	//(CoreNode: 4h-10h)
-	//(Node: 14h-1Ch)
-	RectArea m_frame; //20h
-	RectArea m_zero; //30h
-	RectArea m_client; //40h
+  // vtable 0h
+  //(CoreNode: 4h-10h)
+  //(Node: 14h-1Ch)
+  RectArea m_frame;  // 20h
+  RectArea m_zero;   // 30h
+  RectArea m_client; // 40h
 
-	UIFrame();
+  UIFrame();
 
-	void calcClientFromFrame(RectArea&);
-	void calcFrameFromClient(RectArea&);
-	void setClient(RectArea&);
-	void setFrame(RectArea&);
+  void calcClientFromFrame(RectArea &);
+  void calcFrameFromClient(RectArea &);
+  void setClient(RectArea &);
+  void setFrame(RectArea &);
 };
 
 #endif

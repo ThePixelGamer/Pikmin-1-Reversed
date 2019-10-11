@@ -13,18 +13,18 @@
 
 class SYSCORE_API RectArea {
 public:
-	int x1; //0h
-	int y1; //4h
-	int x2; //8h
-	int y2; //Ch
+  int x1; // 0h
+  int y1; // 4h
+  int x2; // 8h
+  int y2; // Ch
 
-	RectArea();
-	RectArea(int x1, int y1, int x2, int y2);
+  RectArea();
+  RectArea(int x1, int y1, int x2, int y2);
 
-	int height();
-	int width();
-	bool pointInside(int, int);
-	void set(int, int, int, int);
+  int height();
+  int width();
+  bool pointInside(int, int);
+  void set(int, int, int, int);
 };
 
 #endif

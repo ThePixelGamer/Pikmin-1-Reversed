@@ -15,9 +15,9 @@
 
 class SYSCORE_API ANode {
 public:
-	virtual void genAge(class AgeServer&);
-	virtual void genAgeNode(class AgeServer&);
-	virtual int getAgeNodeType();
+  virtual void genAge(class AgeServer &);
+  virtual void genAgeNode(class AgeServer &);
+  virtual int getAgeNodeType();
 };
 
 #endif

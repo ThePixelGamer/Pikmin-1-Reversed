@@ -4,11 +4,9 @@
 // AnimCacheInfo class functions
 //////////////////////////////////////////////////////////////////////
 
-AnimCacheInfo::AnimCacheInfo() {
-    this->initData();
-}
+AnimCacheInfo::AnimCacheInfo() { this->initData(); }
 
 void AnimCacheInfo::initData() {
-    this->cacheInfo = 0;
-	this->unk2 = 0;
+  this->cacheInfo = 0;
+  this->unk2 = 0;
 }

@@ -7,24 +7,24 @@
 #ifndef UIMGR_H
 #define UIMGR_H
 
-#include "UIWindow.h"
 #include "../Nodes/NodeMgr.h"
+#include "UIWindow.h"
 
 class SYSCORE_API UIMgr : public Node {
 public:
-	//vtable 0h
-	//(CoreNode: 4h-10h)
-	//(Node: 14h-1Ch)
-	Node m_unk1; // 20h
+  // vtable 0h
+  //(CoreNode: 4h-10h)
+  //(Node: 14h-1Ch)
+  Node m_unk1; // 20h
 
-	UIMgr();
-	~UIMgr();
+  UIMgr();
+  ~UIMgr();
 
-	void RegisterGenWindowClass(LPCSTR lpszClass, void*, bool);
-	void activateWindow(HWND, UIWindow* a3);
-	bool isActive();
+  void RegisterGenWindowClass(LPCSTR lpszClass, void *, bool);
+  void activateWindow(HWND, UIWindow *a3);
+  bool isActive();
 };
 
-extern SYSCORE_API UIMgr* uiMgr;
+extern SYSCORE_API UIMgr *uiMgr;
 
 #endif

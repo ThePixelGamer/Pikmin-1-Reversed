@@ -9,38 +9,38 @@
 
 class SYSCORE_API AyuStack {
 public:
-	int m_allocType; //0h
-	int m_size; //4h
-	int m_used; //8h
-	unsigned __int32* top; //Ch
-	int m_topSize; //10h
-	unsigned __int32* sp; //14h ( this + 20 ) | <- top probably???
-	int m_topFree; //18h
-	bool overflowProtect; //1Ch
-	bool active; //1Dh ( this + 29 )
-	char* name; //20h ( this + 32 )
+  int m_allocType;       // 0h
+  int m_size;            // 4h
+  int m_used;            // 8h
+  unsigned __int32 *top; // Ch
+  int m_topSize;         // 10h
+  unsigned __int32 *sp;  // 14h ( this + 20 ) | <- top probably???
+  int m_topFree;         // 18h
+  bool overflowProtect;  // 1Ch
+  bool active;           // 1Dh ( this + 29 )
+  char *name;            // 20h ( this + 32 )
 
-	AyuStack();
+  AyuStack();
 
-	bool checkOverflow();
-	void checkStack();
-	void create(char*, int, void*, int, bool);
+  bool checkOverflow();
+  void checkStack();
+  void create(char *, int, void *, int, bool);
 
-	int getFree();
-	int getMaxFree();
-	int getSize();
-	int getTopUsed();
-	int getUsed();
+  int getFree();
+  int getMaxFree();
+  int getSize();
+  int getTopUsed();
+  int getUsed();
 
-	void inactivate();
+  void inactivate();
 
-	void pop();
-	unsigned __int32* push(int);
+  void pop();
+  unsigned __int32 *push(int);
 
-	void reset();
-	void reset(int);
+  void reset();
+  void reset(int);
 
-	int setAllocType(int);
+  int setAllocType(int);
 };
 
 #endif

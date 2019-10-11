@@ -10,16 +10,16 @@
 #include "../Stream/Stream.h"
 
 class SYSCORE_API Vector2f {
-	float x;
-	float y;
+  float x;
+  float y;
 
-	Vector2f() {}
-	Vector2f(const float&, const float&);
+  Vector2f() {}
+  Vector2f(const float &, const float &);
 
-	void read(Stream&);
-	void write(Stream&);
+  void read(Stream &);
+  void write(Stream &);
 
-	void set(float, float);
+  void set(float, float);
 };
 
 #endif

@@ -13,26 +13,25 @@
 
 #include "WSocket.h"
 
-class SYSCORE_API TcpStream : public Stream
-{
+class SYSCORE_API TcpStream : public Stream {
 public:
-	//0h - vtbl
-	//STREAM MEMBER VAR- 4h
-	WSocket* m_wSock; //8h
-	int m_streamInUse; //Ch (used in System::setStreamType)
+  // 0h - vtbl
+  // STREAM MEMBER VAR- 4h
+  WSocket *m_wSock;  // 8h
+  int m_streamInUse; // Ch (used in System::setStreamType)
 
-	TcpStream();
-	TcpStream(WSocket*);
+  TcpStream();
+  TcpStream(WSocket *);
 
-	virtual void read(void*, int);
-	virtual void write(void*, int);
-	virtual int getPending();
-	virtual int getAvailable();
-	virtual void close();
-	virtual void flush();
-	virtual bool closing();
+  virtual void read(void *, int);
+  virtual void write(void *, int);
+  virtual int getPending();
+  virtual int getAvailable();
+  virtual void close();
+  virtual void flush();
+  virtual bool closing();
 
-	bool connect(char* name, int port);
+  bool connect(char *name, int port);
 };
 
 #endif

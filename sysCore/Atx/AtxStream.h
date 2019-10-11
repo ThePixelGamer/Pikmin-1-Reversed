@@ -9,24 +9,24 @@
 
 #include "../Stream/Stream.h"
 
-void ATXPRINT(const char* fmt, ...);
+void ATXPRINT(const char *fmt, ...);
 
 class SYSCORE_API AtxStream : public Stream {
 public:
-	//0h - vtbl
-	//4h - stream var
-	class TcpStream* m_stream; //8h
-	int m_dwordC; //Ch
+  // 0h - vtbl
+  // 4h - stream var
+  class TcpStream *m_stream; // 8h
+  int m_dwordC;              // Ch
 
-	AtxStream() : Stream() { this->init(); }
+  AtxStream() : Stream() { this->init(); }
 
-	void init();
-	bool open(char*, int);
-	virtual void close();
-	virtual void flush();
-	virtual int getPending();
-	virtual void read(void*, int);
-	virtual void write(void*, int);
+  void init();
+  bool open(char *, int);
+  virtual void close();
+  virtual void flush();
+  virtual int getPending();
+  virtual void read(void *, int);
+  virtual void write(void *, int);
 };
 
 #endif

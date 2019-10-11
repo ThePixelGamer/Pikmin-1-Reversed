@@ -11,17 +11,17 @@
 
 class SYSCORE_API OptionBox : public ComboBox {
 public:
-	//vtable 0h
-	//(CoreNode: 4h-10h)
-	//(Node: 14h-1Ch)
-	//(UIFrame: 20h-40h)
-	//(UIWindow: 50h-84h)
-	//(ComboBox: 88h-8Ch)
+  // vtable 0h
+  //(CoreNode: 4h-10h)
+  //(Node: 14h-1Ch)
+  //(UIFrame: 20h-40h)
+  //(UIWindow: 50h-84h)
+  //(ComboBox: 88h-8Ch)
 
-	OptionBox(UIWindow*, int, int, int, bool);
+  OptionBox(UIWindow *, int, int, int, bool);
 
-	virtual void selectionChanged(int);
-	virtual int processMessage(HWND, unsigned int, WPARAM, long);
+  virtual void selectionChanged(int);
+  virtual int processMessage(HWND, unsigned int, WPARAM, long);
 };
 
 #endif

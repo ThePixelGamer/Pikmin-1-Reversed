@@ -12,13 +12,13 @@
 // Skinning Envelope, used by MOD and DMD
 class SYSCORE_API Envelope {
 public:
-	int m_indicesCount;
-	int* m_indices;
-	float* m_weights;
+  int m_indicesCount;
+  int *m_indices;
+  float *m_weights;
 
-	Envelope();
-	void read(RandomAccessStream&);
-	void write(RandomAccessStream&);
+  Envelope();
+  void read(RandomAccessStream &);
+  void write(RandomAccessStream &);
 };
 
 #endif

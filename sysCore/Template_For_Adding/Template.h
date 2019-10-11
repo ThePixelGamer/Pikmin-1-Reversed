@@ -13,11 +13,10 @@
 //	Add any headers here!
 //
 
-class SYSCORE_API Template
-{
+class SYSCORE_API Template {
 public:
-	Template();
-	~Template();
+  Template();
+  ~Template();
 };
 
 #endif

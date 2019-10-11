@@ -9,17 +9,16 @@
 
 #include <windows.h>
 
-class ControllerMgr
-{
+class ControllerMgr {
 public:
-	//4h - vtbl pointer
-	PBYTE lpKeyState;
+  // 4h - vtbl pointer
+  PBYTE lpKeyState;
 
-	ControllerMgr();
+  ControllerMgr();
 
-	void update();
+  void update();
 
-	virtual bool keyDown(int key);
+  virtual bool keyDown(int key);
 };
 
-#endif 
+#endif

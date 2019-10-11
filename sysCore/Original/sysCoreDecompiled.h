@@ -47,8 +47,7 @@ struct ITypeLibVtbl;
 struct tagTLIBATTR;
 
 /* 1 */
-struct FuncInfo_V1
-{
+struct FuncInfo_V1 {
   int magicNumber;
   int maxState;
   void *pUnwindMap;
@@ -59,15 +58,13 @@ struct FuncInfo_V1
 };
 
 /* 2 */
-struct UnwindMapEntry
-{
+struct UnwindMapEntry {
   int toState;
   void *action;
 };
 
 /* 3 */
-struct _SCOPETABLE_ENTRY
-{
+struct _SCOPETABLE_ENTRY {
   int EnclosingLevel;
   void *FilterFunc;
   void *HandlerFunc;
@@ -83,8 +80,7 @@ typedef void *PVOID;
 typedef unsigned int DWORD;
 
 /* 5 */
-struct _EH3_EXCEPTION_REGISTRATION
-{
+struct _EH3_EXCEPTION_REGISTRATION {
   struct _EH3_EXCEPTION_REGISTRATION *Next;
   PVOID ExceptionHandler;
   PSCOPETABLE_ENTRY ScopeTable;
@@ -98,8 +94,7 @@ typedef struct _EH3_EXCEPTION_REGISTRATION EH3_EXCEPTION_REGISTRATION;
 typedef struct _EH3_EXCEPTION_REGISTRATION *PEH3_EXCEPTION_REGISTRATION;
 
 /* 8 */
-struct CPPEH_RECORD
-{
+struct CPPEH_RECORD {
   DWORD old_esp;
   EXCEPTION_POINTERS *exc_ptr;
   struct _EH3_EXCEPTION_REGISTRATION registration;
@@ -136,12 +131,11 @@ typedef unsigned int UINT;
 typedef UINT WPARAM;
 
 /* 21 */
-typedef UINT (__stdcall *LPOFNHOOKPROC)(HWND, UINT, WPARAM, LPARAM);
+typedef UINT(__stdcall *LPOFNHOOKPROC)(HWND, UINT, WPARAM, LPARAM);
 
 /* 9 */
 #pragma pack(push, 1)
-struct tagOFNA
-{
+struct tagOFNA {
   DWORD lStructSize;
   HWND hwndOwner;
   HINSTANCE hInstance;
@@ -166,20 +160,17 @@ struct tagOFNA
 #pragma pack(pop)
 
 /* 12 */
-struct HWND__
-{
+struct HWND__ {
   int unused;
 };
 
 /* 14 */
-struct HINSTANCE__
-{
+struct HINSTANCE__ {
   int unused;
 };
 
 /* 24 */
-struct tagRECT
-{
+struct tagRECT {
   LONG left;
   LONG top;
   LONG right;
@@ -196,8 +187,7 @@ typedef HMENU__ *HMENU;
 typedef HBITMAP__ *HBITMAP;
 
 /* 26 */
-struct tagMENUITEMINFOA
-{
+struct tagMENUITEMINFOA {
   UINT cbSize;
   UINT fMask;
   UINT fType;
@@ -213,14 +203,12 @@ struct tagMENUITEMINFOA
 };
 
 /* 28 */
-struct HMENU__
-{
+struct HMENU__ {
   int unused;
 };
 
 /* 30 */
-struct HBITMAP__
-{
+struct HBITMAP__ {
   int unused;
 };
 
@@ -231,8 +219,8 @@ typedef _devicemodeA DEVMODEA;
 typedef unsigned __int8 BYTE;
 
 /* 35 */
-struct _devicemodeA::$1DE029518E5B112A14BB6E76DECCA4C4::$5ACE225D4D14CE0550A9F5A217E306C5
-{
+struct _devicemodeA::$1DE029518E5B112A14BB6E76DECCA4C4::
+    $5ACE225D4D14CE0550A9F5A217E306C5 {
   __int16 dmOrientation;
   __int16 dmPaperSize;
   __int16 dmPaperLength;
@@ -240,8 +228,7 @@ struct _devicemodeA::$1DE029518E5B112A14BB6E76DECCA4C4::$5ACE225D4D14CE0550A9F5A
 };
 
 /* 37 */
-struct _POINTL
-{
+struct _POINTL {
   LONG x;
   LONG y;
 };
@@ -250,10 +237,8 @@ struct _POINTL
 typedef _POINTL POINTL;
 
 /* 34 */
-union _devicemodeA::$1DE029518E5B112A14BB6E76DECCA4C4
-{
-  struct
-  {
+union _devicemodeA::$1DE029518E5B112A14BB6E76DECCA4C4 {
+  struct {
     __int16 dmOrientation;
     __int16 dmPaperSize;
     __int16 dmPaperLength;
@@ -263,18 +248,15 @@ union _devicemodeA::$1DE029518E5B112A14BB6E76DECCA4C4
 };
 
 /* 32 */
-struct _devicemodeA
-{
+struct _devicemodeA {
   BYTE dmDeviceName[32];
   WORD dmSpecVersion;
   WORD dmDriverVersion;
   WORD dmSize;
   WORD dmDriverExtra;
   DWORD dmFields;
-  union
-  {
-    struct
-    {
+  union {
+    struct {
       __int16 dmOrientation;
       __int16 dmPaperSize;
       __int16 dmPaperLength;
@@ -309,8 +291,7 @@ struct _devicemodeA
 };
 
 /* 38 */
-struct _OSVERSIONINFOA
-{
+struct _OSVERSIONINFOA {
   DWORD dwOSVersionInfoSize;
   DWORD dwMajorVersion;
   DWORD dwMinorVersion;
@@ -320,8 +301,7 @@ struct _OSVERSIONINFOA
 };
 
 /* 41 */
-struct tagPOINT
-{
+struct tagPOINT {
   LONG x;
   LONG y;
 };
@@ -330,8 +310,7 @@ struct tagPOINT
 typedef tagPOINT POINT;
 
 /* 39 */
-struct tagMSG
-{
+struct tagMSG {
   HWND hwnd;
   UINT message;
   WPARAM wParam;
@@ -348,8 +327,7 @@ typedef unsigned int _fsize_t;
 
 /* 42 */
 #pragma pack(push, 8)
-struct _finddata_t
-{
+struct _finddata_t {
   unsigned int attrib;
   time_t time_create;
   time_t time_access;
@@ -363,8 +341,7 @@ struct _finddata_t
 typedef _LARGE_INTEGER LARGE_INTEGER;
 
 /* 47 */
-struct _LARGE_INTEGER::$837407842DC9087486FDFA5FEB63B74E
-{
+struct _LARGE_INTEGER::$837407842DC9087486FDFA5FEB63B74E {
   DWORD LowPart;
   LONG HighPart;
 };
@@ -373,10 +350,8 @@ struct _LARGE_INTEGER::$837407842DC9087486FDFA5FEB63B74E
 typedef __int64 LONGLONG;
 
 /* 46 */
-union _LARGE_INTEGER
-{
-  struct
-  {
+union _LARGE_INTEGER {
+  struct {
     DWORD LowPart;
     LONG HighPart;
   };
@@ -391,7 +366,7 @@ typedef tagRECT RECT;
 typedef LONG LRESULT;
 
 /* 51 */
-typedef LRESULT (__stdcall *WNDPROC)(HWND, UINT, WPARAM, LPARAM);
+typedef LRESULT(__stdcall *WNDPROC)(HWND, UINT, WPARAM, LPARAM);
 
 /* 53 */
 typedef HICON__ *HICON;
@@ -403,8 +378,7 @@ typedef HICON HCURSOR;
 typedef HBRUSH__ *HBRUSH;
 
 /* 50 */
-struct tagWNDCLASSEXA
-{
+struct tagWNDCLASSEXA {
   UINT cbSize;
   UINT style;
   WNDPROC lpfnWndProc;
@@ -420,21 +394,18 @@ struct tagWNDCLASSEXA
 };
 
 /* 54 */
-struct HICON__
-{
+struct HICON__ {
   int unused;
 };
 
 /* 57 */
-struct HBRUSH__
-{
+struct HBRUSH__ {
   int unused;
 };
 
 /* 58 */
 #pragma pack(push, 4)
-struct WSAData
-{
+struct WSAData {
   WORD wVersion;
   WORD wHighVersion;
   char szDescription[257];
@@ -450,8 +421,7 @@ typedef unsigned __int16 u_short;
 
 /* 59 */
 #pragma pack(push, 4)
-struct sockaddr
-{
+struct sockaddr {
   u_short sa_family;
   char sa_data[14];
 };
@@ -465,8 +435,7 @@ typedef u_int SOCKET;
 
 /* 61 */
 #pragma pack(push, 4)
-struct fd_set
-{
+struct fd_set {
   u_int fd_count;
   SOCKET fd_array[64];
 };
@@ -545,8 +514,7 @@ struct ClassicScalingSystem;
 struct SoftImageScalingSystem;
 
 /* 88 */
-struct __declspec(align(4)) CoreNode
-{
+struct __declspec(align(4)) CoreNode {
   _DWORD vtblPointer;
   char *name;
   CoreNode *Parent;
@@ -693,8 +661,7 @@ struct BaseApp;
 struct CmdStream;
 
 /* 183 */
-struct __declspec(align(4)) Module
-{
+struct __declspec(align(4)) Module {
   _DWORD newObjAddr;
   _DWORD objListAddr;
   _DWORD autoStartAddr;
@@ -703,8 +670,7 @@ struct __declspec(align(4)) Module
 };
 
 /* 135 */
-struct Controller
-{
+struct Controller {
   Module module0;
   _BYTE gap14[12];
   _DWORD dword20;
@@ -965,8 +931,7 @@ struct AnimPalette;
 struct Shape;
 
 /* 216 */
-struct System
-{
+struct System {
   _DWORD dword0;
   _BYTE gap4[576];
   _DWORD dword244;
@@ -998,8 +963,7 @@ struct System
 };
 
 /* 217 */
-struct __declspec(align(4)) Node
-{
+struct __declspec(align(4)) Node {
   int pVtbl;
   char *name;
   CoreNode *parent;
@@ -1062,25 +1026,31 @@ typedef int BOOL;
 typedef BOOL *PBOOL;
 
 /* 219 */
-struct NodeVtbl
-{
-  HRESULT (__stdcall *QueryInterface)(#218 *This, const IID *const riid, void **ppvObject);
-  ULONG (__stdcall *AddRef)(#218 *This);
-  ULONG (__stdcall *Release)(#218 *This);
-  HRESULT (__stdcall *GetTypeInfoCount)(#218 *This, UINT *pctinfo);
-  HRESULT (__stdcall *GetTypeInfo)(#218 *This, UINT iTInfo, LCID lcid, ITypeInfo **ppTInfo);
-  HRESULT (__stdcall *GetIDsOfNames)(#218 *This, const IID *const riid, LPWSTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId);
-  HRESULT (__stdcall *Invoke)(#218 *This, DISPID dispIdMember, const IID *const riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr);
-  HRESULT (__stdcall *get_Name)(#218 *This, PBSTR Name);
-  HRESULT (__stdcall *get_Property)(#218 *This, BSTR PropertyName, PBSTR PropertyValue);
-  HRESULT (__stdcall *get_Bookmark)(#218 *This, PBSTR Bookmark);
-  HRESULT (__stdcall *IsScopeNode)(#218 *This, PBOOL IsScopeNode);
-  HRESULT (__stdcall *get_Nodetype)(#218 *This, PBSTR Nodetype);
+struct NodeVtbl {
+  HRESULT(__stdcall *QueryInterface)
+  (#218 * This, const IID *const riid, void **ppvObject);
+  ULONG(__stdcall *AddRef)(#218 * This);
+  ULONG(__stdcall *Release)(#218 * This);
+  HRESULT(__stdcall *GetTypeInfoCount)(#218 * This, UINT *pctinfo);
+  HRESULT(__stdcall *GetTypeInfo)
+  (#218 * This, UINT iTInfo, LCID lcid, ITypeInfo **ppTInfo);
+  HRESULT(__stdcall *GetIDsOfNames)
+  (#218 * This, const IID *const riid, LPWSTR *rgszNames, UINT cNames,
+   LCID lcid, DISPID *rgDispId);
+  HRESULT(__stdcall *Invoke)
+  (#218 * This, DISPID dispIdMember, const IID *const riid, LCID lcid,
+   WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult,
+   EXCEPINFO *pExcepInfo, UINT *puArgErr);
+  HRESULT(__stdcall *get_Name)(#218 * This, PBSTR Name);
+  HRESULT(__stdcall *get_Property)
+  (#218 * This, BSTR PropertyName, PBSTR PropertyValue);
+  HRESULT(__stdcall *get_Bookmark)(#218 * This, PBSTR Bookmark);
+  HRESULT(__stdcall *IsScopeNode)(#218 * This, PBOOL IsScopeNode);
+  HRESULT(__stdcall *get_Nodetype)(#218 * This, PBSTR Nodetype);
 };
 
 /* 222 */
-struct _GUID
-{
+struct _GUID {
   DWORD Data1;
   WORD Data2;
   WORD Data3;
@@ -1089,8 +1059,7 @@ struct _GUID
 
 /* 226 */
 #pragma pack(push, 8)
-struct ITypeInfo
-{
+struct ITypeInfo {
   ITypeInfoVtbl *lpVtbl;
 };
 #pragma pack(pop)
@@ -1100,8 +1069,7 @@ typedef VARIANT VARIANTARG;
 
 /* 285 */
 #pragma pack(push, 8)
-struct tagDISPPARAMS
-{
+struct tagDISPPARAMS {
   VARIANTARG *rgvarg;
   DISPID *rgdispidNamedArgs;
   UINT cArgs;
@@ -1129,8 +1097,7 @@ typedef LONG SCODE;
 
 /* 277 */
 #pragma pack(push, 8)
-struct tagCY::$983F061E0B702DD8AE0B4B955735A6A3
-{
+struct tagCY::$983F061E0B702DD8AE0B4B955735A6A3 {
   unsigned int Lo;
   int Hi;
 };
@@ -1138,15 +1105,13 @@ struct tagCY::$983F061E0B702DD8AE0B4B955735A6A3
 
 /* 276 */
 #pragma pack(push, 8)
-union tagCY
-{
-  #pragma pack(push, 8)
-  struct
-  {
+union tagCY {
+#pragma pack(push, 8)
+  struct {
     unsigned int Lo;
     int Hi;
   };
-  #pragma pack(pop)
+#pragma pack(pop)
   LONGLONG int64;
 };
 #pragma pack(pop)
@@ -1171,8 +1136,8 @@ typedef tagDEC DECIMAL;
 
 /* 299 */
 #pragma pack(push, 8)
-struct tagVARIANT::$::$::$E3ADF3533BFFE4E09553D0C58E41D45E::$0FDBD249F1AECD6A49409B6B82281578
-{
+struct tagVARIANT::$::$::$E3ADF3533BFFE4E09553D0C58E41D45E::
+    $0FDBD249F1AECD6A49409B6B82281578 {
   PVOID pvRecord;
   IRecordInfo *pRecInfo;
 };
@@ -1180,8 +1145,8 @@ struct tagVARIANT::$::$::$E3ADF3533BFFE4E09553D0C58E41D45E::$0FDBD249F1AECD6A494
 
 /* 270 */
 #pragma pack(push, 8)
-union tagVARIANT::$::$2E851DBA257FA738680F86C475CAC6EB::$E3ADF3533BFFE4E09553D0C58E41D45E
-{
+union tagVARIANT::$::$2E851DBA257FA738680F86C475CAC6EB::
+    $E3ADF3533BFFE4E09553D0C58E41D45E {
   LONG lVal;
   BYTE bVal;
   SHORT iVal;
@@ -1221,27 +1186,25 @@ union tagVARIANT::$::$2E851DBA257FA738680F86C475CAC6EB::$E3ADF3533BFFE4E09553D0C
   ULONG *pulVal;
   INT *pintVal;
   UINT *puintVal;
-  #pragma pack(push, 8)
-  struct
-  {
+#pragma pack(push, 8)
+  struct {
     PVOID pvRecord;
     IRecordInfo *pRecInfo;
   };
-  #pragma pack(pop)
+#pragma pack(pop)
 };
 #pragma pack(pop)
 
 /* 269 */
 #pragma pack(push, 8)
-struct tagVARIANT::$CFEED276C078973BD7512520F6B5AF6E::$2E851DBA257FA738680F86C475CAC6EB
-{
+struct tagVARIANT::$CFEED276C078973BD7512520F6B5AF6E::
+    $2E851DBA257FA738680F86C475CAC6EB {
   VARTYPE vt;
   WORD wReserved1;
   WORD wReserved2;
   WORD wReserved3;
-  #pragma pack(push, 8)
-  union
-  {
+#pragma pack(push, 8)
+  union {
     LONG lVal;
     BYTE bVal;
     SHORT iVal;
@@ -1281,22 +1244,21 @@ struct tagVARIANT::$CFEED276C078973BD7512520F6B5AF6E::$2E851DBA257FA738680F86C47
     ULONG *pulVal;
     INT *pintVal;
     UINT *puintVal;
-    #pragma pack(push, 8)
-    struct
-    {
+#pragma pack(push, 8)
+    struct {
       PVOID pvRecord;
       IRecordInfo *pRecInfo;
     };
-    #pragma pack(pop)
+#pragma pack(pop)
   };
-  #pragma pack(pop)
+#pragma pack(pop)
 };
 #pragma pack(pop)
 
 /* 295 */
 #pragma pack(push, 8)
-struct tagDEC::$64EC678C49E7BE49873AFBFB7A849D34::$7F8459940C2B08BD5D82B0F27239141B
-{
+struct tagDEC::$64EC678C49E7BE49873AFBFB7A849D34::
+    $7F8459940C2B08BD5D82B0F27239141B {
   BYTE scale;
   BYTE sign;
 };
@@ -1304,23 +1266,21 @@ struct tagDEC::$64EC678C49E7BE49873AFBFB7A849D34::$7F8459940C2B08BD5D82B0F272391
 
 /* 294 */
 #pragma pack(push, 8)
-union tagDEC::$64EC678C49E7BE49873AFBFB7A849D34
-{
-  #pragma pack(push, 8)
-  struct
-  {
+union tagDEC::$64EC678C49E7BE49873AFBFB7A849D34 {
+#pragma pack(push, 8)
+  struct {
     BYTE scale;
     BYTE sign;
   };
-  #pragma pack(pop)
+#pragma pack(pop)
   USHORT signscale;
 };
 #pragma pack(pop)
 
 /* 297 */
 #pragma pack(push, 8)
-struct tagDEC::$D28E26DEC3EC762C06C2AA9D0F7AC301::$674876891A86A76F12C10005982BCA56
-{
+struct tagDEC::$D28E26DEC3EC762C06C2AA9D0F7AC301::
+    $674876891A86A76F12C10005982BCA56 {
   ULONG Lo32;
   ULONG Mid32;
 };
@@ -1331,68 +1291,58 @@ typedef unsigned __int64 ULONGLONG;
 
 /* 296 */
 #pragma pack(push, 8)
-union tagDEC::$D28E26DEC3EC762C06C2AA9D0F7AC301
-{
-  #pragma pack(push, 8)
-  struct
-  {
+union tagDEC::$D28E26DEC3EC762C06C2AA9D0F7AC301 {
+#pragma pack(push, 8)
+  struct {
     ULONG Lo32;
     ULONG Mid32;
   };
-  #pragma pack(pop)
+#pragma pack(pop)
   ULONGLONG Lo64;
 };
 #pragma pack(pop)
 
 /* 293 */
 #pragma pack(push, 8)
-struct tagDEC
-{
+struct tagDEC {
   USHORT wReserved;
-  #pragma pack(push, 8)
-  union
-  {
-    #pragma pack(push, 8)
-    struct
-    {
+#pragma pack(push, 8)
+  union {
+#pragma pack(push, 8)
+    struct {
       BYTE scale;
       BYTE sign;
     };
-    #pragma pack(pop)
+#pragma pack(pop)
     USHORT signscale;
   };
-  #pragma pack(pop)
+#pragma pack(pop)
   ULONG Hi32;
-  #pragma pack(push, 8)
-  union
-  {
-    #pragma pack(push, 8)
-    struct
-    {
+#pragma pack(push, 8)
+  union {
+#pragma pack(push, 8)
+    struct {
       ULONG Lo32;
       ULONG Mid32;
     };
-    #pragma pack(pop)
+#pragma pack(pop)
     ULONGLONG Lo64;
   };
-  #pragma pack(pop)
+#pragma pack(pop)
 };
 #pragma pack(pop)
 
 /* 268 */
 #pragma pack(push, 8)
-union tagVARIANT::$CFEED276C078973BD7512520F6B5AF6E
-{
-  #pragma pack(push, 8)
-  struct
-  {
+union tagVARIANT::$CFEED276C078973BD7512520F6B5AF6E {
+#pragma pack(push, 8)
+  struct {
     VARTYPE vt;
     WORD wReserved1;
     WORD wReserved2;
     WORD wReserved3;
-    #pragma pack(push, 8)
-    union
-    {
+#pragma pack(push, 8)
+    union {
       LONG lVal;
       BYTE bVal;
       SHORT iVal;
@@ -1432,38 +1382,33 @@ union tagVARIANT::$CFEED276C078973BD7512520F6B5AF6E
       ULONG *pulVal;
       INT *pintVal;
       UINT *puintVal;
-      #pragma pack(push, 8)
-      struct
-      {
+#pragma pack(push, 8)
+      struct {
         PVOID pvRecord;
         IRecordInfo *pRecInfo;
       };
-      #pragma pack(pop)
+#pragma pack(pop)
     };
-    #pragma pack(pop)
+#pragma pack(pop)
   };
-  #pragma pack(pop)
+#pragma pack(pop)
   DECIMAL decVal;
 };
 #pragma pack(pop)
 
 /* 267 */
 #pragma pack(push, 8)
-struct tagVARIANT
-{
-  #pragma pack(push, 8)
-  union
-  {
-    #pragma pack(push, 8)
-    struct
-    {
+struct tagVARIANT {
+#pragma pack(push, 8)
+  union {
+#pragma pack(push, 8)
+    struct {
       VARTYPE vt;
       WORD wReserved1;
       WORD wReserved2;
       WORD wReserved3;
-      #pragma pack(push, 8)
-      union
-      {
+#pragma pack(push, 8)
+      union {
         LONG lVal;
         BYTE bVal;
         SHORT iVal;
@@ -1503,27 +1448,25 @@ struct tagVARIANT
         ULONG *pulVal;
         INT *pintVal;
         UINT *puintVal;
-        #pragma pack(push, 8)
-        struct
-        {
+#pragma pack(push, 8)
+        struct {
           PVOID pvRecord;
           IRecordInfo *pRecInfo;
         };
-        #pragma pack(pop)
+#pragma pack(pop)
       };
-      #pragma pack(pop)
+#pragma pack(pop)
     };
-    #pragma pack(pop)
+#pragma pack(pop)
     DECIMAL decVal;
   };
-  #pragma pack(pop)
+#pragma pack(pop)
 };
 #pragma pack(pop)
 
 /* 287 */
 #pragma pack(push, 8)
-struct tagEXCEPINFO
-{
+struct tagEXCEPINFO {
   WORD wCode;
   WORD wReserved;
   BSTR bstrSource;
@@ -1531,7 +1474,7 @@ struct tagEXCEPINFO
   BSTR bstrHelpFile;
   DWORD dwHelpContext;
   PVOID pvReserved;
-  HRESULT (__stdcall *pfnDeferredFillIn)(tagEXCEPINFO *);
+  HRESULT(__stdcall *pfnDeferredFillIn)(tagEXCEPINFO *);
   SCODE scode;
 };
 #pragma pack(pop)
@@ -1555,8 +1498,7 @@ typedef DWORD HREFTYPE;
 typedef OLECHAR *LPOLESTR;
 
 /* 307 */
-enum tagINVOKEKIND
-{
+enum tagINVOKEKIND {
   INVOKE_FUNC = 0x1,
   INVOKE_PROPERTYGET = 0x2,
   INVOKE_PROPERTYPUT = 0x4,
@@ -1568,53 +1510,68 @@ typedef tagINVOKEKIND INVOKEKIND;
 
 /* 227 */
 #pragma pack(push, 8)
-struct ITypeInfoVtbl
-{
-  HRESULT (__stdcall *QueryInterface)(ITypeInfo *This, const IID *const riid, void **ppvObject);
-  ULONG (__stdcall *AddRef)(ITypeInfo *This);
-  ULONG (__stdcall *Release)(ITypeInfo *This);
-  HRESULT (__stdcall *GetTypeAttr)(ITypeInfo *This, TYPEATTR **ppTypeAttr);
-  HRESULT (__stdcall *GetTypeComp)(ITypeInfo *This, ITypeComp **ppTComp);
-  HRESULT (__stdcall *GetFuncDesc)(ITypeInfo *This, UINT index, FUNCDESC **ppFuncDesc);
-  HRESULT (__stdcall *GetVarDesc)(ITypeInfo *This, UINT index, VARDESC **ppVarDesc);
-  HRESULT (__stdcall *GetNames)(ITypeInfo *This, MEMBERID memid, BSTR *rgBstrNames, UINT cMaxNames, UINT *pcNames);
-  HRESULT (__stdcall *GetRefTypeOfImplType)(ITypeInfo *This, UINT index, HREFTYPE *pRefType);
-  HRESULT (__stdcall *GetImplTypeFlags)(ITypeInfo *This, UINT index, INT *pImplTypeFlags);
-  HRESULT (__stdcall *GetIDsOfNames)(ITypeInfo *This, LPOLESTR *rgszNames, UINT cNames, MEMBERID *pMemId);
-  HRESULT (__stdcall *Invoke)(ITypeInfo *This, PVOID pvInstance, MEMBERID memid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr);
-  HRESULT (__stdcall *GetDocumentation)(ITypeInfo *This, MEMBERID memid, BSTR *pBstrName, BSTR *pBstrDocString, DWORD *pdwHelpContext, BSTR *pBstrHelpFile);
-  HRESULT (__stdcall *GetDllEntry)(ITypeInfo *This, MEMBERID memid, INVOKEKIND invKind, BSTR *pBstrDllName, BSTR *pBstrName, WORD *pwOrdinal);
-  HRESULT (__stdcall *GetRefTypeInfo)(ITypeInfo *This, HREFTYPE hRefType, ITypeInfo **ppTInfo);
-  HRESULT (__stdcall *AddressOfMember)(ITypeInfo *This, MEMBERID memid, INVOKEKIND invKind, PVOID *ppv);
-  HRESULT (__stdcall *CreateInstance)(ITypeInfo *This, IUnknown *pUnkOuter, const IID *const riid, PVOID *ppvObj);
-  HRESULT (__stdcall *GetMops)(ITypeInfo *This, MEMBERID memid, BSTR *pBstrMops);
-  HRESULT (__stdcall *GetContainingTypeLib)(ITypeInfo *This, ITypeLib **ppTLib, UINT *pIndex);
-  void (__stdcall *ReleaseTypeAttr)(ITypeInfo *This, TYPEATTR *pTypeAttr);
-  void (__stdcall *ReleaseFuncDesc)(ITypeInfo *This, FUNCDESC *pFuncDesc);
-  void (__stdcall *ReleaseVarDesc)(ITypeInfo *This, VARDESC *pVarDesc);
+struct ITypeInfoVtbl {
+  HRESULT(__stdcall *QueryInterface)
+  (ITypeInfo *This, const IID *const riid, void **ppvObject);
+  ULONG(__stdcall *AddRef)(ITypeInfo *This);
+  ULONG(__stdcall *Release)(ITypeInfo *This);
+  HRESULT(__stdcall *GetTypeAttr)(ITypeInfo *This, TYPEATTR **ppTypeAttr);
+  HRESULT(__stdcall *GetTypeComp)(ITypeInfo *This, ITypeComp **ppTComp);
+  HRESULT(__stdcall *GetFuncDesc)
+  (ITypeInfo *This, UINT index, FUNCDESC **ppFuncDesc);
+  HRESULT(__stdcall *GetVarDesc)
+  (ITypeInfo *This, UINT index, VARDESC **ppVarDesc);
+  HRESULT(__stdcall *GetNames)
+  (ITypeInfo *This, MEMBERID memid, BSTR *rgBstrNames, UINT cMaxNames,
+   UINT *pcNames);
+  HRESULT(__stdcall *GetRefTypeOfImplType)
+  (ITypeInfo *This, UINT index, HREFTYPE *pRefType);
+  HRESULT(__stdcall *GetImplTypeFlags)
+  (ITypeInfo *This, UINT index, INT *pImplTypeFlags);
+  HRESULT(__stdcall *GetIDsOfNames)
+  (ITypeInfo *This, LPOLESTR *rgszNames, UINT cNames, MEMBERID *pMemId);
+  HRESULT(__stdcall *Invoke)
+  (ITypeInfo *This, PVOID pvInstance, MEMBERID memid, WORD wFlags,
+   DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo,
+   UINT *puArgErr);
+  HRESULT(__stdcall *GetDocumentation)
+  (ITypeInfo *This, MEMBERID memid, BSTR *pBstrName, BSTR *pBstrDocString,
+   DWORD *pdwHelpContext, BSTR *pBstrHelpFile);
+  HRESULT(__stdcall *GetDllEntry)
+  (ITypeInfo *This, MEMBERID memid, INVOKEKIND invKind, BSTR *pBstrDllName,
+   BSTR *pBstrName, WORD *pwOrdinal);
+  HRESULT(__stdcall *GetRefTypeInfo)
+  (ITypeInfo *This, HREFTYPE hRefType, ITypeInfo **ppTInfo);
+  HRESULT(__stdcall *AddressOfMember)
+  (ITypeInfo *This, MEMBERID memid, INVOKEKIND invKind, PVOID *ppv);
+  HRESULT(__stdcall *CreateInstance)
+  (ITypeInfo *This, IUnknown *pUnkOuter, const IID *const riid, PVOID *ppvObj);
+  HRESULT(__stdcall *GetMops)(ITypeInfo *This, MEMBERID memid, BSTR *pBstrMops);
+  HRESULT(__stdcall *GetContainingTypeLib)
+  (ITypeInfo *This, ITypeLib **ppTLib, UINT *pIndex);
+  void(__stdcall *ReleaseTypeAttr)(ITypeInfo *This, TYPEATTR *pTypeAttr);
+  void(__stdcall *ReleaseFuncDesc)(ITypeInfo *This, FUNCDESC *pFuncDesc);
+  void(__stdcall *ReleaseVarDesc)(ITypeInfo *This, VARDESC *pVarDesc);
 };
 #pragma pack(pop)
 
 /* 280 */
 #pragma pack(push, 8)
-struct IUnknown
-{
+struct IUnknown {
   IUnknownVtbl *lpVtbl;
 };
 #pragma pack(pop)
 
 /* 282 */
 #pragma pack(push, 8)
-struct IDispatch
-{
+struct IDispatch {
   IDispatchVtbl *lpVtbl;
 };
 #pragma pack(pop)
 
 /* 244 */
 #pragma pack(push, 8)
-struct tagSAFEARRAYBOUND
-{
+struct tagSAFEARRAYBOUND {
   ULONG cElements;
   LONG lLbound;
 };
@@ -1625,8 +1582,7 @@ typedef tagSAFEARRAYBOUND SAFEARRAYBOUND;
 
 /* 290 */
 #pragma pack(push, 8)
-struct tagSAFEARRAY
-{
+struct tagSAFEARRAY {
   USHORT cDims;
   USHORT fFeatures;
   ULONG cbElements;
@@ -1638,15 +1594,13 @@ struct tagSAFEARRAY
 
 /* 300 */
 #pragma pack(push, 8)
-struct IRecordInfo
-{
+struct IRecordInfo {
   IRecordInfoVtbl *lpVtbl;
 };
 #pragma pack(pop)
 
 /* 237 */
-enum tagTYPEKIND
-{
+enum tagTYPEKIND {
   TKIND_ENUM = 0x0,
   TKIND_RECORD = 0x1,
   TKIND_MODULE = 0x2,
@@ -1663,8 +1617,7 @@ typedef tagTYPEKIND TYPEKIND;
 
 /* 240 */
 #pragma pack(push, 8)
-union tagTYPEDESC::$AC700B6542D8071E244CADABF8A32897
-{
+union tagTYPEDESC::$AC700B6542D8071E244CADABF8A32897 {
   tagTYPEDESC *lptdesc;
   tagARRAYDESC *lpadesc;
   HREFTYPE hreftype;
@@ -1673,16 +1626,14 @@ union tagTYPEDESC::$AC700B6542D8071E244CADABF8A32897
 
 /* 239 */
 #pragma pack(push, 8)
-struct tagTYPEDESC
-{
-  #pragma pack(push, 8)
-  union
-  {
+struct tagTYPEDESC {
+#pragma pack(push, 8)
+  union {
     tagTYPEDESC *lptdesc;
     tagARRAYDESC *lpadesc;
     HREFTYPE hreftype;
   };
-  #pragma pack(pop)
+#pragma pack(pop)
   VARTYPE vt;
 };
 #pragma pack(pop)
@@ -1692,8 +1643,7 @@ typedef tagTYPEDESC TYPEDESC;
 
 /* 248 */
 #pragma pack(push, 8)
-struct tagIDLDESC
-{
+struct tagIDLDESC {
   ULONG dwReserved;
   USHORT wIDLFlags;
 };
@@ -1704,8 +1654,7 @@ typedef tagIDLDESC IDLDESC;
 
 /* 229 */
 #pragma pack(push, 8)
-struct tagTYPEATTR
-{
+struct tagTYPEATTR {
   GUID guid;
   LCID lcid;
   DWORD dwReserved;
@@ -1729,8 +1678,7 @@ struct tagTYPEATTR
 
 /* 249 */
 #pragma pack(push, 8)
-struct ITypeComp
-{
+struct ITypeComp {
   ITypeCompVtbl *lpVtbl;
 };
 #pragma pack(pop)
@@ -1739,8 +1687,7 @@ struct ITypeComp
 typedef tagELEMDESC ELEMDESC;
 
 /* 305 */
-enum tagFUNCKIND
-{
+enum tagFUNCKIND {
   FUNC_VIRTUAL = 0x0,
   FUNC_PUREVIRTUAL = 0x1,
   FUNC_NONVIRTUAL = 0x2,
@@ -1752,8 +1699,7 @@ enum tagFUNCKIND
 typedef tagFUNCKIND FUNCKIND;
 
 /* 309 */
-enum tagCALLCONV
-{
+enum tagCALLCONV {
   CC_FASTCALL = 0x0,
   CC_CDECL = 0x1,
   CC_MSCPASCAL = 0x2,
@@ -1775,8 +1721,7 @@ typedef tagPARAMDESCEX *LPPARAMDESCEX;
 
 /* 262 */
 #pragma pack(push, 8)
-struct tagPARAMDESC
-{
+struct tagPARAMDESC {
   LPPARAMDESCEX pparamdescex;
   USHORT wParamFlags;
 };
@@ -1787,8 +1732,7 @@ typedef tagPARAMDESC PARAMDESC;
 
 /* 260 */
 #pragma pack(push, 8)
-union tagELEMDESC::$7C8F4CED1424251743D09680A1A0B07D
-{
+union tagELEMDESC::$7C8F4CED1424251743D09680A1A0B07D {
   IDLDESC idldesc;
   PARAMDESC paramdesc;
 };
@@ -1796,23 +1740,20 @@ union tagELEMDESC::$7C8F4CED1424251743D09680A1A0B07D
 
 /* 259 */
 #pragma pack(push, 8)
-struct tagELEMDESC
-{
+struct tagELEMDESC {
   TYPEDESC tdesc;
-  #pragma pack(push, 8)
-  union
-  {
+#pragma pack(push, 8)
+  union {
     IDLDESC idldesc;
     PARAMDESC paramdesc;
   };
-  #pragma pack(pop)
+#pragma pack(pop)
 };
 #pragma pack(pop)
 
 /* 256 */
 #pragma pack(push, 8)
-struct tagFUNCDESC
-{
+struct tagFUNCDESC {
   MEMBERID memid;
   SCODE *lprgscode;
   ELEMDESC *lprgelemdescParam;
@@ -1830,16 +1771,14 @@ struct tagFUNCDESC
 
 /* 312 */
 #pragma pack(push, 8)
-union tagVARDESC::$E6274BD6A7149C9CC2413444FF769F0B
-{
+union tagVARDESC::$E6274BD6A7149C9CC2413444FF769F0B {
   ULONG oInst;
   VARIANT *lpvarValue;
 };
 #pragma pack(pop)
 
 /* 314 */
-enum tagVARKIND
-{
+enum tagVARKIND {
   VAR_PERINSTANCE = 0x0,
   VAR_STATIC = 0x1,
   VAR_CONST = 0x2,
@@ -1851,17 +1790,15 @@ typedef tagVARKIND VARKIND;
 
 /* 311 */
 #pragma pack(push, 8)
-struct tagVARDESC
-{
+struct tagVARDESC {
   MEMBERID memid;
   LPOLESTR lpstrSchema;
-  #pragma pack(push, 8)
-  union
-  {
+#pragma pack(push, 8)
+  union {
     ULONG oInst;
     VARIANT *lpvarValue;
   };
-  #pragma pack(pop)
+#pragma pack(pop)
   ELEMDESC elemdescVar;
   WORD wVarFlags;
   VARKIND varkind;
@@ -1870,33 +1807,38 @@ struct tagVARDESC
 
 /* 315 */
 #pragma pack(push, 8)
-struct ITypeLib
-{
+struct ITypeLib {
   ITypeLibVtbl *lpVtbl;
 };
 #pragma pack(pop)
 
 /* 281 */
 #pragma pack(push, 8)
-struct IUnknownVtbl
-{
-  HRESULT (__stdcall *QueryInterface)(IUnknown *This, const IID *const riid, void **ppvObject);
-  ULONG (__stdcall *AddRef)(IUnknown *This);
-  ULONG (__stdcall *Release)(IUnknown *This);
+struct IUnknownVtbl {
+  HRESULT(__stdcall *QueryInterface)
+  (IUnknown *This, const IID *const riid, void **ppvObject);
+  ULONG(__stdcall *AddRef)(IUnknown *This);
+  ULONG(__stdcall *Release)(IUnknown *This);
 };
 #pragma pack(pop)
 
 /* 283 */
 #pragma pack(push, 8)
-struct IDispatchVtbl
-{
-  HRESULT (__stdcall *QueryInterface)(IDispatch *This, const IID *const riid, void **ppvObject);
-  ULONG (__stdcall *AddRef)(IDispatch *This);
-  ULONG (__stdcall *Release)(IDispatch *This);
-  HRESULT (__stdcall *GetTypeInfoCount)(IDispatch *This, UINT *pctinfo);
-  HRESULT (__stdcall *GetTypeInfo)(IDispatch *This, UINT iTInfo, LCID lcid, ITypeInfo **ppTInfo);
-  HRESULT (__stdcall *GetIDsOfNames)(IDispatch *This, const IID *const riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId);
-  HRESULT (__stdcall *Invoke)(IDispatch *This, DISPID dispIdMember, const IID *const riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr);
+struct IDispatchVtbl {
+  HRESULT(__stdcall *QueryInterface)
+  (IDispatch *This, const IID *const riid, void **ppvObject);
+  ULONG(__stdcall *AddRef)(IDispatch *This);
+  ULONG(__stdcall *Release)(IDispatch *This);
+  HRESULT(__stdcall *GetTypeInfoCount)(IDispatch *This, UINT *pctinfo);
+  HRESULT(__stdcall *GetTypeInfo)
+  (IDispatch *This, UINT iTInfo, LCID lcid, ITypeInfo **ppTInfo);
+  HRESULT(__stdcall *GetIDsOfNames)
+  (IDispatch *This, const IID *const riid, LPOLESTR *rgszNames, UINT cNames,
+   LCID lcid, DISPID *rgDispId);
+  HRESULT(__stdcall *Invoke)
+  (IDispatch *This, DISPID dispIdMember, const IID *const riid, LCID lcid,
+   WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult,
+   EXCEPINFO *pExcepInfo, UINT *puArgErr);
 };
 #pragma pack(pop)
 
@@ -1905,34 +1847,43 @@ typedef const OLECHAR *LPCOLESTR;
 
 /* 301 */
 #pragma pack(push, 8)
-struct IRecordInfoVtbl
-{
-  HRESULT (__stdcall *QueryInterface)(IRecordInfo *This, const IID *const riid, void **ppvObject);
-  ULONG (__stdcall *AddRef)(IRecordInfo *This);
-  ULONG (__stdcall *Release)(IRecordInfo *This);
-  HRESULT (__stdcall *RecordInit)(IRecordInfo *This, PVOID pvNew);
-  HRESULT (__stdcall *RecordClear)(IRecordInfo *This, PVOID pvExisting);
-  HRESULT (__stdcall *RecordCopy)(IRecordInfo *This, PVOID pvExisting, PVOID pvNew);
-  HRESULT (__stdcall *GetGuid)(IRecordInfo *This, GUID *pguid);
-  HRESULT (__stdcall *GetName)(IRecordInfo *This, BSTR *pbstrName);
-  HRESULT (__stdcall *GetSize)(IRecordInfo *This, ULONG *pcbSize);
-  HRESULT (__stdcall *GetTypeInfo)(IRecordInfo *This, ITypeInfo **ppTypeInfo);
-  HRESULT (__stdcall *GetField)(IRecordInfo *This, PVOID pvData, LPCOLESTR szFieldName, VARIANT *pvarField);
-  HRESULT (__stdcall *GetFieldNoCopy)(IRecordInfo *This, PVOID pvData, LPCOLESTR szFieldName, VARIANT *pvarField, PVOID *ppvDataCArray);
-  HRESULT (__stdcall *PutField)(IRecordInfo *This, ULONG wFlags, PVOID pvData, LPCOLESTR szFieldName, VARIANT *pvarField);
-  HRESULT (__stdcall *PutFieldNoCopy)(IRecordInfo *This, ULONG wFlags, PVOID pvData, LPCOLESTR szFieldName, VARIANT *pvarField);
-  HRESULT (__stdcall *GetFieldNames)(IRecordInfo *This, ULONG *pcNames, BSTR *rgBstrNames);
-  BOOL (__stdcall *IsMatchingType)(IRecordInfo *This, IRecordInfo *pRecordInfo);
-  PVOID (__stdcall *RecordCreate)(IRecordInfo *This);
-  HRESULT (__stdcall *RecordCreateCopy)(IRecordInfo *This, PVOID pvSource, PVOID *ppvDest);
-  HRESULT (__stdcall *RecordDestroy)(IRecordInfo *This, PVOID pvRecord);
+struct IRecordInfoVtbl {
+  HRESULT(__stdcall *QueryInterface)
+  (IRecordInfo *This, const IID *const riid, void **ppvObject);
+  ULONG(__stdcall *AddRef)(IRecordInfo *This);
+  ULONG(__stdcall *Release)(IRecordInfo *This);
+  HRESULT(__stdcall *RecordInit)(IRecordInfo *This, PVOID pvNew);
+  HRESULT(__stdcall *RecordClear)(IRecordInfo *This, PVOID pvExisting);
+  HRESULT(__stdcall *RecordCopy)
+  (IRecordInfo *This, PVOID pvExisting, PVOID pvNew);
+  HRESULT(__stdcall *GetGuid)(IRecordInfo *This, GUID *pguid);
+  HRESULT(__stdcall *GetName)(IRecordInfo *This, BSTR *pbstrName);
+  HRESULT(__stdcall *GetSize)(IRecordInfo *This, ULONG *pcbSize);
+  HRESULT(__stdcall *GetTypeInfo)(IRecordInfo *This, ITypeInfo **ppTypeInfo);
+  HRESULT(__stdcall *GetField)
+  (IRecordInfo *This, PVOID pvData, LPCOLESTR szFieldName, VARIANT *pvarField);
+  HRESULT(__stdcall *GetFieldNoCopy)
+  (IRecordInfo *This, PVOID pvData, LPCOLESTR szFieldName, VARIANT *pvarField,
+   PVOID *ppvDataCArray);
+  HRESULT(__stdcall *PutField)
+  (IRecordInfo *This, ULONG wFlags, PVOID pvData, LPCOLESTR szFieldName,
+   VARIANT *pvarField);
+  HRESULT(__stdcall *PutFieldNoCopy)
+  (IRecordInfo *This, ULONG wFlags, PVOID pvData, LPCOLESTR szFieldName,
+   VARIANT *pvarField);
+  HRESULT(__stdcall *GetFieldNames)
+  (IRecordInfo *This, ULONG *pcNames, BSTR *rgBstrNames);
+  BOOL(__stdcall *IsMatchingType)(IRecordInfo *This, IRecordInfo *pRecordInfo);
+  PVOID(__stdcall *RecordCreate)(IRecordInfo *This);
+  HRESULT(__stdcall *RecordCreateCopy)
+  (IRecordInfo *This, PVOID pvSource, PVOID *ppvDest);
+  HRESULT(__stdcall *RecordDestroy)(IRecordInfo *This, PVOID pvRecord);
 };
 #pragma pack(pop)
 
 /* 241 */
 #pragma pack(push, 8)
-struct tagARRAYDESC
-{
+struct tagARRAYDESC {
   TYPEDESC tdescElem;
   USHORT cDims;
   SAFEARRAYBOUND rgbounds[1];
@@ -1940,8 +1891,7 @@ struct tagARRAYDESC
 #pragma pack(pop)
 
 /* 252 */
-enum tagDESCKIND
-{
+enum tagDESCKIND {
   DESCKIND_NONE = 0x0,
   DESCKIND_FUNCDESC = 0x1,
   DESCKIND_VARDESC = 0x2,
@@ -1958,20 +1908,23 @@ typedef tagBINDPTR BINDPTR;
 
 /* 250 */
 #pragma pack(push, 8)
-struct ITypeCompVtbl
-{
-  HRESULT (__stdcall *QueryInterface)(ITypeComp *This, const IID *const riid, void **ppvObject);
-  ULONG (__stdcall *AddRef)(ITypeComp *This);
-  ULONG (__stdcall *Release)(ITypeComp *This);
-  HRESULT (__stdcall *Bind)(ITypeComp *This, LPOLESTR szName, ULONG lHashVal, WORD wFlags, ITypeInfo **ppTInfo, DESCKIND *pDescKind, BINDPTR *pBindPtr);
-  HRESULT (__stdcall *BindType)(ITypeComp *This, LPOLESTR szName, ULONG lHashVal, ITypeInfo **ppTInfo, ITypeComp **ppTComp);
+struct ITypeCompVtbl {
+  HRESULT(__stdcall *QueryInterface)
+  (ITypeComp *This, const IID *const riid, void **ppvObject);
+  ULONG(__stdcall *AddRef)(ITypeComp *This);
+  ULONG(__stdcall *Release)(ITypeComp *This);
+  HRESULT(__stdcall *Bind)
+  (ITypeComp *This, LPOLESTR szName, ULONG lHashVal, WORD wFlags,
+   ITypeInfo **ppTInfo, DESCKIND *pDescKind, BINDPTR *pBindPtr);
+  HRESULT(__stdcall *BindType)
+  (ITypeComp *This, LPOLESTR szName, ULONG lHashVal, ITypeInfo **ppTInfo,
+   ITypeComp **ppTComp);
 };
 #pragma pack(pop)
 
 /* 264 */
 #pragma pack(push, 8)
-struct tagPARAMDESCEX
-{
+struct tagPARAMDESCEX {
   ULONG cBytes;
   VARIANTARG varDefaultValue;
 };
@@ -1982,28 +1935,35 @@ typedef tagTLIBATTR TLIBATTR;
 
 /* 316 */
 #pragma pack(push, 8)
-struct ITypeLibVtbl
-{
-  HRESULT (__stdcall *QueryInterface)(ITypeLib *This, const IID *const riid, void **ppvObject);
-  ULONG (__stdcall *AddRef)(ITypeLib *This);
-  ULONG (__stdcall *Release)(ITypeLib *This);
-  UINT (__stdcall *GetTypeInfoCount)(ITypeLib *This);
-  HRESULT (__stdcall *GetTypeInfo)(ITypeLib *This, UINT index, ITypeInfo **ppTInfo);
-  HRESULT (__stdcall *GetTypeInfoType)(ITypeLib *This, UINT index, TYPEKIND *pTKind);
-  HRESULT (__stdcall *GetTypeInfoOfGuid)(ITypeLib *This, const GUID *const guid, ITypeInfo **ppTinfo);
-  HRESULT (__stdcall *GetLibAttr)(ITypeLib *This, TLIBATTR **ppTLibAttr);
-  HRESULT (__stdcall *GetTypeComp)(ITypeLib *This, ITypeComp **ppTComp);
-  HRESULT (__stdcall *GetDocumentation)(ITypeLib *This, INT index, BSTR *pBstrName, BSTR *pBstrDocString, DWORD *pdwHelpContext, BSTR *pBstrHelpFile);
-  HRESULT (__stdcall *IsName)(ITypeLib *This, LPOLESTR szNameBuf, ULONG lHashVal, BOOL *pfName);
-  HRESULT (__stdcall *FindName)(ITypeLib *This, LPOLESTR szNameBuf, ULONG lHashVal, ITypeInfo **ppTInfo, MEMBERID *rgMemId, USHORT *pcFound);
-  void (__stdcall *ReleaseTLibAttr)(ITypeLib *This, TLIBATTR *pTLibAttr);
+struct ITypeLibVtbl {
+  HRESULT(__stdcall *QueryInterface)
+  (ITypeLib *This, const IID *const riid, void **ppvObject);
+  ULONG(__stdcall *AddRef)(ITypeLib *This);
+  ULONG(__stdcall *Release)(ITypeLib *This);
+  UINT(__stdcall *GetTypeInfoCount)(ITypeLib *This);
+  HRESULT(__stdcall *GetTypeInfo)
+  (ITypeLib *This, UINT index, ITypeInfo **ppTInfo);
+  HRESULT(__stdcall *GetTypeInfoType)
+  (ITypeLib *This, UINT index, TYPEKIND *pTKind);
+  HRESULT(__stdcall *GetTypeInfoOfGuid)
+  (ITypeLib *This, const GUID *const guid, ITypeInfo **ppTinfo);
+  HRESULT(__stdcall *GetLibAttr)(ITypeLib *This, TLIBATTR **ppTLibAttr);
+  HRESULT(__stdcall *GetTypeComp)(ITypeLib *This, ITypeComp **ppTComp);
+  HRESULT(__stdcall *GetDocumentation)
+  (ITypeLib *This, INT index, BSTR *pBstrName, BSTR *pBstrDocString,
+   DWORD *pdwHelpContext, BSTR *pBstrHelpFile);
+  HRESULT(__stdcall *IsName)
+  (ITypeLib *This, LPOLESTR szNameBuf, ULONG lHashVal, BOOL *pfName);
+  HRESULT(__stdcall *FindName)
+  (ITypeLib *This, LPOLESTR szNameBuf, ULONG lHashVal, ITypeInfo **ppTInfo,
+   MEMBERID *rgMemId, USHORT *pcFound);
+  void(__stdcall *ReleaseTLibAttr)(ITypeLib *This, TLIBATTR *pTLibAttr);
 };
 #pragma pack(pop)
 
 /* 254 */
 #pragma pack(push, 8)
-union tagBINDPTR
-{
+union tagBINDPTR {
   FUNCDESC *lpfuncdesc;
   VARDESC *lpvardesc;
   ITypeComp *lptcomp;
@@ -2011,8 +1971,7 @@ union tagBINDPTR
 #pragma pack(pop)
 
 /* 320 */
-enum tagSYSKIND
-{
+enum tagSYSKIND {
   SYS_WIN16 = 0x0,
   SYS_WIN32 = 0x1,
   SYS_MAC = 0x2,
@@ -2023,8 +1982,7 @@ typedef tagSYSKIND SYSKIND;
 
 /* 318 */
 #pragma pack(push, 8)
-struct tagTLIBATTR
-{
+struct tagTLIBATTR {
   GUID guid;
   LCID lcid;
   SYSKIND syskind;
@@ -2035,16 +1993,13 @@ struct tagTLIBATTR
 #pragma pack(pop)
 
 /* 325 */
-struct struct_this
-{
+struct struct_this {
   _BYTE byte0;
   CoreNode corenode4;
 };
 
 /* 326 */
-struct struct_this_1
-{
+struct struct_this_1 {
   _BYTE gap0[4];
   struct CoreNode corenode4;
 };
-

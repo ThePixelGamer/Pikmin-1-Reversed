@@ -11,32 +11,32 @@
 
 class SYSCORE_API CmdStream {
 private:
-	Stream* strm; // 0h
-	char* buffer; // 4h
-	char currentToken[0x100]; // 8h
-	int pending; // 108h
-	int unkVar2; // 10Ch
-	int unkVar3; // 110h
-	int currentChar; // 114h
+  Stream *strm;             // 0h
+  char *buffer;             // 4h
+  char currentToken[0x100]; // 8h
+  int pending;              // 108h
+  int unkVar2;              // 10Ch
+  int unkVar3;              // 110h
+  int currentChar;          // 114h
 public:
-	static char* statbuff;
+  static char *statbuff;
 
-	CmdStream() {}
-	CmdStream(Stream* strm);
+  CmdStream() {}
+  CmdStream(Stream *strm);
 
-	void init(Stream*);
-	void fillBuffer(bool canFill);
-	void copyToToken(int);
+  void init(Stream *);
+  void fillBuffer(bool canFill);
+  void copyToToken(int);
 
-	char nextChar();
-	bool isToken(char* Str);
-	char* getToken(bool hasComments);
-	char* skipLine();
+  char nextChar();
+  bool isToken(char *Str);
+  char *getToken(bool hasComments);
+  char *skipLine();
 
-	bool LineIsComment();
-	bool whiteSpace(char toCheck);
-	bool endOfCmds();
-	bool endOfSection();
+  bool LineIsComment();
+  bool whiteSpace(char toCheck);
+  bool endOfCmds();
+  bool endOfSection();
 };
 
 #endif

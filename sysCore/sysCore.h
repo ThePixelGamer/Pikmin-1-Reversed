@@ -9,19 +9,19 @@
 #endif
 
 #pragma once
-	
+
 #ifndef SYSCORE_H
 #define SYSCORE_H
 
-#include "Stream/Stream.h"
 #include "Nodes/Node.h"
+#include "Stream/Stream.h"
 #include <Windows.h>
-#pragma comment(lib,"ws2_32.lib") //Winsock Library
+#pragma comment(lib, "ws2_32.lib") // Winsock Library
 
 extern SYSCORE_API HINSTANCE hInstance;
 extern SYSCORE_API HINSTANCE sysHInst;
-extern SYSCORE_API Stream* sysCon;
-extern SYSCORE_API Stream* errCon;
+extern SYSCORE_API Stream *sysCon;
+extern SYSCORE_API Stream *errCon;
 extern SYSCORE_API HWND sysCurrWnd;
 static HWND hWnd;
 static WNDPROC lpPrevWndFunc;

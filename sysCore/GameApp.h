@@ -3,17 +3,15 @@
 #include "BaseApp.h"
 #include "UI/UIWindow.h"
 
-class GameApp :
-	public BaseApp
-{
+class GameApp : public BaseApp {
 public:
-	UIWindow* m_mainWindow; // 54h
-	bool unkByte; //58h
+  UIWindow *m_mainWindow; // 54h
+  bool unkByte;           // 58h
 
-	GameApp();
-	~GameApp();
+  GameApp();
+  ~GameApp();
 
-	virtual void InitApp();
+  virtual void InitApp();
 };
 
 #endif

@@ -7,15 +7,15 @@
 #ifndef TEXIMG_H
 #define TEXIMG_H
 
-#include "../Stream/RandomAccessStream.h"
 #include "../Nodes/CoreNode.h"
+#include "../Stream/RandomAccessStream.h"
 
 class SYSCORE_API TexImg : public CoreNode {
 public:
-	//0h vtable
-	//10h CoreNode
+  // 0h vtable
+  // 10h CoreNode
 
-	TexImg() : CoreNode("texImg") {}
+  TexImg() : CoreNode("texImg") {}
 };
 
 #endif

@@ -8,17 +8,10 @@
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-ControllerMgr::ControllerMgr()
-{
+ControllerMgr::ControllerMgr() {}
 
-}
+void ControllerMgr::update() { GetKeyboardState(this->lpKeyState); }
 
-void ControllerMgr::update()
-{
-	GetKeyboardState(this->lpKeyState);
-}
-
-bool ControllerMgr::keyDown(int key)
-{
-	return (this->lpKeyState[key] & 0x80) == 0x80;
+bool ControllerMgr::keyDown(int key) {
+  return (this->lpKeyState[key] & 0x80) == 0x80;
 }

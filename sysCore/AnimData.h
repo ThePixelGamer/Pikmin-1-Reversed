@@ -15,18 +15,18 @@ class AnimCacheInfo;
 
 class SYSCORE_API AnimData : public CoreNode {
 public:
-	//vtable 0h
-	//(CoreNode: 4h-10h)
-	int animCacheSize; //30h
-	AnimCacheInfo* animCache; //40h
+  // vtable 0h
+  //(CoreNode: 4h-10h)
+  int animCacheSize;        // 30h
+  AnimCacheInfo *animCache; // 40h
 
-	AnimData();
+  AnimData();
 
-	virtual void genAge(AgeServer&);
-	virtual void extractSRT(SRT&, int, AnimDataInfo*, float);
-	virtual void makeAnimSRT(int, Matrix4f*, Matrix4f*, AnimDataInfo*, float);
-	virtual void detach();
-	virtual void writeType(RandomAccessStream&);
+  virtual void genAge(AgeServer &);
+  virtual void extractSRT(SRT &, int, AnimDataInfo *, float);
+  virtual void makeAnimSRT(int, Matrix4f *, Matrix4f *, AnimDataInfo *, float);
+  virtual void detach();
+  virtual void writeType(RandomAccessStream &);
 };
 
 #endif

@@ -10,18 +10,18 @@
 #define EDITNODE_H
 
 //
-#include "CoreNode.h"
 #include "../Graphics.h"
+#include "CoreNode.h"
 //
 
 class DataMsg;
 
 class SYSCORE_API EditNode : public CoreNode {
 public:
-	EditNode(char*);
+  EditNode(char *);
 
-	virtual void msgCommand(DataMsg&);
-	virtual void render2d(Graphics&, int&);
+  virtual void msgCommand(DataMsg &);
+  virtual void render2d(Graphics &, int &);
 };
 
 #endif

@@ -13,10 +13,9 @@
 #include "CoreNode.h"
 //
 
-class SYSCORE_API MemInfoNode : public CoreNode
-{
+class SYSCORE_API MemInfoNode : public CoreNode {
 public:
-	MemInfoNode();
+  MemInfoNode();
 };
 
 #endif

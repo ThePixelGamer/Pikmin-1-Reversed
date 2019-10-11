@@ -13,14 +13,14 @@ class Vector3f;
 
 class SYSCORE_API Matrix4f {
 public:
-	float mMatrix4f[4][4];
+  float mMatrix4f[4][4];
 
-	Matrix4f(float[4][4]);
-	Matrix4f();
+  Matrix4f(float[4][4]);
+  Matrix4f();
 
-	void blend(Matrix4f&, float);
-	void getColumn(int, Vector3f&);
-	void getRow(int, Vector3f&);
+  void blend(Matrix4f &, float);
+  void getColumn(int, Vector3f &);
+  void getRow(int, Vector3f &);
 };
 
-#endif 
+#endif

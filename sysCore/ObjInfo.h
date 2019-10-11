@@ -11,44 +11,44 @@
 
 class SYSCORE_API GfxobjInfo {
 public:
-	//vtable - 0h
-	GfxobjInfo* prev; //4h
-	GfxobjInfo* next; //8h
-	char* str; //Ch
-	ID32 id32; //10h
-	void* unused; //1Ch
+  // vtable - 0h
+  GfxobjInfo *prev; // 4h
+  GfxobjInfo *next; // 8h
+  char *str;        // Ch
+  ID32 id32;        // 10h
+  void *unused;     // 1Ch
 
-	GfxobjInfo();
+  GfxobjInfo();
 
-	virtual void attach();
-	virtual void detach();
+  virtual void attach();
+  virtual void detach();
 
-	void insertAfter(GfxobjInfo* a2);
-	void remove();
+  void insertAfter(GfxobjInfo *a2);
+  void remove();
 };
 
 class AnimData;
 
 class SYSCORE_API AnmobjInfo : public GfxobjInfo {
 public:
-	//(GfxobjInfo: 0h-1Ch)
-	AnimData* animData; 
+  //(GfxobjInfo: 0h-1Ch)
+  AnimData *animData;
 
-	AnmobjInfo();
+  AnmobjInfo();
 
-	virtual void detach();
+  virtual void detach();
 };
 
 class Texture;
 
 class SYSCORE_API TexobjInfo : public GfxobjInfo {
 public:
-	//(GfxobjInfo: 0h-1Ch)
-	Texture* texData; 
+  //(GfxobjInfo: 0h-1Ch)
+  Texture *texData;
 
-	TexobjInfo();
+  TexobjInfo();
 
-	virtual void detach();
+  virtual void detach();
 };
 
-#endif 
+#endif

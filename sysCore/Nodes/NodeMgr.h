@@ -14,25 +14,24 @@
 //
 
 static unsigned char foundNode;
-static CoreNode* unkNode;
+static CoreNode *unkNode;
 
 class SYSCORE_API NodeMgr {
 public:
-	//0h - vtbl
-	int unk; //4h
-	CoreNode firstnode; //32h
+  // 0h - vtbl
+  int unk;            // 4h
+  CoreNode firstnode; // 32h
 
-	// Functions
-	NodeMgr();
-	~NodeMgr();
+  // Functions
+  NodeMgr();
+  ~NodeMgr();
 
-	CoreNode* findNode(char*, CoreNode*);
-	CoreNode* firstNode();
-	void recFindNode(CoreNode*, char*);
-	void Del(Node*);
+  CoreNode *findNode(char *, CoreNode *);
+  CoreNode *firstNode();
+  void recFindNode(CoreNode *, char *);
+  void Del(Node *);
 };
 
-extern SYSCORE_API NodeMgr* nodeMgr;
-
+extern SYSCORE_API NodeMgr *nodeMgr;
 
 #endif

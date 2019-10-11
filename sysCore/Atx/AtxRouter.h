@@ -11,14 +11,14 @@
 
 class SYSCORE_API AtxRouter {
 public:
-	virtual bool openRoute(class AtxStream*, int) = 0; // 0
-	virtual void closeRoute(class AtxStream*) = 0; // 4
-	virtual void lock() {} // 8
-	virtual void unlock() {} // 12
-	virtual void closeAll() {} // 16
-	virtual void reset() = 0; // 20
-	virtual bool isConnected() { return false; } // 24
-	virtual void setWindow(unsigned __int32) {} // 28
+  virtual bool openRoute(class AtxStream *, int) = 0; // 0
+  virtual void closeRoute(class AtxStream *) = 0;     // 4
+  virtual void lock() {}                              // 8
+  virtual void unlock() {}                            // 12
+  virtual void closeAll() {}                          // 16
+  virtual void reset() = 0;                           // 20
+  virtual bool isConnected() { return false; }        // 24
+  virtual void setWindow(unsigned __int32) {}         // 28
 };
 
 #endif

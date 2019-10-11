@@ -11,10 +11,10 @@
 
 class SYSCORE_API AyuHeap : public AyuStack {
 public:
-	//(AyuStack: 0h-20h)
-	int unk; //24h
+  //(AyuStack: 0h-20h)
+  int unk; // 24h
 
-	void init(char*, int, void*, int);
+  void init(char *, int, void *, int);
 };
 
 #endif

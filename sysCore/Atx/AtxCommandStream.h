@@ -11,12 +11,12 @@
 
 class SYSCORE_API AtxCommandStream : public AtxStream {
 public:
-	//0h - vtbl
-	//4h - stream var
-	class BaseApp* m_baseApp;//10h
+  // 0h - vtbl
+  // 4h - stream var
+  class BaseApp *m_baseApp; // 10h
 
-	AtxCommandStream(BaseApp* app) { this->m_baseApp = app; }
-	bool checkCommands();
+  AtxCommandStream(BaseApp *app) { this->m_baseApp = app; }
+  bool checkCommands();
 };
 
 #endif

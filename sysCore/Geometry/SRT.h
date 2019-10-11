@@ -7,19 +7,19 @@
 #ifndef SRT_H
 #define SRT_H
 
-#include "Vector3f.h"
 #include "../Stream/RandomAccessStream.h"
+#include "Vector3f.h"
 
 class SYSCORE_API SRT {
 public:
-	Vector3f m_scale;
-	Vector3f m_rotation;
-	Vector3f m_position;
+  Vector3f m_scale;
+  Vector3f m_rotation;
+  Vector3f m_position;
 
-	SRT();
+  SRT();
 
-	void read(RandomAccessStream&);
-	void write(RandomAccessStream&);
+  void read(RandomAccessStream &);
+  void write(RandomAccessStream &);
 };
 
 #endif
