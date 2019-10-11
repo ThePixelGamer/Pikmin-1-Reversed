@@ -4,28 +4,10 @@
 // IDelegate class functions
 //////////////////////////////////////////////////////////////////////
 
-Callback::Callback(T trg, Method method) : target(trg), op(method) {}
-
-void Callback::invoke() {
-    (target->*op)();
-}
-
 //////////////////////////////////////////////////////////////////////
 // IDelegate1 class functions
 //////////////////////////////////////////////////////////////////////
 
-Callback::Callback1(T trg, Method method) : target(trg), op(method) {}
-
-void Callback::invoke(Param0 param0) {
-    (target->*op)(param0);
-}
-
 //////////////////////////////////////////////////////////////////////
 // IDelegate2 class functions
 //////////////////////////////////////////////////////////////////////
-
-Callback2::Callback2(T trg, Method method) : target(trg), op(method) {}
-
-void Callback2::invoke(Param0 param0, Param1 param1) {
-    (target->*op)(param0, param1);
-}

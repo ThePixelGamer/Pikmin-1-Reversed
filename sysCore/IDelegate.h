@@ -30,9 +30,14 @@ public:
     T target;
     Method op;
 
-	Callback(T, Method);
+	Callback(T trg, Method method) {
+		target = trg;
+		op = method;
+	}
 
-	virtual void invoke();
+	virtual void invoke() {
+		(target->*op)();
+	}
 };
 
 template <class T, class Method, class Param0>
@@ -41,9 +46,14 @@ public:
     T target;
     Method op;
 
-	Callback1(T, Method);
+	Callback1(T trg, Method method) {
+		target = trg;
+		op = method;
+	}
 
-	virtual void invoke(Param0);
+	virtual void invoke(Param0 param0) {
+		(target->*op)(param0);
+	}
 };
 
 template <class T, class Method, class Param0, class Param1>
@@ -52,9 +62,14 @@ public:
     T target;
     Method op;
 
-	Callback2(T, Method);
+	Callback2(T trg, Method method) {
+		target = trg;
+		op = method;
+	}
 
-	virtual void invoke(Param0, Param1);
+	virtual void invoke(Param0 param0, Param1 param1) {
+		(target->*op)(param0, param1);
+	}
 };
 
 #endif
