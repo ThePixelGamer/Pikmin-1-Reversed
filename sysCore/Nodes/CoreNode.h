@@ -49,7 +49,7 @@ public:
 	void load(char*, char*, unsigned __int32); // TODO
 
 	void genWrite(AgeServer&) {}				   // TODO
-	void genRead(AgeServer&) {}				   // TODO
+	void genRead(AgeServer&);				   // TODO
 };
 
 #endif

@@ -92,12 +92,21 @@ void AgeServer::NewNodeWindow(char* name) {
 	this->writeString(name);
 }
 
-void AgeServer::setOnChange(IDelegate* a2) {
-	
+void AgeServer::setOnChange(IDelegate* d) {
+	this->writeInt(207);
+	this->writeInt(0);
+	this->writeInt(reinterpret_cast<int>(d));
 }
 
-void AgeServer::setOnChange(IDelegate1<AgeServer&>*) {
-	
+void AgeServer::setOnChange(IDelegate1<AgeServer&>* d) {
+	this->writeInt(207);
+	this->writeInt(1);
+	this->writeInt(reinterpret_cast<int>(d));
+}
+
+void AgeServer::setSectionRefresh(IDelegate1<AgeServer&>* d) {
+	this->writeInt(208);
+	this->writeInt(reinterpret_cast<int>(d));
 }
 
 //WRITE
@@ -122,6 +131,21 @@ bool AgeServer::Open() {
 		AGEPRINT("cant open AgeServer\n");
 		return false;
 	}
+}
+
+bool AgeServer::getOpenFilename(String& str, char* filter)
+{
+	this->writeInt(404);
+	if (filter)
+	{
+		AGEPRINT("filter length = %d\n", strlen(filter));
+		this->writeString(filter);;
+	}
+	else
+		this->writeString("All (*.*)|*.*");
+
+	this->readString(str);
+	return str.getLength() != 0;
 }
 
 void AgeServer::StartSection(char* name, bool unk)

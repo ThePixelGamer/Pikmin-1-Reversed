@@ -1,7 +1,7 @@
 #include "ID32.h"
 
 #include "sysCore.h"
-#include "IDelegate.h"
+#include "IDelegate.cpp"
 #include "Stream/RandomAccessStream.h"
 #include "AgeServer.h"
 

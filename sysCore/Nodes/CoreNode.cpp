@@ -1,5 +1,23 @@
 #include "CoreNode.h"
 #include "../AgeServer.h"
+#include "../sysCore.h"
+#include "../Atx/AtxFileStream.h"
+#include "../IDelegate.cpp"
+
+void NODEPRINT(const char* fmt, ...) {
+	va_list args;
+	va_start(args, fmt);
+	char dest[1024];
+
+	if (sysCon) {
+		if ("Node")
+			sysCon->print("%s: ", "Node");
+		vsprintf(dest, fmt, args);
+		if (strlen(dest)) {
+			sysCon->write(dest, strlen(dest));
+		}
+	}
+}
 
 CoreNode::CoreNode(char* name) {
 	this->initCore(name);
@@ -13,8 +31,34 @@ void CoreNode::genAge(AgeServer& server)
 	IDelegate1<AgeServer&>* loadButton = new Callback1<CoreNode*, void (CoreNode::*)(AgeServer&), AgeServer&>(this, &CoreNode::genRead);
 	server.NewButton("Load", loadButton, 120);
 
+	IDelegate1<AgeServer&>* saveButton = new Callback1<CoreNode*, void (CoreNode::*)(AgeServer&), AgeServer&>(this, &CoreNode::genWrite);
+	server.NewButton("Save", saveButton, 120);
+
 	server.EndGroup();
 	server.EndSection();
+}
+
+struct String_Unk : public String
+{
+	String_Unk() : String()
+	{
+		this->init(128);
+	}
+};
+
+void CoreNode::genRead(AgeServer& server)
+{
+	String_Unk unkString;
+	if (server.getOpenFilename(unkString, "All files (*.*)|*.*"))
+	{
+		AtxFileStream stream;
+		NODEPRINT("Trying to open file '%s'\n", unkString.m_string);
+		if (stream.open(unkString.m_string, true))
+		{
+			NODEPRINT("opened file ...\n");
+
+		}
+	}
 }
 
 int CoreNode::getAgeNodeType() {

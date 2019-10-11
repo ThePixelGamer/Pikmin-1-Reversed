@@ -7,8 +7,8 @@
 #ifndef ID32_H
 #define ID32_H
 
-class RandomAccessStream;
 class AgeServer;
+class RandomAccessStream;
 
 class SYSCORE_API ID32 { 
 public:

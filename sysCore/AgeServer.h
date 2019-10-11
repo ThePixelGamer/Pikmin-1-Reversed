@@ -54,6 +54,7 @@ public:
 
 	void setOnChange(IDelegate*);
 	void setOnChange(IDelegate1<AgeServer&>*);
+	void setSectionRefresh(IDelegate1<AgeServer&>*);
 
 	void StartSection(char*, bool);
 	void StartGroup(char*);
@@ -62,6 +63,7 @@ public:
 	int writePropValue(PROP_TYPE, void*);
 
 	bool Open();
+	bool getOpenFilename(String&, char*);
 };
 
 #endif
