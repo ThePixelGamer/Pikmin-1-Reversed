@@ -6,13 +6,13 @@ TcpStream::TcpStream() {
 }
 
 TcpStream::TcpStream(WSocket* sock) {
-	this->m_wSock = (WSocket*)malloc(sizeof(WSocket)); // replace with the new[] overloaded function
+	this->m_wSock = new WSocket;
 	this->m_wSock->m_listeningSock = sock->m_listeningSock;
 	this->m_wSock->connect();
 }
 
 void TcpStream::read(void* buf, int len) {
-	int oldStreamType = gsys->setStreamType(this->m_streamInUse);
+	const int oldStreamType = gsys->setStreamType(this->m_streamInUse);
 	this->m_wSock->read((char*)buf, len);
 	gsys->setStreamType(oldStreamType);
 }
@@ -34,7 +34,8 @@ void TcpStream::close() {
 }
 
 void TcpStream::flush() {
-	WSocket::flushWrite();
+	// Oddly enough, this WSocket function doesn't ever get overloaded
+	this->m_wSock->flushWrite();
 }
 
 bool TcpStream::closing() {
@@ -42,6 +43,6 @@ bool TcpStream::closing() {
 }
 
 bool TcpStream::connect(char* name, int port) {
-	this->m_wSock = (WSocket*)malloc (sizeof(WSocket)); // replace with new[] overloaded function
+	this->m_wSock = new WSocket;
 	return this->m_wSock->open(name, port) != 0;
 }
