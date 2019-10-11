@@ -131,6 +131,10 @@ SOURCE=.\Stream\CmdStream.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Stream\DebugStream.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Stream\FileIO.cpp
 # End Source File
 # Begin Source File
@@ -465,6 +469,10 @@ SOURCE=.\Colour.h
 # Begin Source File
 
 SOURCE=.\ControllerManager.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stream\DebugStream.h
 # End Source File
 # Begin Source File
 

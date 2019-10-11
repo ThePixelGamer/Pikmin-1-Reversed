@@ -13,6 +13,7 @@
 #include "../IDelegate.h"
 #include "../Atx/AtxRouter.h"
 #include "../Networking/WSocket.h"
+#include "../Stream/DebugStream.h"
 
 class SYSCORE_API System : public StdSystem {
 public:
@@ -83,73 +84,5 @@ public:
 };
 
 extern SYSCORE_API System* gsys;
-
-class DebugStream : public Stream // not exported
-{
-public:
-	//0h - vtbl
-	//4h - stream var
-	int m_written; //8h
-	int m_dwordC; //Ch
-	char m_unk[256]; //10h
-	RandomAccessStream* m_RAStream; // 110h
-	UIWindow* m_window; //114h
-
-	DebugStream(UIWindow* window) {
-		this->m_written = 0;
-		this->m_dwordC = 0;
-
-		this->m_window = new UIWindow(window, 15, 0x50200140, 512, 0);
-		this->m_window->sizeWindow(window->m_client.width(), window->m_client.height(), 0);
-		this->m_window->createWindow("ListBox", 0, 0);
-		WPARAM obj = (WPARAM)GetStockObject(DEFAULT_GUI_FONT);
-		SendMessage(this->m_window->m_hWnd, 0x30, obj, 0);
-		this->m_RAStream = gsys->createFile("../log.txt", true);
-	}
-
-	void writeChar(char toWrite) { // unsure of name
-		if (this->m_written >= 255) {
-			this->flush();
-		}
-		this->m_unk[this->m_written] = toWrite;
-		this->m_written++;
-
-	}
-
-	virtual void write(void* buf, int len) {
-		for (int i = 0; i < len; ++i) {
-			char currentChar = *((char*)buf + i);
-			if (currentChar == '\n') {
-				this->flush();
-			}
-			else if (currentChar == '\t') {
-				this->writeChar(' ');
-				this->writeChar(' ');
-			}
-			else {
-				this->writeChar(currentChar);
-			}
-		}
-	}
-
-	virtual void flush() {
-		this->m_unk[this->m_written] = 0;
-		if (this->m_window) {
-			if (gsys->m_debugStreamUnk == nullptr) {
-				SendMessage(this->m_window->m_hWnd, LB_ADDSTRING, 0, (LPARAM)this->m_unk);
-				SendMessage(this->m_window->m_hWnd, LB_SETCURSEL, this->m_dwordC++, 0);
-
-				if (this->m_RAStream) { // has file open
-					char newline[2];
-					strcpy(newline, "\n");
-					this->m_RAStream->write(this->m_unk, strlen(this->m_unk));
-					this->m_RAStream->write(newline, strlen(newline));
-				}
-			}
-		}
-		this->m_written = 0;
-	}
-};
-
 #endif
 
