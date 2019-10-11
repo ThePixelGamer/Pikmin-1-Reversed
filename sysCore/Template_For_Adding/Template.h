@@ -1,3 +1,5 @@
+#pragma once
+
 #ifdef SYSCORE_EXPORTS
 #define SYSCORE_API __declspec(dllexport)
 #else
@@ -6,6 +8,10 @@
 
 #ifndef TEMPLATE_H
 #define TEMPLATE_H
+
+//
+//	Add any headers here!
+//
 
 class SYSCORE_API Template
 {
