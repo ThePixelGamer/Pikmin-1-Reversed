@@ -11,13 +11,13 @@
 
 class SYSCORE_API CmdStream {
 private:
-	Stream* strm;
-	char* buffer; //this + 4
-	char currentToken[256];
-	int pending;
-	int currentChar;
-	int unkVar2;
-	int unkVar3;
+	Stream* strm; // 0h
+	char* buffer; // 4h
+	char currentToken[0x100]; // 8h
+	int pending; // 108h
+	int unkVar2; // 10Ch
+	int unkVar3; // 110h
+	int currentChar; // 114h
 public:
 	static char* statbuff;
 
