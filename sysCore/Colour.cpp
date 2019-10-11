@@ -31,10 +31,12 @@ void Colour::add(Colour& toAdd) {
 	unsigned short a = this->A + toAdd.A;
 	if (a > 255)
 		this->set(r, g, b, 0xFF);
-	else if (a < 0)
-		a = 0;
-
-	this->set(r, g, b, a);
+	else 
+	{
+		if (a < 0)
+			a = 0;
+		this->set(r, g, b, a);
+	}
 }
 
 
