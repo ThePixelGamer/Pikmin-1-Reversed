@@ -8,7 +8,7 @@
 #define SYSTEM_H
 
 #include "StdSystem.h"
-#include "../UI/UI.h"
+#include "../UI/UIMgr.h"
 #include "../BaseApp.h"
 #include "../IDelegate.h"
 #include "../Atx/AtxRouter.h"

@@ -1,7 +1,7 @@
 #ifndef GAMEAPP_H
 #define GAMEAPP_H
 #include "BaseApp.h"
-#include "UI/UI.h"
+#include "UI/UIWindow.h"
 
 class GameApp :
 	public BaseApp

@@ -60,7 +60,7 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Group "ATX SOURCE FILES"
 
-# PROP Default_Filter ""
+# PROP Default_Filter ".cpp"
 # Begin Source File
 
 SOURCE=.\Atx\AtxCommandStream.cpp
@@ -166,6 +166,42 @@ SOURCE=.\Texturing\TexImg.cpp
 SOURCE=.\Texturing\Texture.cpp
 # End Source File
 # End Group
+# Begin Group "UI SOURCE FILES"
+
+# PROP Default_Filter ".cpp"
+# Begin Source File
+
+SOURCE=.\UI\ComboBox.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\EditBox.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\OptionBox.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\RectArea.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\ToolWindow.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\UIFrame.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\UIMgr.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\UIWindow.cpp
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\AgeServer.cpp
@@ -242,17 +278,13 @@ SOURCE=.\sysCore.cpp
 
 SOURCE=.\System\System.cpp
 # End Source File
-# Begin Source File
-
-SOURCE=.\UI\UI.cpp
-# End Source File
 # End Group
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Group "ATX HEADER FILES"
 
-# PROP Default_Filter ""
+# PROP Default_Filter ".h"
 # Begin Source File
 
 SOURCE=.\Atx\AtxCommandStream.h
@@ -358,6 +390,42 @@ SOURCE=.\Texturing\TexImg.h
 SOURCE=.\Texturing\Texture.h
 # End Source File
 # End Group
+# Begin Group "UI HEADER FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\UI\ComboBox.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\EditBox.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\OptionBox.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\RectArea.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\ToolWindow.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\UIFrame.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\UIMgr.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\UI\UIWindow.h
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\AgeServer.h
@@ -433,10 +501,6 @@ SOURCE=.\sysCore.h
 # Begin Source File
 
 SOURCE=.\System\System.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\UI.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
