@@ -44,7 +44,7 @@ void AgeServer::EndOptionBox() {
 
 void AgeServer::EndSection() {
 	this->writeInt(301);
-	this->m_unkOpen = false;
+	this->m_sectionStarted = false;
 }
 
 //NEW
@@ -54,6 +54,15 @@ void AgeServer::NewBit(char* str, unsigned __int32 a2, unsigned __int32 a3) {
 	this->writeString(str);
 	this->writeInt(a2);
 	this->writeInt(a3);
+}
+
+void AgeServer::NewButton(char* name, IDelegate1<AgeServer&>* callback, int unk)
+{
+	this->writeInt(105);
+	this->writeString(name);
+	this->writeInt(unk);
+	this->writeInt(1);
+	this->writeInt(reinterpret_cast<int>(callback));
 }
 
 void AgeServer::NewEditor(char* unk, Colour& col) {
@@ -106,11 +115,25 @@ int AgeServer::writePropValue(PROP_TYPE type, void* buffer) {
 bool AgeServer::Open() {
 	AGEPRINT("!!!!! Opening Age server\n");
 	if (this->open("age", 3)) {
-		this->m_unkOpen = false;
+		this->m_sectionStarted = false;
 		return true;
 	}
 	else {
 		AGEPRINT("cant open AgeServer\n");
 		return false;
 	}
+}
+
+void AgeServer::StartSection(char* name, bool unk)
+{
+	this->writeInt(300);
+	this->writeInt(static_cast<int>(unk));
+	this->writeString(name);
+	this->m_sectionStarted = true;
+}
+
+void AgeServer::StartGroup(char* name)
+{
+	this->writeInt(302);
+	this->writeString(name);
 }

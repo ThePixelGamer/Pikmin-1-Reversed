@@ -14,7 +14,7 @@
 #define SYSCORE_H
 
 #include "Stream/Stream.h"
-#include "Nodes.h"
+#include "Nodes/Node.h"
 #include <Windows.h>
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
 

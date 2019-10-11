@@ -10,7 +10,7 @@
 
 #include <Windows.h>
 #include "../AgeServer.h"
-#include "../Nodes.h"
+#include "../Nodes/Node.h"
 #include "../ObjInfo.h"
 #include "../AyuHeap.h"
 #include "../Stream/FileIO.h"

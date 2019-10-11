@@ -7,7 +7,7 @@
 #ifndef UIFRAME_H
 #define UIFRAME_H
 
-#include "../Nodes.h"
+#include "../Nodes/Node.h"
 #include "RectArea.h"
 
 class SYSCORE_API UIFrame : public Node {

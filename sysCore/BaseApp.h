@@ -7,7 +7,7 @@
 #ifndef BASEAPP_H
 #define BASEAPP_H
 
-#include "Nodes.h"
+#include "Nodes/Node.h"
 #include "Atx/AtxCommandStream.h"
 #include "AgeServer.h"
 

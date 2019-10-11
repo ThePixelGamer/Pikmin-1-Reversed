@@ -8,6 +8,7 @@
 #define UIMGR_H
 
 #include "UIWindow.h"
+#include "../Nodes/NodeMgr.h"
 
 class SYSCORE_API UIMgr : public Node {
 public:

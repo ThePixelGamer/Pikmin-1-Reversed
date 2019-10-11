@@ -10,14 +10,13 @@
 #include "Vector3f.h"
 #include "../Stream/RandomAccessStream.h"
 
-class SRT {
+class SYSCORE_API SRT {
 public:
-	Vector3f mUnk1;
-	Vector3f mUnk2;
-	Vector3f mUnk3;
+	Vector3f m_scale;
+	Vector3f m_rotation;
+	Vector3f m_position;
 
 	SRT();
-	SRT(const SRT&);
 
 	void read(RandomAccessStream&);
 	void write(RandomAccessStream&);

@@ -39,7 +39,7 @@ public:
 	float distance(Vector3f&);
 	void div(float);
 	float dot(Vector3f&);
-	void genAge(AgeServer&, char*, Vector3f&, Vector3f&);
+	void genAge(AgeServer&, char* name, Vector3f& scaleUpperBounds, Vector3f& scaleLowerBounds);
 	void input(Vector3f&);
 	bool isSame(Vector3f&);
 	float length();

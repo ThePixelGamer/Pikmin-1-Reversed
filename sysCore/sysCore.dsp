@@ -210,6 +210,46 @@ SOURCE=.\UI\UIMgr.cpp
 SOURCE=.\UI\UIWindow.cpp
 # End Source File
 # End Group
+# Begin Group "NODE SOURCE FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Nodes\ANode.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\CoreNode.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\EditNode.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\FaceNode.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\MemInfoNode.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\Node.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\NodeMgr.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\Nodes.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\SRTNode.cpp
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\AgeServer.cpp
@@ -261,10 +301,6 @@ SOURCE=.\IDelegate.cpp
 # Begin Source File
 
 SOURCE=.\Module.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Nodes.cpp
 # End Source File
 # Begin Source File
 
@@ -438,6 +474,46 @@ SOURCE=.\UI\UIMgr.h
 SOURCE=.\UI\UIWindow.h
 # End Source File
 # End Group
+# Begin Group "NODE HEADER FILES"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Nodes\ANode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\CoreNode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\EditNode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\FaceNode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\MemInfoNode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\Node.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\NodeMgr.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\Nodes.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Nodes\SRTNode.h
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\AgeServer.h
@@ -493,10 +569,6 @@ SOURCE=.\IDelegate.h
 # Begin Source File
 
 SOURCE=.\Module.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Nodes.h
 # End Source File
 # Begin Source File
 

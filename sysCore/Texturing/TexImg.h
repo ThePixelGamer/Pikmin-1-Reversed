@@ -8,7 +8,7 @@
 #define TEXIMG_H
 
 #include "../Stream/RandomAccessStream.h"
-#include "../Nodes.h"
+#include "../Nodes/CoreNode.h"
 
 class SYSCORE_API TexImg : public CoreNode {
 public:

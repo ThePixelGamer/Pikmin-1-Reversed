@@ -2,20 +2,14 @@
 
 SRT::SRT() {}
 
-SRT::SRT(const SRT& a2) {
-	this->mUnk1 = a2.mUnk1;
-	this->mUnk2 = a2.mUnk2;
-	this->mUnk3 = a2.mUnk3;
-}
-
 void SRT::read(RandomAccessStream& a2) {
-	this->mUnk1.read(a2);
-	this->mUnk2.read(a2);
-	this->mUnk3.read(a2);
+	this->m_scale.read(a2);
+	this->m_rotation.read(a2);
+	this->m_position.read(a2);
 }
 
 void SRT::write(RandomAccessStream& a2) {
-	this->mUnk1.write(a2);
-	this->mUnk2.write(a2);
-	this->mUnk3.write(a2);
+	this->m_scale.write(a2);
+	this->m_rotation.write(a2);
+	this->m_position.write(a2);
 }

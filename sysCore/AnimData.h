@@ -7,7 +7,8 @@
 #ifndef ANIMDATA_H
 #define ANIMDATA_H
 
-#include "Nodes.h"
+#include "Nodes/CoreNode.h"
+#include "Nodes/SRTNode.h"
 
 class AnimDataInfo;
 class AnimCacheInfo;

@@ -27,25 +27,25 @@ enum PROP_TYPE {
 class SYSCORE_API AgeServer : public AtxStream {
 public:
 	// 16h - AtxStream
-	bool m_unkOpen;// 10h
+	bool m_sectionStarted;// 10h
 
-	AgeServer(); // empty
+	AgeServer();
 
 	virtual void close() {}
 
-	void Done(); // this->writeInt(200);
-	void EndBitGroup(); // this->writeInt(0);
-	void EndGroup(); // this->writeInt(303);
-	void EndNode(); // this->writeInt(200);
-	void EndOptionBox(); // this->writeInt(0);
-	void EndSection(); // this->writeInt(301); this->m_unk = false
+	void Done();
+	void EndBitGroup();
+	void EndGroup();
+	void EndNode();
+	void EndOptionBox();
+	void EndSection();
 
 	// NEW SECTION
-	void NewBit(char*, unsigned __int32, unsigned __int32); // this->writeInt(1); blah blah
-	// UH OH
+	void NewBit(char*, unsigned __int32, unsigned __int32);
+
 	void NewButton(char *, IDelegate *, int);
 	void NewButton(char *, IDelegate1<AgeServer &> *, int);
-	//void NewEditor(char *, AyuImage *, bool);
+	void NewEditor(char*, class AyuImage*, bool) {}
 	void NewEditor(char*, Colour&);
 	void NewEditor(char*, char*, int);
 	void NewEditor(char*, char*, int, int, int);
@@ -54,6 +54,9 @@ public:
 
 	void setOnChange(IDelegate*);
 	void setOnChange(IDelegate1<AgeServer&>*);
+
+	void StartSection(char*, bool);
+	void StartGroup(char*);
 
 	int writeProp(PROP_TYPE, void*);
 	int writePropValue(PROP_TYPE, void*);
