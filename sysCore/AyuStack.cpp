@@ -108,10 +108,9 @@ unsigned __int32 *AyuStack::push(int toPush) {
     return nullptr;
   } else
     this->m_used += unk;
-    this->m_topFree -= unk;
-    // what *this->m_topFree = unk;
-    return reinterpret_cast<unsigned __int32 *>(&this->m_topFree +
-                                                8); // fix this
+  this->m_topFree -= unk;
+  // what *this->m_topFree = unk;
+  return reinterpret_cast<unsigned __int32 *>(&this->m_topFree + 8); // fix this
 }
 
 void AyuStack::reset(int allocType) {

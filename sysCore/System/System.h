@@ -7,6 +7,7 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include "../Atx/AtxFileStream.h"
 #include "../Atx/AtxRouter.h"
 #include "../BaseApp.h"
 #include "../IDelegate.h"
@@ -14,7 +15,6 @@
 #include "../Stream/DebugStream.h"
 #include "../UI/UIMgr.h"
 #include "StdSystem.h"
-#include "../Atx/AtxFileStream.h"
 
 class SYSCORE_API System : public StdSystem {
 public:
@@ -29,13 +29,13 @@ public:
                           void* unk; // 254h
                           void* unk; // 258h*/
   int m_heapSize;
-  void* m_heapMemory; // 25Ch
+  void *m_heapMemory; // 25Ch
   /*void* unk; // 260h*/
   AtxFileStream m_fileStream; // 264h
-                          /*BufferedStream unk; // 284h*/
-  int streamType;         // 2B0h
+                              /*BufferedStream unk; // 284h*/
+  int streamType;             // 2B0h
   // ControllerMgr controllerMgr; // 2B0h
-  char m_hostName[128];       // 3B8h
+  char m_hostName[128];  // 3B8h
   AtxRouter *mainRouter; // 438h
   /* current unknown members
           void* unk; // 440h
@@ -48,7 +48,7 @@ public:
   float frameTime; // 458h
   // void* unk; // 45Ch
   float frameRate; // 460h
-  int frameCount;   // 464h
+  int frameCount;  // 464h
   // void* unk; // 468h
 
   System();

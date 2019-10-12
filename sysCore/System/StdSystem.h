@@ -44,7 +44,7 @@ public:
                           void* unk; // 34h
                           void* unk; // 38h
                           void* unk; // 3Ch*/
-  int matrixUnk; // 40h
+  int matrixUnk;    // 40h
   Matrix4f *matrix; // 44h
   char *bloRoot;    // 48h
   char *texRoot;    // 4Ch
