@@ -1,5 +1,7 @@
 #include "Graphics.h"
 
+Matrix4f Graphics::ident;
+
 void PRINTGRAPHICS(const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
@@ -15,6 +17,16 @@ void PRINTGRAPHICS(const char *fmt, ...) {
   }
 }
 
+void GRAPHICSHALT(const char *fmt, ...) {
+  va_list args;
+  va_start(args, fmt);
+  char dest[1024];
+  vsprintf(dest, fmt, args);
+  System::halt("c:\\development\\dolphinpiki\\syscommon\\graphics.cpp", 17,
+               dest);
+  // file, line, error
+}
+
 Graphics::Graphics() {
   PRINTGRAPHICS("dgxgraphics constructor\n");
   this->m_unk1 = 0;
@@ -22,12 +34,41 @@ Graphics::Graphics() {
     unused[i] = sin(i / 4096.0 * TAU);
     unused2[i] = cos(i / 4096.0 * TAU);
   }
-
-  this->m_unkColour2.set(0, 0, 48, 0xFF);
+  ident.makeIdentity();
+  this->m_unkColour2.set(0, 0, 0x30, 0xFF);
+  this->m_unk2 = 1;
 }
 
-void Graphics::videoReset() {}
-void Graphics::setVerticalFilter(char *a2) {}
-void Graphics::getVerticalFilter(unsigned __int8 *a2) {}
-unsigned __int8 *Graphics::getDListPtr() { return 0; }
-unsigned __int32 Graphics::getDListRemainSize() { return 0; }
+void Graphics::perspPrintf(Font *, Vector3f &, int, int, char *, ...) {}
+
+void Graphics::addLight(Light *light) {
+  // light->initCore("");
+  gsys->m_lightCount++;
+  // this->m_lights.add(light);
+}
+
+void Graphics::cacheShape(BaseShape *, ShapeDynMaterials *) {}
+
+int Graphics::calcBoxLighting(BoundBox &) { return 0; }
+
+int Graphics::calcLighting(float) { return 0; }
+
+int Graphics::calcSphereLighting(Vector3f &, float) { return 0; }
+
+void Graphics::drawCircle(Vector3f &, float, Matrix4f &) {}
+
+void Graphics::drawCylinder(Vector3f &, Vector3f &, float, Matrix4f &) {}
+
+void Graphics::drawSphere(Vector3f &, float, Matrix4f &) {}
+
+void Graphics::flushCachedShapes() {}
+
+void Graphics::genAge(AgeServer &) {}
+
+Matrix4f *Graphics::getMatrices(int) { return nullptr; }
+
+void Graphics::resetCacheBuffer() {}
+
+void Graphics::resetLights() {}
+
+void Graphics::resetMatrixBuffer() {}

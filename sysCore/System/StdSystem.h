@@ -20,7 +20,6 @@
 class CacheTexture;
 class LoadIdler;
 class AnimData;
-class Texture;
 class Graphics;
 class AyuHeap;
 class LFInfo;
@@ -38,7 +37,7 @@ public:
           void* unk; // 18h
           void* unk; // 1Ch*/
   void *m_debugStreamUnk; // 20h
-                          /*void* unk; // 24h
+  /*void* unk; // 24h
                           void* unk; // 28h
                           void* unk; // 2Ch
                           void* unk; // 30h
@@ -46,7 +45,7 @@ public:
                           void* unk; // 38h
                           void* unk; // 3Ch
                           void* unk; // 40h
-                  */
+  */
   Matrix4f *matrix;
   char *bloRoot;    // 48h
   char *texRoot;    // 4Ch
@@ -55,12 +54,12 @@ public:
   AyuHeap heaps[8]; // 58h
   int heapNum;      // 198h
   /*	void* unk; // 19Ch
-          void* unk; // 1A0h
-          void* unk; // 1A4h
-          void* unk; // 1A8h
-          void* unk; // 1ACh
-          void* unk; // 1B0h
-          void* unk; // 1B4h
+                        void* unk; // 1A0h
+                        void* unk; // 1A4h
+                        void* unk; // 1A8h
+                        void* unk;*/ // 1ACh
+  int m_lightCount; // 1B0h
+  /*void* unk; // 1B4h
           void* unk; // 1B8h
           void* unk; // 1BCh
           void* unk; // 1C0h
@@ -118,7 +117,7 @@ public:
   // AnimData* findIndexAnimation(char*, int);
   // GfxobjInfo* findTexture(Texture*);
   void flushLFlares(Graphics *);
-  void genAge(AgeServer *);
+  void genAge(AgeServer &);
   void getAppMemory(char *);
   float getFade();
   float getHalfRand(float);

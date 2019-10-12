@@ -21,6 +21,8 @@ public:
   void blend(Matrix4f &, float);
   void getColumn(int, Vector3f &);
   void getRow(int, Vector3f &);
+  void makeIdentity();
+  void multiply(Matrix4f &);
 };
 
 #endif

@@ -98,7 +98,10 @@ BaseApp *System::firstApp() {
   return static_cast<BaseApp *>(nodeMgr->firstNode()->Child()->Next());
 }
 
-void System::genAge(AgeServer &) {}
+void System::genAge(AgeServer &server) {
+  // this->pointerDword258->vfunc(server);
+  StdSystem::genAge(server);
+}
 
 AtxRouter *System::getAtxRouter() { return this->mainRouter; }
 

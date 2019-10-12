@@ -1,7 +1,8 @@
 #include "StdSystem.h"
-#include "System.h"
-
+#include "../Graphics.h"
 #include "../Stream/CmdStream.h"
+#include "../Texturing/Texture.h"
+#include "System.h"
 
 //////////////////////////////////////////////////////////////////////
 // StdSystem class functions
@@ -59,7 +60,10 @@ int StdSystem::findAnyIndex(char *, char *) { return 0; }
 // AnimData* StdSystem::findIndexAnimation(char*, int) {}
 // GfxobjInfo* StdSystem::findTexture(Texture*) {}
 void StdSystem::flushLFlares(Graphics *) {}
-void StdSystem::genAge(AgeServer *) {}
+void StdSystem::genAge(AgeServer &server) {
+  server.StartSection("StdSystem", true);
+  server.EndSection();
+}
 void StdSystem::getAppMemory(char *) {}
 // AyuHeap* StdSystem::getHeap(int) {}
 int StdSystem::getHeapNum() { return 0; }

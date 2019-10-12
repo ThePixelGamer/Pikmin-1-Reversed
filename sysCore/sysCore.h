@@ -31,5 +31,7 @@ extern SYSCORE_API int glnHeight;
 extern SYSCORE_API int glnWidth;
 
 #define nullptr 0
+typedef unsigned __int8 uchar;   // actually used in game, check Graphics
+typedef unsigned __int16 ushort; // actually used in game, check Graphics
 
 #endif
