@@ -76,49 +76,43 @@ void AyuStack::pop() {
   }
 }
 
-/*
-unsigned __int32* AyuStack::push(int toPush) {
-        if (!toPush)
-                toPush = 1;
-        if (toPush & 7)
-                toPush = (toPush + 7) & 0xFFFFFFF8;
+unsigned __int32 *AyuStack::push(int toPush) {
+  if (!toPush)
+    toPush = 1;
+  if (toPush & 7)
+    toPush = (toPush + 7) & 0xFFFFFFF8;
 
-        int unk = toPush + 8;
-        if (this->m_allocType == 2) {
-                // this makes me think sp is the top of the stack
-                if (this->sp[unk] <= m_topFree) {
-                        unsigned __int32* unused = this->sp;
-                        int unk2;
-                        unsigned __int32* top_maybe;
-                        if (this->sp == this->sp) {
-                                unk2 = 0;
-                                top_maybe = this->sp;
-                        }
-                        else {
-                                unk2 = *(this->sp - 2);
-                                top_maybe = this->sp - 8;
-                        }
+  int unk = toPush + 8;
+  if (this->m_allocType == 2) {
+    // this makes me think sp is the top of the stack
+    if (this->sp[unk] <= m_topFree) {
+      unsigned __int32 *unused = this->sp;
+      int unk2;
+      unsigned __int32 *top_maybe;
+      if (this->sp == this->sp) {
+        unk2 = 0;
+        top_maybe = this->sp;
+      } else {
+        unk2 = *(this->sp - 2);
+        top_maybe = (this->sp - 2);
+      }
 
-                        this->m_used += unk;
-                        this->sp = (this->sp + unk);
-                        *(this->sp - 2) = unk2 + unk;
-                        this->checkStack();
-                        return top_maybe;
-                }
-                else
-                        return 0;
-        }
-        else if ((this->m_topFree - unk) >= *this->sp)
-        {
-                this->m_used += unk;
-                this->m_topFree -= unk;
-                //what *this->m_topFree = unk;
-                return this->m_topFree + 8; //fix this
-        }
-        else
-                return 0;
+      this->m_used += unk;
+      this->sp = (this->sp + unk);
+      *(this->sp - 2) = unk2 + unk;
+      this->checkStack();
+      return top_maybe;
+    } else
+      return nullptr;
+  } else if ((this->m_topFree - unk) < *this->sp) {
+    return nullptr;
+  } else
+    this->m_used += unk;
+    this->m_topFree -= unk;
+    // what *this->m_topFree = unk;
+    return reinterpret_cast<unsigned __int32 *>(&this->m_topFree +
+                                                8); // fix this
 }
-*/
 
 void AyuStack::reset(int allocType) {
   if (allocType & 2) {

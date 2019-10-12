@@ -7,7 +7,7 @@
 
 AtxDirectRouter::AtxDirectRouter(char *_name) {
   this->m_hostname =
-      strcmp(_name, "self") ? StdSystem::stringDup(_name) : gsys->m3B8h;
+      strcmp(_name, "self") ? StdSystem::stringDup(_name) : gsys->m_hostName;
   this->m_networkStream = 0;
 }
 

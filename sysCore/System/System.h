@@ -14,6 +14,7 @@
 #include "../Stream/DebugStream.h"
 #include "../UI/UIMgr.h"
 #include "StdSystem.h"
+#include "../Atx/AtxFileStream.h"
 
 class SYSCORE_API System : public StdSystem {
 public:
@@ -26,15 +27,15 @@ public:
   bool m_unkGameAppBool2; // 24Eh
                           /*void* unk; // 250h
                           void* unk; // 254h
-                          void* unk; // 258h
-                          void* unk; // 25Ch
-                          void* unk; // 260h
-                          AtxFileStream unk; // 264h
-                          BufferedStream unk; // 284h
-                  */
+                          void* unk; // 258h*/
+  int m_heapSize;
+  void* m_heapMemory; // 25Ch
+  /*void* unk; // 260h*/
+  AtxFileStream m_fileStream; // 264h
+                          /*BufferedStream unk; // 284h*/
   int streamType;         // 2B0h
   // ControllerMgr controllerMgr; // 2B0h
-  char m3B8h[128];       // 3B8h
+  char m_hostName[128];       // 3B8h
   AtxRouter *mainRouter; // 438h
   /* current unknown members
           void* unk; // 440h
@@ -44,9 +45,9 @@ public:
           void* unk; // 450h
           void* unk; // 454h
   */
-  double frameTime; // 458h
+  float frameTime; // 458h
   // void* unk; // 45Ch
-  double frameRate; // 460h
+  float frameRate; // 460h
   int frameCount;   // 464h
   // void* unk; // 468h
 

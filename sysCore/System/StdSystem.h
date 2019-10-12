@@ -36,17 +36,16 @@ public:
           void* unk; // 14h
           void* unk; // 18h
           void* unk; // 1Ch*/
-  void *m_debugStreamUnk; // 20h
+  bool m_debugStreamUnk; // 20h
   /*void* unk; // 24h
                           void* unk; // 28h
                           void* unk; // 2Ch
                           void* unk; // 30h
                           void* unk; // 34h
                           void* unk; // 38h
-                          void* unk; // 3Ch
-                          void* unk; // 40h
-  */
-  Matrix4f *matrix;
+                          void* unk; // 3Ch*/
+  int matrixUnk; // 40h
+  Matrix4f *matrix; // 44h
   char *bloRoot;    // 48h
   char *texRoot;    // 4Ch
   char *baseDir;    // 50h

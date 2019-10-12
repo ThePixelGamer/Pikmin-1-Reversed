@@ -34,4 +34,11 @@ extern SYSCORE_API int glnWidth;
 typedef unsigned __int8 uchar;   // actually used in game, check Graphics
 typedef unsigned __int16 ushort; // actually used in game, check Graphics
 
+// overloading operators!
+void *operator new(size_t);
+void *operator new[](size_t);
+void *operator new[](size_t, size_t);
+void operator delete(void *);
+void operator delete[](void *);
+
 #endif

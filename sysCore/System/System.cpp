@@ -28,13 +28,23 @@ void SYSTEMHALT(const char *fmt, ...) {
 }
 
 System::System() : StdSystem() {
-  gsys = this;
 
+  sysCurrWnd = nullptr;
+  this->m_debugStreamUnk = true;
+
+  gsys = this;
+  this->m_unkGameAppBool2 = false;
   char Dest[512];
   sprintf(Dest, "%s\\", getcwd(0, 0));
   this->baseDir = strdup(Dest);
-
+  this->m_heapSize = 0x5000000;
+  this->m_heapMemory = GlobalAlloc(GMEM_FIXED, this->m_heapSize);
+  this->heaps[0].init("sys", 1, this->m_heapMemory, this->m_heapSize);
+  this->buildModeList();
   WSocket::init();
+  gethostname(this->m_hostName, sizeof(this->m_hostName));
+  this->onceInit();
+  this->frameTime = 0.000099999997f;
 }
 
 System::System(const System &sys) : StdSystem(sys) {}

@@ -14,7 +14,7 @@ void Matrix4f::blend(Matrix4f &a2, float a3) { // pseudocode fine, asm not
   for (int i = 0; i < 4; ++i) {
     for (int j = 0; j < 4; ++j)
       this->mMatrix4f[i][j] =
-          (a2.mMatrix4f[i][j] - this->mMatrieex4f[i][j]) * a3 +
+          (a2.mMatrix4f[i][j] - this->mMatrix4f[i][j]) * a3 +
           this->mMatrix4f[i][j];
   }
 }

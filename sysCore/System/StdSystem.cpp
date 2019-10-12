@@ -85,7 +85,10 @@ bool StdSystem::isShutdown() { return (this->unkShutdownCode) == 0x80000000; }
 void StdSystem::loadBundle(char *, bool) {}
 // Shape* StdSystem::loadShape(char*, bool) {}
 // Texture* StdSystem::loadTexture(char*, bool) {}
-void StdSystem::onceInit() {}
+void StdSystem::onceInit() {
+	this->matrixUnk = 0x1000;
+	this->matrix = new (0x20) Matrix4f[this->matrixUnk]();
+}
 // LFlareGroup* StdSystem::registerLFlare(Texture*) {}
 void StdSystem::resetHeap(int, int) {}
 void StdSystem::resetLFlares() {}
