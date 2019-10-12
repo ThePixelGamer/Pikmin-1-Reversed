@@ -17,26 +17,24 @@ const char *systemName = "OpenGL / Dolphin System";
 
 void isLast() { menuP->prev = 0; } // may be autogen?
 
-class UIMain : public UIWindow { // not an official name
-public:
-  UIMain() : UIWindow() {}
-  UIMain(UIWindow *parent, int unk1, int dwStyle, int dwExStyle, bool unk2)
-      : UIWindow(parent, unk1, dwStyle, dwExStyle, unk2) {}
+class UIMain : public UIWindow{
+  // not an official name
+  public : UIMain() : UIWindow(){} UIMain(
+      UIWindow * parent, int unk1, int dwStyle, int dwExStyle, bool unk2) :
+      UIWindow(parent, unk1, dwStyle, dwExStyle, unk2){}
 
   virtual int processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam,
-                             long lParam) {
-    if (Msg == WM_COMMAND) {
-      for (MenuPlugin *i = menuP; i; i = i->next) {
-        if (i->prev == wParam) {
-          ((void (*)(void))modMgr->Alloc(i->name))();
-          return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
-        }
-      }
-    }
-    return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
-  }
-};
-UIMain *window;
+                             long lParam){
+      if (Msg == WM_COMMAND){for (MenuPlugin *i = menuP; i; i = i->next){
+          if (i->prev == wParam){((void (*)(void))modMgr->Alloc(i->name))();
+return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
+}
+}
+}
+return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
+}
+}
+*window;
 
 void print(const char *fmt, ...) {
   va_list args;
@@ -53,9 +51,12 @@ void print(const char *fmt, ...) {
   }
 }
 
-void createUIWindow(HINSTANCE hInst) { // 0x16C40000
+void createUIWindow(HINSTANCE hInst) {
   RectArea newFrame(690, 32, 1260, 300);
-  window = new UIMain(0, 0, 0x16C40000, 0, true);
+  window = new UIMain(0, 0,
+                      WS_VISIBLE | WS_CAPTION | WS_CLIPSIBLINGS |
+                          WS_CLIPCHILDREN | WS_THICKFRAME,
+                      0, true);
   window->setFrame(
       RectArea(newFrame.x1, newFrame.y1, newFrame.x2, newFrame.y2));
   window->createWindow("DUIClearWin", systemName,
@@ -106,15 +107,15 @@ void passCmdParams(const char *str, char *unused) {
       if (cmd->isToken("+output")) {
         createUIWindow(sysHInst);
       } else if (cmd->isToken("+plugins")) {
-        char *tmp = cmd->getToken(true);
-        loadDLLsInDir(tmp);
+        char *directory = cmd->getToken(true);
+        loadDLLsInDir(directory);
       } else if (cmd->isToken("+direct")) {
         print("Creating atxDirectRouter\n");
         gsys->mainRouter = new AtxDirectRouter(cmd->getToken(true));
         print("done\n");
       } else if (cmd->isToken("+client")) {
-        char *tmp = cmd->getToken(true);
-        modMgr->Alloc(tmp);
+        char *moduleName = cmd->getToken(true);
+        modMgr->Alloc(moduleName);
       }
     }
 
@@ -139,19 +140,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         "A top level window does not exist,\nthe application will now close.",
         "Warning!", MB_OK | MB_ICONWARNING);
 
-  int ret = gsys->run(0);
+  int retVal = gsys->run(0);
 
   if (uiMgr)
     delete uiMgr;
-  uiMgr = 0;
+  uiMgr = nullptr;
 
   if (modMgr)
     delete modMgr;
-  modMgr = 0;
+  modMgr = nullptr;
 
   if (nodeMgr)
     delete nodeMgr;
-  nodeMgr = 0;
+  nodeMgr = nullptr;
 
-  return ret;
+  return retVal;
 }
