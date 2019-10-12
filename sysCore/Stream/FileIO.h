@@ -1,11 +1,5 @@
 #pragma once
 
-#ifdef SYSCORE_EXPORTS
-#define SYSCORE_API __declspec(dllexport)
-#else
-#define SYSCORE_API __declspec(dllimport)
-#endif
-
 #ifndef FILEIO_H
 #define FILEIO_H
 
@@ -16,7 +10,7 @@
 
 // Technically a stream class, so its allowed in the Stream folder,
 // only ever used in System::openFile/System::createFile
-class SYSCORE_API fileIO : public RandomAccessStream {
+class fileIO : public RandomAccessStream {
 public:
   // 0h - vtable
   //(Stream: 4h)

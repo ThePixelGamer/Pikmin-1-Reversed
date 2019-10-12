@@ -39,7 +39,7 @@ void Colour::add(Colour &toAdd) {
 }
 
 void Colour::genAge(AgeServer &server, char *unk) {
-  server.NewEditor(unk, *this);
+  server.NewEditor(unk, this);
 }
 
 void Colour::lerp(Colour &l, float t) {

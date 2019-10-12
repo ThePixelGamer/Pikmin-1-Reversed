@@ -296,10 +296,6 @@ SOURCE=.\ID32.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\IDelegate.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\Module.cpp
 # End Source File
 # Begin Source File
