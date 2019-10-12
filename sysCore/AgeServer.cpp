@@ -186,14 +186,14 @@ void AgeServer::setSectionRefresh(IDelegate1<AgeServer &> *d) {
 }
 
 void AgeServer::update() {
-	// need to do this function
+  // need to do this function
   bool hasDataLeft = false;
   while (true) {
     if (this->getPending()) {
       hasDataLeft = true;
       const int identifier = this->readInt();
-      //switch (identifier) {
-        // case
+      // switch (identifier) {
+      // case
       //}
     }
   }
@@ -229,12 +229,12 @@ void AgeServer::writePropValue(PROP_TYPE type, void *buffer) {
     break;
   case UNK7:
   case UNK9:
-	  return;
+    return;
   case CHAR_PTR_PROP:
-	  this->writeString(static_cast<char*>(buffer));
+    this->writeString(static_cast<char *>(buffer));
   default:
     AGEHALT("Unsupported PropType");
-	return;
+    return;
   }
   return;
 }

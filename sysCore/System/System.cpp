@@ -128,7 +128,6 @@ void System::halt(char *unused, int unused2, char *toPrint) {
 void System::hardReset() {}
 
 int System::run(BaseApp *) {
-
   tagMSG message;
 
   while (1) {

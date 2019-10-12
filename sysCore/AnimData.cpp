@@ -9,7 +9,6 @@ void AnimData::genAge(AgeServer &) {}
 void AnimData::extractSRT(SRT &, int, AnimDataInfo *, float) {}
 
 void AnimData::makeAnimSRT(int, Matrix4f *, Matrix4f *, AnimDataInfo *, float) {
-
 }
 
 void AnimData::detach() {

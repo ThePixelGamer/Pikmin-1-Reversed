@@ -74,8 +74,8 @@ public:
   static void halt(char *, int, char *);
   void hardReset();
   int run(BaseApp *);
-  // void 					searchFiles(char*, char*, IDelegate2<char*, unsigned
-  // int>*, bool);
+  // void 					searchFiles(char*, char*,
+  // IDelegate2<char*, unsigned int>*, bool);
   void setAtxRouter(int);
   int setStreamType(int);
   bool setVideoMode(bool, int, int, int);

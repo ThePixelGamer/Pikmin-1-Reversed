@@ -14,15 +14,15 @@ class Colour;
 
 enum PROP_TYPE {
   CHAR_PROP = 0,
-  SHORT_PROP,  // 1
-  INT_PROP,    // 2
-  FLOAT_PROP,  // 3
-  COLOUR_PROP, // 4
-  IMAGE_PROP,        // 5
-  STRING_PROP, // 6
-  UNK7,   // 7
-  CHAR_PTR_PROP,        // 8
-  UNK9         // 9
+  SHORT_PROP,    // 1
+  INT_PROP,      // 2
+  FLOAT_PROP,    // 3
+  COLOUR_PROP,   // 4
+  IMAGE_PROP,    // 5
+  STRING_PROP,   // 6
+  UNK7,          // 7
+  CHAR_PTR_PROP, // 8
+  UNK9           // 9
 };
 
 class SYSCORE_API AgeServer : public AtxStream {
@@ -86,7 +86,8 @@ public:
   void update(); //< TODO ! Need to finish the function
 
   void writeProp(PROP_TYPE, void *);
-  //< TODO ! Need to find a fix for the `default` case not being included properly
+  //< TODO ! Need to find a fix for the `default` case not being included
+  // properly
   void writePropValue(PROP_TYPE, void *);
 };
 
