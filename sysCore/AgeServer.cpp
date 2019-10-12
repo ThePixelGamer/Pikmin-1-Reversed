@@ -185,7 +185,7 @@ void AgeServer::setSectionRefresh(IDelegate1<AgeServer &> *d) {
   this->writeInt(reinterpret_cast<int>(d));
 }
 
-void AgeServer::update() {
+bool AgeServer::update() {
   // need to do this function
   bool hasDataLeft = false;
   while (true) {
@@ -197,6 +197,7 @@ void AgeServer::update() {
       //}
     }
   }
+  return hasDataLeft;
 }
 
 // WRITE

@@ -83,7 +83,7 @@ public:
   void setOnChange(IDelegate1<AgeServer &> *);
   void setSectionRefresh(IDelegate1<AgeServer &> *);
 
-  void update(); //< TODO ! Need to finish the function
+  bool update(); //< TODO ! Need to finish the function
 
   void writeProp(PROP_TYPE, void *);
   //< TODO ! Need to find a fix for the `default` case not being included

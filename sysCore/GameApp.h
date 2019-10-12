@@ -9,9 +9,11 @@ public:
   bool unkByte;           // 58h
 
   GameApp();
-  ~GameApp();
+  virtual ~GameApp();
 
-  virtual void InitApp();
+  virtual bool idle();
+
+  void doInitApp();
 };
 
 #endif

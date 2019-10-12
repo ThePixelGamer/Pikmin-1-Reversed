@@ -21,18 +21,18 @@ public:
   /* current unknown members
           void* unk; // 244h
           void* unk; // 248h
-          bool  unk; // 24Ch
-          bool  unk; // 24Dh
-          bool  unk; // 24Eh
-          void* unk; // 250h
-          void* unk; // 254h
-          void* unk; // 258h
-          void* unk; // 25Ch
-          void* unk; // 260h
-          AtxFileStream unk; // 264h
-          BufferedStream unk; // 284h
-  */
-  int streamType; // 2B0h
+          bool  unk; // 24Ch*/
+  bool m_unkGameAppBool;  // 24Dh
+  bool m_unkGameAppBool2; // 24Eh
+                          /*void* unk; // 250h
+                          void* unk; // 254h
+                          void* unk; // 258h
+                          void* unk; // 25Ch
+                          void* unk; // 260h
+                          AtxFileStream unk; // 264h
+                          BufferedStream unk; // 284h
+                  */
+  int streamType;         // 2B0h
   // ControllerMgr controllerMgr; // 2B0h
   char m3B8h[128];       // 3B8h
   AtxRouter *mainRouter; // 438h

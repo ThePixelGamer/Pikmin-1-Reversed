@@ -23,11 +23,22 @@ public:
   int heapType;                  // 50h
 
   BaseApp();
+  virtual ~BaseApp();
 
   virtual void genAge(AgeServer &);
+  virtual void InitApp(char *) {}
+  virtual bool idle() { return false; }
+  virtual bool keyDown(int, int, int) { return false; }
+  virtual void softReset();
+  virtual void useHeap(int);
+  virtual void procCmd(char *) {}
 
+  bool idleUpdate();
   void startAgeServer();
   void stopAgeServer();
+
+  double rnd();
+  double rnd(float);
 };
 
 #endif
