@@ -18,7 +18,7 @@ public:
 
   void initTools(HINSTANCE, int, TBBUTTON *, tagTBADDBITMAP *);
   virtual int processMessage(HWND, unsigned int, WPARAM,
-                             long); // todo: find out class type
+                             long);
   virtual void createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu);
 };
 #endif

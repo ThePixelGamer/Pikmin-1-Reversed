@@ -23,9 +23,9 @@ void Envelope::read(RandomAccessStream &stream) {
 }
 
 void Envelope::write(RandomAccessStream &stream) {
-  stream.writeInt(this->m_indicesCount);
+  stream.writeShort(this->m_indicesCount);
   for (int i = 0; i < this->m_indicesCount; i++) {
-    stream.writeInt(this->m_indices[i]);
+    stream.writeShort(this->m_indices[i]);
     stream.writeFloat(this->m_weights[i]);
   }
 }

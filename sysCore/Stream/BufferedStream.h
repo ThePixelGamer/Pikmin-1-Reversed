@@ -7,32 +7,69 @@
 #ifndef BUFFEREDSTREAM_H
 #define BUFFEREDSTREAM_H
 
+#include "../sysCore.h"
 #include "RandomAccessStream.h"
 
-// TODO
 class SYSCORE_API BufferedInputStream : public RandomAccessStream {
 public:
-  int m_position;
-  Stream *m_stream;
+  // 4h - Stream variable + vtbl ptr
+  uchar *m_buffer;        // 8h
+  int m_bufferSize;       // Ch
+  int m_amountToRead;     // 10h
+  int m_readLimit;        // 14h
+  int m_position;         // 18h
+  Stream *m_bufferStream; // 1Ch
 
-  BufferedInputStream(){};
-  BufferedInputStream(Stream *stream, unsigned __int8 *buf, int bufSize) {
-    this->init(stream, buf, bufSize);
-  };
+  BufferedInputStream();
+  BufferedInputStream(Stream *stream, unsigned __int8 *buf, int bufSize);
 
-  void close() {}
-  void fillBuffer() {}
-  int getPending() { return NULL; }
-  int getPosition() { return m_position; }
-  void init(Stream *stream, unsigned __int8 *buf, int bufSize) {}
-  void open(Stream *stream) {
-    // this->dword14 = 0;
-    this->m_position = 0;
-    // this->dword10 = 0;
-    this->m_stream = stream;
-  }
-  void read(void *buffer, int size) {}
-  void resetBuffer() {}
+  virtual void read(void *buffer, int size);
+  virtual int getPending();
+  virtual void close();
+  virtual int getPosition();
+
+  void fillBuffer();
+  void init(Stream *stream, unsigned __int8 *buf, int bufSize);
+  void open(Stream *stream);
+  void resetBuffer();
+};
+
+class SYSCORE_API BufferedOutputStream : public Stream {
+public:
+  // 4h - Stream variable + vtbl ptr
+  uchar *m_buffer;        // 8h
+  int m_bufferPosition;   // Ch
+  int m_bufferSize;       // 10h
+  Stream *m_bufferStream; // 14h
+  bool m_unk;             // 18h
+
+  BufferedOutputStream(Stream *stream, int bufferSize, bool unk);
+
+  virtual void write(void *buffer, int size);
+  virtual void flush();
+
+  void addChar(char);
+};
+
+class SYSCORE_API BufferedStream : public RandomAccessStream {
+public:
+  // 4h - Stream variable + vtbl ptr
+  RandomAccessStream *m_stream; // 8h
+  BufferedInputStream m_buffStream;     // 1Ch
+
+  BufferedStream(RandomAccessStream *stream, int bufferSize);
+  BufferedStream();
+
+  // Stream
+  virtual void read(void *, int);
+  virtual int getPending();
+  virtual void close();
+  // RandomAccessStream
+  virtual int getPosition();
+  virtual void setPosition(int);
+  virtual int getLength();
+
+  void init(RandomAccessStream *, int);
 };
 
 #endif
