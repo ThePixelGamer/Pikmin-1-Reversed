@@ -87,6 +87,10 @@ SOURCE=.\Atx\AtxStream.cpp
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE=.\BoundBox.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Geometry\Matrix3f.cpp
 # End Source File
 # Begin Source File
@@ -349,6 +353,10 @@ SOURCE=.\Atx\AtxStream.h
 # Begin Group "GEOMETRY HEADER FILES"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\BoundBox.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\Geometry\Matrix3f.h
