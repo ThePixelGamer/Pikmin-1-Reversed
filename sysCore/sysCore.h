@@ -18,6 +18,13 @@
 #include <Windows.h>
 #pragma comment(lib, "ws2_32.lib") // Winsock Library
 
+#define nullptr 0
+#define TAU 6.2831855
+#define PI 3.1415927
+
+typedef unsigned __int8 uchar;   // actually used in game, check Graphics
+typedef unsigned __int16 ushort; // actually used in game, check Graphics
+
 extern SYSCORE_API HINSTANCE hInstance;
 extern SYSCORE_API HINSTANCE sysHInst;
 extern SYSCORE_API Stream *sysCon;
@@ -26,13 +33,13 @@ extern SYSCORE_API HWND sysCurrWnd;
 static HWND hWnd;
 static WNDPROC lpPrevWndFunc;
 
+SYSCORE_API float angDist(float, float);
+SYSCORE_API float roundAng(float);
+SYSCORE_API HANDLE startThread(void *, void *, int);
+
 // Not sure where to put these
 extern SYSCORE_API int glnHeight;
 extern SYSCORE_API int glnWidth;
-
-#define nullptr 0
-typedef unsigned __int8 uchar;   // actually used in game, check Graphics
-typedef unsigned __int16 ushort; // actually used in game, check Graphics
 
 // overloading operators!
 void *operator new(size_t);

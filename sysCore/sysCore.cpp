@@ -41,6 +41,25 @@ BOOL __stdcall DllMain(HINSTANCE hinstDLL, DWORD fdwReason,
   return TRUE;
 }
 
+HANDLE startThread(void *lpStartAddress, void *lpParameter, int a3) {
+  LPDWORD ThreadId;
+  HANDLE hThread =
+      CreateThread(NULL, 0, static_cast<LPTHREAD_START_ROUTINE>(lpStartAddress),
+                   lpParameter, CREATE_SUSPENDED, ThreadId);
+  if (hThread) {
+    int nPriority = 0;
+    if (a3 < 0) {
+      SetThreadPriority(hThread, -1);
+    } else {
+      if (a3 > 0)
+        nPriority = 2;
+      SetThreadPriority(hThread, nPriority);
+    }
+    ResumeThread(hThread);
+  }
+  return hThread;
+}
+
 void *operator new(size_t size) {
   void *returnValue = nullptr;
   if (gsys->heapNum >= 0) {
@@ -92,4 +111,20 @@ void operator delete(void *toDelete) {
 void operator delete[](void *toDelete) {
   if (gsys->heapNum < 0)
     GlobalFree(toDelete);
+}
+
+float angDist(float a1, float a2) {
+  float angle = roundAng(a1 - a2);
+  if (angle >= PI) {
+    angle = -roundAng(TAU - angle);
+  }
+  return angle;
+}
+
+float roundAng(float angle) {
+  if (angle < 0.0)
+    angle += static_cast<float>(TAU);
+  if (angle >= TAU)
+    angle -= static_cast<float>(TAU);
+  return angle;
 }

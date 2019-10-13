@@ -15,8 +15,6 @@
 #pragma comment(lib, "opengl32.lib")
 #include <gl/GL.h>
 
-#define TAU 6.2831855
-
 static float unused[4096];  // flt_101CF090
 static float unused2[4096]; // flt_101CB090
 
