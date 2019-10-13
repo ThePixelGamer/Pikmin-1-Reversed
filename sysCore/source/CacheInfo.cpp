@@ -1,0 +1,13 @@
+#include <CacheInfo.h>
+
+//////////////////////////////////////////////////////////////////////
+// AnimCacheInfo class functions
+//////////////////////////////////////////////////////////////////////
+
+AnimCacheInfo::AnimCacheInfo() { this->initData(); }
+
+void AnimCacheInfo::initData()
+{
+    this->cacheInfo = 0;
+    this->unk2 = 0;
+}

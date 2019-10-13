@@ -39,8 +39,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "SYSCORE_EXPORTS" /YX /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "SYSCORE_EXPORTS" /Fr /FD /GZ /c
-# SUBTRACT CPP /YX
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "include/" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "SYSCORE_EXPORTS" /Fr /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "_DEBUG"
@@ -58,565 +57,673 @@ LINK32=link.exe
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
-# Begin Group "ATX SOURCE FILES"
-
-# PROP Default_Filter ".cpp"
-# Begin Source File
-
-SOURCE=.\Atx\AtxCommandStream.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Atx\AtxDirectRouter.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Atx\AtxFileStream.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Atx\AtxRouter.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Atx\AtxStream.cpp
-# End Source File
-# End Group
-# Begin Group "GEOMETRY SOURCE FILES"
+# Begin Group "Anim"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\BoundBox.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Matrix3f.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Matrix4f.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Plane.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\SRT.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Vector2f.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Vector3f.cpp
+SOURCE=.\source\Anim\AnimData.cpp
 # End Source File
 # End Group
-# Begin Group "NETWORK SOURCE FILES"
+# Begin Group "App"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\Networking\TcpStream.cpp
+SOURCE=.\source\App\BaseApp.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Networking\WSocket.cpp
+SOURCE=.\source\App\GameApp.cpp
 # End Source File
 # End Group
-# Begin Group "STREAM SOURCE FILES"
+# Begin Group "Atx"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\Stream\BufferedStream.cpp
+SOURCE=.\source\Atx\AtxCommandStream.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream\CmdStream.cpp
+SOURCE=.\source\Atx\AtxDirectRouter.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream\DebugStream.cpp
+SOURCE=.\source\Atx\AtxFileStream.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream\FileIO.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\RamStream.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\RandomAccessStream.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\Stream.cpp
+SOURCE=.\source\Atx\AtxStream.cpp
 # End Source File
 # End Group
-# Begin Group "MODEL SOURCE FILES"
+# Begin Group "Ayu"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\Model_File\DispList.cpp
+SOURCE=.\source\Ayu\AyuHeap.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Model_File\DispList.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Model_File\Envelope.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Model_File\Mesh.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Model_File\Mesh.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Model_File\MtxGroup.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Model_File\MtxGroup.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Model_File\VtxMatrix.cpp
+SOURCE=.\source\Ayu\AyuStack.cpp
 # End Source File
 # End Group
-# Begin Group "TEXTURE SOURCE FILES"
+# Begin Group "Controller"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\Texturing\TexImg.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Texturing\Texture.cpp
+SOURCE=.\source\Controller\ControllerManager.cpp
 # End Source File
 # End Group
-# Begin Group "UI SOURCE FILES"
-
-# PROP Default_Filter ".cpp"
-# Begin Source File
-
-SOURCE=.\UI\ComboBox.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\EditBox.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\OptionBox.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\RectArea.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\ToolWindow.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\UIFrame.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\UIMgr.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\UIWindow.cpp
-# End Source File
-# End Group
-# Begin Group "NODE SOURCE FILES"
+# Begin Group "Graphics"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\Nodes\ANode.cpp
+SOURCE=.\source\Graphics\Graphics.cpp
+# End Source File
+# End Group
+# Begin Group "Math"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\source\Math\BoundBox.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\CoreNode.cpp
+SOURCE=.\source\Math\Matrix3f.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\EditNode.cpp
+SOURCE=.\source\Math\Matrix4f.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\FaceNode.cpp
+SOURCE=.\source\Math\Plane.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\MemInfoNode.cpp
+SOURCE=.\source\Math\Quat.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\Node.cpp
+SOURCE=.\source\Math\SRT.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\NodeMgr.cpp
+SOURCE=.\source\Math\Vector2f.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\SRTNode.cpp
+SOURCE=.\source\Math\Vector3f.cpp
+# End Source File
+# End Group
+# Begin Group "Model"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\source\Model\DispList.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Model\Envelope.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Model\Mesh.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Model\MtxGroup.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Model\VtxMatrix.cpp
+# End Source File
+# End Group
+# Begin Group "Module"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\source\Module\Module.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Module\ModuleMgr.cpp
+# End Source File
+# End Group
+# Begin Group "Networking"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\source\Networking\TcpStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Networking\WSocket.cpp
+# End Source File
+# End Group
+# Begin Group "Nodes"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\source\Nodes\ANode.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Nodes\CoreNode.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Nodes\EditNode.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Nodes\FaceNode.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Nodes\MemInfoNode.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Nodes\Node.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Nodes\NodeMgr.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Nodes\SRTNode.cpp
+# End Source File
+# End Group
+# Begin Group "Object"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\source\Object\AnimobjInfo.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Object\DlobjInfo.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Object\GfxObject.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Object\GfxobjInfo.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Object\TexobjInfo.cpp
+# End Source File
+# End Group
+# Begin Group "Stream"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\source\Stream\BufferedStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Stream\CmdStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Stream\DebugStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Stream\FileIO.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Stream\RamStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Stream\RandomAccessStream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Stream\Stream.cpp
+# End Source File
+# End Group
+# Begin Group "System"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\source\System\StdSystem.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\System\System.cpp
+# End Source File
+# End Group
+# Begin Group "Texture"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\source\Texture\TexImg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\Texture\Texture.cpp
+# End Source File
+# End Group
+# Begin Group "UI"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\source\UI\ComboBox.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\UI\EditBox.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\UI\OptionBox.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\UI\RectArea.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\UI\ToolWindow.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\UI\UIFrame.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\UI\UIMgr.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\source\UI\UIWindow.cpp
 # End Source File
 # End Group
 # Begin Source File
 
-SOURCE=.\AgeServer.cpp
+SOURCE=.\source\_String.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\AnimData.cpp
+SOURCE=.\source\AgeServer.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\AyuHeap.cpp
+SOURCE=.\source\CacheInfo.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\AyuStack.cpp
+SOURCE=.\source\Colour.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\BaseApp.cpp
+SOURCE=.\source\ID32.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\CacheInfo.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Colour.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\ControllerManager.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\GfxObject.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Graphics.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\ID32.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\Module.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\ObjInfo.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\System\StdSystem.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\String.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\sysCore.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\System\System.cpp
+SOURCE=.\source\sysCore.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
-# Begin Group "ATX HEADER FILES"
-
-# PROP Default_Filter ".h"
-# Begin Source File
-
-SOURCE=.\Atx\AtxCommandStream.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Atx\AtxDirectRouter.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Atx\AtxFileStream.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Atx\AtxRouter.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Atx\AtxStream.h
-# End Source File
-# End Group
-# Begin Group "GEOMETRY HEADER FILES"
+# Begin Group "Anim No. 1"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\BoundBox.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Matrix3f.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Matrix4f.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Plane.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\SRT.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Vector2f.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Geometry\Vector3f.h
+SOURCE=.\include\Anim\AnimData.h
 # End Source File
 # End Group
-# Begin Group "NETWORK HEADER FILES"
+# Begin Group "App No. 1"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\Networking\TcpStream.h
+SOURCE=.\include\App\BaseApp.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Networking\WSocket.h
+SOURCE=.\include\App\GameApp.h
 # End Source File
 # End Group
-# Begin Group "STREAM HEADER FILES"
+# Begin Group "Atx No. 1"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\Stream\BufferedStream.h
+SOURCE=.\include\Atx\AtxCommandStream.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream\CmdStream.h
+SOURCE=.\include\Atx\AtxDirectRouter.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream\FileIO.h
+SOURCE=.\include\Atx\AtxFileStream.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream\RamStream.h
+SOURCE=.\include\Atx\AtxRouter.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Stream\RandomAccessStream.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\Stream.h
+SOURCE=.\include\Atx\AtxStream.h
 # End Source File
 # End Group
-# Begin Group "MODEL HEADER FILES"
+# Begin Group "Ayu No. 1"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\Model_File\Envelope.h
+SOURCE=.\include\Ayu\AyuHeap.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Model_File\VtxMatrix.h
+SOURCE=.\include\Ayu\AyuStack.h
 # End Source File
 # End Group
-# Begin Group "TEXTURE HEADER FILES"
+# Begin Group "Controller No. 1"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\Texturing\TexImg.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Texturing\Texture.h
+SOURCE=.\include\Controller\ControllerManager.h
 # End Source File
 # End Group
-# Begin Group "UI HEADER FILES"
+# Begin Group "Graphics No. 1"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\UI\ComboBox.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\EditBox.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\OptionBox.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\RectArea.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\ToolWindow.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\UIFrame.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\UIMgr.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\UI\UIWindow.h
+SOURCE=.\include\Graphics\Graphics.h
 # End Source File
 # End Group
-# Begin Group "NODE HEADER FILES"
+# Begin Group "Math No. 1"
 
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\Nodes\ANode.h
+SOURCE=.\include\Math\BoundBox.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\CoreNode.h
+SOURCE=.\include\Math\Matrix3f.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\EditNode.h
+SOURCE=.\include\Math\Matrix4f.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\FaceNode.h
+SOURCE=.\include\Math\Plane.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\MemInfoNode.h
+SOURCE=.\include\Math\Quat.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\Node.h
+SOURCE=.\include\Math\SRT.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\NodeMgr.h
+SOURCE=.\include\Math\Vector2f.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\SRTNode.h
+SOURCE=.\include\Math\Vector3f.h
+# End Source File
+# End Group
+# Begin Group "Model No. 1"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\Model\DispList.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Model\Envelope.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Model\Mesh.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Model\MtxGroup.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Model\VtxMatrix.h
+# End Source File
+# End Group
+# Begin Group "Module No. 1"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\Module\Module.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Module\ModuleMgr.h
+# End Source File
+# End Group
+# Begin Group "Networking No. 1"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\Networking\TcpStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Networking\WSocket.h
+# End Source File
+# End Group
+# Begin Group "Nodes No. 1"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\Nodes\ANode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Nodes\CoreNode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Nodes\EditNode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Nodes\FaceNode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Nodes\MemInfoNode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Nodes\Node.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Nodes\NodeMgr.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Nodes\SRTNode.h
+# End Source File
+# End Group
+# Begin Group "Object No. 1"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\Object\AnimobjInfo.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Object\DlobjInfo.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Object\GfxObject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Object\GfxobjInfo.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Object\TexobjInfo.h
+# End Source File
+# End Group
+# Begin Group "Stream No. 1"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\Stream\BufferedStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Stream\CmdStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Stream\DebugStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Stream\FileIO.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Stream\RamStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Stream\RandomAccessStream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Stream\Stream.h
+# End Source File
+# End Group
+# Begin Group "System No. 1"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\System\StdSystem.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\System\System.h
+# End Source File
+# End Group
+# Begin Group "Texture No. 1"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\Texture\TexImg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Texture\Texture.h
+# End Source File
+# End Group
+# Begin Group "UI No. 1"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\UI\ComboBox.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\UI\EditBox.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\UI\OptionBox.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\UI\RectArea.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\UI\ToolWindow.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\UI\UIFrame.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\UI\UIMgr.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\UI\UIWindow.h
 # End Source File
 # End Group
 # Begin Source File
 
-SOURCE=.\AgeServer.h
+SOURCE=.\include\_String.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\AnimData.h
+SOURCE=.\include\AgeServer.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\AyuHeap.h
+SOURCE=.\include\CacheInfo.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\AyuStack.h
+SOURCE=.\include\Colour.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\BaseApp.h
+SOURCE=.\include\ID32.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\CacheInfo.h
+SOURCE=.\include\IDelegate.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Colour.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\ControllerManager.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Stream\DebugStream.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\GfxObject.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Graphics.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\ID32.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\IDelegate.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Module.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\ObjInfo.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\System\StdSystem.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\String.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\sysCore.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\System\System.h
+SOURCE=.\include\sysCore.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

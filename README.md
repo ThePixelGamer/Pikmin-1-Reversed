@@ -39,7 +39,7 @@
 
 # Contributing
 
-* **NOTE: you will need a reverse engineering tool, [IDA](https://www.hex-rays.com/products/decompiler/) Is an expensive feature-full decompiler. However if you haven't got a lot of money, go for [Ghidra](https://ghidra-sre.org/), which is free.
+* **NOTE: you will need a reverse engineering tool, [IDA](https://www.hex-rays.com/products/decompiler/) Is an expensive feature-full decompiler. However if you haven't got a lot of money, go for [Ghidra](https://ghidra-sre.org/), which is free.**
 
 	- First, some rules:
 		- All new classes need to be in seperate `.cpp` and `.h` files 

@@ -12,10 +12,8 @@ Debug/
 *.bat
 *.positions
 sysBootup/Original/log.txt
-sysBootup/Original/MSVCRTD.DLL
 sysBootup/Original/sysCore.dll
 *.plg
 *.json
 .vscode/
 *.map
-sysPlug
