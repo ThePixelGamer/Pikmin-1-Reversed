@@ -51,4 +51,17 @@ public:
   virtual void detach();
 };
 
+class DispList;
+
+class SYSCORE_API DlobjInfo : public GfxobjInfo {
+public:
+  //(GfxobjInfo: 0h-1Ch)
+  DispList *m_displayList; // 20h
+
+  DlobjInfo();
+
+  virtual void attach();
+  virtual void detach();
+};
+
 #endif

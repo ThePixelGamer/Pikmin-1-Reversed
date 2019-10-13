@@ -163,7 +163,31 @@ SOURCE=.\Stream\Stream.cpp
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE=.\Model_File\DispList.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Model_File\DispList.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\Model_File\Envelope.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Model_File\Mesh.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Model_File\Mesh.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Model_File\MtxGroup.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Model_File\MtxGroup.h
 # End Source File
 # Begin Source File
 
