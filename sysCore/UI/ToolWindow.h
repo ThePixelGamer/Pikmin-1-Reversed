@@ -17,8 +17,7 @@ public:
   ToolWindow(UIWindow *, int, int, int, bool);
 
   void initTools(HINSTANCE, int, TBBUTTON *, tagTBADDBITMAP *);
-  virtual int processMessage(HWND, unsigned int, WPARAM,
-                             long);
+  virtual int processMessage(HWND, unsigned int, WPARAM, long);
   virtual void createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu);
 };
 #endif

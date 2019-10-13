@@ -106,49 +106,36 @@ void BufferedOutputStream::addChar(char toAdd) {
     this->flush();
 }
 
-BufferedStream::BufferedStream(RandomAccessStream* stream, int bufferSize)
-	: m_buffStream(stream, 0, bufferSize)
-{
-	this->filePath = stream->filePath;
-	this->m_stream = stream;
+BufferedStream::BufferedStream(RandomAccessStream *stream, int bufferSize)
+    : m_buffStream(stream, 0, bufferSize) {
+  this->filePath = stream->filePath;
+  this->m_stream = stream;
 }
 
-BufferedStream::BufferedStream() { }
+BufferedStream::BufferedStream() {}
 
-void BufferedStream::read(void* buffer, int size)
-{
-	this->m_stream->read(buffer, size);
+void BufferedStream::read(void *buffer, int size) {
+  this->m_stream->read(buffer, size);
 }
 
-int BufferedStream::getPending()
-{
-	return this->m_buffStream.getPending();
+int BufferedStream::getPending() { return this->m_buffStream.getPending(); }
+
+void BufferedStream::close() { this->m_stream->close(); }
+
+int BufferedStream::getPosition() {
+  return this->getPending() -
+         (this->m_buffStream.m_amountToRead - this->m_buffStream.m_readLimit);
 }
 
-void BufferedStream::close()
-{
-	this->m_stream->close();
+void BufferedStream::setPosition(int pos) {
+  this->m_buffStream.resetBuffer();
+  this->m_stream->setPosition(pos);
 }
 
-int BufferedStream::getPosition()
-{
-	return this->getPending() - (this->m_buffStream.m_amountToRead - this->m_buffStream.m_readLimit);
-}
+int BufferedStream::getLength() { return this->m_stream->getLength(); }
 
-void BufferedStream::setPosition(int pos)
-{
-	this->m_buffStream.resetBuffer();
-	this->m_stream->setPosition(pos);
-}
-
-int BufferedStream::getLength()
-{
-	return this->m_stream->getLength();
-}
-
-void BufferedStream::init(RandomAccessStream* stream, int bufferSize)
-{
-	this->m_buffStream.init(stream, nullptr, bufferSize);
-	this->filePath = stream->filePath;
-	this->m_stream = stream;
+void BufferedStream::init(RandomAccessStream *stream, int bufferSize) {
+  this->m_buffStream.init(stream, nullptr, bufferSize);
+  this->filePath = stream->filePath;
+  this->m_stream = stream;
 }

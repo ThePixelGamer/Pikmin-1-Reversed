@@ -17,7 +17,7 @@ class SYSCORE_API AnimData : public CoreNode {
 public:
   // vtable 0h
   //(CoreNode: 4h-10h)
-  int animCacheSize;        // 30h
+  int m_frameCount;         // 30h
   AnimCacheInfo *animCache; // 40h
 
   AnimData();
@@ -27,6 +27,10 @@ public:
   virtual void makeAnimSRT(int, Matrix4f *, Matrix4f *, AnimDataInfo *, float);
   virtual void detach();
   virtual void writeType(RandomAccessStream &);
+
+  void initData();
+  void delAnim(AgeServer &);
+  void playAnim(AgeServer &);
 };
 
 #endif

@@ -95,6 +95,10 @@ SOURCE=.\Geometry\Matrix4f.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Geometry\Plane.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Geometry\SRT.cpp
 # End Source File
 # Begin Source File
@@ -243,10 +247,6 @@ SOURCE=.\Nodes\NodeMgr.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Nodes\Nodes.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\Nodes\SRTNode.cpp
 # End Source File
 # End Group
@@ -356,6 +356,10 @@ SOURCE=.\Geometry\Matrix3f.h
 # Begin Source File
 
 SOURCE=.\Geometry\Matrix4f.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Geometry\Plane.h
 # End Source File
 # Begin Source File
 
@@ -500,10 +504,6 @@ SOURCE=.\Nodes\Node.h
 # Begin Source File
 
 SOURCE=.\Nodes\NodeMgr.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Nodes\Nodes.h
 # End Source File
 # Begin Source File
 

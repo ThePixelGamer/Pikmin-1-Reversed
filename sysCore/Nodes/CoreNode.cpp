@@ -39,6 +39,16 @@ void CoreNode::genAge(AgeServer &server) {
   server.EndSection();
 }
 
+void CoreNode::genAgeNode(AgeServer &server) {
+  char *name = (this->getName()) ? this->getName() : "NULL";
+  server.NewNode(name, this);
+
+  for (CoreNode *i = this->child; i; i = i->next)
+    i->genAge(server);
+
+  server.EndNode();
+}
+
 struct String_Unk : public String {
   String_Unk() : String() { this->init(128); }
 };

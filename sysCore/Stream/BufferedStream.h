@@ -54,8 +54,8 @@ public:
 class SYSCORE_API BufferedStream : public RandomAccessStream {
 public:
   // 4h - Stream variable + vtbl ptr
-  RandomAccessStream *m_stream; // 8h
-  BufferedInputStream m_buffStream;     // 1Ch
+  RandomAccessStream *m_stream;     // 8h
+  BufferedInputStream m_buffStream; // 1Ch
 
   BufferedStream(RandomAccessStream *stream, int bufferSize);
   BufferedStream();
