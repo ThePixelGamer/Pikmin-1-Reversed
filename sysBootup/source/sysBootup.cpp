@@ -19,7 +19,9 @@ void isLast() { menuP->prev = 0; } // may be autogen?
 
 class UIMain : public UIWindow{
     // not an official name
-    public : UIMain() : UIWindow(){} UIMain(UIWindow * parent, int unk1, int dwStyle, int dwExStyle, bool unk2) :
+    public : UIMain() : UIWindow(){}
+
+    UIMain(UIWindow * parent, int unk1, int dwStyle, int dwExStyle, bool unk2) :
         UIWindow(parent, unk1, dwStyle, dwExStyle, unk2){}
 
     virtual int processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam){if (Msg == WM_COMMAND){
