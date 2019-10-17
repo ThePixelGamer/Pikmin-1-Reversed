@@ -68,6 +68,7 @@ public:
     void read(RandomAccessStream&);
     void recShowHierarchy();
     void sectionJoint(AgeServer&);
+    void genAge(AgeServer&);
 };
 
 #endif

@@ -67,3 +67,14 @@ void Joint::sectionJoint(AgeServer& server)
     server.EndBitGroup();
     server.EndGroup();
 }
+
+void Joint::genAge(AgeServer& server) 
+{
+	server.StartSection(this->name, true);
+    IDelegate1<AgeServer&>* sectionJointRef =
+        new Callback1<Joint*, void (Joint::*)(AgeServer&), AgeServer&>(this, &Joint::sectionJoint);
+    server.setSectionRefresh(sectionJointRef);
+    for (CoreNode* i = this->Child(); i; i = i->Next())
+        i->genAge(server);
+    server.EndSection();
+}
