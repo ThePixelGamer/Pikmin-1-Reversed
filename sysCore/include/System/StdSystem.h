@@ -145,7 +145,7 @@ public:
     void setDataRoot(char*);
     void setFade(float, float);
     void setFrameClamp(int);
-    void setHeap(int);
+    int setHeap(int);
     void setTextureBase(char*, char*);
     void softReset();
     static char* stringDup(char*);

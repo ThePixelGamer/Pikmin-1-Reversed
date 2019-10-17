@@ -7,8 +7,8 @@
 #ifndef RECTAREA_H
 #define RECTAREA_H
 
-#include <CommCtrl.h>
 #include <sysCore.h>
+#include <CommCtrl.h>
 #pragma comment(lib, "comctl32.lib")
 
 class SYSCORE_API RectArea

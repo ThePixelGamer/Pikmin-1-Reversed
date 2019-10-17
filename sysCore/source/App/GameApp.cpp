@@ -10,7 +10,7 @@ void GameApp::doInitApp() {}
 bool GameApp::idle()
 {
     sysCurrWnd = this->m_mainWindow->m_hWnd;
-    const int updateCode = this->update();
+    const int updateCode = this->idleUpdate();
     sysCurrWnd = nullptr;
     if (!this->m_unkByte && !updateCode)
         return false;
