@@ -68,9 +68,9 @@ void Joint::sectionJoint(AgeServer& server)
     server.EndGroup();
 }
 
-void Joint::genAge(AgeServer& server) 
+void Joint::genAge(AgeServer& server)
 {
-	server.StartSection(this->name, true);
+    server.StartSection(this->name, true);
     IDelegate1<AgeServer&>* sectionJointRef =
         new Callback1<Joint*, void (Joint::*)(AgeServer&), AgeServer&>(this, &Joint::sectionJoint);
     server.setSectionRefresh(sectionJointRef);

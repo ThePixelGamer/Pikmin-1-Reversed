@@ -29,7 +29,7 @@ public:
     void* m_pad1;           // 14h
     int m_index;            // 18h
     void* m_unk1;           // 1Ch
-    int m_flags;           // 20h
+    int m_flags;            // 20h
     Vector3f m_scale;       // 24h
     Vector3f m_rotation;    // 30h
     Vector3f m_translation; // 3Ch
@@ -61,7 +61,7 @@ public:
     bool m_useVolume;     // C9h
     bool m_useLightGroup; // CAh
 
-	int dword10C; // 10Ch
+    int dword10C; // 10Ch
 
     Joint();
 
