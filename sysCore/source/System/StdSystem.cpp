@@ -101,11 +101,11 @@ void StdSystem::setActive(bool) {}
 void StdSystem::setDataRoot(char*) {}
 void StdSystem::setFade(float, float) {}
 void StdSystem::setFrameClamp(int) {}
-int StdSystem::setHeap(int heap) 
-{ 
-	int retVal = heapNum; 
-	heapNum = heap;
-	return retVal;
+int StdSystem::setHeap(int heap)
+{
+    int retVal = heapNum;
+    heapNum = heap;
+    return retVal;
 }
 void StdSystem::setTextureBase(char*, char*) {}
 void StdSystem::softReset() {}

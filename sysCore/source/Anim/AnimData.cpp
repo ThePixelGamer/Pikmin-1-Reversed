@@ -5,6 +5,8 @@
 
 AnimData::AnimData() {}
 
+AnimData::AnimData(char* name) : CoreNode(name) {}
+
 void AnimData::genAge(AgeServer& server)
 {
     server.StartGroup(this->Name());

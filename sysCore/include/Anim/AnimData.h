@@ -22,6 +22,7 @@ public:
     AnimCacheInfo* animCache; // 40h
 
     AnimData();
+    AnimData(char* name);
 
     virtual void genAge(AgeServer&);
     virtual void extractSRT(SRT&, int, AnimDataInfo*, float);
