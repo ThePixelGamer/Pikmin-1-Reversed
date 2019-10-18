@@ -102,13 +102,13 @@ void Texture::createBuffer(int width, int height, int unused, void* buffer)
     this->m_height = height;
 }
 
-unsigned __int8 Texture::getAlpha(int unk1, int unk2)
+uchar Texture::getAlpha(int unk1, int unk2)
 {
     // gets rightmost byte
     return this->m_pixels[unk1 + this->m_width * unk2] >> 24;
 }
 
-unsigned __int8 Texture::getRed(int unk1, int unk2) { return this->m_pixels[unk1 + this->m_width * unk2]; }
+uchar Texture::getRed(int unk1, int unk2) { return this->m_pixels[unk1 + this->m_width * unk2]; }
 
 int Texture::offsetGXtoGL(int offset)
 {
@@ -121,7 +121,7 @@ int Texture::offsetGXtoGL(int unk1, int unk2, int unk3, int offset)
            unk2 * unk3 * (offset / (unk2 * unk3)) + unk1 * (offset / (unk2 * unk1) % (unk3 / unk1));
 }
 
-void Texture::decodeS3TC(int, int, unsigned __int8*, unsigned __int8*) {
+void Texture::decodeS3TC(int, int, uchar*, uchar*) {
 
 }
 
@@ -133,32 +133,37 @@ void Texture::decodeData(TexImg* tex)
         TEXTUREPRINT("decoding data %d x %d : %08x\n", tex->m_width, tex->m_height, tex->m_texData);
         switch (tex->m_format)
         {
-            case TexImgFormat::TEX_FMT_RGB565:
+            case TEX_FMT_RGB565:
 			{
-                unsigned short* u16texData = (unsigned short*)tex->m_texData;
+                ushort* u16texData = (ushort*)tex->m_texData;
                 for (int i = 0; i < this->m_width * this->m_height; ++i)
                 {
-                    unsigned short byteSwap = ((u16texData[i] & 0xFF00) >> 8) | ((u16texData[i] & 0xFF) << 8);
-                    //u16texData[i];
-                    unsigned short v29 = 8 * (((u16texData[i] & 0xFF00) >> 8) & 0x1F);
-                    int v27 = this->offsetGXtoGL(i);
-                    if (v27 >= this->m_width * this->m_height)
+                    ushort byteSwap = ((u16texData[i] & 0xFF) << 8) | ((u16texData[i] & 0xFF00) >> 8);
+
+                    uchar R = ((byteSwap >> 11) & 0x1F) << 3;
+                    uchar G = ((byteSwap >> 5) & 0x3F) << 2;
+                    uchar B = ((byteSwap) & 0x1F) << 3;
+                    uchar A = 0xFF;
+
+                    int glOffset = this->offsetGXtoGL(i);
+                    if (glOffset >= this->m_width * this->m_height)
                     {
                         TEXTUREHALT("too big an offset!\n");
-                        v27 = 0;
+                        glOffset = 0;
                     }
-                    this->m_pixels[v27] = (8 * ((byteSwap >> 11) & 0x1F)) | ((4 * ((byteSwap >> 5) & 0x3F)) << 8) | (v29 << 16) | 0xFF000000;
+
+                    this->m_pixels[glOffset] = A << 24 | B << 16 | G << 8 | R;
                 }
             } break;
-            case TexImgFormat::TEX_FMT_S3TC:
-                this->decodeS3TC(this->m_width, this->m_height, (unsigned __int8*)tex->m_texData, (unsigned __int8*)this->m_pixels);
+            case TEX_FMT_S3TC:
+                this->decodeS3TC(this->m_width, this->m_height, (uchar*)tex->m_texData, (uchar*)this->m_pixels);
             break;
-            case TexImgFormat::TEX_FMT_RGB5A3:
+            case TEX_FMT_RGB5A3:
             {
-                unsigned short* u16texData = (unsigned short*)tex->m_texData;
+                ushort* u16texData = (ushort*)tex->m_texData;
                 for (int j = 0; j < this->m_width * this->m_height; ++j)
                 {
-                    unsigned short byteSwap = ((u16texData[j] & 0xFF00) >> 8) | ((u16texData[j] & 0xFF) << 8);
+                    ushort byteSwap = ((u16texData[j] & 0xFF00) >> 8) | ((u16texData[j] & 0xFF) << 8);
                     unsigned __int8 v37, v36, v35, v34;
                     if ( byteSwap & 0x8000 )
                     {
@@ -184,7 +189,7 @@ void Texture::decodeData(TexImg* tex)
                     this->m_pixels[v32] = v37 | (v36 << 8) | (v35 << 16) | (v34 << 24);
                 }
             } break;
-            case TexImgFormat::TEX_FMT_I4: {
+            case TEX_FMT_I4: {
                 unsigned __int8* u8texData = (unsigned __int8*)tex->m_texData;
                 for (int k = 0; k < (this->m_width/2) * this->m_height / 2; ++k )
                 {
@@ -193,7 +198,7 @@ void Texture::decodeData(TexImg* tex)
                     this->m_pixels[Texture::offsetGXtoGL(2 * k + 1)] = (16 * (v4 & 0xF)) | ((16 * (v4 & 0xF)) << 8) | ((16 * (v4 & 0xF)) << 16) | 0xFF000000;
                 }
             } break;
-            /*case TexImgFormat::TEX_FMT_I8:
+            /*case TEX_FMT_I8:
             v20 = *(tex->11);
             for ( l = 0; l < tex->5) * tex->4); ++l )
             {
@@ -201,7 +206,7 @@ void Texture::decodeData(TexImg* tex)
                 *(tex->5) + 4 * Texture::offsetGXtoGL(v40, l)) = v7;
             }
             break;
-            case TexImgFormat::TEX_FMT_IA4:
+            case TEX_FMT_IA4:
             v24 = *(tex->11);
             for ( m = 0; m < tex->5) * tex->4); ++m )
             {
@@ -209,7 +214,7 @@ void Texture::decodeData(TexImg* tex)
                 *(tex->5) + 4 * Texture::offsetGXtoGL(v40, m)) = (16 * (v5 & 0xF)) | ((16 * (v5 & 0xF)) << 8) | ((16 * (v5 & 0xF)) << 16) | ((16 * ((v5 & 0xF0) >> 4)) << 24);
             }
             break;
-            case TexImgFormat::TEX_FMT_IA8:
+            case TEX_FMT_IA8:
             v22 = *(tex->11);
             for ( n = 0; n < tex->5) * tex->4); ++n )
             {
@@ -218,7 +223,7 @@ void Texture::decodeData(TexImg* tex)
                 *(tex->5) + 4 * Texture::offsetGXtoGL(v40, n)) = v6 | (v6 << 8) | (v6 << 16) | (HIBYTE(v6) << 24);
             }
             break;
-            case TexImgFormat::TEX_FMT_RGBA8:
+            case TEX_FMT_RGBA8:
             v18 = *(tex->11);
             for ( ii = 0; ii < tex->5) * tex->4); ++ii )
             {
@@ -238,7 +243,7 @@ void Texture::decodeData(TexImg* tex)
                 *(tex->5) + 4 * v11) |= (v9 << 8) | (v10 << 16);
             }
             break;
-            case TexImgFormat::TEX_FMT_RGB565:
+            case TEX_FMT_RGB565:
             v15 = *(tex->11);
             for ( kk = 0; kk < tex->5) * tex->4); ++kk )
             {

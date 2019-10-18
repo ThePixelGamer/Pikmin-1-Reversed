@@ -21,8 +21,8 @@ class SYSCORE_API Texture : public GfxObject
 public:
     short word4;                  // _4
     short word6;                  // _6
-    short m_width;                // _8
-    short m_height;               // _A
+    ushort m_width;               // _8
+    ushort m_height;              // _A
     unsigned __int32 m_tileSizeX; // _C
     unsigned __int32 m_tileSizeY; // _10
     GLuint* m_pixels;             // _14
@@ -43,11 +43,11 @@ public:
     void read(RandomAccessStream&);
     void grabBuffer(GLsizei, GLsizei, bool, bool);
     void createBuffer(int, int, int, void*);
-    unsigned __int8 getAlpha(int, int);
-    unsigned __int8 getRed(int, int);
+    uchar getAlpha(int, int);
+    uchar getRed(int, int);
     int offsetGXtoGL(int);
     int offsetGXtoGL(int, int, int, int);
-    void decodeS3TC(int, int, unsigned __int8*, unsigned __int8*);
+    void decodeS3TC(int, int, uchar*, uchar*);
 
     void decodeData(class TexImg*);
 };
