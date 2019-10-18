@@ -47,6 +47,7 @@ public:
     unsigned __int8 getRed(int, int);
     int offsetGXtoGL(int);
     int offsetGXtoGL(int, int, int, int);
+    void decodeS3TC(int, int, unsigned __int8*, unsigned __int8*);
 
     void decodeData(class TexImg*);
 };
