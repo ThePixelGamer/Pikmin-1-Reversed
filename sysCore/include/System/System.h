@@ -22,8 +22,8 @@ public:
     //(StdSystem: 4h-240h)
     /* current unknown members
             void* unk; // 244h
-            void* unk; // 248h
-            bool  unk; // 24Ch*/
+            void* unk; // 248h*/
+    bool m_textureByteUnk;  // 24Ch
     bool m_unkGameAppBool;  // 24Dh
     bool m_unkGameAppBool2; // 24Eh
                             /*void* unk; // 250h

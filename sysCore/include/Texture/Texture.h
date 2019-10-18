@@ -19,28 +19,20 @@
 class SYSCORE_API Texture : public GfxObject
 {
 public:
-    /*_WORD word0;
-      __declspec(align(4)) _WORD word4;
-      _WORD word6;
-      _WORD x;
-      _WORD y;
-      _DWORD dwordC;
-      _DWORD dword10;
-      _DWORD dword14;
-      _DWORD dword18;
-      _DWORD dword1C;
-      _DWORD dword20;
-      _DWORD dword24;
-      _DWORD dword28;
-      _DWORD dword2C;
-      _DWORD dword30;*/
-
-    // 0h vtable
-    GLsizei width;  // 8h
-    GLsizei height; // Ah
-
-    GLuint* pixels; // 14h
-    GLuint tex;     // 18h
+    short word4;                  // _4
+    short word6;                  // _6
+    short m_width;                // _8
+    short m_height;               // _A
+    unsigned __int32 m_tileSizeX; // _C
+    unsigned __int32 m_tileSizeY; // _10
+    GLuint* m_pixels;             // _14
+    GLuint m_textures;            // _18
+    int dword1C;                  // _1C
+    int dword20;                  // _20
+    int dword24;                  // _24
+    int dword28;                  // _28
+    int dword2C;                  // _2C
+    int dword30;                  // _30
 
     Texture();
 
@@ -50,8 +42,13 @@ public:
 
     void read(RandomAccessStream&);
     void grabBuffer(GLsizei, GLsizei, bool, bool);
+    void createBuffer(int, int, int, void*);
     unsigned __int8 getAlpha(int, int);
     unsigned __int8 getRed(int, int);
+    int offsetGXtoGL(int);
+    int offsetGXtoGL(int, int, int, int);
+
+    void decodeData(class TexImg*);
 };
 
 #endif

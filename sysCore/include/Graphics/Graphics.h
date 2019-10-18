@@ -36,6 +36,8 @@ class BaseShape;
 class ShapeDynMaterials;
 class BoundBox;
 
+void GRAPHICSHALT(const char* fmt, ...);
+
 class SYSCORE_API Graphics
 {
 public:
