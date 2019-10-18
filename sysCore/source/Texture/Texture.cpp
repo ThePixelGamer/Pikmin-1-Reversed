@@ -121,9 +121,7 @@ int Texture::offsetGXtoGL(int unk1, int unk2, int unk3, int offset)
            unk2 * unk3 * (offset / (unk2 * unk3)) + unk1 * (offset / (unk2 * unk1) % (unk3 / unk1));
 }
 
-void Texture::decodeS3TC(int, int, uchar*, uchar*) {
-
-}
+void Texture::decodeS3TC(int, int, uchar*, uchar*) {}
 
 void Texture::decodeData(TexImg* tex)
 {
@@ -133,126 +131,90 @@ void Texture::decodeData(TexImg* tex)
         TEXTUREPRINT("decoding data %d x %d : %08x\n", tex->m_width, tex->m_height, tex->m_texData);
         switch (tex->m_format)
         {
-            case TEX_FMT_RGB565:
-			{
-                ushort* u16texData = (ushort*)tex->m_texData;
-                for (int i = 0; i < this->m_width * this->m_height; ++i)
-                {
-                    ushort byteSwap = ((u16texData[i] & 0xFF) << 8) | ((u16texData[i] & 0xFF00) >> 8);
+        case TEX_FMT_RGB565:
+        {
+            ushort* u16texData = (ushort*)tex->m_texData;
+            for (int i = 0; i < this->m_width * this->m_height; ++i)
+            {
+                ushort byteSwap = ((u16texData[i] & 0xFF) << 8) | ((u16texData[i] & 0xFF00) >> 8);
 
-                    uchar R = ((byteSwap >> 11) & 0x1F) << 3;
-                    uchar G = ((byteSwap >> 5) & 0x3F) << 2;
-                    uchar B = ((byteSwap) & 0x1F) << 3;
-                    uchar A = 0xFF;
+                uchar R = ((byteSwap >> 11) & 0x1F) << 3;
+                uchar G = ((byteSwap >> 5) & 0x3F) << 2;
+                uchar B = ((byteSwap)&0x1F) << 3;
+                uchar A = 0xFF;
 
-                    int glOffset = this->offsetGXtoGL(i);
-                    if (glOffset >= this->m_width * this->m_height)
-                    {
-                        TEXTUREHALT("too big an offset!\n");
-                        glOffset = 0;
-                    }
+                int glOffset = this->offsetGXtoGL(i);
+                if (glOffset >= this->m_width * this->m_height)
+                {
+                    TEXTUREHALT("too big an offset!\n");
+                    glOffset = 0;
+                }
 
-                    this->m_pixels[glOffset] = A << 24 | B << 16 | G << 8 | R;
-                }
-            } break;
-            case TEX_FMT_S3TC:
-                this->decodeS3TC(this->m_width, this->m_height, (uchar*)tex->m_texData, (uchar*)this->m_pixels);
+                this->m_pixels[glOffset] = A << 24 | B << 16 | G << 8 | R;
+            }
+        }
+        break;
+        case TEX_FMT_S3TC:
+            this->decodeS3TC(this->m_width, this->m_height, (uchar*)tex->m_texData, (uchar*)this->m_pixels);
             break;
-            case TEX_FMT_RGB5A3:
+        case TEX_FMT_RGB5A3:
+        {
+            ushort* u16texData = (ushort*)tex->m_texData;
+            for (int j = 0; j < this->m_width * this->m_height; ++j)
             {
-                ushort* u16texData = (ushort*)tex->m_texData;
-                for (int j = 0; j < this->m_width * this->m_height; ++j)
+                ushort byteSwap = ((u16texData[j] & 0xFF00) >> 8) | ((u16texData[j] & 0xFF) << 8);
+                unsigned __int8 v37, v36, v35, v34;
+                if (byteSwap & 0x8000)
                 {
-                    ushort byteSwap = ((u16texData[j] & 0xFF00) >> 8) | ((u16texData[j] & 0xFF) << 8);
-                    unsigned __int8 v37, v36, v35, v34;
-                    if ( byteSwap & 0x8000 )
-                    {
-                        v37 = 8 * ((byteSwap >> 10) & 0x1F);
-                        v36 = 8 * ((byteSwap >> 5) & 0x1F);
-                        u16texData[j];
-                        v35 = 8 * (((u16texData[j] & 0xFF00) >> 8) & 0x1F);
-                        v34 = -1;
-                    }
-                    else
-                    {
-                        v37 = 16 * (byteSwap >> 8 & 0xF);
-                        v36 = 16 * ((byteSwap >> 4) & 0xF);
-                        v35 = 16 * (byteSwap & 0xF);
-                        v34 = 32 * ((byteSwap >> 12) & 7);
-                    }
-                    int v32 = offsetGXtoGL(j);
-                    if ( v32 >= this->m_width * this->m_height )
-                    {
-                        TEXTUREHALT("too big an offset!\n");
-                        v32 = 0;
-                    }
-                    this->m_pixels[v32] = v37 | (v36 << 8) | (v35 << 16) | (v34 << 24);
+                    v37 = 8 * ((byteSwap >> 10) & 0x1F);
+                    v36 = 8 * ((byteSwap >> 5) & 0x1F);
+                    u16texData[j];
+                    v35 = 8 * (((u16texData[j] & 0xFF00) >> 8) & 0x1F);
+                    v34 = -1;
                 }
-            } break;
-            case TEX_FMT_I4: {
-                unsigned __int8* u8texData = (unsigned __int8*)tex->m_texData;
-                for (int k = 0; k < (this->m_width/2) * this->m_height / 2; ++k )
+                else
                 {
-                    unsigned __int8 v4 = u8texData[k];
-                    this->m_pixels[Texture::offsetGXtoGL(2 * k)] = (16 * ((v4 & 0xF0) >> 4)) | ((16 * ((v4 & 0xF0) >> 4)) << 8) | ((16 * ((v4 & 0xF0) >> 4)) << 16) | 0xFF000000;
-                    this->m_pixels[Texture::offsetGXtoGL(2 * k + 1)] = (16 * (v4 & 0xF)) | ((16 * (v4 & 0xF)) << 8) | ((16 * (v4 & 0xF)) << 16) | 0xFF000000;
+                    v37 = 16 * (byteSwap >> 8 & 0xF);
+                    v36 = 16 * ((byteSwap >> 4) & 0xF);
+                    v35 = 16 * (byteSwap & 0xF);
+                    v34 = 32 * ((byteSwap >> 12) & 7);
                 }
-            } break;
-            /*case TEX_FMT_I8:
-            v20 = *(tex->11);
-            for ( l = 0; l < tex->5) * tex->4); ++l )
-            {
-                v7 = *(l + v20) | (*(l + v20) << 8) | (*(l + v20) << 16) | 0xFF000000;
-                *(tex->5) + 4 * Texture::offsetGXtoGL(v40, l)) = v7;
+                int v32 = offsetGXtoGL(j);
+                if (v32 >= this->m_width * this->m_height)
+                {
+                    TEXTUREHALT("too big an offset!\n");
+                    v32 = 0;
+                }
+                this->m_pixels[v32] = v37 | (v36 << 8) | (v35 << 16) | (v34 << 24);
             }
+        }
+        break;
+        case TEX_FMT_I4:
+        {
+            unsigned __int8* u8texData = (unsigned __int8*)tex->m_texData;
+            for (int k = 0; k < (this->m_width / 2) * this->m_height / 2; ++k)
+            {
+                unsigned __int8 v4 = u8texData[k];
+                this->m_pixels[Texture::offsetGXtoGL(2 * k)] = (16 * ((v4 & 0xF0) >> 4)) |
+                                                               ((16 * ((v4 & 0xF0) >> 4)) << 8) |
+                                                               ((16 * ((v4 & 0xF0) >> 4)) << 16) | 0xFF000000;
+                this->m_pixels[Texture::offsetGXtoGL(2 * k + 1)] =
+                    (16 * (v4 & 0xF)) | ((16 * (v4 & 0xF)) << 8) | ((16 * (v4 & 0xF)) << 16) | 0xFF000000;
+            }
+        }
+        break;
+        case TEX_FMT_I8:
             break;
-            case TEX_FMT_IA4:
-            v24 = *(tex->11);
-            for ( m = 0; m < tex->5) * tex->4); ++m )
-            {
-                v5 = *(m + v24);
-                *(tex->5) + 4 * Texture::offsetGXtoGL(v40, m)) = (16 * (v5 & 0xF)) | ((16 * (v5 & 0xF)) << 8) | ((16 * (v5 & 0xF)) << 16) | ((16 * ((v5 & 0xF0) >> 4)) << 24);
-            }
+        case TEX_FMT_IA4:
             break;
-            case TEX_FMT_IA8:
-            v22 = *(tex->11);
-            for ( n = 0; n < tex->5) * tex->4); ++n )
-            {
-                v6 = ((*(v22 + 2 * n) & 0xFF00) >> 8) | ((*(v22 + 2 * n) & 0xFF) << 8);
-                *(v22 + 2 * n);
-                *(tex->5) + 4 * Texture::offsetGXtoGL(v40, n)) = v6 | (v6 << 8) | (v6 << 16) | (HIBYTE(v6) << 24);
-            }
+        case TEX_FMT_IA8:
             break;
-            case TEX_FMT_RGBA8:
-            v18 = *(tex->11);
-            for ( ii = 0; ii < tex->5) * tex->4); ++ii )
-            {
-                v8 = ((*(v18 + 2 * ((ii & 0xF) + 32 * (ii / 16))) & 0xFF00) >> 8) | ((*(v18 + 2
-                                                                                            * ((ii & 0xF) + 32 * (ii / 16))) & 0xFF) << 8);
-                *(tex->5) + 4 * Texture::offsetGXtoGL(v40, ii)) = v8 | (HIBYTE(v8) << 24);
-            }
-            for ( jj = 0; jj < tex->5) * tex->4); ++jj )
-            {
-                v9 = (((*(v18 + 2 * ((jj & 0xF) + 32 * (jj / 16)) + 32) & 0xFF00) >> 8) | ((*(v18
-                                                                                            + 2
-                                                                                            * ((jj & 0xF) + 32 * (jj / 16))
-                                                                                            + 32) & 0xFF) << 8)) >> 8;
-                *(v18 + 2 * ((jj & 0xF) + 32 * (jj / 16)) + 32);
-                v10 = (*(v18 + 2 * ((jj & 0xF) + 32 * (jj / 16)) + 32) & 0xFF00) >> 8;
-                v11 = Texture::offsetGXtoGL(v40, jj);
-                *(tex->5) + 4 * v11) |= (v9 << 8) | (v10 << 16);
-            }
+        case TEX_FMT_RGBA8:
             break;
-            case TEX_FMT_RGB565:
-            v15 = *(tex->11);
-            for ( kk = 0; kk < tex->5) * tex->4); ++kk )
-            {
-                v12 = *(kk + v15) | (*(kk + v15) << 8) | (*(kk + v15) << 16) | 0xFF000000;
-                *(tex->5) + 4 * Texture::offsetGXtoGL(v40, kk)) = v12;
-            }
-            break;*/
-            default:
-                TEXTUREHALT("Unknown texture format\n");
+        case 9:
+            break;
+        default:
+            TEXTUREHALT("Unknown texture format\n");
             break;
         }
         tex->m_buffer = this->m_pixels;
