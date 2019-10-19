@@ -17,7 +17,7 @@ class SYSCORE_API TexobjInfo : public GfxobjInfo
 {
 public:
     //(GfxobjInfo: 0h-1Ch)
-    Texture* texData;
+    Texture* texData; // 20h
 
     TexobjInfo();
 

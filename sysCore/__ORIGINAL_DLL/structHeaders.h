@@ -311,67 +311,312 @@ struct TexAttr : public CoreNode
     TexImg* m_image;
 };
 
-struct BaseShape
+struct AnimData : public CoreNode
 {
-    int vtblPtr;
-    char coreNode[16];
-    int m_systemUsed;
-    int m_currentAnims; // AnimContext* m_currentAnims;
-    int* dword1C;
-    int* m_animContext;
+    int dword14;
+    int dword18;
+    int dword1C;
+    int dword20;
     int dword24;
     int dword28;
     int dword2C;
-    int m_envelopeCount;
-    Envelope* m_envelopes;
-    int m_vtxMatrixCount;
-    VtxMatrix* m_vtxMatrix;
-    int m_materialCount;
-    int m_materials;
-    int m_tevInfoCount;
-    int m_tevInfo;
-    int m_meshCount;
-    Mesh* m_meshes;
-    int m_jointCount;
-    struct Joint* m_joints;
-    int m_jointUnkCount;
-    struct JointUnk* m_jointUnk;
-    int m_textureAttributesCount;
-    TexAttr* m_textureAtttributes;
-    int dword70;
-    int m_textureCount;
-    TexImg* m_textures;
-    char gap7C[264];
-    BoundBox m_collisionBounds;
-    float m_gridSizeRadius;
-    int m_gridSizeX;
-    int m_gridSizeY;
-    class CollGroup* m_collTris;
-    int m_collTriInfoCount;
-    struct CollTriInfo* m_collTriInfo;
-    int m_baseRoomInfoCount;
-    class RoomInfo* m_roomInfo;
-    char gap1BC[192];
-    int m_vertexCount;
-    Vector3f* m_vertices;
-    int m_colourCount;
-    Colour* m_colours;
-    int m_texCoordCount;
-    int m_texCoordVecCount;
-    Vector2f* m_texCoordVec2f[8];
-    int m_vertexNormalCount;
-    Vector3f* m_vertexNormals;
-    int m_nbtCount;
-    Vector3f* m_NBT;
+    int dword30;
+    int dword34;
+    int dword38;
+    int dword3C;
+    int dword40;
+};
+
+struct LightFlare : public CoreNode
+{
+    int dword14;
+    int dword18;
+    int dword1C;
+    int dword20;
+};
+
+struct LightGroup : public CoreNode
+{
+    int dword14;
+    int dword18;
+    int dword1C;
+    int dword20;
+    int dword24;
+    int dword28;
+    int dword2C;
+    int dword30;
+    int dword34;
+    int dword38;
+    int dword3C;
+    LightFlare lightflare40;
+    int dword64;
+    int dword68;
+};
+
+struct ObjCollInfo : public CoreNode
+{
+    int dword14;
+    int dword18;
+    int dword1C;
+    int dword20;
+    int dword24;
+    int dword28;
+    int dword2C;
+    int dword30;
+    int dword34;
+    int dword38;
+    int dword3C;
+    int dword40;
+    int dword44;
+    int dword48;
+    int dword4C;
+    int dword50;
+};
+struct RouteLink : public CoreNode
+{
+    int dword14;
+};
+
+struct RoutePoint
+{
+    int dword14;
+    int dword18;
+    int dword1C;
+    int dword20;
+    int dword24;
+    int dword28;
+    int dword2C;
+    int dword30;
+    int dword34;
+    int dword38;
+    RouteLink routelink3C;
+};
+
+struct RouteGroup : public CoreNode
+{
+    _DWORD dword14;
+    _BYTE gap18[64];
+    _DWORD dword58;
+    _BYTE gap5C[8];
+    _DWORD dword64;
+    _BYTE gap68[84];
+    _DWORD dwordBC;
 };
 
 struct CollGroup
 {
     int collgroup0;
-    _WORD word4;
+    short* word4;
+    int dword8;
+    int dwordC;
+    int dword10;
+    int dword14;
+    int dword18;
+};
+
+struct SRT
+{
+    Vector3f m_scale;
+    Vector3f m_rotation;
+    Vector3f m_position;
+};
+
+struct BaseShape : public CoreNode
+{
+    // _0 vtbl
+    // _10 corenode
+    int m_systemUsed;                         // _14
+    class AnimContext* m_currentAnims;        // _18 AnimContext* m_currentAnims;
+    int* m_animOverrides;                     // _1C
+    int* m_animContext;                       // _20
+    class AnimFrameCacher* m_animFrameCacher; // _24
+    Matrix4f* m_animMatrix;                   // _28
+    int m_;                                   // _2C
+    int m_envelopeCount;                      // _30
+    Envelope* m_envelopes;                    // _34
+    int m_vtxMatrixCount;                     // _38
+    VtxMatrix* m_vtxMatrix;                   // _3C
+    int m_materialCount;                      // _40
+    class Material* m_materials;              // _44
+    int m_tevInfoCount;                       // _48
+    class TevInfo* m_tevInfo;                 // _4C
+    int m_meshCount;                          // _50
+    Mesh* m_meshes;                           // _54
+    int m_jointCount;                         // _58
+    struct Joint* m_joints;                   // _5C
+    int m_routeGroupCount;                    // _60
+    RouteGroup* m_routeGroup;                 // _64
+    int m_textureAttributesCount;             // _68
+    TexAttr* m_textureAtttributes;            // _6C
+    int dword70;                              // _70
+    int m_textureCount;                       // _74
+    TexImg* m_textures;                       // _78
+    AnimData m_animData;                      // _7C
+    LightGroup m_groups;                      // _C0
+    ObjCollInfo m_collisionInfo;              // _12C
+    int dword180;                             // _180
+    BoundBox m_courseExtents;                 // _184
+    float m_gridSize;                         // _19C
+    int m_gridSizeX;                          // _1A0
+    int m_gridSizeY;                          // _1A4
+    int* dword1A8;                            // _1A8
+    int m_collTriCount;                       // _1AC
+    _DWORD* m_collTriInfo;                    // _1B0
+    int m_baseRoomCount;                      // _1B4
+    struct RoomInfo* proominfo1B8;            // _1B8
+    _BYTE gap1BC[0xC0];                       // _1BC
+    int m_vertexCount;                        // _27C
+    Vector3f* m_vertices;                     // _280
+    int m_vertColourCount;                    // _284
+    Colour* m_vertColours;                    // _288
+    int m_unk;                                // _28C
+    int m_texCoordCount[8];                   // _290
+    Vector2f* m_texCoords[8];                 // _2B0
+    int m_normalCount;                        // _2D0
+    Vector3f* m_normals;                      // _2D4
+    int m_nbtCount;                           // _2D8
+    Vector3f* m_nbt;                          // _2DC
+    _DWORD dword2E0;                          // _2E0
+    _DWORD dword2E4;                          // _2E4
+    _DWORD dword2E8;                          // _2E8
+    _DWORD dword2EC;                          // _2EC
+    _BYTE byte2F0;                            // _2FO
+};
+
+struct AyuStack
+{
+    int m_allocType;       // 0h
+    int m_size;            // 4h
+    int m_used;            // 8h
+    unsigned __int32* top; // Ch
+    int m_topSize;         // 10h
+    unsigned __int32* sp;  // 14h ( this + 20 ) | <- top probably???
+    int m_topFree;         // 18h
+    bool overflowProtect;  // 1Ch
+    bool active;           // 1Dh ( this + 29 )
+    char* name;            // 20h ( this + 32 )
+};
+
+struct AyuHeap : public AyuStack
+{
+    int dword24;
+};
+
+struct GfxobjInfo
+{
+    int vtbl;         // 0h
+    GfxobjInfo* prev; // 4h
+    GfxobjInfo* next; // 8h
+    char* str;        // Ch
+    ID32 id32;        // 10h
+    int attached;    // 1Ch
+};
+
+struct StdSystem
+{
+    int vtbl;             // 0h
+    bool pending;         // 4h
+    float fade;           // 8h
+    void* dwordC;         // Ch
+    float dword10;        // 10h
+    void* dword14;        // 14h
+    void* dword18;        // 18h
+    void* dword1C;        // 1Ch
+    int m_debugStreamUnk; // 20h
+    void* dword24;        // 24h
+    void* dword28;        // 28h
+    void* dword2C;        // 2Ch
+    void* dword30;        // 30h
+    void* dword34;        // 34h
+    void* dword38;        // 38h
+    void* dword3C;        // 3Ch
+    int matrixUnk;        // 40h
+    Matrix4f* matrix;     // 44h
+    char* bloRoot;        // 48h
+    char* texRoot;        // 4Ch
+    char* baseDir;        // 50h
+    char* fileName;       // 54h
+    AyuHeap heaps[8];     // 58h
+    int heapNum;          // 198h
+    void* dword19C;       // 19Ch
+    void* dword1A0;       // 1A0h
+    void* dword1A4;       // 1A4h
+    void* dword1A8;       // 1A8h
+    void* dword1AC;       // 1ACh
+    int m_lightCount;     // 1B0h
+    void* dword1B4;       // 1B4h
+    void* dword1B8;       // 1B8h
+    void* dword1BC;       // 1BCh
+    void* dword1C0;       // 1C0h
+    void* dword1C4;       // 1C4h
+    int unkShutdownCode;  // 1C8h
+    void* dword1CC;       // 1CCh
+    GfxobjInfo gfx;       // 1D0h
+    bool byte1F0;         // 1F0h
+    int dword1F4;         // 1F4h
+    void* dword1F8;       // 1F8h
+    class Shape* shape;   // 1FCh
+    CoreNode core1;       // 200h
+    CoreNode core2;       // 214h
+    void* dword228;       // 228h
+    void* dword22C;       // 22Ch
+    void* dword230;       // 230h
+    void* dword234;       // 234h
+    void* dword238;       // 238h
+    void* dword23C;       // 23Ch
+    void* dword240;       // 240h
+};
+
+struct TexobjInfo : public GfxobjInfo
+{
+    Texture* texData;
+};
+
+struct Graphics
+{
+    int vtbl;
+    _DWORD dword4;
     _DWORD dword8;
     _DWORD dwordC;
     _DWORD dword10;
-    _DWORD dword14;
-    _DWORD dword18;
+    _BYTE m_light[724]; // _14
+    _DWORD dword2E8;
+    _BYTE gap2EC[32];
+    _DWORD dword30C;
+    _DWORD dword310;
+    _DWORD dword314;
+    _DWORD dword318;
+    _DWORD dword31C;
+    _DWORD dword320;
+    _BYTE byte324;
+    _BYTE byte325;
+    _BYTE gap326[2];
+    _DWORD dword328;
+    _DWORD dword32C;
+    _DWORD dword330;
+    _DWORD dword334;
+    _DWORD dword338;
+    struct LightCamera* m_lightCam;
+    _DWORD dword340;
+    _DWORD dword344;
+    _DWORD dword348;
+    _DWORD dword34C;
+    _DWORD dword350;
+    struct MaterialHandler* m_matHandler;
+    _DWORD dword358;
+    _DWORD dword35C;
+    _DWORD dword360;
+    _DWORD dword364;
+    _DWORD dword368;
+    _DWORD dword36C;
+    _DWORD dword370;
+    _DWORD dword374;
+    _DWORD dword378;
+    _DWORD dword37C;
+    _DWORD dword380;
+    _DWORD dword384;
+    _DWORD dword388;
+    _DWORD dword38C;
+    _DWORD dword390;
+    char char394;
 };

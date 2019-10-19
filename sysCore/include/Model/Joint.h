@@ -20,7 +20,7 @@
 
 class Material;
 
-//< TODO: finish class
+// TODO: finish class
 class SYSCORE_API Joint : public CoreNode
 {
 public:

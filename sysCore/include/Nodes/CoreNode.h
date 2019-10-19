@@ -25,8 +25,8 @@ public:
 
     CoreNode(char* = "CoreNode");
 
-    virtual void genAge(AgeServer&);           // this+0 TODO
-    virtual void genAgeNode(AgeServer&);       // this+4 TODO
+    virtual void genAge(AgeServer&);           // this+0
+    virtual void genAgeNode(AgeServer&);       // this+4
     virtual int getAgeNodeType();              // this+8
     virtual void write(RandomAccessStream&) {} // this+12
     virtual void read(RandomAccessStream&) {}  // this+16
@@ -47,10 +47,10 @@ public:
     void add(CoreNode*);
     void del();
 
-    void load(char*, char*, unsigned __int32); // TODO
+    void load(char*, char*, unsigned __int32);
 
-    void genWrite(AgeServer&) {} // TODO
-    void genRead(AgeServer&);    // TODO
+    void genWrite(AgeServer&);
+    void genRead(AgeServer&);
 };
 
 #endif

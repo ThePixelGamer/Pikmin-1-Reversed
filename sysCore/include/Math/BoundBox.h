@@ -31,7 +31,7 @@ public:
     void expandBound(BoundBox&);
     void expandBound(Vector3f&);
 
-    void draw(Graphics&); //< TODO
+    void draw(Graphics&); // TODO
     bool intersects(BoundBox&);
     void resetBound();
 };

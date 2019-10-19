@@ -14,7 +14,7 @@
 //
 
 class SYSCORE_API Plane : public Vector3f
-{ //< TODO
+{ // TODO
 public:
     float m_unk2;
 

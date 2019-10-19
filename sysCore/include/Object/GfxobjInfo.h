@@ -19,7 +19,7 @@ public:
     GfxobjInfo* next; // 8h
     char* str;        // Ch
     ID32 id32;        // 10h
-    void* unused;     // 1Ch
+    int attached;     // 1Ch
 
     GfxobjInfo();
 

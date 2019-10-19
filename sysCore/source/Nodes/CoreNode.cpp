@@ -2,6 +2,7 @@
 #include <Atx/AtxFileStream.h>
 #include <IDelegate.h>
 #include <Nodes/CoreNode.h>
+#include <Stream/BufferedStream.h>
 #include <sysCore.h>
 
 void NODEPRINT(const char* fmt, ...)
@@ -43,7 +44,7 @@ void CoreNode::genAge(AgeServer& server)
 
 void CoreNode::genAgeNode(AgeServer& server)
 {
-    char* name = (this->getName()) ? this->getName() : "NULL";
+    char* name = this->getName() ? this->getName() : "NULL";
     server.NewNode(name, this);
 
     for (CoreNode* i = this->child; i; i = i->next)
@@ -54,7 +55,9 @@ void CoreNode::genAgeNode(AgeServer& server)
 
 struct String_Unk : public String
 {
-    String_Unk() : String() { this->init(128); }
+    char* name;
+
+    String_Unk() : String() { this->init(name, 128); }
 };
 
 void CoreNode::genRead(AgeServer& server)
@@ -67,6 +70,36 @@ void CoreNode::genRead(AgeServer& server)
         if (stream.open(unkString.m_string, true))
         {
             NODEPRINT("opened file ...\n");
+            BufferedStream bFstream(static_cast<RandomAccessStream*>(&stream), 0x8000);
+            NODEPRINT("reading file ...\n");
+            this->read(bFstream);
+            NODEPRINT("closing file ...\n");
+            bFstream.close();
+            server.RefreshNode();
+        }
+        else
+        {
+            NODEPRINT("cant open file '%s'\n", unkString.m_string);
+        }
+    }
+}
+
+void CoreNode::genWrite(AgeServer& server)
+{
+    String_Unk unkString;
+    if (server.getOpenFilename(unkString, "All files (*.*)|*.*"))
+    {
+        AtxFileStream stream;
+        if (stream.open(unkString.m_string, true))
+        {
+            NODEPRINT("saving as '%s'\n", unkString.m_string);
+            this->write(stream);
+            stream.close();
+            NODEPRINT("closed file\n");
+        }
+        else
+        {
+            NODEPRINT("cant save file '%s'\n", unkString.m_string);
         }
     }
 }

@@ -45,7 +45,7 @@ public:
 
     // 0h vtbl
     int m_unk1; // 4h
-    // Light m_lights; // 14h
+    // Light m_light; // 14h
 
     Colour m_unkColour1; // 318h
     Colour m_unkColour2; // 31Ch
@@ -56,6 +56,8 @@ public:
     Colour m_unkColour4; // 368h
     Colour m_unkColour5; // 36Ch
     Colour m_unkColour6; // 370h
+
+    void* m_matrixBuffer; // 390h
 
     float m_unk2;
 
@@ -68,8 +70,7 @@ public:
     virtual unsigned __int32 compileMaterial(Material*) { return 0; }
     virtual void useDList(unsigned __int32) {}
 
-    // needs resetMatrixBuffer and resetCacheBuffer
-    virtual void initRender(int, int) {}
+    virtual void initRender(int, int);
     virtual void resetCopyFilter() = 0;
     virtual void setAmbient() {} // actually empty
     virtual void setLighting(bool, PVWLightingInfo*) = 0;

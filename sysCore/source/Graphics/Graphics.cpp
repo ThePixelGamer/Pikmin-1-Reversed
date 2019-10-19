@@ -77,4 +77,11 @@ void Graphics::resetCacheBuffer() {}
 
 void Graphics::resetLights() {}
 
-void Graphics::resetMatrixBuffer() {}
+void Graphics::resetMatrixBuffer() { this->m_matrixBuffer = nullptr; }
+
+void Graphics::initRender(int, int)
+{
+    // this->m_light.initCore("");
+    this->resetMatrixBuffer();
+    this->resetCacheBuffer();
+}

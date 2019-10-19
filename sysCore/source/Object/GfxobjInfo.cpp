@@ -6,7 +6,7 @@ GfxobjInfo::GfxobjInfo()
     this->prev = 0;
     this->str = "";
     this->id32.setID('none');
-    this->unused = 0;
+    this->attached = 0;
 }
 
 void GfxobjInfo::attach() {}

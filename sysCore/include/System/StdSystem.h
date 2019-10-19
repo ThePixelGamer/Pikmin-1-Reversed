@@ -12,7 +12,6 @@
 #include <Nodes/Node.h>
 #include <Object/GfxobjInfo.h>
 #include <Stream/FileIO.h>
-#include <Texture/Texture.h>
 #include <Windows.h>
 
 #include <algorithm>
@@ -26,68 +25,63 @@ class AyuHeap;
 class LFInfo;
 class Shape;
 class LFlareGroup;
+class Texture;
 
 class SYSCORE_API StdSystem
 {
 public:
-    bool pending; // 4h
-    float fade;   // 8h
-    /* current unknown members
-            void* unk; // Ch
-            void* unk; // 10h
-            void* unk; // 14h
-            void* unk; // 18h
-            void* unk; // 1Ch*/
-    bool m_debugStreamUnk; // 20h
-    /*void* unk; // 24h
-                            void* unk; // 28h
-                            void* unk; // 2Ch
-                            void* unk; // 30h
-                            void* unk; // 34h
-                            void* unk; // 38h
-                            void* unk; // 3Ch*/
-    int matrixUnk;    // 40h
-    Matrix4f* matrix; // 44h
-    char* bloRoot;    // 48h
-    char* texRoot;    // 4Ch
-    char* baseDir;    // 50h
-    char* fileName;   // 54h
-    AyuHeap heaps[8]; // 58h
-    int heapNum;      // 198h
-    /*	void* unk; // 19Ch
-                          void* unk; // 1A0h
-                          void* unk; // 1A4h
-                          void* unk; // 1A8h
-                          void* unk;*/ // 1ACh
-    int m_lightCount; // 1B0h
-    /*void* unk; // 1B4h
-            void* unk; // 1B8h
-            void* unk; // 1BCh
-            void* unk; // 1C0h
-            void* unk; // 1C4h
-    */
-    int unkShutdownCode; // 1C8h
-    /* current unknown members
-            void* unk; // 1CCh
-    */
-    GfxobjInfo gfx; // 1D0h
-    int unkBool;    // 1F0h
-    /* current unknown members
-            void* unk; // 1F4h
-            void* unk; // 1F8h
-    */
-    Shape* shape;   // 1FCh
-    CoreNode core1; // 200h
-    CoreNode core2; // 214h
-    /* current unknown members
-            void* unk; // 228h
-            void* unk; // 22Ch
-            void* unk; // 230h
-            void* unk; // 234h
-            void* unk; // 238h
-            void* unk; // 23Ch
-            void* unk; // 240h
-    */
+    // 0h - VTBL
+    bool pending;         // 4h
+    float fade;           // 8h
+    void* dwordC;         // Ch
+    float dword10;        // 10h
+    float dword14;        // 14h
+    int m_frameClamp;     // 18h
+    void* dword1C;        // 1Ch
+    int m_debugStreamUnk; // 20h
+    void* dword24;        // 24h
+    void* dword28;        // 28h
+    void* dword2C;        // 2Ch
+    void* dword30;        // 30h
+    void* dword34;        // 34h
+    void* dword38;        // 38h
+    void* dword3C;        // 3Ch
+    int matrixUnk;        // 40h
+    Matrix4f* matrix;     // 44h
+    char* bloRoot;        // 48h
+    char* texRoot;        // 4Ch
+    char* baseDir;        // 50h
+    char* fileName;       // 54h
+    AyuHeap heaps[8];     // 58h
+    int heapNum;          // 198h
+    void* dword19C;       // 19Ch
+    void* dword1A0;       // 1A0h
+    void* dword1A4;       // 1A4h
+    void* dword1A8;       // 1A8h
+    void* dword1AC;       // 1ACh
+    int m_lightCount;     // 1B0h
+    void* dword1B4;       // 1B4h
+    void* dword1B8;       // 1B8h
+    void* dword1BC;       // 1BCh
+    void* dword1C0;       // 1C0h
+    void* dword1C4;       // 1C4h
+    int unkShutdownCode;  // 1C8h
+    void* dword1CC;       // 1CCh
+    GfxobjInfo gfx;       // 1D0h
+    bool m_toAttachObjs;  // 1F0h
+    int dword1F4;         // 1F4h
+    void* dword1F8;       // 1F8h
+    Shape* shape;         // 1FCh
+    CoreNode core1;       // 200h
+    CoreNode core2;       // 214h
+    void* dword228;       // 228h
+    void* m_lFlares;      // 22Ch
+    void* dword230;       // 230h
+    void* dword234;       // 234h
+    void* dword238;       // 238h
+    void* dword23C;       // 23Ch
+    void* dword240;       // 240h
+
 
     StdSystem();
 
@@ -114,27 +108,27 @@ public:
     // AnimData* findAnyAnimation(char*);
     // GfxobjInfo* findAnyGfxObject(char*, unsigned int);
     int findAnyIndex(char*, char*);
-    // GfxobjInfo* findGfxObject(char*, unsigned int);
+    GfxobjInfo* findGfxObject(char*, unsigned __int32);
     // AnimData* findIndexAnimation(char*, int);
-    // GfxobjInfo* findTexture(Texture*);
+    class TexobjInfo* findTexture(Texture*);
     void flushLFlares(Graphics*);
     void genAge(AgeServer&);
     void getAppMemory(char*);
     float getFade();
     float getHalfRand(float);
-    // AyuHeap* getHeap(int);
+    AyuHeap* getHeap(int);
     int getHeapNum();
     // LFInfo* getLFlareInfo();
     double getRand(float);
     Shape* getShape(char*, char*, char*, bool);
     void initLFlares(int);
-    void invalidateObjs(unsigned int, unsigned int);
+    void invalidateObjs(unsigned __int32, unsigned __int32);
     bool isActive();
     bool isShutdown();
     // AnimData* loadAnimation(Shape*, char*, bool);
     void loadBundle(char*, bool);
     // Shape* loadShape(char*, bool);
-    // Texture* loadTexture(char*, bool);
+    Texture* loadTexture(char*, bool);
     void onceInit();
     // LFlareGroup* registerLFlare(Texture*);
     void resetHeap(int, int);

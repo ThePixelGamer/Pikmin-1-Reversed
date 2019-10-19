@@ -13,6 +13,7 @@
 #include <GL/glu.h>
 
 #include <Object/GfxObject.h>
+#include <Object/TexobjInfo.h>
 #include <Stream/RandomAccessStream.h>
 #pragma comment(lib, "opengl32.lib")
 
@@ -32,7 +33,7 @@ public:
     int dword24;                  // _24
     int dword28;                  // _28
     int dword2C;                  // _2C
-    int dword30;                  // _30
+    TexobjInfo* m_objInfo;        // _30
 
     Texture();
 
@@ -47,8 +48,7 @@ public:
     uchar getRed(int, int);
     int offsetGXtoGL(int);
     int offsetGXtoGL(int, int, int, int);
-    void decodeS3TC(int, int, uchar*, uchar*);
-
+    void decodeS3TC(int, int, unsigned __int8*, unsigned __int8*);
     void decodeData(class TexImg*);
 };
 

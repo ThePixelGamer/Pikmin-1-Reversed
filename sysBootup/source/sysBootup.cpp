@@ -12,11 +12,10 @@
 #include <sysCore.h>
 
 MenuPlugin* menuP = new MenuPlugin();
-System unused;
-const char* systemName = "OpenGL / Dolphin System";
-
 void isLast() { menuP->prev = 0; } // may be autogen?
 
+System autoGenGSYS; // used to initialise GSYS, the global system object
+const char systemName[] = "OpenGL / Dolphin System";
 class UIMain : public UIWindow{
     // not an official name
     public : UIMain() : UIWindow(){}

@@ -12,7 +12,7 @@
 class Vector3f;
 
 class Matrix3f
-{ //< TODO
+{ // TODO
 public:
     enum mode; // unknown
     enum do_not_initialize;

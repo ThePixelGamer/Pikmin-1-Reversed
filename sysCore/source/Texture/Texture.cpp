@@ -31,7 +31,13 @@ void TEXTUREHALT(const char* fmt, ...)
     // file, line, error
 }
 
-Texture::Texture() : GfxObject() { this->m_textures = -1; }
+Texture::Texture() : GfxObject()
+{
+    this->dword2C = 0;
+    this->m_textures = -1;
+    this->dword24 = 0;
+    this->dword28 = 0;
+}
 
 void Texture::attach()
 {
@@ -58,7 +64,7 @@ void Texture::attach()
                 unk |= 2;
         }
 
-        //< TODO FIX
+        // TODO FIX
         if (unk != 3 || (!gsys->m_textureByteUnk || this->word6 & 4))
         {
 
@@ -89,8 +95,15 @@ void Texture::makeResident() {}
 void Texture::grabBuffer(GLsizei width, GLsizei height, bool unused1, bool unused2)
 {
     glReadPixels(0, glnHeight - width, width, height, GL_RGBA, GL_UNSIGNED_BYTE, this->m_pixels);
-    // TODO: figure out what makes the variable below 'zf' not 'ST70_4'
+
+    // For perfect decomp, the unused variable has to be zf,
+    // which somehow is achieved by doing an ifdef. The question
+    // is, what the fuck was the ifdef supposed to be?
     bool unused = this->m_textures == 0;
+#ifdef AMBROSIAISGREATOMGLOL
+    unused = false;
+    printf(unused);
+#endif
     glBindTexture(GL_TEXTURE_2D, this->m_textures);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, this->m_pixels);
 }
@@ -104,11 +117,15 @@ void Texture::createBuffer(int width, int height, int unused, void* buffer)
 
 uchar Texture::getAlpha(int unk1, int unk2)
 {
-    // gets rightmost byte
+    // gets rightmost byte (R G B |A|)
     return this->m_pixels[unk1 + this->m_width * unk2] >> 24;
 }
 
-uchar Texture::getRed(int unk1, int unk2) { return this->m_pixels[unk1 + this->m_width * unk2]; }
+uchar Texture::getRed(int unk1, int unk2)
+{
+    // gets leftmost byte (|R| G B A)
+    return this->m_pixels[unk1 + this->m_width * unk2];
+}
 
 int Texture::offsetGXtoGL(int offset)
 {
@@ -121,7 +138,7 @@ int Texture::offsetGXtoGL(int unk1, int unk2, int unk3, int offset)
            unk2 * unk3 * (offset / (unk2 * unk3)) + unk1 * (offset / (unk2 * unk1) % (unk3 / unk1));
 }
 
-void Texture::decodeS3TC(int, int, uchar*, uchar*) {}
+void Texture::decodeS3TC(int, int, unsigned __int8*, unsigned __int8*) {}
 
 void Texture::decodeData(TexImg* tex)
 {
@@ -133,7 +150,7 @@ void Texture::decodeData(TexImg* tex)
         {
         case TEX_FMT_RGB565:
         {
-            ushort* u16texData = (ushort*)tex->m_texData;
+            ushort* u16texData = static_cast<ushort*>(tex->m_texData);
             for (int i = 0; i < this->m_width * this->m_height; ++i)
             {
                 ushort byteSwap = ((u16texData[i] & 0xFF) << 8) | ((u16texData[i] & 0xFF00) >> 8);
@@ -146,7 +163,7 @@ void Texture::decodeData(TexImg* tex)
                 int glOffset = this->offsetGXtoGL(i);
                 if (glOffset >= this->m_width * this->m_height)
                 {
-                    TEXTUREHALT("too big an offset!\n");
+                    TEXTUREPRINT("too big an offset!\n");
                     glOffset = 0;
                 }
 
@@ -159,40 +176,41 @@ void Texture::decodeData(TexImg* tex)
             break;
         case TEX_FMT_RGB5A3:
         {
-            ushort* u16texData = (ushort*)tex->m_texData;
+            ushort* u16texData = static_cast<ushort*>(tex->m_texData);
             for (int j = 0; j < this->m_width * this->m_height; ++j)
             {
                 ushort byteSwap = ((u16texData[j] & 0xFF00) >> 8) | ((u16texData[j] & 0xFF) << 8);
-                unsigned __int8 v37, v36, v35, v34;
+                uchar R, G, B, A;
                 if (byteSwap & 0x8000)
                 {
-                    v37 = 8 * ((byteSwap >> 10) & 0x1F);
-                    v36 = 8 * ((byteSwap >> 5) & 0x1F);
-                    u16texData[j];
-                    v35 = 8 * (((u16texData[j] & 0xFF00) >> 8) & 0x1F);
-                    v34 = -1;
+                    R = 8 * ((byteSwap >> 10) & 0x1F);
+                    G = 8 * ((byteSwap >> 5) & 0x1F);
+                    B = 8 * (((u16texData[j] & 0xFF00) >> 8) & 0x1F);
+                    A = -1;
                 }
                 else
                 {
-                    v37 = 16 * (byteSwap >> 8 & 0xF);
-                    v36 = 16 * ((byteSwap >> 4) & 0xF);
-                    v35 = 16 * (byteSwap & 0xF);
-                    v34 = 32 * ((byteSwap >> 12) & 7);
+                    R = 16 * (byteSwap >> 8 & 0xF);
+                    G = 16 * ((byteSwap >> 4) & 0xF);
+                    B = 16 * (byteSwap & 0xF);
+                    A = 32 * ((byteSwap >> 12) & 7);
                 }
-                int v32 = offsetGXtoGL(j);
-                if (v32 >= this->m_width * this->m_height)
+
+                int glOffset = offsetGXtoGL(j);
+                if (glOffset >= this->m_width * this->m_height)
                 {
-                    TEXTUREHALT("too big an offset!\n");
-                    v32 = 0;
+                    TEXTUREPRINT("too big an offset!\n");
+                    glOffset = 0;
                 }
-                this->m_pixels[v32] = v37 | (v36 << 8) | (v35 << 16) | (v34 << 24);
+
+                this->m_pixels[glOffset] = A << 24 | B << 16 | G << 8 | R;
             }
         }
         break;
         case TEX_FMT_I4:
         {
-            unsigned __int8* u8texData = (unsigned __int8*)tex->m_texData;
-            for (int k = 0; k < (this->m_width / 2) * this->m_height / 2; ++k)
+            uchar* u8texData = static_cast<uchar*>(tex->m_texData);
+            for (int k = 0; k < (this->m_width / 2) * this->m_height; ++k)
             {
                 unsigned __int8 v4 = u8texData[k];
                 this->m_pixels[Texture::offsetGXtoGL(2 * k)] = (16 * ((v4 & 0xF0) >> 4)) |
@@ -226,13 +244,17 @@ void Texture::read(RandomAccessStream& stream)
     if (!strcmp(stream.filePath + strlen(stream.filePath) - 3, "txe"))
     {
         TexImg* img = new TexImg;
+        img->importTxe(this, stream);
     }
     else if (!strcmp(stream.filePath + strlen(stream.filePath) - 3, "bti"))
     {
         TexImg* img = new TexImg;
+        img->importBti(this, stream, nullptr);
     }
     else
     {
         TEXTUREHALT("Unknown texture extension (%s)!!\n", stream.filePath + strlen(stream.filePath) - 3);
     }
+
+    gsys->addTexture(this, stream.filePath);
 }

@@ -56,7 +56,7 @@ System::System(const System& sys) : StdSystem(sys) {}
 
 System::~System() {}
 
-RandomAccessStream* System::openFile(char* cwd, bool hasCwd)
+RandomAccessStream* System::openFile(char* cwd, bool hasCwd, bool print)
 {
     char* _workingDir = (hasCwd ? this->baseDir : "");
 
@@ -70,6 +70,9 @@ RandomAccessStream* System::openFile(char* cwd, bool hasCwd)
     FILE* fptr = fopen(fPath, "rb");
     if (!fptr)
         return 0;
+
+    if (print)
+        SYSTEMPRINT("Opened file %s\n", fPath);
 
     return new fileIO(fptr, cwd);
 }
