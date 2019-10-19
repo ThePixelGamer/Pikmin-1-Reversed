@@ -364,3 +364,14 @@ struct BaseShape
     int m_nbtCount;
     Vector3f* m_NBT;
 };
+
+struct CollGroup
+{
+    int collgroup0;
+    _WORD word4;
+    _DWORD dword8;
+    _DWORD dwordC;
+    _DWORD dword10;
+    _DWORD dword14;
+    _DWORD dword18;
+};
