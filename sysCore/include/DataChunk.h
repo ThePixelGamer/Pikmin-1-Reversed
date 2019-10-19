@@ -9,9 +9,8 @@
 #ifndef DATACHUNK_H
 #define DATACHUNK_H
 
-//
-//	Add any headers here!
-//
+class RandomAccessStream;
+class CmdStream;
 
 class SYSCORE_API DataChunk
 {
@@ -23,9 +22,9 @@ public:
     DataChunk();
 
     void addData(float toAdd);
-    void getData(class CmdStream* stream);
-    void read(class RandomAccessStream& stream);
-    void write(class RandomAccessStream& stream);
+    void getData(CmdStream* stream);
+    void read(RandomAccessStream& stream);
+    void write(RandomAccessStream& stream);
     void setDataSize(int dataSize);
 };
 
