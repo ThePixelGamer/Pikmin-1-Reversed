@@ -115,9 +115,8 @@ int String::getLength(char* string)
 
 int String::getLength()
 {
-    int i = 0;
     char* tempString = this->m_string;
-    for (i = 0;; ++i)
+    for (int i = 0;; ++i)
     {
         if (!(*tempString++))
             break;
@@ -127,24 +126,22 @@ int String::getLength()
 
 char* String::copy(char* arg1, char* arg2)
 {
-    int loop = 0;
-    while (loop)
+	// TODO: FIX!
+    do
     {
         *arg1 = *arg2;
-        loop = *arg1++;
-        ++arg2;
-    }
+    } while (*arg1++, arg2++);
+
     return arg1;
 }
 
 void String::concat(char* arg1, char* arg2)
 {
-    int arg1Iter;
-    do
-        arg1Iter = *arg1++;
-    while (arg1Iter);
+    while (*arg1++)
+        ;
 
     char* tempChar = arg1 - 1;
+    // TODO: below is wrong!
     int temp;
     do
     {

@@ -383,6 +383,10 @@ SOURCE=.\source\Colour.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\source\DataChunk.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\source\ID32.cpp
 # End Source File
 # Begin Source File
@@ -720,6 +724,10 @@ SOURCE=.\include\CacheInfo.h
 # Begin Source File
 
 SOURCE=.\include\Colour.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\DataChunk.h
 # End Source File
 # Begin Source File
 
