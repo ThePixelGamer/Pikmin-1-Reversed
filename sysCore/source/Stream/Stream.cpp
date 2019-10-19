@@ -17,7 +17,7 @@ void Stream::print(char* Format, ...)
 
 void Stream::vPrintf(char* Format, char* Args)
 {
-    char resultantString[256];
+    char resultantString[0x400];
 
     vsprintf(resultantString, Format, Args);
 
@@ -31,7 +31,7 @@ int Stream::readInt()
 {
     int c;
     this->read(&c, sizeof(int));
-    return ((c & 0xFF000000) >> 24) | ((c & 0xFF0000) >> 8) | ((c & 0xFF00) << 8) | (c << 24);
+    return (c << 24) | ((c & 0xFF00) << 8) | ((c & 0xFF0000) >> 8) | ((c & 0xFF000000) >> 24);
 }
 
 unsigned __int8 Stream::readByte()
@@ -45,7 +45,7 @@ short Stream::readShort()
 {
     short c;
     this->read(&c, sizeof(short));
-    return ((c & 0xFF00) >> 8) | (c << 8);
+    return (c << 8) | ((c & 0xFF00) >> 8);
 }
 
 float Stream::readFloat()
@@ -85,25 +85,25 @@ void Stream::readString(char* string, int stringLength)
     this->readString(tempVar);
 }
 
-void Stream::writeInt(int toW)
+void Stream::writeInt(int c)
 {
-    unsigned int wr = ((toW & 0xFF000000) >> 24) | ((toW & 0xFF0000) >> 8) | ((toW & 0xFF00) << 8) | (toW << 24);
+    int wr = ((unsigned __int8)c << 24) | ((c & 0xFF00) << 8) | ((c & 0xFF0000) >> 8) | ((c & 0xFF000000) >> 24);
     this->write(&wr, sizeof(wr));
 }
 
 void Stream::writeByte(unsigned __int8 toW) { this->write(&toW, sizeof(toW)); }
 
-void Stream::writeShort(short toW)
+void Stream::writeShort(short c)
 {
-    short wr = ((toW & 0xFF00) >> 8) | (toW << 8);
+    short wr = (c << 8) | ((c & 0xFF00) >> 8);
     this->write(&wr, sizeof(wr));
 }
 
 void Stream::writeFloat(float toW)
 {
-    unsigned int temp = *reinterpret_cast<unsigned int*>(&toW);
-    temp = (temp << 24) | ((temp & 0xFF00) << 8) | ((temp & 0xFF0000) >> 8) | ((temp & 0xFF000000) >> 24);
-    this->write(&temp, sizeof(float));
+    int c = *reinterpret_cast<int*>(&toW);
+    c = ((unsigned __int8)c << 24) | ((c & 0xFF00) << 8) | ((c & 0xFF0000) >> 8) | ((c & 0xFF000000) >> 24);
+    this->write(&c, sizeof(float));
 }
 
 void Stream::writeString(String& str)

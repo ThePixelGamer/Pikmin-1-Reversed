@@ -47,9 +47,9 @@ public:
     virtual int getAvailable() { return 0; } // 40h
 
     // Misc. functions (gets overloaded)
-    virtual void close() {}                 // 44h
-    virtual bool getClosing() { return 0; } // 48h
-    virtual void flush() {}                 // 4Ch
+    virtual void close() {}                     // 44h
+    virtual bool getClosing() { return false; } // 48h
+    virtual void flush() {}                     // 4Ch
 
     // Printing functions
     void print(char*, ...);

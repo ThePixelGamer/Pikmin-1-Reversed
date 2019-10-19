@@ -509,7 +509,7 @@ struct GfxobjInfo
     GfxobjInfo* next; // 8h
     char* str;        // Ch
     ID32 id32;        // 10h
-    int attached;    // 1Ch
+    int attached;     // 1Ch
 };
 
 struct StdSystem
@@ -619,4 +619,11 @@ struct Graphics
     _DWORD dword38C;
     _DWORD dword390;
     char char394;
+};
+
+struct DataChunk
+{
+    int m_dataIndex; // _0
+    int m_dataSize;  // _4
+    float* m_data;   // _8
 };
