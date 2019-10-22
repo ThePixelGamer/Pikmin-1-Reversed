@@ -7,6 +7,11 @@ struct CoreNode
     CoreNode* child;  // 10h
 };
 
+struct BaseRoomInfo
+{
+    int m_unk1; // _0
+};
+
 struct Vector3f
 {
     float mX; // 0h
@@ -311,19 +316,61 @@ struct TexAttr : public CoreNode
     TexImg* m_image;
 };
 
+struct DataChunk
+{
+    int m_dataIndex; // _0
+    int m_dataSize;  // _4
+    float* m_data;   // _8
+};
+
+struct AnimDck : public AnimData
+{
+};
+
+struct AnimDca : public AnimData
+{
+};
+
+struct param
+{
+    int param1;
+    int param2;
+    int param3;
+};
+
+struct AnimJoint
+{
+    param sx_param;
+    param sy_param;
+    param sz_param;
+
+    param rx_param;
+    param ry_param;
+    param rz_param;
+	
+	param tx_param;
+    param ty_param;
+    param tz_param;
+
+    _BYTE gap0[8];
+    Matrix4f matrix4f74;
+    SRT srtB4;
+    _WORD wordD8;
+};
+
 struct AnimData : public CoreNode
 {
-    int dword14;
-    int dword18;
-    int dword1C;
-    int dword20;
+    DataChunk* m_scaling;
+    DataChunk* m_rotation;
+    DataChunk* m_translation;
+    short* m_jointIndex;
     int dword24;
-    int dword28;
+    int m_numJoints;
     int dword2C;
-    int dword30;
+    int m_numFrames;
     int dword34;
     int dword38;
-    int dword3C;
+    AnimJoint* dword3C;
     int dword40;
 };
 
@@ -463,7 +510,7 @@ struct BaseShape : public CoreNode
     int m_collTriCount;                       // _1AC
     _DWORD* m_collTriInfo;                    // _1B0
     int m_baseRoomCount;                      // _1B4
-    struct RoomInfo* proominfo1B8;            // _1B8
+    BaseRoomInfo* proominfo1B8;               // _1B8
     _BYTE gap1BC[0xC0];                       // _1BC
     int m_vertexCount;                        // _27C
     Vector3f* m_vertices;                     // _280
@@ -619,11 +666,4 @@ struct Graphics
     _DWORD dword38C;
     _DWORD dword390;
     char char394;
-};
-
-struct DataChunk
-{
-    int m_dataIndex; // _0
-    int m_dataSize;  // _4
-    float* m_data;   // _8
 };

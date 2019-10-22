@@ -40,8 +40,11 @@ void SYSNEWHALT(const char* fmt, ...)
 
 BOOL __stdcall DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
-    if (fdwReason == 1)
-        hInstance = hinstDLL;
+    switch (fdwReason)
+    {
+    case DLL_PROCESS_ATTACH:
+		hInstance = hinstDLL;
+    }
     return TRUE;
 }
 

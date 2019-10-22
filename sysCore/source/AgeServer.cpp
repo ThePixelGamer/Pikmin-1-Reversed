@@ -208,20 +208,25 @@ void AgeServer::setSectionRefresh(IDelegate1<AgeServer&>* d)
 
 bool AgeServer::update()
 {
-    // need to do this function
+    // TODO
     bool hasDataLeft = false;
-    while (true)
+    while (2)
     {
         if (this->getPending())
         {
             hasDataLeft = true;
             const int identifier = this->readInt();
-            // switch (identifier) {
-            // case
-            //}
+            int ident2 = identifier;
+            if (identifier <= 0x1F4)
+            {
+            }
+            else
+            {
+                AGEHALT("Age cmd unknown %d", identifier);
+            }
         }
+        return hasDataLeft;
     }
-    return hasDataLeft;
 }
 
 // WRITE
@@ -250,11 +255,15 @@ void AgeServer::writePropValue(PROP_TYPE type, void* buffer)
         this->writeFloat(*static_cast<float*>(buffer));
         break;
     case COLOUR_PROP:
-        this->writeInt((*static_cast<Colour*>(buffer)).R);
-        this->writeInt((*static_cast<Colour*>(buffer)).G);
-        this->writeInt((*static_cast<Colour*>(buffer)).B);
-        this->writeInt((*static_cast<Colour*>(buffer)).A);
+    {
+
+        Colour* col = static_cast<Colour*>(buffer);
+        this->writeInt(col->R);
+        this->writeInt(col->G);
+        this->writeInt(col->B);
+        this->writeInt(col->A);
         break;
+    }
     case UNK7:
     case UNK9:
         return;
@@ -262,9 +271,7 @@ void AgeServer::writePropValue(PROP_TYPE type, void* buffer)
         this->writeString(static_cast<char*>(buffer));
     default:
         AGEHALT("Unsupported PropType");
-        return;
     }
-    return;
 }
 
 bool AgeServer::Open()
@@ -424,4 +431,10 @@ void AgeServer::StartOptionBox(char* name, unsigned __int8* prop, int unk)
     this->writeProp(UNK9, 0);
     this->writeProp(CHAR_PROP, prop);
     this->writeInt(unk);
+}
+
+void AgeServer::NewLabel(char* labelName)
+{
+    this->writeInt(108);
+    this->writeString(labelName);
 }
