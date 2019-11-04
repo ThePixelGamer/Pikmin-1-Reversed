@@ -14,7 +14,7 @@ class SYSCORE_API VtxMatrix
 {
 public:
     bool m_partiallyWeighted;
-    short m_index;
+    int m_index;
 
     void read(RandomAccessStream&);
     void write(RandomAccessStream&);

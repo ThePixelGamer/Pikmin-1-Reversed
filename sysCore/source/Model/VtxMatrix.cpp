@@ -9,5 +9,5 @@ void VtxMatrix::read(RandomAccessStream& stream)
 void VtxMatrix::write(RandomAccessStream& stream)
 {
     // Basically an if statement
-    (this->m_partiallyWeighted) ? stream.writeShort(this->m_index) : stream.writeShort(-(this->m_index + 1));
+    this->m_partiallyWeighted ? stream.writeShort(this->m_index) : stream.writeShort(-(this->m_index + 1));
 }

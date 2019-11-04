@@ -482,7 +482,7 @@ struct BaseShape : public CoreNode
     int* m_animContext;                       // _20
     class AnimFrameCacher* m_animFrameCacher; // _24
     Matrix4f* m_animMatrix;                   // _28
-    int m_;                                   // _2C
+    int dword2C;                                   // _2C
     int m_envelopeCount;                      // _30
     Envelope* m_envelopes;                    // _34
     int m_vtxMatrixCount;                     // _38
@@ -510,7 +510,7 @@ struct BaseShape : public CoreNode
     float m_gridSize;                         // _19C
     int m_gridSizeX;                          // _1A0
     int m_gridSizeY;                          // _1A4
-    int* dword1A8;                            // _1A8
+    int* m_collisionTriangles;                            // _1A8
     int m_collTriCount;                       // _1AC
     _DWORD* m_collTriInfo;                    // _1B0
     int m_baseRoomCount;                      // _1B4
