@@ -43,7 +43,7 @@ BOOL __stdcall DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
     switch (fdwReason)
     {
     case DLL_PROCESS_ATTACH:
-		hInstance = hinstDLL;
+        hInstance = hinstDLL;
     }
     return TRUE;
 }

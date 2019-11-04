@@ -32,17 +32,17 @@ class SYSCORE_API StdSystem
 public:
     // 0h - VTBL
     bool pending;         // 4h
-    float fade;           // 8h
-    void* dwordC;         // Ch
-    float dword10;        // 10h
-    float dword14;        // 14h
+    int dword8;         // 8h
+    float initialFade;    // Ch
+    float endFade;        // 10h
+    void* m_consFont;     // 14h, class Font
     int m_frameClamp;     // 18h
-    void* dword1C;        // 1Ch
+    int dword1C;          // 1Ch
     int m_debugStreamUnk; // 20h
-    void* dword24;        // 24h
-    void* dword28;        // 28h
-    void* dword2C;        // 2Ch
-    void* dword30;        // 30h
+    int dword24;          // 24h
+    int dword28;          // 28h
+    int dword2C;          // 2Ch
+    int dword30;        // 30h
     void* dword34;        // 34h
     void* dword38;        // 38h
     void* dword3C;        // 3Ch
@@ -54,7 +54,7 @@ public:
     char* fileName;       // 54h
     AyuHeap heaps[8];     // 58h
     int heapNum;          // 198h
-    void* dword19C;       // 19Ch
+    int dword19C;       // 19Ch
     void* dword1A0;       // 1A0h
     void* dword1A4;       // 1A4h
     void* dword1A8;       // 1A8h
@@ -69,8 +69,8 @@ public:
     void* dword1CC;       // 1CCh
     GfxobjInfo gfx;       // 1D0h
     bool m_toAttachObjs;  // 1F0h
-    int dword1F4;         // 1F4h
-    void* dword1F8;       // 1F8h
+    char* m_textureBase1; // 1F4h
+    char* m_textureBase2; // 1F8h
     Shape* shape;         // 1FCh
     CoreNode core1;       // 200h
     CoreNode core2;       // 214h
@@ -101,15 +101,15 @@ public:
     void addAnimation(AnimData*, char*);
     void addGfxObject(GfxobjInfo*);
     void addTexture(Texture*, char*);
-    void ageAnyAnimations();
+    void ageAnyAnimations(AgeServer& server, char* name);
     void attachObjs();
     void detachObjs();
-    // AnimData* findAnimation(char*);
-    // AnimData* findAnyAnimation(char*);
-    // GfxobjInfo* findAnyGfxObject(char*, unsigned int);
+    AnimData* findAnimation(char*);
+    AnimData* findAnyAnimation(char*);
+    GfxobjInfo* findAnyGfxObject(char*, unsigned int);
     int findAnyIndex(char*, char*);
     GfxobjInfo* findGfxObject(char*, unsigned __int32);
-    // AnimData* findIndexAnimation(char*, int);
+    AnimData* findIndexAnimation(char*, int);
     class TexobjInfo* findTexture(Texture*);
     void flushLFlares(Graphics*);
     void genAge(AgeServer&);
@@ -125,7 +125,7 @@ public:
     void invalidateObjs(unsigned __int32, unsigned __int32);
     bool isActive();
     bool isShutdown();
-    // AnimData* loadAnimation(Shape*, char*, bool);
+    AnimData* loadAnimation(Shape*, char*, bool);
     void loadBundle(char*, bool);
     // Shape* loadShape(char*, bool);
     Texture* loadTexture(char*, bool);

@@ -19,6 +19,7 @@ void ComboBox::selOption(int option) { SendMessage(this->m_boxWindow->m_hWnd, CB
 
 int ComboBox::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam)
 {
+    unsigned int msg = Msg;
     if (wParam == WM_USER)
     {
         SendMessage(this->m_boxWindow->m_hWnd, WM_GETTEXT, sizeof(cBoxStringBuf), (LPARAM)cBoxStringBuf);

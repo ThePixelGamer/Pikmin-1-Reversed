@@ -3,9 +3,17 @@
 #include <CacheInfo.h>
 #include <IDelegate.h>
 
-AnimData::AnimData() {}
+AnimData::AnimData()
+{
+    this->dword24 = 0;
+    this->dword38 = 0;
+}
 
-AnimData::AnimData(char* name) : CoreNode(name) {}
+AnimData::AnimData(char* name) : CoreNode(name)
+{
+    this->dword24 = 0;
+    this->dword38 = 0;
+}
 
 void AnimData::genAge(AgeServer& server)
 {
@@ -28,9 +36,15 @@ void AnimData::extractSRT(SRT&, int, AnimDataInfo*, float) {}
 
 void AnimData::makeAnimSRT(int, Matrix4f*, Matrix4f*, AnimDataInfo*, float) {}
 
-void AnimData::detach() {}
+void AnimData::detach()
+{
+    for (int i = 0; i < this->m_frameCount; i++)
+    {
+        // this->animCache->cacheInfo->;
+    }
+}
 
-void AnimData::writeType(RandomAccessStream&) {}
+void AnimData::writeType(RandomAccessStream&) {} // Empty
 
 void AnimData::delAnim(AgeServer&) {}
 

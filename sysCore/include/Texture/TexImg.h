@@ -22,9 +22,8 @@ enum TexImgFormat
     TEX_FMT_RGBA8
 };
 
-class BTI
+struct BTI
 {
-public:
     unsigned char format; // GXTexFmt
     unsigned char transparent;
     unsigned short width;

@@ -11,15 +11,16 @@
 
 #include <windows.h>
 
-class ControllerMgr
+class SYSCORE_API ControllerMgr
 {
 public:
     // 4h - vtbl pointer
-    PBYTE lpKeyState;
+    BYTE lpKeyState[0x100];
 
     ControllerMgr();
 
     void update();
+    void updateController(class Controller*);
 
     virtual bool keyDown(int key);
 };

@@ -31,12 +31,21 @@ void SYSTEMHALT(const char* fmt, ...)
     // file, line, error
 }
 
-System::System() : StdSystem()
+System::System() : StdSystem() // DONE
 {
-
-    sysCurrWnd = nullptr;
+    this->dword1C = 0;
     this->m_debugStreamUnk = true;
-
+    this->dword24 = 0;
+    this->dword28 = 1;
+    this->dword2C = 1;
+    this->streamType = 0;
+    this->mainRouter = nullptr;
+    sysCurrWnd = nullptr;
+    this->m_textureByteUnk = false;
+    this->m_unkGameAppBool = false;
+    this->dword254 = 32;
+    this->unkShutdownCode = 0x200000;
+    this->heapNum = -1;
     gsys = this;
     this->m_unkGameAppBool2 = false;
     char Dest[512];
@@ -77,8 +86,6 @@ RandomAccessStream* System::openFile(char* cwd, bool hasCwd, bool print)
     return new fileIO(fptr, cwd);
 }
 
-void System::sndPlaySe(unsigned int) {}
-
 void System::beginRender() {}
 
 void System::buildModeList() {}
@@ -94,21 +101,15 @@ UIWindow* System::createDebugStream(UIWindow* wind)
 
 RandomAccessStream* System::createFile(char* cwd, bool hasCwd)
 {
-    /*Get working directory to properly place file*/
-    char* workingDir = (hasCwd ? this->baseDir : "");
-
     char Dest[256];
-    sprintf(Dest, "%s", workingDir);
-
-    /*get filename*/
-    char* fname = (hasCwd ? "" : this->fileName);
+    sprintf(Dest, "%s", (hasCwd ? this->baseDir : ""));
 
     /*combine current working directory with filename*/
-    sprintf(Dest, "%s%s", fname, cwd);
+    sprintf(Dest, "%s%s", (hasCwd ? "" : this->fileName), cwd);
 
     FILE* fptr = fopen(Dest, "wb");
     if (!fptr)
-        return 0;
+        return nullptr;
 
     return new fileIO(fptr, cwd);
 }
@@ -150,7 +151,13 @@ void System::halt(char* unused, int unused2, char* toPrint)
     exit(0);
 }
 
-void System::hardReset() {}
+void System::hardReset()
+{
+    // this->m_consFont = new Font;
+    // this->m_consFont->setTexture(this->loadTexture("constFont.bti", true), 16, 8);
+    gsys->set2DRoot("screen/eng_blo/", "screen/eng_tex/");
+    this->frameCount = 0;
+}
 
 int System::run(BaseApp*)
 {
@@ -170,7 +177,7 @@ int System::run(BaseApp*)
             else
             {
                 this->updateSysClock();
-                // this->controllerMgr->update();
+                this->controllermgr.update();
             }
         }
         if (!GetMessageA(&message, 0, 0, 0))
@@ -183,12 +190,29 @@ int System::run(BaseApp*)
     return message.wParam;
 }
 
-/*void System::searchFiles(char* base, char* type, IDelegate2<char*, unsigned
-int>*, bool) {
+#include <io.h>
+#include <time.h>
 
-}*/
+void System::searchFiles(char* base, char* type, IDelegate2<char*, unsigned int>* delegate, bool unk1) // TODO
+{
+    char dest[256];
+    sprintf(dest, "%s/%s", base, type);
+    SYSTEMPRINT("base = %s : type = %s\n", base, type);
 
-void System::setAtxRouter(int) {}
+    struct _finddata_t fblock;
+    int handle = _findfirst(dest, &fblock);
+    for (int i = (handle == -1); !i; i = (_findnext(handle, &fblock) != 0))
+    {
+        if (fblock.attrib & _A_SUBDIR)
+        {
+            char t[0x10];
+            sprintf(t, "%s/%s", base, fblock.name);
+            delegate->invoke(t, fblock.size);
+        }
+    }
+}
+
+void System::setAtxRouter(AtxRouter* r) { this->mainRouter = r; }
 
 int System::setStreamType(int strTyp)
 {

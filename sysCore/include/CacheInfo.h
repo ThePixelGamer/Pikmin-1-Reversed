@@ -9,7 +9,16 @@
 
 #include <ID32.h>
 
-class CacheInfo;
+class SYSCORE_API CacheInfo
+{
+public:
+    int dword0;  // _0
+    int dword4;  // _4
+    int dword8;  // _8
+    int dwordC;  // _C
+    int dword10; // _10
+    int dword14; // _14
+};
 
 class SYSCORE_API AnimCacheInfo
 {

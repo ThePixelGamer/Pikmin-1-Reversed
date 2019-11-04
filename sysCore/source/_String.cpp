@@ -126,7 +126,7 @@ int String::getLength()
 
 char* String::copy(char* arg1, char* arg2)
 {
-	// TODO: FIX!
+    // TODO: FIX!
     do
     {
         *arg1 = *arg2;

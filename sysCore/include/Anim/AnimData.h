@@ -7,6 +7,7 @@
 #ifndef ANIMDATA_H
 #define ANIMDATA_H
 
+#include <DataChunk.h>
 #include <Nodes/CoreNode.h>
 #include <Nodes/SRTNode.h>
 
@@ -18,7 +19,17 @@ class SYSCORE_API AnimData : public CoreNode
 public:
     // vtable 0h
     //(CoreNode: 4h-10h)
+    DataChunk* m_scaling;     // _14
+    DataChunk* m_rotation;    // _18
+    DataChunk* m_translation; // _1C
+    AnimData* dword20;        // _20
+    int dword24;              // _24
+    int m_jointCount;         // _28
+    int dword2C;              // _2C
     int m_frameCount;         // 30h
+    int dword34;              // _34
+    int dword38;              // _38
+    int dword3C;              // _3C
     AnimCacheInfo* animCache; // 40h
 
     AnimData();

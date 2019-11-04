@@ -212,12 +212,13 @@ void Texture::decodeData(TexImg* tex)
             uchar* u8texData = static_cast<uchar*>(tex->m_texData);
             for (int k = 0; k < (this->m_width / 2) * this->m_height; ++k)
             {
-                unsigned __int8 v4 = u8texData[k];
-                this->m_pixels[Texture::offsetGXtoGL(2 * k)] = (16 * ((v4 & 0xF0) >> 4)) |
-                                                               ((16 * ((v4 & 0xF0) >> 4)) << 8) |
-                                                               ((16 * ((v4 & 0xF0) >> 4)) << 16) | 0xFF000000;
-                this->m_pixels[Texture::offsetGXtoGL(2 * k + 1)] =
-                    (16 * (v4 & 0xF)) | ((16 * (v4 & 0xF)) << 8) | ((16 * (v4 & 0xF)) << 16) | 0xFF000000;
+                unsigned __int8 tex = u8texData[k];
+                // TODO:
+                this->m_pixels[this->offsetGXtoGL(2 * k)] =
+                    (((16 * ((tex & 0xF0) >> 4)) << 16) | 0xFF000000 | ((16 * ((tex & 0xF0) >> 4)) << 8) |
+                     (16 * ((tex & 0xF0) >> 4)));
+                this->m_pixels[this->offsetGXtoGL(2 * k + 1)] =
+                    ((16 * (tex & 0xF)) | ((16 * (tex & 0xF)) << 8) | ((16 * (tex & 0xF)) << 16) | 0xFF000000);
             }
         }
         break;

@@ -7,6 +7,15 @@ struct CoreNode
     CoreNode* child;  // 10h
 };
 
+struct Node
+{
+    // vtable 0h
+    //(CoreNode: 4h-10h)
+    int type;    // 14h
+    int flags;   // 18h
+    int dword1c; // 1Ch
+};
+
 struct BaseRoomInfo
 {
     int m_unk1; // _0
@@ -61,6 +70,9 @@ struct String
     int m_stringLen; // _0
     char* m_string;  // _4
 };
+
+typedef void* GLvoid;
+typedef unsigned int GLuint;
 
 struct Texture
 {
@@ -293,8 +305,8 @@ struct Joint : public CoreNode
         class Material* m_mat; // 14h
         Mesh* m_mesh;          // 18h
         int m_index;           // 1Ch
-        int mint20;            // 20h
-        int mint24;            // 24h
+        int m_int20;           // 20h
+        int m_int24;           // 24h
     };
 
     BoundBox m_bounds;    // CCh
@@ -323,19 +335,18 @@ struct DataChunk
     float* m_data;   // _8
 };
 
-struct AnimDck : public AnimData
-{
-};
-
-struct AnimDca : public AnimData
-{
-};
-
 struct param
 {
     int param1;
     int param2;
     int param3;
+};
+
+struct SRT
+{
+    Vector3f m_scale;
+    Vector3f m_rotation;
+    Vector3f m_position;
 };
 
 struct AnimJoint
@@ -347,8 +358,8 @@ struct AnimJoint
     param rx_param;
     param ry_param;
     param rz_param;
-	
-	param tx_param;
+
+    param tx_param;
     param ty_param;
     param tz_param;
 
@@ -461,13 +472,6 @@ struct CollGroup
     int dword18;
 };
 
-struct SRT
-{
-    Vector3f m_scale;
-    Vector3f m_rotation;
-    Vector3f m_position;
-};
-
 struct BaseShape : public CoreNode
 {
     // _0 vtbl
@@ -562,17 +566,17 @@ struct GfxobjInfo
 struct StdSystem
 {
     int vtbl;             // 0h
-    bool pending;         // 4h
-    float fade;           // 8h
-    void* dwordC;         // Ch
-    float dword10;        // 10h
-    void* dword14;        // 14h
-    void* dword18;        // 18h
-    void* dword1C;        // 1Ch
+ bool pending;         // 4h
+    int dword8;         // 8h
+    float initialFade;    // Ch
+    float endFade;        // 10h
+    void* m_consFont;     // 14h, class Font
+    int m_frameClamp;     // 18h
+    int dword1C;          // 1Ch
     int m_debugStreamUnk; // 20h
-    void* dword24;        // 24h
-    void* dword28;        // 28h
-    void* dword2C;        // 2Ch
+    int dword24;          // 24h
+    int dword28;          // 28h
+    int dword2C;          // 2Ch
     void* dword30;        // 30h
     void* dword34;        // 34h
     void* dword38;        // 38h
@@ -599,14 +603,14 @@ struct StdSystem
     int unkShutdownCode;  // 1C8h
     void* dword1CC;       // 1CCh
     GfxobjInfo gfx;       // 1D0h
-    bool byte1F0;         // 1F0h
-    int dword1F4;         // 1F4h
-    void* dword1F8;       // 1F8h
-    class Shape* shape;   // 1FCh
+    bool m_toAttachObjs;  // 1F0h
+    char* m_textureBase1; // 1F4h
+    char* m_textureBase2; // 1F8h
+    class Shape* shape;         // 1FCh
     CoreNode core1;       // 200h
     CoreNode core2;       // 214h
     void* dword228;       // 228h
-    void* dword22C;       // 22Ch
+    void* m_lFlares;      // 22Ch
     void* dword230;       // 230h
     void* dword234;       // 234h
     void* dword238;       // 238h
@@ -666,4 +670,138 @@ struct Graphics
     _DWORD dword38C;
     _DWORD dword390;
     char char394;
+};
+
+struct CacheInfo
+{
+    int dword0;        // _0
+    CacheInfo* dword4; // _4
+    CacheInfo* dword8; // _8
+    int dwordC;        // _C
+    int dword10;       // _10
+    int dword14;       // _14
+};
+
+struct AnimCacheInfo
+{
+    int dword0;
+    int dword4;
+    int dword8;
+    int dwordC;
+    CacheInfo* dword10;
+    int dword14;
+    int dword18;
+    int dword1C;
+};
+
+struct AnimData : public CoreNode
+{
+    // vtable 0h
+    // CoreNode: 4h-10h)
+    DataChunk* m_scaling;     // _14
+    DataChunk* m_rotation;    // _18
+    DataChunk* m_translation; // _1C
+    int* dword20;             // _20
+    int dword24;              // _24
+    int m_jointCount;         // _28
+    int dword2C;              // _2C
+    int m_frameCount;         // 30h
+    int dword34;              // _34
+    int dword38;              // _38
+    int dword3C;              // _3C
+    AnimCacheInfo* animCache; // 40h
+};
+
+struct Controller
+{
+    _BYTE node[32];
+    _DWORD dword20;
+    _DWORD dword24;
+    _DWORD dword28;
+    _DWORD dword2C;
+    _DWORD dword30;
+    _DWORD dword34;
+    _DWORD dword38;
+    _DWORD dword3C;
+    _DWORD dword40;
+    _BYTE byte44;
+    _BYTE byte45;
+    _BYTE byte46;
+    _BYTE byte47;
+    _BYTE byte48;
+    _BYTE byte49;
+    _BYTE byte4A;
+    _BYTE byte4B;
+    _BYTE byte4C;
+};
+
+struct AtxStream : public Stream
+{
+    // 0h - vtbl
+    // 4h - stream var
+    class TcpStream* m_stream; // 8h
+    int m_dwordC;
+};
+
+struct AtxFileStream : public RandomAccessStream
+{
+    int position;     // 8h
+    int length;       // Ch
+    AtxStream stream; // 10h
+};
+
+struct BufferedInputStream : public RandomAccessStream
+{
+    // 4h - Stream variable + vtbl ptr
+    unsigned char* m_buffer; // 8h
+    int m_bufferSize;        // Ch
+    int m_amountToRead;      // 10h
+    int m_readLimit;         // 14h
+    int m_position;          // 18h
+    Stream* m_bufferStream;  // 1Ch
+};
+
+struct BufferedStream : public RandomAccessStream
+{
+    // 4h - Stream variable + vtbl ptr
+    RandomAccessStream* m_stream;     // 8h
+    BufferedInputStream m_buffStream; // 1Ch
+};
+
+struct ControllerMgr
+{
+    int vtblPtr;
+    BYTE lpKeyState[0x100];
+};
+
+struct System : public StdSystem
+{
+    _DWORD dword244;
+    _DWORD dword248;
+    bool m_textureByteUnk;  // 24Ch
+    bool m_unkGameAppBool;  // 24Dh
+    bool m_unkGameAppBool2; // 24Eh
+    _DWORD dword250;
+    _DWORD dword254;
+    _DWORD dword258; // 258h
+    void* m_heapMemory;
+    int m_heapSize; // 260h
+    AtxFileStream atxfilestream264;
+    BufferedStream bufferedStream;
+    int streamType;
+    ControllerMgr controllermgr;
+    char m_hostName[0x80];       // 3B8h
+    class AtxRouter* mainRouter; // 438h
+    _DWORD dword43C;
+    _DWORD dword440;
+    _DWORD dword444;
+    _DWORD dword448;
+    _DWORD dword44C;
+    _DWORD dword450;
+    _DWORD dword454;
+    float frameTime; // 458h
+    float frameRate; // 45Ch
+    void* dword460;
+    void* dword464; // 464h
+    int frameCount; // 468h
 };

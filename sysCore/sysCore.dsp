@@ -375,6 +375,10 @@ SOURCE=.\source\AgeServer.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\source\Object\BinobjInfo.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\source\CacheInfo.cpp
 # End Source File
 # Begin Source File
@@ -716,6 +720,10 @@ SOURCE=.\include\_String.h
 # Begin Source File
 
 SOURCE=.\include\AgeServer.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Object\BinobjInfo.h
 # End Source File
 # Begin Source File
 

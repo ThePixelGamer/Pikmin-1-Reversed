@@ -16,7 +16,7 @@
 class SYSCORE_API Plane : public Vector3f
 { // TODO
 public:
-    float m_unk2;
+    float mD;
 
     Plane() {}
 
