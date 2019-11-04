@@ -482,7 +482,7 @@ struct BaseShape : public CoreNode
     int* m_animContext;                       // _20
     class AnimFrameCacher* m_animFrameCacher; // _24
     Matrix4f* m_animMatrix;                   // _28
-    int dword2C;                                   // _2C
+    int dword2C;                              // _2C
     int m_envelopeCount;                      // _30
     Envelope* m_envelopes;                    // _34
     int m_vtxMatrixCount;                     // _38
@@ -510,7 +510,7 @@ struct BaseShape : public CoreNode
     float m_gridSize;                         // _19C
     int m_gridSizeX;                          // _1A0
     int m_gridSizeY;                          // _1A4
-    int* m_collisionTriangles;                            // _1A8
+    int* m_collisionTriangles;                // _1A8
     int m_collTriCount;                       // _1AC
     _DWORD* m_collTriInfo;                    // _1B0
     int m_baseRoomCount;                      // _1B4
@@ -566,8 +566,8 @@ struct GfxobjInfo
 struct StdSystem
 {
     int vtbl;             // 0h
- bool pending;         // 4h
-    int dword8;         // 8h
+    bool pending;         // 4h
+    int dword8;           // 8h
     float initialFade;    // Ch
     float endFade;        // 10h
     void* m_consFont;     // 14h, class Font
@@ -606,7 +606,7 @@ struct StdSystem
     bool m_toAttachObjs;  // 1F0h
     char* m_textureBase1; // 1F4h
     char* m_textureBase2; // 1F8h
-    class Shape* shape;         // 1FCh
+    class Shape* shape;   // 1FCh
     CoreNode core1;       // 200h
     CoreNode core2;       // 214h
     void* dword228;       // 228h

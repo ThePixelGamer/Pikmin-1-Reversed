@@ -32,7 +32,7 @@ class SYSCORE_API StdSystem
 public:
     // 0h - VTBL
     bool pending;         // 4h
-    int dword8;         // 8h
+    int dword8;           // 8h
     float initialFade;    // Ch
     float endFade;        // 10h
     void* m_consFont;     // 14h, class Font
@@ -42,7 +42,7 @@ public:
     int dword24;          // 24h
     int dword28;          // 28h
     int dword2C;          // 2Ch
-    int dword30;        // 30h
+    int dword30;          // 30h
     void* dword34;        // 34h
     void* dword38;        // 38h
     void* dword3C;        // 3Ch
@@ -54,7 +54,7 @@ public:
     char* fileName;       // 54h
     AyuHeap heaps[8];     // 58h
     int heapNum;          // 198h
-    int dword19C;       // 19Ch
+    int dword19C;         // 19Ch
     void* dword1A0;       // 1A0h
     void* dword1A4;       // 1A4h
     void* dword1A8;       // 1A8h

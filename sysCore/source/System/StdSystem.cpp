@@ -12,8 +12,8 @@
 // StdSystem class functions
 //////////////////////////////////////////////////////////////////////
 
-StdSystem::StdSystem() 
-{ 
+StdSystem::StdSystem()
+{
     this->m_consFont = 0;
     this->dword8 = 0;
     this->initialFade = 0.0f;
