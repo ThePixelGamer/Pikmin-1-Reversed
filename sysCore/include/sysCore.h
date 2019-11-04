@@ -40,6 +40,7 @@ static WNDPROC lpPrevWndFunc;
 SYSCORE_API float angDist(float, float);
 SYSCORE_API float roundAng(float);
 SYSCORE_API HANDLE startThread(void*, void*, int);
+SYSCORE_API void handlePopupMenu(HWND hWnd, int*, tagPOINT point, HMENU menu);
 
 // overloading operators
 void* operator new(size_t);

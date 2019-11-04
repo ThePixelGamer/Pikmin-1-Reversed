@@ -1,6 +1,7 @@
 #include <Ayu/AyuStack.h>
 #include <System/System.h>
 #include <sysCore.h>
+#include <UI/RectArea.h>
 
 SYSCORE_API HINSTANCE hInstance;
 SYSCORE_API HINSTANCE sysHInst;
@@ -69,6 +70,21 @@ HANDLE startThread(void* lpStartAddress, void* lpParameter, int a3)
         ResumeThread(hThread);
     }
     return hThread;
+}
+
+void handlePopupMenu(HWND hWnd, int* a1, tagPOINT point, HMENU menu)
+{
+    if (menu)
+    {
+        if (a1)
+            *a1 = 1;
+        HMENU subMenu = GetSubMenu(menu, 0);
+        ClientToScreen(hWnd, &point);
+        RectArea rArea(0, 0, 32, 32);
+        // reinterpret_cast<RECT*>(&rArea) is actually valid because they have the same member variables and RectArea is literally a copy.
+        TrackPopupMenu(subMenu, 0, point.x, point.y, 0, hWnd, reinterpret_cast<RECT*>(&rArea));
+        DestroyMenu(menu);
+    }
 }
 
 void* operator new(size_t size)
