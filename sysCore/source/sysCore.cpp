@@ -83,7 +83,7 @@ void handlePopupMenu(HWND hWnd, int* a1, tagPOINT point, HMENU menu)
         RectArea rArea(0, 0, 32, 32);
         // reinterpret_cast<RECT*>(&rArea) is actually valid because they have the same member variables and RectArea is
         // literally a copy.
-        TrackPopupMenu(subMenu, 0, point.x, point.y, 0, hWnd, reinterpret_cast<RECT*>(&rArea));
+        TrackPopupMenu(subMenu, TPM_TOPALIGN, point.x, point.y, 0, hWnd, reinterpret_cast<RECT*>(&rArea));
         DestroyMenu(menu);
     }
 }
@@ -146,6 +146,12 @@ void operator delete(void* toDelete)
 }
 
 void operator delete[](void* toDelete)
+{
+    if (gsys->heapNum < 0)
+        GlobalFree(toDelete);
+}
+
+void operator delete[](void* toDelete, size_t amount)
 {
     if (gsys->heapNum < 0)
         GlobalFree(toDelete);

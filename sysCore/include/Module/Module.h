@@ -32,6 +32,8 @@ struct Object
     char* str;
     bool load;
     void* funcPtr;
+
+    Object(char* s, bool l, void* f) : str(s), load(l), funcPtr(f) {}
 };
 
 typedef Object* (*DLLFuncVoid)();
