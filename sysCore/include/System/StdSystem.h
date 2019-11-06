@@ -93,7 +93,7 @@ public:
     virtual void copyCacheToTexture(CacheTexture*);
     virtual void Activate(bool);
     virtual void parseArchiveDirectory(char*, char*);
-    virtual void sndPlaySe(unsigned int) {};
+    virtual void sndPlaySe(unsigned int){};
     virtual void startLoading(LoadIdler*, bool, unsigned int);
     virtual void endLoading();
 

@@ -8,7 +8,7 @@ class GameApp : public BaseApp
 {
 public:
     UIWindow* m_mainWindow; // 54h
-    bool unkByte;           // 58h
+    bool m_hasInit;           // 58h
 
     GameApp();
     virtual ~GameApp();
@@ -16,6 +16,7 @@ public:
     virtual bool idle();
 
     void doInitApp();
+    void renderall();
 };
 
 #endif

@@ -334,6 +334,10 @@ SOURCE=.\source\Texture\Texture.cpp
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE=.\source\UI\AppWindow.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\source\UI\ComboBox.cpp
 # End Source File
 # Begin Source File
@@ -680,6 +684,10 @@ SOURCE=.\include\Texture\Texture.h
 # Begin Group "UI No. 1"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\UI\AppWindow.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\include\UI\ComboBox.h

@@ -57,7 +57,7 @@ public:
 
     virtual RandomAccessStream* openFile(char*, bool, bool);
     // virtual void 			parseArchiveDirectory(char * );
-    virtual void sndPlaySe(unsigned __int32) { }
+    virtual void sndPlaySe(unsigned __int32) {}
 
     void beginRender();
     void buildModeList();

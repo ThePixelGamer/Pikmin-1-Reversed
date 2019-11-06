@@ -1,0 +1,110 @@
+#include "resources.h"
+
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+
+EDITOR_ICONS BITMAP "editor.bmp"
+
+EDITOR_MENU MENU
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+{
+  POPUP "&File"
+  {
+    MENUITEM "&New",  EDITOR_MENU_NEW
+    MENUITEM "&Open",  EDITOR_MENU_OPEN
+    MENUITEM "&Save",  EDITOR_MENU_SAVE
+    MENUITEM "&Close",  EDITOR_MENU_CLOSE
+    MENUITEM SEPARATOR
+    MENUITEM "&Export MOD file",  EDITOR_MENU_EXPORT
+    MENUITEM SEPARATOR
+    MENUITEM "E&xit",  EDITOR_MENU_EXIT
+  }
+}
+
+BLAH_MENU MENU
+LANGUAGE LANG_JAPANESE, 0x1
+{
+  POPUP "blah"
+  {
+    MENUITEM "New Command",  BLAH_MENU_NEWCMD
+    MENUITEM "blkdfsdf",  BLAH_MENU_A
+    MENUITEM "fg",  BLAH_MENU_B
+    MENUITEM "ggfds",  BLAH_MENU_C
+    MENUITEM "ggfdfsg",  BLAH_MENU_D
+  }
+}
+
+MODVIEW_MENU MENU
+LANGUAGE LANG_JAPANESE, 0x1
+{
+  POPUP "foobar1"
+  {
+    POPUP "view type"
+    {
+      MENUITEM "wireframe",  MODVIEW_TYPE_WF
+      MENUITEM "solid face",  MODVIEW_TYPE_SF
+      MENUITEM "textured",  MODVIEW_TYPE_TX
+    }
+    MENUITEM "show",  MODVIEW_SHOW
+    MENUITEM SEPARATOR
+    MENUITEM "Grid visible",  MODVIEW_VISGRID
+    MENUITEM SEPARATOR
+  }
+}
+
+FOO_MENU MENU
+LANGUAGE LANG_JAPANESE, 0x1
+{
+  POPUP "foo"
+  {
+    MENUITEM "blah1",  FOO_BLAH1
+  }
+}
+
+STRINGTABLE
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+{
+  STRTBL_VEMODE, 	"Vertex editing mode"
+  STRTBL_LXAXIS, 	"Un/Lock X axis"
+  STRTBL_EEMODE, 	"Edge editing mode"
+  STRTBL_FEMODE, 	"Face editing mode"
+  STRTBL_LZAXIS, 	"Un/Lock Z axis"
+  STRTBL_SELOBJ, 	"Select an object"
+  STRTBL_UWCORD, 	"Use world coordinates"
+  STRTBL_UOCORD, 	"Use object coordinates"
+}
+
+STRINGTABLE
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+{
+  STRTBL_LYAXIS, 	"Un/Lock Y axis"
+  STRTBL_SELOBJS, 	"Select objects"
+  40031, 	"Zoom camera in/out"
+}
+
+STRINGTABLE
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+{
+  40032, 	"Select light mode"
+  40033, 	"Move selected objects"
+  40034, 	"Scale selected objects"
+  40035, 	"Rotate selected objects"
+  40036, 	"Texture mode"
+}
+
+103 ICON "ICON103_1.ico"
+
+104 ICON "ICON104_1.ico"
+
+105 ICON "ICON105_1.ico"
+
+106 ICON "ICON106_1.ico"
+
+107 ICON "ICON107_1.ico"
+
+108 ICON "ICON108_1.ico"
+
+109 ICON "ICON109_1.ico"
+
+110 ICON "ICON110_1.ico"
+
+115 ICON "ICON115_1.ico"

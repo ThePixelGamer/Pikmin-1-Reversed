@@ -47,7 +47,7 @@ void DebugStream::flush()
     this->m_currentString[this->m_written] = 0;
     if (this->m_window)
     {
-        if (gsys->m_debugStreamUnk == nullptr)
+        if (gsys->m_debugStreamUnk != nullptr)
         {
             SendMessage(this->m_window->m_hWnd, LB_ADDSTRING, NULL, (LPARAM)this->m_currentString);
             SendMessage(this->m_window->m_hWnd, LB_SETCURSEL, this->m_optionCount++, NULL);
