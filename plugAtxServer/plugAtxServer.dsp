@@ -110,6 +110,10 @@ SOURCE=.\include\globals.h
 
 SOURCE=.\include\plugAtxServer.h
 # End Source File
+# Begin Source File
+
+SOURCE=..\__PLUG_SHARED\sysNew.h
+# End Source File
 # End Group
 # Begin Group "Resource Files"
 

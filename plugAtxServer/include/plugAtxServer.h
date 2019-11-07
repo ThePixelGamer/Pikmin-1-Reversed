@@ -2,11 +2,11 @@
 #include <System/System.h>
 #include <Module/Module.h>
 #include <App/BaseApp.h>
+#include "../../__PLUG_SHARED/sysNew.h"
 
 class plugAtxServer : public BaseApp
 {
-public:
-    
+public:   
 
     plugAtxServer();
     virtual ~plugAtxServer();

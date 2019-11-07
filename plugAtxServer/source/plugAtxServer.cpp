@@ -18,13 +18,14 @@ plugAtxServer::~plugAtxServer()
 
 }
 
-static plugAtxServer* GenerateInstance()
+static plugAtxServer* GeneratePASInstance()
 {
     return new plugAtxServer();
 }
 
 Object ObjectList[]
 = {
-    Object("AtxServer", true, &GenerateInstance),
+    Object("AtxServer", true, &GeneratePASInstance),
+    Object("AtxServerFile", false, nullptr),
     Object(0, false, nullptr),
 };

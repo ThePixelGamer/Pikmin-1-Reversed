@@ -1,4 +1,5 @@
 #include <UI/AppWindow.h>
+#include <System/System.h>
 
 int AppWindow::processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam)
 {

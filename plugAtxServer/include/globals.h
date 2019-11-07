@@ -7,6 +7,6 @@ static HBRUSH MistyRed;     //FFE0E0
 static HGDIOBJ HighlightPen;
 
 // WHY WOULD YOU NAME VARIABLES LIKE THIS WTF
-extern HGDIOBJ hbr;
-extern HICON hIcon;
-extern HGDIOBJ h;
+static HGDIOBJ hbr;
+static HICON hIcon;
+static HGDIOBJ h;
