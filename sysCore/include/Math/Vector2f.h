@@ -9,6 +9,9 @@
 
 #include <Stream/Stream.h>
 
+/*
+ *  2 floats in a class, used for many things like UV's, 2D positions, scaling, ect.
+ */
 class SYSCORE_API Vector2f
 {
     float x;

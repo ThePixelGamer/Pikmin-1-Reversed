@@ -5,6 +5,9 @@
 
 #include "AtxRouter.h"
 
+/*
+ *  Part of the ATX/AGE enigma, unsure of purpose
+ */
 class SYSCORE_API AtxDirectRouter : public AtxRouter
 {
 public:

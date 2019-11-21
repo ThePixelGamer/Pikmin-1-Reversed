@@ -27,6 +27,9 @@ class Shape;
 class LFlareGroup;
 class Texture;
 
+/*
+ *  Standard System, base class for the main (System)
+ */
 class SYSCORE_API StdSystem
 {
 public:

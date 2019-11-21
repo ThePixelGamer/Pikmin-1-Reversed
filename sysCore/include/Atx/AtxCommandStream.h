@@ -9,6 +9,9 @@
 
 #include <Atx/AtxStream.h>
 
+/*
+ *  Part of the ATX/AGE enigma, unsure of purpose
+ */
 class SYSCORE_API AtxCommandStream : public AtxStream
 {
 public:

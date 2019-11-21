@@ -23,16 +23,22 @@ class UIMain : public UIWindow{
     UIMain(UIWindow * parent, int unk1, int dwStyle, int dwExStyle, bool unk2) :
         UIWindow(parent, unk1, dwStyle, dwExStyle, unk2){}
 
-    virtual int processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam){if (Msg == WM_COMMAND){
-        for (MenuPlugin* i = menuP; i; i = i->next){if (i->prev == wParam){((void (*)(void))modMgr->Alloc(i->name))();
-return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
-}
-}
-}
-return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
-}
-}
-*window;
+    virtual int processMessage(HWND hWnd, unsigned int Msg, WPARAM wParam, long lParam)
+    {
+        if (Msg == WM_COMMAND)
+            {
+                for (MenuPlugin* i = menuP; i; i = i->next)
+                {
+                    if (i->prev == wParam)
+                    {
+                        ((void (*)(void))modMgr->Alloc(i->name))();
+                        return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
+                    }
+                }
+            }
+        return UIWindow::processMessage(hWnd, Msg, wParam, lParam);
+    }
+} *window;
 
 void print(const char* fmt, ...)
 {
@@ -55,15 +61,21 @@ void print(const char* fmt, ...)
 void createUIWindow(HINSTANCE hInst)
 {
     RectArea newFrame(690, 32, 1260, 300);
+    // Instantiate new UI window
     window = new UIMain(0, 0, WS_VISIBLE | WS_CAPTION | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_THICKFRAME, 0, true);
+    // Resize window
     window->setFrame(RectArea(newFrame.x1, newFrame.y1, newFrame.x2, newFrame.y2));
-    window->createWindow("DUIClearWin", systemName, LoadMenu(sysHInst, MAKEINTRESOURCE(IDR_MENU1)));
+    // Create window, 'DUIClearWin' = 'Debug User Interface Clear Window'
+    window->createWindow("DUIClearWin", systemName, LoadMenu(sysHInst, MAKEINTRESOURCE(MAIN_MENU)));
+    // Create debug output stream
     UIWindow* debugStream = gsys->createDebugStream(window);
     window->refreshWindow();
+    // Finally, show the window
     ShowWindow(window->m_hWnd, SW_SHOWNORMAL);
     print("Basedir = %s\n", gsys->baseDir);
 }
 
+// Loops through the 'dir' and adds all compatible .dll files (modules) to the menu
 void loadDLLsInDir(const char* dir)
 {
     _finddata_t fd_file;
@@ -94,7 +106,9 @@ void loadDLLsInDir(const char* dir)
     _findclose(dll);
 }
 
-void passCmdParams(const char* str, char* unused)
+// Used for parsing command line parameters.
+void passCmdParams(const char* str, char* configFile)
+// Note, 'configFile' is unused
 {
     loadDLLsInDir("plugins");
 
@@ -106,22 +120,22 @@ void passCmdParams(const char* str, char* unused)
         while (!cmd->endOfCmds() && !cmd->endOfSection())
         {
             cmd->getToken(true);
-            if (cmd->isToken("+output"))
+            if (cmd->isToken("+output")) // UI
             {
                 createUIWindow(sysHInst);
             }
-            else if (cmd->isToken("+plugins"))
+            else if (cmd->isToken("+plugins")) // Load modules from directory
             {
                 char* directory = cmd->getToken(true);
                 loadDLLsInDir(directory);
             }
-            else if (cmd->isToken("+direct"))
+            else if (cmd->isToken("+direct")) // Create direct TCP stream to IP addr
             {
                 print("Creating atxDirectRouter\n");
                 gsys->mainRouter = new AtxDirectRouter(cmd->getToken(true));
                 print("done\n");
             }
-            else if (cmd->isToken("+client"))
+            else if (cmd->isToken("+client")) // Create a new instance of the module named.
             {
                 char* moduleName = cmd->getToken(true);
                 modMgr->Alloc(moduleName);
@@ -137,6 +151,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
     sysHInst = hInstance;
 
+    // Instantiate managers
     nodeMgr = new NodeMgr();
     modMgr = new ModuleMgr();
     uiMgr = new UIMgr();
@@ -144,11 +159,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     passCmdParams(lpCmdLine, "config.ini");
 
     if (!uiMgr->isActive() && !gsys->firstApp())
-        MessageBoxA(NULL, "A top level window does not exist,\nthe application will now close.", "Warning!",
-                    MB_OK | MB_ICONWARNING);
+        MessageBoxA(NULL, "A top level window does not exist,\nthe application will now close.", "Warning!", MB_OK | MB_ICONWARNING);
 
-    int retVal = gsys->run(0);
+    int returnCode = gsys->run(nullptr);
 
+    // Properly dispose of the manager's memory
     if (uiMgr)
         delete uiMgr;
     uiMgr = nullptr;
@@ -161,5 +176,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         delete nodeMgr;
     nodeMgr = nullptr;
 
-    return retVal;
+    return returnCode;
 }

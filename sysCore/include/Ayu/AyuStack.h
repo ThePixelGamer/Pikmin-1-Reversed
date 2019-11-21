@@ -9,6 +9,9 @@
 #ifndef AYUSTACK_H
 #define AYUSTACK_H
 
+/*
+ *  Used as a replacement stack, maybe to simulate the GC's own hardware limitations?
+ */
 class SYSCORE_API AyuStack
 {
 public:

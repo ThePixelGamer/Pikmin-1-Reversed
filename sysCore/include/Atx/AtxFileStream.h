@@ -6,6 +6,9 @@
 #include <Atx/AtxStream.h>
 #include <Stream/RandomAccessStream.h>
 
+/*
+ *  Part of the ATX/AGE enigma, unsure of purpose
+ */
 class SYSCORE_API AtxFileStream : public RandomAccessStream
 {
 public:

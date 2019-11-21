@@ -4,7 +4,7 @@
 //
 #include <windows.h>
 
-#define IDR_MENU1 101
+#define MAIN_MENU 101
 
 // Next default values for new objects
 //

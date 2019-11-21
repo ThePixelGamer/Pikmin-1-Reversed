@@ -1,6 +1,7 @@
 #include <Atx/AtxCommandStream.h>
 #include <Networking/TcpStream.h>
 #include <System/System.h>
+
 void ATXCOMMANDSTREAMPRINT(const char* fmt, ...)
 {
     va_list args;

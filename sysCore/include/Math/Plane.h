@@ -13,6 +13,9 @@
 #include <Math/Vector3f.h>
 //
 
+/*
+ *  A standard 3D plane (space plane;)
+ */
 class SYSCORE_API Plane : public Vector3f
 { // TODO
 public:
@@ -21,7 +24,7 @@ public:
     Plane() {}
 
     void bounceVector(Vector3f&, float);
-    double calcRadScale(); // TODO
+    double calcRadScale(); // TODO,
 };
 
 #endif

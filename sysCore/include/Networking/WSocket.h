@@ -13,6 +13,9 @@
 #include <winsock.h>
 #pragma comment(lib, "wsock32.lib")
 
+/*
+ *  Essentially a Windows Socket wrapper
+ */
 class SYSCORE_API WSocket
 {
 public:

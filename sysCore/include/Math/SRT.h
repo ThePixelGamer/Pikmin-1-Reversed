@@ -10,6 +10,9 @@
 #include <Math/Vector3f.h>
 #include <Stream/RandomAccessStream.h>
 
+/*
+ *  Used to contain an often used trio of Scale, Rotation, and Position (S R T)
+ */
 class SYSCORE_API SRT
 {
 public:

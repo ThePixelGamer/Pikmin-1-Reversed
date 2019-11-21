@@ -16,6 +16,9 @@
 
 class Graphics;
 
+/*
+ *  Also known as an AABB, Axis-Aligned Bounding Box.
+ */
 class SYSCORE_API BoundBox
 {
 public:

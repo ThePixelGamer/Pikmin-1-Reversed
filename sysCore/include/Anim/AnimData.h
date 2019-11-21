@@ -14,6 +14,9 @@
 class AnimDataInfo;
 class AnimCacheInfo;
 
+/*
+ *  Used for storing animation data
+ */
 class SYSCORE_API AnimData : public CoreNode
 {
 public:

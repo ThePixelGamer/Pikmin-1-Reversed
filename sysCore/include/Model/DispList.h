@@ -15,6 +15,9 @@
 #include <sysCore.h>
 //
 
+/*
+ *  Display List, used for inputting data into the graphics registers on the Gamecube
+ */
 class SYSCORE_API DispList : public CoreNode
 {
 public:

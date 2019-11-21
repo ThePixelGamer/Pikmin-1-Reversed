@@ -13,6 +13,9 @@
 //	Add any headers here!
 //
 
+/*
+ *  Base class for a linked list
+ */
 class SYSCORE_API ANode
 {
 public:

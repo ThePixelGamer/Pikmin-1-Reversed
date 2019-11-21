@@ -11,6 +11,9 @@
 
 class Vector3f;
 
+/*
+ *  4D float array
+ */
 class SYSCORE_API Matrix4f
 {
 public:

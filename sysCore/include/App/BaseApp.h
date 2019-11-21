@@ -13,6 +13,9 @@
 #include <Atx/AtxCommandStream.h>
 #include <Nodes/Node.h>
 
+/*
+ *  Base class, used for inheritance.
+ */
 class SYSCORE_API BaseApp : public Node
 {
 public:

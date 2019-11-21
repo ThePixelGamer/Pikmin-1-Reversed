@@ -9,7 +9,9 @@
 #ifndef ENVELOPE_H
 #define ENVELOPE_H
 
-// Skinning Envelope, used by MOD and DMD
+/*
+ * Skinning Envelope, used by MOD and DMD
+ */
 class SYSCORE_API Envelope
 {
 public:

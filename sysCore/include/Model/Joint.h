@@ -21,6 +21,9 @@
 class Material;
 
 // TODO: finish class
+/*
+ *  Used in models, very unfinished
+ */
 class SYSCORE_API Joint : public CoreNode
 {
 public:

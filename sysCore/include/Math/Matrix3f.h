@@ -11,6 +11,9 @@
 
 class Vector3f;
 
+/*
+ *  3D float array
+ */
 class Matrix3f
 { // TODO
 public:

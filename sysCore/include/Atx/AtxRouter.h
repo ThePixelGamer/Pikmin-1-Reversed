@@ -11,7 +11,9 @@
 
 #include <Atx/AtxStream.h>
 
-// Base class
+/*
+ *  Part of the ATX/AGE enigma, unsure of purpose
+ */
 class SYSCORE_API AtxRouter
 {
 public:

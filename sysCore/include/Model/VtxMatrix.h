@@ -9,7 +9,9 @@
 #ifndef VTXMATRIX_H
 #define VTXMATRIX_H
 
-// VtxMatrix, used by MOD and DMD
+/*
+ * Vertex Matrix
+ */
 class SYSCORE_API VtxMatrix
 {
 public:

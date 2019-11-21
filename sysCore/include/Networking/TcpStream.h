@@ -11,6 +11,9 @@
 
 #include <Networking/WSocket.h>
 
+/*
+ * Simple TCP stream, basically a WSocket wrapper
+ */
 class SYSCORE_API TcpStream : public Stream
 {
 public:

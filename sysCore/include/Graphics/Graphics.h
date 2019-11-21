@@ -38,6 +38,9 @@ class BoundBox;
 
 void GRAPHICSHALT(const char* fmt, ...);
 
+/*
+ *  Base class, first inherited but, used for all graphics related things,
+ */
 class SYSCORE_API Graphics
 {
 public:

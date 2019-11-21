@@ -17,6 +17,9 @@ class AgeServer;
 class Quat;
 class Matrix4f;
 
+/*
+ *  Contains 3 floats, used for a LOT more things than Vector2f, e.g.: Vertex positions, positions, scale, ect.
+ */
 class SYSCORE_API Vector3f
 {
 public:

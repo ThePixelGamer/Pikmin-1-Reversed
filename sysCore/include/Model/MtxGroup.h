@@ -14,6 +14,9 @@
 #include <Stream/RandomAccessStream.h>
 //
 
+/*
+ *  Stands for Matrix Group, contains display lists from models.
+ */
 class SYSCORE_API MtxGroup
 {
 public:

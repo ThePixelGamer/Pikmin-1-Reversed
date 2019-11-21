@@ -33,7 +33,7 @@ void AtxFileStream::close()
 {
     this->stream.writeInt(103); // probably a define
     this->stream.flush();       // flush file
-    this->stream.readInt();     // unsure of meaning behind reading an int
+    this->stream.readInt();
     this->stream.close();       // finally close the stream
 }
 

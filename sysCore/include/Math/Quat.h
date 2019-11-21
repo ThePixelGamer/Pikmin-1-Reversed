@@ -13,6 +13,9 @@
 #include <Math/Vector3f.h>
 //
 
+/*
+ *  Quaternion, represents orientation in 3D space
+ */
 class SYSCORE_API Quat : public Vector3f
 {
 public:
