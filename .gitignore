@@ -381,3 +381,4 @@ MigrationBackup/
 *.exe
 *.out
 *.app
+format.bat
