@@ -1,3 +1,17 @@
+enum PROP_TYPE
+{
+    CHAR_PROP = 0,
+    SHORT_PROP,    // 1
+    INT_PROP,      // 2
+    FLOAT_PROP,    // 3
+    COLOUR_PROP,   // 4
+    IMAGE_PROP,    // 5
+    STRING_PROP,   // 6
+    UNK7,          // 7
+    CHAR_PTR_PROP, // 8
+    UNK9           // 9
+};
+
 struct CoreNode
 {
     int vtbl;         // _0
@@ -565,57 +579,57 @@ struct GfxobjInfo
 
 struct StdSystem
 {
-    int vtbl;             // 0h
-    bool pending;         // 4h
-    int dword8;           // 8h
-    float initialFade;    // Ch
-    float endFade;        // 10h
-    void* m_consFont;     // 14h, class Font
-    int m_frameClamp;     // 18h
-    int dword1C;          // 1Ch
-    int m_debugStreamUnk; // 20h
-    int dword24;          // 24h
-    int dword28;          // 28h
-    int dword2C;          // 2Ch
-    void* dword30;        // 30h
-    void* dword34;        // 34h
-    void* dword38;        // 38h
-    void* dword3C;        // 3Ch
-    int matrixUnk;        // 40h
-    Matrix4f* matrix;     // 44h
-    char* bloRoot;        // 48h
-    char* texRoot;        // 4Ch
-    char* baseDir;        // 50h
-    char* fileName;       // 54h
-    AyuHeap heaps[8];     // 58h
-    int heapNum;          // 198h
-    void* dword19C;       // 19Ch
-    void* dword1A0;       // 1A0h
-    void* dword1A4;       // 1A4h
-    void* dword1A8;       // 1A8h
-    void* dword1AC;       // 1ACh
-    int m_lightCount;     // 1B0h
-    void* dword1B4;       // 1B4h
-    void* dword1B8;       // 1B8h
-    void* dword1BC;       // 1BCh
-    void* dword1C0;       // 1C0h
-    void* dword1C4;       // 1C4h
-    int unkShutdownCode;  // 1C8h
-    void* dword1CC;       // 1CCh
-    GfxobjInfo gfx;       // 1D0h
-    bool m_toAttachObjs;  // 1F0h
-    char* m_textureBase1; // 1F4h
-    char* m_textureBase2; // 1F8h
-    class Shape* shape;   // 1FCh
-    CoreNode core1;       // 200h
-    CoreNode core2;       // 214h
-    void* dword228;       // 228h
-    void* m_lFlares;      // 22Ch
-    void* dword230;       // 230h
-    void* dword234;       // 234h
-    void* dword238;       // 238h
-    void* dword23C;       // 23Ch
-    void* dword240;       // 240h
+    int vtbl;              // 0h
+    bool pending;          // 4h
+    int dword8;            // 8h
+    float initialFade;     // Ch
+    float endFade;         // 10h
+    void* m_consFont;      // 14h, class Font
+    int m_frameClamp;      // 18h
+    int dword1C;           // 1Ch
+    int m_debugStreamUnk;  // 20h
+    int dword24;           // 24h
+    int dword28;           // 28h
+    int dword2C;           // 2Ch
+    void* dword30;         // 30h
+    void* dword34;         // 34h
+    void* m_shapeTimer;    // 38h, class Timers
+    void* m_textureCacher; // 3Ch, class TextureCacher
+    int matrixUnk;         // 40h
+    Matrix4f* matrix;      // 44h
+    char* bloRoot;         // 48h
+    char* texRoot;         // 4Ch
+    char* baseDir;         // 50h
+    char* fileName;        // 54h
+    AyuHeap heaps[8];      // 58h
+    int heapNum;           // 198h
+    void* dword19C;        // 19Ch
+    void* dword1A0;        // 1A0h
+    void* dword1A4;        // 1A4h
+    void* dword1A8;        // 1A8h
+    void* dword1AC;        // 1ACh
+    int m_lightCount;      // 1B0h
+    void* dword1B4;        // 1B4h
+    void* dword1B8;        // 1B8h
+    void* dword1BC;        // 1BCh
+    void* dword1C0;        // 1C0h
+    void* dword1C4;        // 1C4h
+    int unkShutdownCode;   // 1C8h
+    void* dword1CC;        // 1CCh
+    GfxobjInfo gfx;        // 1D0h
+    bool m_toAttachObjs;   // 1F0h
+    char* m_textureBase1;  // 1F4h
+    char* m_textureBase2;  // 1F8h
+    class Shape* shape;    // 1FCh
+    CoreNode core1;        // 200h
+    CoreNode core2;        // 214h
+    void* dword228;        // 228h
+    void* m_lFlares;       // 22Ch
+    void* dword230;        // 230h
+    void* dword234;        // 234h
+    void* dword238;        // 238h
+    void* dword23C;        // 23Ch
+    void* dword240;        // 240h
 };
 
 struct TexobjInfo : public GfxobjInfo
