@@ -18,8 +18,8 @@
 #pragma comment(lib, "opengl32.lib")
 #include <gl/GL.h>
 
-static float unused[4096];  // flt_101CF090
-static float unused2[4096]; // flt_101CB090
+static float sinTable[4096];  // flt_101CF090
+static float cosTable[4096]; // flt_101CB090
 
 class Joint;
 class Joint__MatPoly; // Joint::MatPoly

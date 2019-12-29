@@ -36,9 +36,9 @@ Graphics::Graphics()
     this->m_unk1 = 0;
     for (int i = 0; i < 4096; ++i)
     {
-		// twiddle coefficient?
-        unused[i] = sin(i / 4096.0 * TAU);
-        unused2[i] = cos(i / 4096.0 * TAU);
+		// precalculated sine & cosine table at a precision of 4096 units per full circle.
+        sinTable[i] = sin(i / 4096.0 * TAU);
+        cosTable[i] = cos(i / 4096.0 * TAU);
     }
     ident.makeIdentity();
     this->m_unkColour2.set(0, 0, 0x30, 0xFF);
