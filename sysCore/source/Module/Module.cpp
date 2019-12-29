@@ -59,10 +59,11 @@ void Module::menuPlugins(MenuPlugin* menu, HMENU hmenu)
         if (i->load)
         {
             UINT message = RegisterWindowMessageA(i->str);
-            MenuPlugin* unk = new MenuPlugin();
-            unk->prev = message;
-            unk->name = i->str;
-            menu->setNext(unk);
+			// Make a new menuplugin
+            MenuPlugin* nextPlugin = new MenuPlugin();
+            nextPlugin->prev = message;
+            nextPlugin->name = i->str;
+            menu->setNext(nextPlugin);
 
             MENUITEMINFO mi;
             mi.cbSize = sizeof(MENUITEMINFO);

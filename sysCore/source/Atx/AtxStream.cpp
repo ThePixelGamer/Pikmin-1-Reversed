@@ -23,20 +23,22 @@ void ATXPRINT(const char* fmt, ...)
 
 void AtxStream::init() { this->m_dwordC = 0; }
 
-bool AtxStream::open(char* unk, int unk2)
+bool AtxStream::open(char* name, int port)
 {
     AtxRouter* router = gsys->getAtxRouter();
     if (!router)
         return false;
 
-    if (router->openRoute(this, unk2))
+    if (router->openRoute(this, port))
     {
-        this->write(unk, 4);
+        this->write(name, 4);
         const int identifier = m_stream->readInt();
-        if (identifier == 0xFFFF)
+        if (identifier == 0xFFFF) 
+		{
             return false;
-        else
-        {
+		}
+        else 
+		{
             this->flush();
             return true;
         }
@@ -55,7 +57,9 @@ void AtxStream::flush()
 {
     AtxRouter* router = gsys->getAtxRouter();
     router->lock();
+
     m_stream->flush();
+
     router->unlock();
 }
 
@@ -63,8 +67,10 @@ int AtxStream::getPending()
 {
     AtxRouter* router = gsys->getAtxRouter();
     router->lock();
+
     const int pending = m_stream->getPending();
-    router->unlock();
+    
+	router->unlock();
     return pending;
 }
 
@@ -72,7 +78,9 @@ void AtxStream::read(void* buffer, int count)
 {
     AtxRouter* router = gsys->getAtxRouter();
     router->lock();
+
     m_stream->read(buffer, count);
+
     router->unlock();
 }
 
@@ -80,6 +88,8 @@ void AtxStream::write(void* buffer, int count)
 {
     AtxRouter* router = gsys->getAtxRouter();
     router->lock();
+
     m_stream->write(buffer, count);
+
     router->unlock();
 }

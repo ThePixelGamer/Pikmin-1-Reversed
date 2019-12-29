@@ -29,6 +29,7 @@ void BoundBox::expandBound(BoundBox& expandBy)
         this->m_maxBounds.mY = expandBy.m_maxBounds.mY;
     if (expandBy.m_maxBounds.mZ < this->m_maxBounds.mZ)
         this->m_maxBounds.mZ = expandBy.m_maxBounds.mZ;
+
     if (expandBy.m_minBounds.mX > this->m_minBounds.mX)
         this->m_minBounds.mX = expandBy.m_minBounds.mX;
     if (expandBy.m_minBounds.mY > this->m_minBounds.mY)
@@ -45,6 +46,7 @@ void BoundBox::expandBound(Vector3f& expandBy)
         this->m_maxBounds.mY = expandBy.mY;
     if (expandBy.mZ < this->m_maxBounds.mZ)
         this->m_maxBounds.mZ = expandBy.mZ;
+
     if (expandBy.mX > this->m_minBounds.mX)
         this->m_minBounds.mX = expandBy.mX;
     if (expandBy.mY > this->m_minBounds.mY)

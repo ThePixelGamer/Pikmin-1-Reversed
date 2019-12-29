@@ -2,6 +2,13 @@
 #include <Networking/TcpStream.h>
 #include <System/System.h>
 
+enum Command
+{
+	Closing = 0xFFFF,
+	GetIdentification = 1,
+	InitAgeserver = 'age\0',
+};
+
 void ATXCOMMANDSTREAMPRINT(const char* fmt, ...)
 {
     va_list args;
@@ -26,17 +33,17 @@ bool AtxCommandStream::checkCommands()
         return false;
 
     const int command = this->m_stream->readInt();
-    switch (command)
+    switch (static_cast<Command>(command))
     {
-    case 0xFFFF:
+	case Closing:
         ATXCOMMANDSTREAMPRINT("Atx - Server is closing\n");
         this->m_baseApp->stopAgeServer();
         return false;
-    case 1:
+	case GetIdentification:
         ATXCOMMANDSTREAMPRINT("Atx - Sending identification information\n");
         this->writeString(this->filePath);
         break;
-    case 'age\0':
+	case InitAgeserver:
         this->m_baseApp->startAgeServer();
         break;
     }

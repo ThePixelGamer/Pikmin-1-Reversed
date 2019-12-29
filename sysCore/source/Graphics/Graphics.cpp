@@ -36,6 +36,7 @@ Graphics::Graphics()
     this->m_unk1 = 0;
     for (int i = 0; i < 4096; ++i)
     {
+		// twiddle coefficient?
         unused[i] = sin(i / 4096.0 * TAU);
         unused2[i] = cos(i / 4096.0 * TAU);
     }

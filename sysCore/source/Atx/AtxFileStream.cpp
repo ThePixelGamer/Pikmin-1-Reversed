@@ -5,12 +5,15 @@ bool AtxFileStream::open(char* name, unsigned __int32 port)
 {
     if (this->stream.open("fil", 3))
     {
+		// Write the name, and then the port of the server we want to connect to
         this->stream.writeString(name);
         this->stream.writeInt(port);
 
+		// Get the length of the stream
         this->length = this->stream.readInt();
         this->position = 0;
 
+		// If the stream is empty, then we have to close it.
         if (this->length < 0)
         {
             this->stream.close();
@@ -18,6 +21,7 @@ bool AtxFileStream::open(char* name, unsigned __int32 port)
         }
         else
         {
+			// We've got the stream open with bytes! Assign the filepath.
             this->filePath = name;
             return true;
         }
@@ -68,5 +72,5 @@ void AtxFileStream::write(void* buf, int len)
     this->stream.write(buf, len);
     this->position += len;
     if (this->position > this->length)
-        this->length = this->position;
+        this->length = this->position; // Move the length of the stream forward if we've gone past what we thought was possible
 }

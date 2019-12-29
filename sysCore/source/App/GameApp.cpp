@@ -44,9 +44,11 @@ bool GameApp::idle()
     if (this->m_hasInit)
     {
         gsys->m_unkGameAppBool2 = true;
+		// Close the main window
         SendMessage(this->m_mainWindow->m_hWnd, WM_CLOSE, 0, 0);
         gsys->m_unkGameAppBool2 = false;
         gsys->m_unkGameAppBool ^= 1;
+		// Initialise application
         this->doInitApp();
         gsys->attachObjs();
         this->m_hasInit = false;

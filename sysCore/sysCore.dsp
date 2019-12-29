@@ -174,10 +174,6 @@ SOURCE=.\source\Model\Envelope.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\Model\Joint.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\source\Model\Mesh.cpp
 # End Source File
 # Begin Source File
@@ -527,6 +523,10 @@ SOURCE=.\include\Model\Envelope.h
 # Begin Source File
 
 SOURCE=.\source\Model\Joint.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\Model\Joint.h
 # End Source File
 # Begin Source File
 

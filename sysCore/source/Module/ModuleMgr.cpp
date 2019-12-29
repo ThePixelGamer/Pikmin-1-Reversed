@@ -57,12 +57,9 @@ Module* ModuleMgr::findModule(char* str)
 
 void ModuleMgr::listModules()
 {
-    if (this->topModule->prev == this->topModule)
+    if (this->topModule->prev != this->topModule)
     {
-    }
-    else
-    {
-        Module* i;
+		Module* i;
 
         char* unk = (this->moduleCount != 1) ? "es" : "e";
 
