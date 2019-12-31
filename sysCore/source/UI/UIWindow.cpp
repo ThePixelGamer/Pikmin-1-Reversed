@@ -24,7 +24,7 @@ UIWindow::UIWindow() : UIFrame()
     this->m_parent = 0;
     this->m_dwExStyle = 0;
     this->m_dwStyle = 0;
-    this->m_unk10 = 0;
+    this->m_unk10 = false;
     this->m_hMenu = 0;
     this->m_unk7 = 0;
     this->m_unk1.set(0, 0, 0, 0);
@@ -33,7 +33,7 @@ UIWindow::UIWindow() : UIFrame()
 UIWindow::UIWindow(UIWindow* parent, int unk2, int style, int exstyle, bool unk5) : UIFrame()
 {
     this->m_unk7 = 0;
-    this->m_unk10 = 0;
+    this->m_unk10 = false;
     this->m_hMenu = 0; // HMENU
     initFrame(parent, unk2, style, exstyle, unk5);
 }
@@ -127,7 +127,7 @@ void UIWindow::createWindow(LPCSTR className, LPCSTR windowName, HMENU hMenu)
     if (this->m_parent)
         hWndParent = this->m_parent->m_hWnd;
     else
-        hWndParent = 0;
+        hWndParent = NULL;
 
     this->m_hWnd =
         CreateWindowExA(this->m_dwExStyle, className, windowName, this->m_dwStyle, this->m_frame.x1, this->m_frame.y1,
@@ -206,8 +206,8 @@ void UIWindow::sizeWindow(int x, int y, int a2)
     int h;
     x += -this->m_zero.x1 + this->m_zero.x2;
     y += -this->m_zero.y1 + this->m_zero.y2;
-    this->m_unk8 = x;
-    this->m_unk9 = y;
+    this->m_width = x;
+    this->m_height = y;
     if (a2 == 1)
     {
         RectArea rect;
@@ -220,17 +220,17 @@ void UIWindow::sizeWindow(int x, int y, int a2)
             SystemParametersInfoA(SPI_GETWORKAREA, 0, &rect, 0);
         }
 
-        w = rect.width() / 2 + rect.x1 - this->m_unk8 / 2;
-        h = rect.height() / 2 + rect.y1 - this->m_unk9 / 2;
+        w = rect.width() / 2 + rect.x1 - this->m_width / 2;
+        h = rect.height() / 2 + rect.y1 - this->m_height / 2;
 
         if (w < 0)
             w = 0;
         if (h < 0)
             h = 0;
-        if (this->m_unk8 > rect.width())
-            this->m_unk8 = rect.width();
-        if (this->m_unk9 > rect.height())
-            this->m_unk9 = rect.height();
+        if (this->m_width > rect.width())
+            this->m_width = rect.width();
+        if (this->m_height > rect.height())
+            this->m_height = rect.height();
     }
     else
     {

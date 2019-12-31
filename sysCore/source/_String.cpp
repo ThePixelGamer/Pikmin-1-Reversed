@@ -28,12 +28,12 @@ int String::calcHash()
 
     while (*string)
     {
-        int unkPurpose = 16 * hash + *string++;
+        int decAsciiCode = 16 * hash + *string++;
 
-        unsigned int unkPurpose2 = unkPurpose & 0xF0000000;
+        unsigned int unkPurpose2 = decAsciiCode & 0xF0000000;
         if (unkPurpose2)
-            unkPurpose ^= unkPurpose2 >> 24;
-        hash = ~unkPurpose2 & unkPurpose;
+            decAsciiCode ^= unkPurpose2 >> 24;
+        hash = ~unkPurpose2 & decAsciiCode;
     }
 
     return hash;
@@ -50,22 +50,22 @@ bool String::contains(char* arg) { return this->contains(this->m_string, arg); }
 
 bool String::contains(char* str1, char* str2)
 {
-    char* tempChar = str2;
+    char* originalString = str2;
     while (*str1 && *str2)
     {
         if (*str1++ == *str2++)
         {
             if (!*str2)
             {
-                return 1;
+                return true;
             }
         }
         else
         {
-            str2 = tempChar;
+            str2 = originalString;
         }
     }
-    return 0;
+    return false;
 }
 
 bool String::contains(char* a1, char a2)

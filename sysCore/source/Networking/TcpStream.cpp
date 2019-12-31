@@ -16,7 +16,9 @@ TcpStream::TcpStream(WSocket* sock)
 void TcpStream::read(void* buf, int len)
 {
     const int oldStreamType = gsys->setStreamType(this->m_streamInUse);
-    this->m_wSock->read((char*)buf, len);
+
+    this->m_wSock->read(static_cast<char*>(buf), len);
+
     gsys->setStreamType(oldStreamType);
 }
 

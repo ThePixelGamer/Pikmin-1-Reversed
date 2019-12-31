@@ -234,19 +234,19 @@ void Quat::normalise()
     this->mW *= v2;
 }
 
-void Quat::rotate(Vector3f& a2, float a3)
+void Quat::rotate(Vector3f& rotateBy, float time)
 { // asm matches
-    float v2 = doSin(a3 * 0.5f);
-    Quat quat(a2.mX * v2, a2.mY * v2, a2.mZ * v2, doCos(a3 * 0.5f));
+    float v2 = doSin(time * 0.5f);
+    Quat quat(rotateBy.mX * v2, rotateBy.mY * v2, rotateBy.mZ * v2, doCos(time * 0.5f));
     this->multiply(quat);
 }
 
-void Quat::set(float a2, float a3, float a4, float a5)
+void Quat::set(float x, float y, float z, float w)
 { // asm matches
-    this->mX = a2;
-    this->mY = a3;
-    this->mZ = a4;
-    this->mW = a5;
+    this->mX = x;
+    this->mY = y;
+    this->mZ = z;
+    this->mW = w;
 }
 
 float doACos(float a2)
@@ -254,16 +254,16 @@ float doACos(float a2)
     return acos(a2);
 }
 
-void Quat::slerp(Quat& a2, float a3, int a4)
+void Quat::slerp(Quat& slerpTo, float time, int unused)
 { // asm matches
-    float v5, v4, v3;
-    float v2 = this->mX * a2.mX + this->mY * a2.mY + this->mZ * a2.mZ + this->mW * a2.mW;
-    float v1;
+    float v5, theta_0, v3;
+    float dot = this->mX * slerpTo.mX + this->mY * slerpTo.mY + this->mZ * slerpTo.mZ + this->mW * slerpTo.mW;
+    float theta;
     int b1;
 
-    if (v2 < 0.0f)
+    if (dot < 0.0f)
     {
-        v2 = -v2;
+        dot = -dot;
         b1 = 1;
     }
     else
@@ -271,26 +271,27 @@ void Quat::slerp(Quat& a2, float a3, int a4)
         b1 = 0;
     }
 
-    if ((1.0f - v2) < 0.000001)
+    if ((1.0f - dot) < 0.000001)
     {
-        v5 = 1.0f - a3;
+        v5 = 1.0f - time;
     }
     else
     {
-        v4 = doACos(v2);
-        v1 = v4;
-        v3 = doSin(v4);
-        v5 = doSin(v4 - a3 * v1) / v3;
-        a3 = doSin(a3 * v1) / v3;
+        theta_0 = doACos(dot);
+        theta = theta_0;
+        v3 = doSin(theta_0);
+		// time * theta = angle between this and slerpTo 
+        v5 = doSin(theta_0 - time * theta) / v3;
+        time = doSin(time * theta) / v3;
     }
 
     if (b1)
     {
-        a3 = -a3;
+        time = -time;
     }
 
-    this->mX = v5 * this->mX + a3 * a2.mX;
-    this->mY = v5 * this->mY + a3 * a2.mY;
-    this->mZ = v5 * this->mZ + a3 * a2.mZ;
-    this->mW = v5 * this->mW + a3 * a2.mW;
+    this->mX = v5 * this->mX + time * slerpTo.mX;
+    this->mY = v5 * this->mY + time * slerpTo.mY;
+    this->mZ = v5 * this->mZ + time * slerpTo.mZ;
+    this->mW = v5 * this->mW + time * slerpTo.mW;
 }

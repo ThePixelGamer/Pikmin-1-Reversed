@@ -25,8 +25,8 @@ public:
     int m_dwExStyle;    // 6Ch
     int m_unk6;         // 70h
     int m_unk7;         // 74h
-    int m_unk8;         // 78h
-    int m_unk9;         // 7Ch
+    int m_width;        // 78h
+    int m_height;       // 7Ch
     bool m_unk10;       // 80h
     HMENU m_hMenu;      // 84h
 

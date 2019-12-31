@@ -22,7 +22,7 @@ void print(const char* fmt, ...)
     }
 }
 
-ID32::ID32() { this->setID(0x6E6F6E65); }
+ID32::ID32() { this->setID('none'); }
 
 ID32::ID32(unsigned __int32 _id) { this->setID(_id); }
 

@@ -13,8 +13,8 @@ class RandomAccessStream;
 class SYSCORE_API ID32
 {
 public:
-    unsigned __int32 id;
-    char sId[5]; // 0h
+    unsigned __int32 id; // _0
+    char sId[5];         // _4
 
     ID32();
     ID32(unsigned __int32);

@@ -23,6 +23,13 @@ void NODEPRINT(const char* fmt, ...)
     }
 }
 
+struct String128 : public String
+{
+    char* name;
+
+    String128() : String() { this->init(name, 128); }
+};
+
 CoreNode::CoreNode(char* name) { this->initCore(name); }
 
 void CoreNode::genAge(AgeServer& server)
@@ -53,21 +60,14 @@ void CoreNode::genAgeNode(AgeServer& server)
     server.EndNode();
 }
 
-struct String_Unk : public String
-{
-    char* name;
-
-    String_Unk() : String() { this->init(name, 128); }
-};
-
 void CoreNode::genRead(AgeServer& server)
 {
-    String_Unk unkString;
-    if (server.getOpenFilename(unkString, "All files (*.*)|*.*"))
+    String128 filename;
+    if (server.getOpenFilename(filename, "All files (*.*)|*.*"))
     {
         AtxFileStream stream;
-        NODEPRINT("Trying to open file '%s'\n", unkString.m_string);
-        if (stream.open(unkString.m_string, true))
+        NODEPRINT("Trying to open file '%s'\n", filename.m_string);
+        if (stream.open(filename.m_string, true))
         {
             NODEPRINT("opened file ...\n");
             BufferedStream bFstream(static_cast<RandomAccessStream*>(&stream), 0x8000);
@@ -79,27 +79,27 @@ void CoreNode::genRead(AgeServer& server)
         }
         else
         {
-            NODEPRINT("cant open file '%s'\n", unkString.m_string);
+            NODEPRINT("cant open file '%s'\n", filename.m_string);
         }
     }
 }
 
 void CoreNode::genWrite(AgeServer& server)
 {
-    String_Unk unkString;
-    if (server.getOpenFilename(unkString, "All files (*.*)|*.*"))
+    String128 filename;
+    if (server.getOpenFilename(filename, "All files (*.*)|*.*"))
     {
         AtxFileStream stream;
-        if (stream.open(unkString.m_string, true))
+        if (stream.open(filename.m_string, true))
         {
-            NODEPRINT("saving as '%s'\n", unkString.m_string);
+            NODEPRINT("saving as '%s'\n", filename.m_string);
             this->write(stream);
             stream.close();
             NODEPRINT("closed file\n");
         }
         else
         {
-            NODEPRINT("cant save file '%s'\n", unkString.m_string);
+            NODEPRINT("cant save file '%s'\n", filename.m_string);
         }
     }
 }
@@ -160,8 +160,10 @@ void CoreNode::del()
                     oldChild->next = parChild->next;
                 else
                     this->parent->child = parChild->next;
-                this->next = 0;
-                this->parent = 0;
+
+                this->next = nullptr;
+                this->parent = nullptr;
+
                 return;
             }
             oldChild = parChild;

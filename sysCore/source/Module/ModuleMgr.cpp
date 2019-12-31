@@ -5,14 +5,17 @@ SYSCORE_API ModuleMgr* modMgr;
 ModuleMgr::ModuleMgr()
 {
     MODULEPRINT("Creating moduleMgr ...\n");
+
     this->topModule = new Module();
     this->topModule->next = this->topModule;
     this->topModule->prev = this->topModule->next;
+
     this->moduleCount = 0;
 }
 
 ModuleMgr::~ModuleMgr()
 {
+	// Unload every module
     Module* nxt;
     for (Module* i = this->topModule->prev; i != this->topModule;)
     {
@@ -22,69 +25,73 @@ ModuleMgr::~ModuleMgr()
     }
 }
 
-void* ModuleMgr::Alloc(char* a2)
+void* ModuleMgr::Alloc(char* name)
 {
-    void* tmp;
+    void* object;
     for (Module* i = this->topModule->prev; i != topModule; i = i->prev)
     {
-        tmp = (i->m_newObjAddr)(a2);
-        if (tmp)
+        object = (i->m_newObjAddr)(name);
+        if (object)
         {
-            return tmp;
+            return object;
         }
     }
-    MODULEPRINT("ModuleMgr: !!!!! could not allocate %s !!!!!\n", a2);
+    MODULEPRINT("ModuleMgr: !!!!! could not allocate %s !!!!!\n", name);
     return 0;
 }
 
-void ModuleMgr::UnLoad(Module* a2)
+void ModuleMgr::UnLoad(Module* toDel)
 {
-    a2->prev->next = a2->next;
-    a2->next->prev = a2->prev;
+    toDel->prev->next = toDel->next;
+    toDel->next->prev = toDel->prev;
+
     this->moduleCount--;
-    delete a2;
+
+    delete toDel;
 }
 
-Module* ModuleMgr::findModule(char* str)
+Module* ModuleMgr::findModule(char* name)
 {
     for (Module* i = this->topModule->prev; i != this->topModule; i = i->prev)
     {
-        if (!strcmp(i->libName, str))
+        if (!strcmp(i->libName, name))
             return i;
     }
     return 0;
 }
 
+// ebp offset for 'i' is incorrect, should be 8 but is C
 void ModuleMgr::listModules()
 {
     if (this->topModule->prev != this->topModule)
     {
-		Module* i;
-
         char* unk = (this->moduleCount != 1) ? "es" : "e";
 
-        for (i = this->topModule->prev; i != this->topModule; i = i->prev)
+        for (Module * i = this->topModule->prev; i != this->topModule; i = i->prev)
         {
         }
     }
 }
 
-Module* ModuleMgr::loadModule(char* a2)
+Module* ModuleMgr::loadModule(char* name)
 {
-    Module* ret = this->findModule(a2);
-    if (!ret)
+    Module* newModule = this->findModule(name);
+
+    if (!newModule)
     {
-        ret = new Module();
-        ret->Load(a2);
-        ret->prev = this->topModule;
-        ret->next = this->topModule->next;
-        this->topModule->next = ret;
-        ret->next->prev = ret;
+        newModule = new Module();
+        newModule->Load(name);
+        newModule->prev = this->topModule;
+        newModule->next = this->topModule->next;
+
+        this->topModule->next = newModule;
+
+        newModule->next->prev = newModule;
         this->moduleCount++;
 
-        if (ret->m_autoStartAddr)
-            (ret->m_autoStartAddr)();
+        if (newModule->m_autoStartAddr)
+            (newModule->m_autoStartAddr)();
     }
 
-    return ret;
+    return newModule;
 }
