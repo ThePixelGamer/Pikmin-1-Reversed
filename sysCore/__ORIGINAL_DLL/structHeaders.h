@@ -130,7 +130,7 @@ struct TexImg : public CoreNode
     int dword24;
     int m_dataSize;
     void* m_texData;
-    int dword30;
+    void* m_pixels;
 };
 
 
@@ -587,7 +587,7 @@ struct StdSystem
     void* m_consFont;      // 14h, class Font
     int m_frameClamp;      // 18h
     int dword1C;           // 1Ch
-    int m_debugStreamUnk;  // 20h
+    int m_debugPrint;      // 20h
     int dword24;           // 24h
     int dword28;           // 28h
     int dword2C;           // 2Ch
@@ -793,11 +793,11 @@ struct System : public StdSystem
     _DWORD dword244;
     _DWORD dword248;
     bool m_textureByteUnk;  // 24Ch
-    bool m_unkGameAppBool;  // 24Dh
+    bool m_isFullScreen;    // 24Dh
     bool m_unkGameAppBool2; // 24Eh
     _DWORD dword250;
-    _DWORD dword254;
-    _DWORD dword258; // 258h
+    int m_defaultBPP; // 254h
+    _DWORD dword258;  // 258h
     void* m_heapMemory;
     int m_heapSize; // 260h
     AtxFileStream atxfilestream264;
@@ -807,9 +807,9 @@ struct System : public StdSystem
     char m_hostName[0x80];       // 3B8h
     class AtxRouter* mainRouter; // 438h
     _DWORD dword43C;
-    _DWORD dword440;
+    LARGE_INTEGER dword440;
     _DWORD dword444;
-    _DWORD dword448;
+    LARGE_INTEGER dword448;
     _DWORD dword44C;
     _DWORD dword450;
     _DWORD dword454;
