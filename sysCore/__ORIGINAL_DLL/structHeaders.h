@@ -73,6 +73,15 @@ struct Colour
     unsigned __int8 A; // _3
 };
 
+struct ShortColour
+{
+    unsigned short R; // _0
+    unsigned short G; // _1
+    unsigned short B; // _2
+    unsigned short A; // _3
+};
+
+
 struct Stream
 {
     int vtbl;       // _0
@@ -123,7 +132,7 @@ struct TexImg : public CoreNode
 {
     // _0 - _10 | CoreNode
 
-    int dword14;
+    int m_index;
     TexImgFormat m_format;
     int m_width;
     int m_height;
@@ -260,7 +269,7 @@ struct DispList : public CoreNode
     int m_dispDataCount;         // 18h
     unsigned __int8* m_dispData; // 1Ch
     int m_unk3;                  // 20h
-    int m_unk4;                  // 24h
+    int m_nodeCount;             // 24h
     int m_unk5;                  // 28h
     FaceNode m_face;             // 2Ch
 };
@@ -283,13 +292,13 @@ struct VtxMatrix
 
 struct Mesh : public CoreNode
 {
-    int m_unk1;            // 14h
+    int m_index;           // 14h
     int m_usingEmbossBump; // 18h
     int m_dependancyIdx;   // 1Ch
     int m_mtxGroupCount;   // 20h
     MtxGroup* m_groups;    // 24h
     int m_unk2;            // 28h
-    int m_vcd;             // 2Ch
+    int m_vcd;             // 2Ch, (|= 0x1000 if emboss NBT is used)
 };
 
 struct Envelope
@@ -299,19 +308,15 @@ struct Envelope
     float* m_weights;
 };
 
+enum JointType // originally called kind
+{
+    NULL,
+    MESH,
+    JOINT
+};
+
 struct Joint : public CoreNode
 {
-    void* m_pad1;           // 14h
-    int m_index;            // 18h
-    void* m_unk1;           // 1Ch
-    int m_flags;            // 20h
-    Vector3f m_scale;       // 24h
-    Vector3f m_rotation;    // 30h
-    Vector3f m_translation; // 3Ch
-    Matrix4f m_unk3;        // 48h
-    Matrix4f m_unk4;        // 88h
-
-    int m_matPolyCount; // 110h
     struct MatPoly : public CoreNode
     {
         // 0h - VTBL
@@ -323,21 +328,39 @@ struct Joint : public CoreNode
         int m_int24;           // 24h
     };
 
-    BoundBox m_bounds;    // CCh
-    bool m_useVolume;     // C9h
-    bool m_useLightGroup; // CAh
+    int m_index;            // 14h
+    int m_parent;           // 18h
+    JointType m_type;       // 1Ch
+    int m_flags;            // 20h
+    Vector3f m_scale;       // 24h
+    Vector3f m_rotation;    // 30h
+    Vector3f m_translation; // 3Ch
+    Matrix4f m_unk3;        // 48h
+    // CANT BE MATRIX4F
+    Matrix4f m_unk4;        // 88h
+    _BYTE m_isBillboard;    // 89h
+    _BYTE m_useVolume;      // 8Ah
+    _BYTE m_useLightGroup;  // 8Bh
+
+    BoundBox m_bounds;     // CCh
+    MatPoly m_matPolygons; // E4h
+
+    _DWORD m_dword10C; // 10Ch
+    _DWORD m_dword110; // 110h
+    _DWORD m_dword114; // 114h
+    _DWORD m_dword118; // 118h
 };
 
 struct TexAttr : public CoreNode
 {
-    int dword14;
+    int m_index;
     int m_texNum;
-    short word1C;
-    short word1E;
+    short m_tiling; // | 1 == clamp
+    short m_flags;  // EDG = 2, XLU = 4
     short word20;
     short word22;
     float dword24;
-    int dword28;
+    char* m_name;
     Texture* m_texture;
     TexImg* m_image;
 };
@@ -534,7 +557,7 @@ struct BaseShape : public CoreNode
     Vector3f* m_vertices;                     // _280
     int m_vertColourCount;                    // _284
     Colour* m_vertColours;                    // _288
-    int m_unk;                                // _28C
+    int m_texCoordSetCount;                   // _28C
     int m_texCoordCount[8];                   // _290
     Vector2f* m_texCoords[8];                 // _2B0
     int m_normalCount;                        // _2D0
@@ -818,4 +841,159 @@ struct System : public StdSystem
     void* dword460;
     void* dword464; // 464h
     int frameCount; // 468h
+};
+
+struct PVWKeyInfoU8
+{
+    // 12 bytes big
+    char m_unk1; // supposed to be char, but for decomp to work properly has to be char
+    float m_unk2;
+    float m_unk3;
+};
+
+struct PVWKeyInfoF32
+{
+    float m_keyframeA;
+    float m_keyframeB;
+    float m_keyframeC;
+};
+
+// POLYGON1 VARIABLES
+
+struct PVWPolygonData // ???
+{
+    // 0x28/40 bytes big
+    int m_unk1;
+    PVWKeyInfoU8 m_keyinfoa;
+    PVWKeyInfoU8 m_keyinfob;
+    PVWKeyInfoU8 m_keyinfoc;
+};
+
+struct PVWPolygon // ???
+{
+    int m_count;
+    PVWPolygonData* m_data;
+};
+
+// POLYGON2 VARIABLES
+
+struct PVWPolygon2Data // ???
+{
+    // 0x10/16 bytes big
+    int m_unk1;
+    PVWKeyInfoU8 m_keyinfo;
+};
+
+struct PVWPolygon2 // ???
+{
+    int m_count;
+    PVWPolygon2Data* m_data;
+};
+
+struct PVWPolygonColourInfo
+{
+    Colour m_diffuseColor;
+    unsigned int unsigned4;
+    float float8;
+    PVWPolygon m_polygon1;
+    PVWPolygon2 m_polygon2; // UNSURE OF NAME
+    float float1C;
+};
+
+struct PVWLightingInfo
+{
+    int m_unk1;
+    float m_unk2;
+    _DWORD dword8;
+};
+
+struct PVWPeInfo
+{
+    int m_unk1;
+    int m_unk2;
+    int m_unk3;
+    int m_unk4;
+};
+
+struct PVWTexGenData
+{
+    char m_unk1;
+    char m_unk2;
+    char m_unk3;
+    char m_unk4;
+};
+
+struct PVWTextureKeyframeData // ???
+{
+    int m_unk1;
+    PVWKeyInfoF32 m_scale;       // 16 bytes
+    PVWKeyInfoF32 m_rotation;    // 28 bytes
+    PVWKeyInfoF32 m_translation; // 40 bytes
+};
+
+struct PVWTexDataHolder // ???
+{
+    int m_count;
+    PVWTextureKeyframeData* data;
+};
+
+struct PVWTextureData
+{
+    _DWORD dword0;
+    _DWORD dword4;
+    _DWORD dword8;
+    _WORD wordC;
+    _WORD wordE;
+    _BYTE byte10;
+    _BYTE byte11;
+    _BYTE byte12;
+    _BYTE byte13;
+    bool dword14;
+    _DWORD dword18;
+    float float1C;
+    float float20;
+    float float24;
+    float float28;
+    float float2C;
+    float float30;
+    float float34;
+    _DWORD dword38;
+    float float3C;
+    PVWTexDataHolder m_TexDataHolderA; // 48h
+    PVWTexDataHolder m_TexDataHolderB; // 50h
+    PVWTexDataHolder m_TexDataHolderC; // 58h
+};
+
+struct PVWTextureInfo
+{
+    Vector3f vector3f0;
+    int m_textureDataCount;
+    int m_genDataCount;
+    _DWORD dword14;
+    _DWORD dword18;
+    PVWTextureData* m_textureData;
+    PVWTexGenData* m_texGenData;
+};
+
+struct Material : public CoreNode
+{
+    int m_index;
+    int m_flag; // PVWTexInfo = (& 1), TEX = 2, XLU = 4
+    int m_textureIndex;
+    _DWORD dword20;
+    _DWORD dword24;
+    _DWORD dword28;
+    PVWPolygonColourInfo m_colourInfo; // 2Ch
+    PVWLightingInfo m_lightingInfo;    // 50h
+    PVWPeInfo m_envInfo;
+    PVWTextureInfo m_textureInfo; // 68h
+    _DWORD dword8C;
+    ShortColour* m_color;
+    _DWORD dword94;
+    _DWORD dword98;
+};
+
+struct MatobjInfo : public GfxobjInfo
+{
+    _DWORD unk;
 };
