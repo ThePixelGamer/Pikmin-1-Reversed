@@ -308,7 +308,7 @@ struct Mesh : public CoreNode
     int m_dependencyIdx;   // 1Ch
     int m_mtxGroupCount;   // 20h
     MtxGroup* m_groups;    // 24h
-    int m_unk2;            // 28h
+    Joint* m_joint;        // 28h
     int m_vcd;             // 2Ch, (|= 0x1000 if emboss NBT is used)
 };
 
@@ -335,7 +335,7 @@ struct Joint : public CoreNode
         class Material* m_mat; // 14h
         Mesh* m_mesh;          // 18h
         int m_index;           // 1Ch
-        int m_int20;           // 20h
+        int m_meshIndex;           // 20h
         int m_int24;           // 24h
     };
 
@@ -584,7 +584,7 @@ struct BaseShape : public CoreNode
     int m_gfx;                                // _50
     Mesh* m_meshes;                           // _54
     int m_jointCount;                         // _58
-    struct Joint* m_joints;                   // _5C
+    Joint* m_joints;                   // _5C
     int m_routeGroupCount;                    // _60
     RouteGroup* m_routeGroup;                 // _64
     int m_textureAttributesCount;             // _68
@@ -1049,4 +1049,10 @@ struct Material : public CoreNode
 struct MatobjInfo : public GfxobjInfo
 {
     _DWORD unk;
+};
+
+struct PVWTevInfo
+{
+
+
 };
