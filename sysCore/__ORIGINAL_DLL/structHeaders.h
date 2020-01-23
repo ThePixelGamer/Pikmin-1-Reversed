@@ -253,7 +253,7 @@ struct FaceNode
     int m_facenode_2;  // 1Ch
     int m_facenode_3;  // 20h
     int m_facenode_4;  // 24h
-    int m_facenode_5;  // 28h
+    int m_vertexCount; // 28h
     int m_facenode_6;  // 2Ch
     int m_facenode_7;  // 30h
     int m_facenode_8;  // 34h
@@ -263,9 +263,20 @@ struct FaceNode
     int m_facenode_12; // 44h
 };
 
+enum VCDFlags
+{
+    NBT = 0x10000,
+};
+
+enum DispListFlags
+{
+    DrawStrip,
+
+};
+
 struct DispList : public CoreNode
 {
-    int m_unk1;                  // 14h
+    int m_flags;                 // 14h
     int m_dispDataCount;         // 18h
     unsigned __int8* m_dispData; // 1Ch
     int m_unk3;                  // 20h
@@ -276,7 +287,7 @@ struct DispList : public CoreNode
 
 struct MtxGroup
 {
-    int m_dependancyCount; // 0h
+    int m_dependencyCount; // 0h
     int* m_dependancies;   // 4h
     int m_dispListCount;   // 8h
     DispList* m_dispLists; // Ch
@@ -294,7 +305,7 @@ struct Mesh : public CoreNode
 {
     int m_index;           // 14h
     int m_usingEmbossBump; // 18h
-    int m_dependancyIdx;   // 1Ch
+    int m_dependencyIdx;   // 1Ch
     int m_mtxGroupCount;   // 20h
     MtxGroup* m_groups;    // 24h
     int m_unk2;            // 28h
@@ -335,20 +346,20 @@ struct Joint : public CoreNode
     Vector3f m_scale;       // 24h
     Vector3f m_rotation;    // 30h
     Vector3f m_translation; // 3Ch
-    Matrix4f m_unk3;        // 48h
-    // CANT BE MATRIX4F
-    Matrix4f m_unk4;        // 88h
-    _BYTE m_isBillboard;    // 89h
-    _BYTE m_useVolume;      // 8Ah
-    _BYTE m_useLightGroup;  // 8Bh
+    Matrix4f m_animMatrix;  // 48h
 
-    BoundBox m_bounds;     // CCh
+    // This gets optimised into a memcpy of size 0x43 (matrix4f is 0x40 + 3 bools (0x03))
+    Matrix4f m_unk4;       // 88h
+    _BYTE m_isBillboard;   // 89h
+    _BYTE m_useVolume;     // 8Ah
+    _BYTE m_useLightGroup; // 8Bh
+
+    BoundBox m_bounds;     // 8Ch
     MatPoly m_matPolygons; // E4h
-
-    _DWORD m_dword10C; // 10Ch
-    _DWORD m_dword110; // 110h
-    _DWORD m_dword114; // 114h
-    _DWORD m_dword118; // 118h
+    _DWORD m_dword10C;     // 10Ch
+    int m_matPolyCount;    // 110h
+    _DWORD m_dword114;     // 114h
+    BaseShape* m_shape;    // 118h
 };
 
 struct TexAttr : public CoreNode
@@ -501,7 +512,7 @@ struct RouteGroup : public CoreNode
 struct CollGroup
 {
     int collgroup0;
-    short* word4;
+    int* dword4;
     int dword8;
     int dwordC;
     int dword10;
@@ -509,14 +520,56 @@ struct CollGroup
     int dword18;
 };
 
+struct AnimContext
+{
+    AnimData* m_unkData1;
+    AnimData* m_state;
+    float m_frame; // on constructor called is set to 30
+};
+
+struct AnimFrameCacher
+{
+    struct AyuCache* m_cache;
+    char* name;
+    _DWORD dword8;
+    _DWORD dwordC;
+    _DWORD dword10;
+    _DWORD dword14;
+    _DWORD dword18;
+};
+
+struct Plane
+{
+    Vector3f m_position;
+    float m_diameter;
+};
+
+struct BaseCollTriInfo
+{
+  int dword0;
+  int dword4;
+  int dword8;
+  int dwordC;
+  short word10;
+  short word12;
+  short word14;
+  short word16;
+  Plane m_plane;
+};
+
+struct CollTriInfo : public BaseCollTriInfo
+{    
+    Plane m_planes[3];
+};
+
 struct BaseShape : public CoreNode
 {
     // _0 vtbl
     // _10 corenode
     int m_systemUsed;                         // _14
-    class AnimContext* m_currentAnims;        // _18 AnimContext* m_currentAnims;
-    int* m_animOverrides;                     // _1C
-    int* m_animContext;                       // _20
+    AnimContext* m_currentAnims;        // _18 AnimContext* m_currentAnims;
+    AnimContext* m_animOverrides;                     // _1C
+    AnimContext* m_animContext;                       // _20
     class AnimFrameCacher* m_animFrameCacher; // _24
     Matrix4f* m_animMatrix;                   // _28
     int dword2C;                              // _2C
@@ -527,8 +580,8 @@ struct BaseShape : public CoreNode
     int m_materialCount;                      // _40
     class Material* m_materials;              // _44
     int m_tevInfoCount;                       // _48
-    class TevInfo* m_tevInfo;                 // _4C
-    int m_meshCount;                          // _50
+    class PVWTevInfo* m_tevInfo;              // _4C
+    int m_gfx;                                // _50
     Mesh* m_meshes;                           // _54
     int m_jointCount;                         // _58
     struct Joint* m_joints;                   // _5C
@@ -549,7 +602,7 @@ struct BaseShape : public CoreNode
     int m_gridSizeY;                          // _1A4
     int* m_collisionTriangles;                // _1A8
     int m_collTriCount;                       // _1AC
-    _DWORD* m_collTriInfo;                    // _1B0
+    CollTriInfo* m_collTriInfo;               // _1B0
     int m_baseRoomCount;                      // _1B4
     BaseRoomInfo* proominfo1B8;               // _1B8
     _BYTE gap1BC[0xC0];                       // _1BC
