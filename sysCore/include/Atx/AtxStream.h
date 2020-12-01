@@ -22,9 +22,9 @@ public:
     // 0h - vtbl
     // 4h - stream var
     class TcpStream* m_stream; // 8h
-    int m_dwordC;              // Ch
+    int m_0C;              // Ch
 
-    AtxStream() : Stream() { this->init(); }
+    AtxStream() : Stream() { init(); }
 
     void init();
     bool open(char*, int);

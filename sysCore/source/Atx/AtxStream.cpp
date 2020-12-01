@@ -21,7 +21,7 @@ void ATXPRINT(const char* fmt, ...)
     }
 }
 
-void AtxStream::init() { this->m_dwordC = 0; }
+void AtxStream::init() { m_0C = 0; }
 
 bool AtxStream::open(char* name, int port)
 {
@@ -29,26 +29,21 @@ bool AtxStream::open(char* name, int port)
     if (!router)
         return false;
 
-    if (router->openRoute(this, port))
-    {
-        this->write(name, 4);
-        const int identifier = m_stream->readInt();
-        if (identifier == 0xFFFF) 
-		{
-            return false;
-		}
-        else 
-		{
-            this->flush();
-            return true;
-        }
-    }
-    else
+    if (!router->openRoute(this, port))
     {
         ATXPRINT("Could not open route to server\n");
         gsys->setAtxRouter(NULL);
         return false;
     }
+
+    write(name, 4);
+    if (m_stream->readInt() == 0xFFFF)
+    {
+        return false;
+    }
+
+    flush();
+    return true;
 }
 
 void AtxStream::close() { gsys->getAtxRouter()->closeRoute(this); }
@@ -69,8 +64,8 @@ int AtxStream::getPending()
     router->lock();
 
     const int pending = m_stream->getPending();
-    
-	router->unlock();
+
+    router->unlock();
     return pending;
 }
 
