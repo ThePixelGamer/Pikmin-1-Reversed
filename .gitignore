@@ -382,3 +382,9 @@ MigrationBackup/
 *.out
 *.app
 format.bat
+*.id0
+*.id1
+*.id2
+*.til
+*.nam
+*.idb
